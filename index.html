@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCap AI Demo</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif; 
+            margin: 0;
+            background-color: #121212; /* Dark background */
+            color: #E0E0E0; /* Light grey text for readability */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            height: 90vh;
+            background-color: #1E1E1E; /* Slightly lighter dark for the container */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        h1 { 
+            color: #FFFFFF; 
+            text-align: center; 
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        p { 
+            text-align: center; 
+            margin-bottom: 20px; 
+            color: #D4AF37; /* Gold color for tagline */
+            font-size: 1.1em;
+        }
+        .chat-box {
+            border: 1px solid #333;
+            padding: 15px;
+            flex-grow: 1;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+            background-color: #262626;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .user-message { 
+            align-self: flex-end;
+            text-align: right; 
+        }
+        .user-message span { 
+            background-color: #005A9C; /* A professional blue for user */
+            color: white;
+            padding: 10px 15px; 
+            border-radius: 18px 18px 5px 18px; 
+            display: inline-block; 
+            max-width: 80%; 
+            text-align: left;
+        }
+        .ai-response { 
+            align-self: flex-start;
+            text-align: left; 
+        }
+        .ai-response span { 
+            background-color: #333333; 
+            color: #E0E0E0;
+            padding: 10px 15px; 
+            border-radius: 18px 18px 18px 5px; 
+            display: inline-block; 
+            max-width: 80%;
+            white-space: pre-wrap; /* Allows line breaks and formatting */
+        }
+        .input-area {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            margin-right: 10px;
+            background-color: #333;
+            color: #E0E0E0;
+            font-size: 1em;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #D4AF37;
+        }
+        button { 
+            padding: 12px 20px; 
+            background-color: #D4AF37; /* Gold button */
+            color: #121212; /* Dark text on button */
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover { 
+            background-color: #B89B2E; /* Darker gold on hover */
+        }
+        .status-message { 
+            font-size: 0.9em; 
+            color: #888; 
+            margin-top: 10px; 
+            text-align: center; 
+            height: 15px;
+        }
+
+        /* Custom scrollbar for webkit browsers */
+        .chat-box::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-box::-webkit-scrollbar-track {
+            background: #262626;
+        }
+        .chat-box::-webkit-scrollbar-thumb {
+            background-color: #555;
+            border-radius: 4px;
+            border: 2px solid #262626;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1>Welcome to SkyCap AI Demo!</h1>
+            <p>Your AI assistant for Skyview Capital market analysis.</p>
+        </div>
+
+        <div class="chat-box" id="chatBox">
+            <div class="ai-response"><span>Hello! I am SkyCap, your AI assistant for Skyview Capital market analysis. How can I help you today? Try asking about "current value," "securities," or "today's trades."</span></div>
+        </div>
+
+        <div>
+            <div class="input-area">
+                <input type="text" id="userInput" placeholder="Type your question here..." autofocus>
+                <button onclick="sendQuery()">Ask SkyCap</button>
+            </div>
+            <div class="status-message" id="statusMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        // The URL for your live, deployed SkyCap AI service (europe-west1 for low latency in West Africa)
+        // The runtime will attempt to read `config.json` at the same directory to allow swapping the backend URL
+        let SKYCAP_AI_URL = "https://skycap-ai-service-idzo2jxfpa-ew.a.run.app/ask"; // fallback value
+        const chatBox = document.getElementById('chatBox');
+        
+        // Try to load config.json to override SKYCAP_AI_URL without editing this file
+        (async function loadConfig() {
+            try {
+                const resp = await fetch('config.json', { cache: 'no-store' });
+                if (!resp.ok) throw new Error('no config');
+                const cfg = await resp.json();
+                if (cfg && cfg.SKYCAP_AI_URL) {
+                    SKYCAP_AI_URL = cfg.SKYCAP_AI_URL;
+                    console.info('SKYCAP: Using SKYCAP_AI_URL from config.json');
+                }
+            } catch (err) {
+                console.info('SKYCAP: config.json not found or invalid; using embedded URL');
+            }
+        })();
+        const userInput = document.getElementById('userInput');
+        const statusMessage = document.getElementById('statusMessage');
+
+        async function sendQuery() {
+            const question = userInput.value.trim();
+            if (!question) {
+                statusMessage.textContent = "Please type a question.";
+                return;
+            }
+
+            appendMessage(question, 'user-message');
+            userInput.value = ''; // Clear input
+            userInput.disabled = true;
+
+            statusMessage.textContent = "SkyCap is thinking...";
+
+            try {
+                const response = await fetch(SKYCAP_AI_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ query: question })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (data.response) {
+                    const messageWithTimestamp = data.timestamp ? 
+                        `${data.response}\n\n[Response generated at: ${data.timestamp}]` : 
+                        data.response;
+                    appendMessage(messageWithTimestamp, 'ai-response');
+                } else if (data.error) {
+                    appendMessage(`Error: ${data.error}`, 'ai-response');
+                } else {
+                    appendMessage("SkyCap did not provide a clear response.", 'ai-response');
+                }
+                statusMessage.textContent = "";
+
+            } catch (error) {
+                console.error('Error:', error);
+                appendMessage(`Oops! SkyCap encountered an error: ${error.message}. Please try again later.`, 'ai-response');
+                statusMessage.textContent = "Connection error.";
+            } finally {
+                userInput.disabled = false;
+                userInput.focus();
+            }
+        }
+
+        function appendMessage(text, className) {
+            const messageElement = document.createElement('div');
+            messageElement.className = className;
+            const spanElement = document.createElement('span');
+            spanElement.textContent = text;
+            messageElement.appendChild(spanElement);
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+        }
+
+        // Allow sending message with Enter key
+        userInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendQuery();
+            }
+        });
+    </script>
+</body>
+</html>
