@@ -1,30 +1,45 @@
-# Production Dockerfile for SkyCap AI Cloud Run Deployment
+# Production Dockerfile for SkyCap AI
 FROM python:3.9-slim
 
-# Set the working directory inside the container
+# Build-time metadata (optional)
+ARG COMMIT_SHA="unknown"
+ARG BUILD_TIMESTAMP
+ARG APP_VERSION
+
+LABEL org.opencontainers.image.source="skycap-ai" \
+    org.opencontainers.image.revision="$COMMIT_SHA" \
+    org.opencontainers.image.created="$BUILD_TIMESTAMP" \
+    org.opencontainers.image.version="$APP_VERSION"
+
+# Set working directory
 WORKDIR /app
 
-# Copy the requirements file into the container
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first for better caching
 COPY requirements.txt .
 
-# Install any needed packages specified in requirements.txt and gunicorn
-RUN pip install --no-cache-dir -r requirements.txt gunicorn
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all necessary application files into the container
+# Copy application files
 COPY app.py .
 COPY intelligent_agent.py .
 COPY master_knowledge_base.json .
-# Copy service account credential candidates into a secure folder inside the image.
-# During testing we will instruct `intelligent_agent.py` which one to use via
-# the SKYCAP_TEST_CREDENTIAL environment variable so we don't need to rewrite the
-# Dockerfile for each credential. This also keeps all candidate credentials
-# available inside /secrets for debugging.
-RUN mkdir -p /secrets
-COPY service_account_key.json /secrets/service_account_key.json
-COPY .env .
 
-# Expose the port the app runs on (Cloud Run uses 8080)
+# Set environment variables (include version if passed)
+ENV PYTHONUNBUFFERED=1 \
+    SKYCAP_KB_PATH=master_knowledge_base.json \
+    PORT=8080 \
+    COMMIT_SHA=${COMMIT_SHA} \
+    APP_VERSION=${APP_VERSION}
+
+# Expose port
 EXPOSE 8080
 
-# Define the command to run the application using gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
+# Use gunicorn for production
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app

@@ -1,0 +1,70 @@
+substitutions:
+  _REGION: "europe-west1"
+  _SERVICE: "skycap-ai-service"
+  _PROJECT_ID: "skycap-ai-final-project"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  # Derive short commit sha & timestamp
+  - name: 'gcr.io/cloud-builders/git'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        SHORT_SHA=$(git rev-parse --short=12 $COMMIT_SHA)
+        echo "Short SHA: ${SHORT_SHA}" > build_meta.env
+        echo "BUILD_TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> build_meta.env
+        echo "APP_VERSION=${SHORT_SHA}" >> build_meta.env
+    id: 'derive-version'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        source build_meta.env
+        echo "Building image with version ${APP_VERSION}"
+        docker build \
+          --build-arg COMMIT_SHA=$COMMIT_SHA \
+          --build-arg BUILD_TIMESTAMP=$BUILD_TIMESTAMP \
+            --build-arg APP_VERSION=$APP_VERSION \
+          -t gcr.io/${_PROJECT_ID}/${_SERVICE}:$APP_VERSION \
+          -t gcr.io/${_PROJECT_ID}/${_SERVICE}:latest .
+    id: 'build-image'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/${_PROJECT_ID}/${_SERVICE}:$COMMIT_SHA'
+    id: 'push-image-sha'
+    waitFor: ['build-image']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/${_PROJECT_ID}/${_SERVICE}:latest'
+    id: 'push-image-latest'
+    waitFor: ['build-image']
+
+  # Deploy the newly built image with explicit version tag
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        source build_meta.env
+        gcloud run deploy ${_SERVICE} \
+          --image gcr.io/${_PROJECT_ID}/${_SERVICE}:$APP_VERSION \
+          --platform=managed \
+          --region=${_REGION} \
+          --allow-unauthenticated \
+          --memory=2Gi \
+          --port=8080 \
+          --max-instances=3 \
+          --timeout=3600
+    id: 'deploy'
+
+images:
+  - gcr.io/${_PROJECT_ID}/${_SERVICE}:latest
