@@ -3,241 +3,614 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkyCap AI Demo</title>
+    <title>SkyCap AI - Intelligent Financial Assistant</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif; 
+        * {
             margin: 0;
-            background-color: #121212; /* Dark background */
-            color: #E0E0E0; /* Light grey text for readability */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            width: 100%;
-            max-width: 800px;
-            height: 90vh;
-            background-color: #1E1E1E; /* Slightly lighter dark for the container */
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        h1 { 
-            color: #FFFFFF; 
-            text-align: center; 
-            margin-top: 0;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        p { 
-            text-align: center; 
-            margin-bottom: 20px; 
-            color: #D4AF37; /* Gold color for tagline */
-            font-size: 1.1em;
-        }
-        .chat-box {
-            border: 1px solid #333;
-            padding: 15px;
-            flex-grow: 1;
-            overflow-y: scroll;
-            margin-bottom: 20px;
-            background-color: #262626;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .user-message { 
-            align-self: flex-end;
-            text-align: right; 
-        }
-        .user-message span { 
-            background-color: #005A9C; /* A professional blue for user */
-            color: white;
-            padding: 10px 15px; 
-            border-radius: 18px 18px 5px 18px; 
-            display: inline-block; 
-            max-width: 80%; 
-            text-align: left;
-        }
-        .ai-response { 
-            align-self: flex-start;
-            text-align: left; 
-        }
-        .ai-response span { 
-            background-color: #333333; 
-            color: #E0E0E0;
-            padding: 10px 15px; 
-            border-radius: 18px 18px 18px 5px; 
-            display: inline-block; 
-            max-width: 80%;
-            white-space: pre-wrap; /* Allows line breaks and formatting */
-        }
-        .input-area {
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-        input[type="text"] {
-            flex-grow: 1;
-            padding: 12px;
-            border: 1px solid #444;
-            border-radius: 8px;
-            margin-right: 10px;
-            background-color: #333;
-            color: #E0E0E0;
-            font-size: 1em;
-        }
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #D4AF37;
-        }
-        button { 
-            padding: 12px 20px; 
-            background-color: #D4AF37; /* Gold button */
-            color: #121212; /* Dark text on button */
-            border: none; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        button:hover { 
-            background-color: #B89B2E; /* Darker gold on hover */
-        }
-        .status-message { 
-            font-size: 0.9em; 
-            color: #888; 
-            margin-top: 10px; 
-            text-align: center; 
-            height: 15px;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Custom scrollbar for webkit browsers */
-        .chat-box::-webkit-scrollbar {
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 800px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #10b981;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .status-dot {
             width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
-        .chat-box::-webkit-scrollbar-track {
-            background: #262626;
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
-        .chat-box::-webkit-scrollbar-thumb {
-            background-color: #555;
-            border-radius: 4px;
-            border: 2px solid #262626;
+
+        .chat-container {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            max-height: 300px;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message-content {
+            display: inline-block;
+            max-width: 80%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.ai .message-content {
+            background: white;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .message-meta {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-top: 5px;
+        }
+
+        .input-container {
+            position: relative;
+            display: flex;
+            gap: 10px;
+        }
+
+        .query-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .query-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .query-input:disabled {
+            background: #f3f4f6;
+            cursor: not-allowed;
+        }
+
+        .send-button {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .send-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .examples {
+            margin-top: 30px;
+        }
+
+        .examples-title {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .example-queries {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .example-query {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .example-query:hover {
+            background: #f3f4f6;
+            border-color: #667eea;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .version-info {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .message-content {
+                max-width: 90%;
+            }
+            
+            .input-container {
+                flex-direction: column;
+            }
+            
+            .send-button {
+                align-self: stretch;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div>
-            <h1>Welcome to SkyCap AI Demo!</h1>
-            <p>Your AI assistant for Skyview Capital market analysis.</p>
-        </div>
-
-        <div class="chat-box" id="chatBox">
-            <div class="ai-response"><span>Hello! I am SkyCap, your AI assistant for Skyview Capital market analysis. How can I help you today? Try asking about "current value," "securities," or "today's trades."</span></div>
-        </div>
-
-        <div>
-            <div class="input-area">
-                <input type="text" id="userInput" placeholder="Type your question here..." autofocus>
-                <button onclick="sendQuery()">Ask SkyCap</button>
+        <div class="header">
+            <h1 class="logo">SkyCap AI</h1>
+            <p class="subtitle">Intelligent Financial Assistant</p>
+            <div class="status">
+                <div class="status-dot"></div>
+                <span>Live & Ready</span>
             </div>
-            <div class="status-message" id="statusMessage"></div>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="chat-container">
+            <div class="messages" id="messages">
+                <div class="message ai">
+                    <div class="message-content">
+                        Welcome to SkyCap AI! I'm your intelligent financial assistant with access to comprehensive financial reports, market data, and client information. Ask me anything about financial metrics, stock prices, or company details.
+                    </div>
+                    <div class="message-meta">Ready to help • Brain 1 Active</div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <input 
+                    type="text" 
+                    id="queryInput" 
+                    class="query-input" 
+                    placeholder="Ask me about financial data, stock prices, or company information..."
+                    maxlength="500"
+                />
+                <button id="sendButton" class="send-button">
+                    <span id="sendButtonText">Send</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="examples">
+            <div class="examples-title">Try these example queries:</div>
+            <div class="example-queries">
+                <div class="example-query" onclick="setQuery('Who is the Managing Director of Skyview Capital?')">
+                    Who is the Managing Director?
+                </div>
+                <div class="example-query" onclick="setQuery('What were the total assets of Jaiz Bank in Q1 2024?')">
+                    Jaiz Bank Total Assets Q1 2024
+                </div>
+                <div class="example-query" onclick="setQuery('What is the stock price for JAIZBANK?')">
+                    JAIZBANK Stock Price
+                </div>
+                <div class="example-query" onclick="setQuery('How many financial reports are available?')">
+                    Available Financial Reports
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div>Powered by Advanced AI • Secure & Private</div>
+            <div class="version-info" id="versionInfo">Connecting to service...</div>
         </div>
     </div>
 
     <script>
-        // The URL for your live, deployed SkyCap AI service (europe-west1 for low latency in West Africa)
-        // The runtime will attempt to read `config.json` at the same directory to allow swapping the backend URL
-        let SKYCAP_AI_URL = "https://skycap-ai-service-idzo2jxfpa-ew.a.run.app/ask"; // fallback value
-        const chatBox = document.getElementById('chatBox');
-        
-        // Try to load config.json to override SKYCAP_AI_URL without editing this file
-        (async function loadConfig() {
-            try {
-                const resp = await fetch('config.json', { cache: 'no-store' });
-                if (!resp.ok) throw new Error('no config');
-                const cfg = await resp.json();
-                if (cfg && cfg.SKYCAP_AI_URL) {
-                    SKYCAP_AI_URL = cfg.SKYCAP_AI_URL;
-                    console.info('SKYCAP: Using SKYCAP_AI_URL from config.json');
-                }
-            } catch (err) {
-                console.info('SKYCAP: config.json not found or invalid; using embedded URL');
-            }
-        })();
-        const userInput = document.getElementById('userInput');
-        const statusMessage = document.getElementById('statusMessage');
+        // Configuration
+        const API_BASE_URL = 'https://skycap-ai-service-472059152731.europe-west1.run.app';
+        const REQUEST_TIMEOUT = 30000; // 30 seconds
 
-        async function sendQuery() {
-            const question = userInput.value.trim();
-            if (!question) {
-                statusMessage.textContent = "Please type a question.";
+        // DOM Elements
+        const messagesContainer = document.getElementById('messages');
+        const queryInput = document.getElementById('queryInput');
+        const sendButton = document.getElementById('sendButton');
+        const sendButtonText = document.getElementById('sendButtonText');
+        const errorMessage = document.getElementById('errorMessage');
+        const versionInfo = document.getElementById('versionInfo');
+
+        // State
+        let isLoading = false;
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            fetchVersionInfo();
+            queryInput.focus();
+        });
+
+        function setupEventListeners() {
+            // Send button click
+            sendButton.addEventListener('click', handleSendQuery);
+            
+            // Enter key press
+            queryInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendQuery();
+                }
+            });
+
+            // Input validation
+            queryInput.addEventListener('input', function() {
+                const query = this.value.trim();
+                sendButton.disabled = !query || isLoading;
+            });
+        }
+
+        async function fetchVersionInfo() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/version`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    timeout: 10000
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    versionInfo.textContent = `Service: ${data.service || 'SkyCap AI'} • Version: ${data.version || 'Unknown'} • Connected`;
+                } else {
+                    versionInfo.textContent = 'Service connected • Version check failed';
+                }
+            } catch (error) {
+                console.warn('Version fetch failed:', error);
+                versionInfo.textContent = 'Service status unknown';
+            }
+        }
+
+        function setQuery(query) {
+            queryInput.value = query;
+            queryInput.focus();
+            sendButton.disabled = false;
+        }
+
+        async function handleSendQuery() {
+            const query = queryInput.value.trim();
+            
+            if (!query || isLoading) {
                 return;
             }
 
-            appendMessage(question, 'user-message');
-            userInput.value = ''; // Clear input
-            userInput.disabled = true;
+            // Clear any previous errors
+            hideError();
 
-            statusMessage.textContent = "SkyCap is thinking...";
+            // Add user message to chat
+            addMessage('user', query);
+
+            // Set loading state
+            setLoadingState(true);
 
             try {
-                const response = await fetch(SKYCAP_AI_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ query: question })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                if (data.response) {
-                    const messageWithTimestamp = data.timestamp ? 
-                        `${data.response}\n\n[Response generated at: ${data.timestamp}]` : 
-                        data.response;
-                    appendMessage(messageWithTimestamp, 'ai-response');
-                } else if (data.error) {
-                    appendMessage(`Error: ${data.error}`, 'ai-response');
-                } else {
-                    appendMessage("SkyCap did not provide a clear response.", 'ai-response');
-                }
-                statusMessage.textContent = "";
+                // Send query to backend
+                const response = await sendQueryToBackend(query);
+                
+                // Process and display response
+                handleBackendResponse(response);
 
             } catch (error) {
-                console.error('Error:', error);
-                appendMessage(`Oops! SkyCap encountered an error: ${error.message}. Please try again later.`, 'ai-response');
-                statusMessage.textContent = "Connection error.";
+                console.error('Query failed:', error);
+                handleQueryError(error);
             } finally {
-                userInput.disabled = false;
-                userInput.focus();
+                setLoadingState(false);
             }
         }
 
-        function appendMessage(text, className) {
-            const messageElement = document.createElement('div');
-            messageElement.className = className;
-            const spanElement = document.createElement('span');
-            spanElement.textContent = text;
-            messageElement.appendChild(spanElement);
-            chatBox.appendChild(messageElement);
-            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+        async function sendQueryToBackend(query) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/ask`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Origin': window.location.origin
+                    },
+                    body: JSON.stringify({ query: query }),
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    throw new Error('Invalid response format - expected JSON');
+                }
+
+                return await response.json();
+
+            } catch (error) {
+                clearTimeout(timeoutId);
+                
+                if (error.name === 'AbortError') {
+                    throw new Error('Request timed out - please try again');
+                }
+                
+                throw error;
+            }
         }
 
-        // Allow sending message with Enter key
-        userInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                sendQuery();
+        function handleBackendResponse(data) {
+            // Validate response structure
+            if (!data || typeof data !== 'object') {
+                throw new Error('Invalid response structure');
+            }
+
+            // Extract answer from response
+            const answer = data.answer;
+            if (!answer || typeof answer !== 'string' || !answer.trim()) {
+                throw new Error('Empty or invalid answer received');
+            }
+
+            // Extract metadata
+            const brainUsed = data.brain_used || 'Unknown';
+            const provenance = data.provenance || 'unknown';
+            const responseTime = data.response_time || 0;
+
+            // Add AI response to chat
+            addMessage('ai', answer, {
+                brain: brainUsed,
+                provenance: provenance,
+                responseTime: responseTime
+            });
+
+            // Clear input
+            queryInput.value = '';
+            queryInput.focus();
+        }
+
+        function handleQueryError(error) {
+            let errorText = 'An unexpected error occurred. Please try again.';
+            
+            if (error.message) {
+                if (error.message.includes('timeout')) {
+                    errorText = 'Request timed out. The service might be busy - please try again in a moment.';
+                } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    errorText = 'Connection failed. Please check your internet connection and try again.';
+                } else if (error.message.includes('HTTP 4')) {
+                    errorText = 'Request error. Please check your query and try again.';
+                } else if (error.message.includes('HTTP 5')) {
+                    errorText = 'Service temporarily unavailable. Please try again in a moment.';
+                } else {
+                    errorText = error.message;
+                }
+            }
+
+            showError(errorText);
+            
+            // Add error message to chat for context
+            addMessage('ai', `I apologize, but I encountered an error: ${errorText}`, {
+                brain: 'System',
+                provenance: 'error',
+                responseTime: 0
+            });
+        }
+
+        function addMessage(type, content, meta = null) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.textContent = content;
+            
+            messageDiv.appendChild(contentDiv);
+            
+            if (meta && type === 'ai') {
+                const metaDiv = document.createElement('div');
+                metaDiv.className = 'message-meta';
+                metaDiv.textContent = `${meta.brain} • ${meta.provenance} • ${(meta.responseTime * 1000).toFixed(0)}ms`;
+                messageDiv.appendChild(metaDiv);
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function setLoadingState(loading) {
+            isLoading = loading;
+            
+            if (loading) {
+                sendButton.disabled = true;
+                queryInput.disabled = true;
+                sendButtonText.innerHTML = '<div class="loading"></div>';
+            } else {
+                sendButton.disabled = !queryInput.value.trim();
+                queryInput.disabled = false;
+                sendButtonText.textContent = 'Send';
+            }
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            
+            // Auto-hide error after 10 seconds
+            setTimeout(hideError, 10000);
+        }
+
+        function hideError() {
+            errorMessage.style.display = 'none';
+        }
+
+        // Global error handler
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Unhandled promise rejection:', event.reason);
+            if (isLoading) {
+                handleQueryError(new Error('An unexpected error occurred'));
+                setLoadingState(false);
             }
         });
     </script>
