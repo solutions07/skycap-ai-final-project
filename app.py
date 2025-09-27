@@ -48,7 +48,7 @@ KNOWLEDGE_BASE_FILE = 'master_knowledge_base.json'
 app = Flask(__name__, static_folder='.', static_url_path='')
 
 # Configure CORS for GitHub Pages professional frontend
-CORS(app, resources={r"/ask": {"origins": "https://solutions07.github.io"}})
+CORS(app, resources={r"/*": {"origins": "https://solutions07.github.io"}})
 
 # Lazy loading for Cloud Run startup optimization
 logger.info("=== SkyCap AI Server Starting (Lazy Loading Mode) ===")
