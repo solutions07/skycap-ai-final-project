@@ -7,62 +7,63 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 steps:
-  # Derive short commit sha & timestamp (with fallback for manual runs)
+  # Step 1: Derive version metadata
   - name: 'gcr.io/cloud-builders/git'
+    id: 'derive-version'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        # Derive commit reference (avoid uppercase var to prevent Cloud Build substitution parsing)
-        if [ -z "$COMMIT_SHA" ]; then
-          commit_ref="HEAD"
-        else
-          commit_ref="$COMMIT_SHA"
-        fi
+        set -euo pipefail
+        if [ -z "${COMMIT_SHA:-}" ]; then commit_ref="HEAD"; else commit_ref="$COMMIT_SHA"; fi
         short_sha=$(git rev-parse --short=12 "$commit_ref")
         build_timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
         echo "commit_ref=$commit_ref" > build_meta.env
         echo "short_sha=$short_sha" >> build_meta.env
         echo "build_timestamp=$build_timestamp" >> build_meta.env
-        echo "APP_VERSION=$short_sha" >> build_meta.env
-    id: 'derive-version'
+        echo "app_version=$short_sha" >> build_meta.env
+        echo "Derived version: $short_sha ($commit_ref)" 
 
+  # Step 2: Build image with version tags
   - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        set -euo pipefail
-        source build_meta.env
-        echo "Building image with version ${APP_VERSION} (commit $commit_ref)"
-        docker build \
-          --build-arg COMMIT_SHA=$commit_ref \
-          --build-arg BUILD_TIMESTAMP=$build_timestamp \
-          --build-arg APP_VERSION=$APP_VERSION \
-          -t gcr.io/${_PROJECT_ID}/${_SERVICE}:$APP_VERSION \
-          -t gcr.io/${_PROJECT_ID}/${_SERVICE}:latest .
     id: 'build-image'
-
-  - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
         set -euo pipefail
         source build_meta.env
-        docker push gcr.io/${_PROJECT_ID}/${_SERVICE}:$APP_VERSION
-    id: 'push-image-sha'
-    waitFor: ['build-image']
+        echo "Building image tag: $app_version"
+        docker build \
+          --build-arg COMMIT_SHA="$commit_ref" \
+          --build-arg BUILD_TIMESTAMP="$build_timestamp" \
+          --build-arg APP_VERSION="$app_version" \
+          -t gcr.io/${_PROJECT_ID}/${_SERVICE}:$app_version \
+          -t gcr.io/${_PROJECT_ID}/${_SERVICE}:latest .
 
+  # Step 3: Push version tag
   - name: 'gcr.io/cloud-builders/docker'
+    id: 'push-image-version'
+    waitFor: ['build-image']
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        set -euo pipefail
+        source build_meta.env
+        docker push gcr.io/${_PROJECT_ID}/${_SERVICE}:$app_version
+
+  # Step 4: Push latest tag
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'push-image-latest'
+    waitFor: ['build-image']
     args:
       - 'push'
       - 'gcr.io/${_PROJECT_ID}/${_SERVICE}:latest'
-    id: 'push-image-latest'
-    waitFor: ['build-image']
 
-  # Deploy the newly built image with explicit version tag
+  # Step 5: Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'deploy'
     entrypoint: 'bash'
     args:
       - '-c'
@@ -70,7 +71,7 @@ steps:
         set -euo pipefail
         source build_meta.env
         gcloud run deploy ${_SERVICE} \
-          --image gcr.io/${_PROJECT_ID}/${_SERVICE}:$APP_VERSION \
+          --image gcr.io/${_PROJECT_ID}/${_SERVICE}:$app_version \
           --platform=managed \
           --region=${_REGION} \
           --allow-unauthenticated \
@@ -78,7 +79,6 @@ steps:
           --port=8080 \
           --max-instances=3 \
           --timeout=3600
-    id: 'deploy'
 
 images:
   - gcr.io/${_PROJECT_ID}/${_SERVICE}:latest
