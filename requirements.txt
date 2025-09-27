@@ -12,6 +12,7 @@ google-auth-oauthlib
 google-auth
 google-cloud-storage
 google-cloud-aiplatform
+gunicorn==21.2.0  # Added for Cloud Run production server
 python-dotenv
 beautifulsoup4
 selenium
