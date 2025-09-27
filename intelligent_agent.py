@@ -104,19 +104,33 @@ class MetadataEngine:
     def search(self, question: str) -> Optional[str]:
         ql = question.lower()
         
-        # Count queries
+        # Enhanced count queries
         if 'how many' in ql and 'financial' in ql:
             count = len(self.kb.get('financial_reports', []))
-            return f"There are {count} financial reports in the knowledge base."
+            return f"There are {count} financial reports available in the knowledge base, primarily covering Jaiz Bank's quarterly and annual financial statements."
         
         if 'how many' in ql and 'market' in ql:
             count = len(self.kb.get('market_data', []))
             return f"There are {count} market data records in the knowledge base."
         
+        # Company information queries
+        if 'skyview capital' in ql and ('about' in ql or 'company' in ql or 'business' in ql):
+            return "Skyview Capital Limited is a financial service provider, licensed by the Nigerian Stock Exchange (NSE) and the Securities and Exchange Commission (SEC) as a Broker/Dealer. They specialize in providing professional solutions for businesses and serve government parastatals, multinational and indigenous companies, and high net worth individuals."
+        
+        # Service queries
+        if 'services' in ql and 'skyview' in ql:
+            return "Skyview Capital Limited offers stockbroking services, retainer-ship for listed companies, certificate verification, receiving agency for IPOs/POs, and comprehensive research reports including weekly, monthly, quarterly, and annual market analysis."
+        
         # Data sources
         if 'data source' in ql or 'sources' in ql:
             if self.data_sources:
-                return 'Data sources: ' + ', '.join(self.data_sources)
+                return 'Data sources include: ' + ', '.join(self.data_sources)
+        
+        # Available reports query
+        if 'available' in ql and ('reports' in ql or 'data' in ql):
+            financial_count = len(self.kb.get('financial_reports', []))
+            market_count = len(self.kb.get('market_data', []))
+            return f"Available data includes {financial_count} financial reports and {market_count} market data records, covering companies like Jaiz Bank with quarterly and annual financial statements."
         
         # List symbols
         if 'list' in ql and 'symbols' in ql:
@@ -126,7 +140,7 @@ class MetadataEngine:
                 if sym:
                     syms.add(str(sym).upper())
             if syms:
-                return 'Symbols: ' + ', '.join(sorted(syms))
+                return 'Available stock symbols: ' + ', '.join(sorted(syms))
         
         return None
 
@@ -149,15 +163,31 @@ class PersonnelEngine:
             for s in team:
                 if not isinstance(s, str):
                     continue
-                name = s.split('—')[0].strip() if '—' in s else s.strip()
+                
+                # Extract name (before parentheses or colon)
+                name_match = re.match(r'^([^(:\-—]+)', s)
+                name = name_match.group(1).strip() if name_match else s
+                
+                # Clean name key
                 key = re.sub(r'[^a-z]', '', name.lower())
                 if key:
                     self.simple_index[key] = name
                 
-                # Add role-based lookups
-                for title in ['managing director', 'chief financial officer', 'cfo']:
-                    if title in s.lower():
-                        self.simple_index[title] = name
+                # Enhanced role-based lookups
+                s_lower = s.lower()
+                if 'managing director' in s_lower:
+                    self.simple_index['managing director'] = name
+                if 'chief financial officer' in s_lower or 'cfo' in s_lower:
+                    self.simple_index['chief financial officer'] = name
+                    self.simple_index['cfo'] = name
+                if 'chief compliance officer' in s_lower or 'cco' in s_lower:
+                    self.simple_index['chief compliance officer'] = name
+                    self.simple_index['cco'] = name
+                if 'chief risk officer' in s_lower or 'cro' in s_lower:
+                    self.simple_index['chief risk officer'] = name
+                    self.simple_index['cro'] = name
+                if 'head' in s_lower and ('admin' in s_lower or 'hr' in s_lower):
+                    self.simple_index['head admin'] = name
         
         # Contact info
         contact = pack.get('contact information & locations for skyview capital limited', [])
@@ -178,24 +208,71 @@ class PersonnelEngine:
     def search_personnel(self, question: str) -> Optional[str]:
         ql = question.lower()
         
-        # Role-based searches
+        # Enhanced role-based searches
         if 'managing director' in ql or 'md ' in ql:
-            return self.simple_index.get('managing director')
+            name = self.simple_index.get('managing director')
+            if name:
+                return f"{name} is the Managing Director of Skyview Capital Limited."
         
-        if 'cfo' in ql or 'chief financial' in ql:
-            return self.simple_index.get('chief financial officer') or self.simple_index.get('cfo')
+        if 'cfo' in ql or 'chief financial' in ql or 'financial officer' in ql:
+            name = self.simple_index.get('chief financial officer') or self.simple_index.get('cfo')
+            if name:
+                return f"{name} is the Chief Financial Officer of Skyview Capital Limited."
+        
+        if 'cco' in ql or 'compliance officer' in ql:
+            name = self.simple_index.get('chief compliance officer')
+            if name:
+                return f"{name} is the Chief Compliance Officer of Skyview Capital Limited."
+        
+        if 'cro' in ql or 'risk officer' in ql:
+            name = self.simple_index.get('chief risk officer')
+            if name:
+                return f"{name} is the Chief Risk Officer of Skyview Capital Limited."
+        
+        if 'head' in ql and ('admin' in ql or 'hr' in ql):
+            name = self.simple_index.get('head admin')
+            if name:
+                return f"{name} is the Head of Admin/HR at Skyview Capital Limited."
+        
+        # Specific name searches with role context
+        if 'olufemi' in ql or 'adesiyan' in ql:
+            return "Olufemi Adesiyan is the Managing Director of Skyview Capital Limited. He holds an M.Sc. in Statistics and has over 10 years of experience in Capital Markets, with expertise in Securities Trading."
+        
+        if 'nkiru' in ql or 'okoli' in ql:
+            return "Nkiru Modesta Okoli is the Chief Financial Officer of Skyview Capital Limited. She holds a B.Sc. in Accounting, is an ACA, and a CFA Level 2 candidate with over 10 years of experience."
+        
+        if 'asomugha' in ql or 'chidozie' in ql or 'stephen' in ql:
+            return "Asomugha Chidozie Stephen is the Chief Compliance Officer of Skyview Capital Limited. He holds an MBA and B.Sc. in Industrial Chemistry, is an ACS, and has over 14 years in capital markets."
+        
+        if 'uche' in ql or 'ronald' in ql or 'bekee' in ql:
+            return "Uche Ronald Bekee is the Chief Risk Officer of Skyview Capital Limited. He holds an MBA in Marketing and B.Sc. in Banking & Finance, and joined Skyview in 2014."
+        
+        if 'atigan' in ql or 'neville' in ql:
+            return "Atigan Neville is the Head of Admin/HR at Skyview Capital Limited. He holds a Master's in Public Administration and joined Skyview in 2008."
+        
+        # What is the role of [person] queries
+        if 'role of' in ql or 'position of' in ql:
+            for name_key in ['olufemi', 'adesiyan', 'nkiru', 'okoli', 'asomugha', 'chidozie', 'stephen', 'uche', 'ronald', 'bekee', 'atigan', 'neville']:
+                if name_key in ql:
+                    return self.search_personnel(f"who is {name_key}")
         
         # Contact info
         if 'phone' in ql or 'contact number' in ql:
-            return self.simple_index.get('phone')
+            phone = self.simple_index.get('phone')
+            if phone:
+                return f"The contact phone number for Skyview Capital Limited is {phone}."
         
         if 'email' in ql:
-            return self.simple_index.get('email')
+            email = self.simple_index.get('email')
+            if email:
+                return f"The email contact for Skyview Capital Limited is {email}."
         
-        if 'address' in ql or 'head office' in ql:
-            return self.simple_index.get('address')
+        if 'address' in ql or 'head office' in ql or 'location' in ql:
+            address = self.simple_index.get('address')
+            if address:
+                return f"The head office of Skyview Capital Limited is located at {address}."
         
-        # Name lookup
+        # General name lookup
         for k, v in self.simple_index.items():
             if k in ql and len(k) > 3:
                 return v
@@ -241,13 +318,18 @@ class FinancialDataEngine:
     def search_financial_metric(self, question: str) -> Optional[str]:
         ql = question.lower()
         
+        # Extract company name (primarily Jaiz Bank for our data)
+        company = 'Jaiz Bank'  # Default since most data is Jaiz Bank
+        if 'jaiz' in ql or 'bank' in ql:
+            company = 'Jaiz Bank'
+        
         # Extract year
         year = None
         ym = re.search(r'(\d{4})', ql)
         if ym:
             year = ym.group(1)
         
-        # Extract quarter
+        # Extract quarter with more flexible matching
         qdate = None
         qm = re.search(r'q([1-4])\s*(\d{4})', ql)
         if qm:
@@ -258,37 +340,73 @@ class FinancialDataEngine:
         elif year:
             qdate = f"{year}-12-31"
 
-        # Identify metric
+        # Enhanced metric identification
         metric = None
-        if 'total asset' in ql or 'totalassets' in ql:
-            metric = 'totalassets'
-        elif 'profit before tax' in ql or 'pbt' in ql:
-            metric = 'profitbeforetax'
+        metric_display = None
+        if 'total asset' in ql or 'totalassets' in ql or 'assets' in ql:
+            metric = 'total assets'
+            metric_display = 'total assets'
+        elif 'profit before tax' in ql or 'pbt' in ql or 'pre-tax profit' in ql:
+            metric = 'profit before tax'
+            metric_display = 'profit before tax'
         elif 'earnings per share' in ql or 'eps' in ql:
-            metric = 'earningspershare'
-        elif 'revenue' in ql:
-            metric = 'revenue'
+            metric = 'earnings per share'
+            metric_display = 'earnings per share'
+        elif 'gross earnings' in ql or 'revenue' in ql or 'income' in ql:
+            metric = 'gross earnings'
+            metric_display = 'gross earnings'
 
-        if not metric or not qdate:
+        if not metric:
             return None
 
-        # Direct lookup
-        if (metric, qdate) in self.metrics:
-            value = self.metrics[(metric, qdate)]
-            return f"The {metric.replace('totalassets', 'total assets').replace('profitbeforetax', 'profit before tax')} for {qdate} was {value}."
+        # Search through all reports for the best match
+        best_match = None
+        target_year = int(year) if year else None
         
-        # Try same year fallback
-        try:
-            ty = int(qdate[:4])
-            candidates = [(d, v) for (m, d), v in self.metrics.items() if m == metric]
-            same_year = [(d, self.metrics[(metric, d)]) for d in set(d for d, _ in candidates) if int(d[:4]) == ty]
-            if same_year:
-                same_year.sort(key=lambda x: x[0], reverse=True)
-                d, v = same_year[0]
-                return f"The {metric.replace('totalassets', 'total assets').replace('profitbeforetax', 'profit before tax')} for {d} was {v}."
-        except Exception:
-            pass
+        for report in self.reports:
+            if not isinstance(report, dict):
+                continue
+                
+            meta = report.get('report_metadata', {})
+            if not isinstance(meta, dict):
+                continue
+                
+            report_date = meta.get('report_date')
+            metrics = meta.get('metrics', {})
+            
+            if not report_date or not isinstance(metrics, dict):
+                continue
+            
+            # Check if this report matches our criteria
+            report_year = int(report_date[:4]) if report_date and len(report_date) >= 4 else None
+            
+            # Look for the metric in the report
+            metric_value = None
+            for key, value in metrics.items():
+                if key.lower().replace(' ', '').replace('_', '') == metric.lower().replace(' ', '').replace('_', ''):
+                    metric_value = value
+                    break
+            
+            if metric_value is not None and metric_value != 0:
+                # If we have a target year, prefer exact match
+                if target_year and report_year == target_year:
+                    # Check for quarter match
+                    if qdate and report_date == qdate:
+                        return f"The {metric_display} for {company} in {qdate} was ₦{float(metric_value):,.2f}."
+                    elif not qm:  # No specific quarter requested
+                        best_match = (report_date, metric_value, True)  # Exact year match
+                elif not target_year or not best_match or (best_match and not best_match[2]):  # No year specified or no exact match yet
+                    best_match = (report_date, metric_value, report_year == target_year if target_year else False)
         
+        if best_match:
+            date, value, is_exact = best_match
+            try:
+                formatted_value = f"₦{float(value):,.2f}"
+            except (ValueError, TypeError):
+                formatted_value = str(value)
+            
+            return f"The {metric_display} for {company} as of {date} was {formatted_value}."
+
         return None
 
 class MarketDataEngine:

@@ -319,7 +319,6 @@
                     <div class="message-content">
                         Welcome to SkyCap AI! I'm your intelligent financial assistant with access to comprehensive financial reports, market data, and client information. Ask me anything about financial metrics, stock prices, or company details.
                     </div>
-                    <div class="message-meta">Ready to help • Brain 1 Active</div>
                 </div>
             </div>
 
@@ -356,7 +355,7 @@
         </div>
 
         <div class="footer">
-            <div>Powered by Advanced AI • Secure & Private</div>
+            <div>Developed by AMD ASCEND Solutions • Secure & Private</div>
             <div class="version-info" id="versionInfo">Connecting to service...</div>
         </div>
     </div>
@@ -568,12 +567,13 @@
             
             messageDiv.appendChild(contentDiv);
             
-            if (meta && type === 'ai') {
-                const metaDiv = document.createElement('div');
-                metaDiv.className = 'message-meta';
-                metaDiv.textContent = `${meta.brain} • ${meta.provenance} • ${(meta.responseTime * 1000).toFixed(0)}ms`;
-                messageDiv.appendChild(metaDiv);
-            }
+            // Technical metadata removed for clean client presentation
+            // if (meta && type === 'ai') {
+            //     const metaDiv = document.createElement('div');
+            //     metaDiv.className = 'message-meta';
+            //     metaDiv.textContent = `${meta.brain} • ${meta.provenance} • ${(meta.responseTime * 1000).toFixed(0)}ms`;
+            //     messageDiv.appendChild(metaDiv);
+            // }
             
             messagesContainer.appendChild(messageDiv);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
