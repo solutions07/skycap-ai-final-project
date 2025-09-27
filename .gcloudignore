@@ -1,0 +1,76 @@
+############################################################
+# Minimal whitelist-style .gcloudignore
+# Goal: Only ship the runtime + deployment essentials.
+# Everything else (raw data, archives, images, old scripts) excluded.
+############################################################
+
+# 1. Ignore everything by default
+**
+
+# 2. Core runtime Python
+!app.py
+!intelligent_agent.py
+!scraper_agent.py
+
+# 3. AI data / schemas needed at runtime
+!master_knowledge_base.json
+!knowledge_base.json
+!desired_output_schema.json
+
+# 4. Dependency manifests
+!requirements.txt
+!requirements-scraper.txt
+!setup.py
+
+# 5. Minimal test/config (kept tiny)
+!pytest.ini
+!test_master_kb_schema.py
+
+# 6. Deployment definitions
+!Dockerfile
+!cloudbuild-deploy.yaml
+!.gcloudignore
+
+# 7. Static / docs
+!index.html
+!README.md
+
+# 8. Sensitive credentials REMAIN IGNORED (not whitelisted)
+# service_account_key.json
+# credentials.json
+# optimum-tea-380714-8632ca8dc0b4.json
+
+# 9. Explicit large / binary exclusions (already covered by **, listed for clarity)
+**/*.pdf
+**/*.csv
+**/*.xlsx
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.log
+**/*.html
+
+# Re-allow the single required HTML asset
+!index.html
+
+# 10. Python caches / build outputs
+**/__pycache__/**
+**/*.pyc
+**/*.pyo
+**/*.pyd
+build/
+dist/
+*.egg-info/
+*.egg
+
+# 11. Editor / OS noise
+.DS_Store
+.idea/
+.vscode/
+Thumbs.db
+
+# (End)
