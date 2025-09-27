@@ -13,17 +13,18 @@ steps:
     args:
       - '-c'
       - |
-        # Use HEAD for manual runs since COMMIT_SHA is not available
+        # Derive commit reference (avoid uppercase var to prevent Cloud Build substitution parsing)
         if [ -z "$COMMIT_SHA" ]; then
-          COMMIT_REF="HEAD"
+          commit_ref="HEAD"
         else
-          COMMIT_REF="$COMMIT_SHA"
+          commit_ref="$COMMIT_SHA"
         fi
-        SHORT_SHA=$(git rev-parse --short=12 $COMMIT_REF)
-         echo "COMMIT_REF=$COMMIT_REF" > build_meta.env
-         echo "SHORT_SHA=${SHORT_SHA}" >> build_meta.env
-        echo "BUILD_TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> build_meta.env
-        echo "APP_VERSION=${SHORT_SHA}" >> build_meta.env
+        short_sha=$(git rev-parse --short=12 "$commit_ref")
+        build_timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+        echo "commit_ref=$commit_ref" > build_meta.env
+        echo "short_sha=$short_sha" >> build_meta.env
+        echo "build_timestamp=$build_timestamp" >> build_meta.env
+        echo "APP_VERSION=$short_sha" >> build_meta.env
     id: 'derive-version'
 
   - name: 'gcr.io/cloud-builders/docker'
@@ -31,11 +32,12 @@ steps:
     args:
       - '-c'
       - |
+        set -euo pipefail
         source build_meta.env
-        echo "Building image with version ${APP_VERSION}"
+        echo "Building image with version ${APP_VERSION} (commit $commit_ref)"
         docker build \
-          --build-arg COMMIT_SHA=$COMMIT_REF \
-          --build-arg BUILD_TIMESTAMP=$BUILD_TIMESTAMP \
+          --build-arg COMMIT_SHA=$commit_ref \
+          --build-arg BUILD_TIMESTAMP=$build_timestamp \
           --build-arg APP_VERSION=$APP_VERSION \
           -t gcr.io/${_PROJECT_ID}/${_SERVICE}:$APP_VERSION \
           -t gcr.io/${_PROJECT_ID}/${_SERVICE}:latest .
@@ -46,6 +48,7 @@ steps:
     args:
       - '-c'
       - |
+        set -euo pipefail
         source build_meta.env
         docker push gcr.io/${_PROJECT_ID}/${_SERVICE}:$APP_VERSION
     id: 'push-image-sha'
@@ -64,6 +67,7 @@ steps:
     args:
       - '-c'
       - |
+        set -euo pipefail
         source build_meta.env
         gcloud run deploy ${_SERVICE} \
           --image gcr.io/${_PROJECT_ID}/${_SERVICE}:$APP_VERSION \
