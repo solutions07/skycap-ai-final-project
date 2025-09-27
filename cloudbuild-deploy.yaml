@@ -7,14 +7,21 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 steps:
-  # Derive short commit sha & timestamp
+  # Derive short commit sha & timestamp (with fallback for manual runs)
   - name: 'gcr.io/cloud-builders/git'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        SHORT_SHA=$(git rev-parse --short=12 $COMMIT_SHA)
-        echo "Short SHA: ${SHORT_SHA}" > build_meta.env
+        # Use HEAD for manual runs since COMMIT_SHA is not available
+        if [ -z "$COMMIT_SHA" ]; then
+          COMMIT_REF="HEAD"
+        else
+          COMMIT_REF="$COMMIT_SHA"
+        fi
+        SHORT_SHA=$(git rev-parse --short=12 $COMMIT_REF)
+         echo "COMMIT_REF=$COMMIT_REF" > build_meta.env
+         echo "SHORT_SHA=${SHORT_SHA}" >> build_meta.env
         echo "BUILD_TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> build_meta.env
         echo "APP_VERSION=${SHORT_SHA}" >> build_meta.env
     id: 'derive-version'
@@ -27,17 +34,20 @@ steps:
         source build_meta.env
         echo "Building image with version ${APP_VERSION}"
         docker build \
-          --build-arg COMMIT_SHA=$COMMIT_SHA \
+          --build-arg COMMIT_SHA=$COMMIT_REF \
           --build-arg BUILD_TIMESTAMP=$BUILD_TIMESTAMP \
-            --build-arg APP_VERSION=$APP_VERSION \
+          --build-arg APP_VERSION=$APP_VERSION \
           -t gcr.io/${_PROJECT_ID}/${_SERVICE}:$APP_VERSION \
           -t gcr.io/${_PROJECT_ID}/${_SERVICE}:latest .
     id: 'build-image'
 
   - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
     args:
-      - 'push'
-      - 'gcr.io/${_PROJECT_ID}/${_SERVICE}:$COMMIT_SHA'
+      - '-c'
+      - |
+        source build_meta.env
+        docker push gcr.io/${_PROJECT_ID}/${_SERVICE}:$APP_VERSION
     id: 'push-image-sha'
     waitFor: ['build-image']
 
