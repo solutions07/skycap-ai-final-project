@@ -1,0 +1,74 @@
+====================================================================================================
+SKYCAP AI - EXHAUSTIVE VALIDATION TEST REPORT
+====================================================================================================
+Generated: 2025-09-27 09:47:47
+Total Tests: 53
+Passed: 53
+Failed: 0
+Success Rate: 100.0%
+
+🎉 STATUS: ALL TESTS PASSED - SYSTEM READY FOR DEPLOYMENT! 🎉
+
+ENGINE PERFORMANCE:
+--------------------------------------------------
+PERSONNEL: 26/26 (100.0%)
+FINANCIAL: 11/11 (100.0%)
+MARKET_PRICE: 7/7 (100.0%)
+METADATA: 8/8 (100.0%)
+UNKNOWN: 1/1 (100.0%)
+
+SUCCESSFUL TESTS:
+--------------------------------------------------
+✅ MD_Query_1: Who is the Managing Director of Skyview Capital?
+✅ MD_Query_2: Who is the MD of Skyview?
+✅ MD_Query_3: What is the role of Olufemi Adesiyan?
+✅ MD_Query_4: Tell me about Olufemi Adesiyan
+✅ CFO_Query_1: Who is the Chief Financial Officer?
+✅ CFO_Query_2: What is the role of Nkiru Okoli?
+✅ CFO_Query_3: Tell me about the CFO
+✅ CCO_Query: Who is the Chief Compliance Officer?
+✅ CRO_Query: What is the role of Uche Bekee?
+✅ HR_Query: Who is the Head of HR?
+✅ Name_Variation_1: Who is Uche Ronald Bekee?
+✅ Name_Variation_2: Tell me about Asomugha Chidozie
+✅ Phone_Query: What is the phone number for Skyview Capital?
+✅ Email_Query: What is the email address?
+✅ Address_Query: Where is the head office located?
+✅ Assets_Q1_2024: What were the total assets of Jaiz Bank in Q1 2024?
+✅ Assets_Alternative_1: What was Jaiz Bank's total assets for Q1 2024?
+✅ Assets_Alternative_2: Total assets of Jaiz Bank first quarter 2024
+✅ PBT_Q1_2024: What was Jaiz Bank's profit before tax in Q1 2024?
+✅ PBT_Alternative: PBT for Jaiz Bank Q1 2024
+✅ Assets_2019: What were Jaiz Bank's total assets in 2019?
+✅ Assets_2017: Total assets for Jaiz Bank in 2017
+✅ EPS_2018: What was the earnings per share for Jaiz Bank in 2018?
+✅ Currency_Format: Show me Jaiz Bank total assets Q1 2024
+✅ Revenue_Query: What was Jaiz Bank's revenue in Q1 2024?
+✅ Income_Query: Show me Jaiz Bank's income for Q1 2024
+✅ Stock_Price_1: What is the stock price for JAIZBANK?
+✅ Stock_Price_2: Show me the price of JAIZBANK stock
+✅ Stock_Price_3: JAIZBANK current stock price
+✅ Opening_Price: What was the opening price for JAIZBANK?
+✅ Closing_Price: What was the closing price for JAIZBANK?
+✅ Historical_Price: JAIZBANK stock price on 2024-03-31
+✅ Report_Count: How many financial reports are available?
+✅ Market_Data_Count: How many market data records do you have?
+✅ Company_Info: Tell me about Skyview Capital
+✅ Services_Info: What services does Skyview Capital offer?
+✅ Symbol_List: What stock symbols are available?
+✅ Data_Sources: What are your data sources?
+✅ Misspelled_Name_1: Who is Olufemi Adesyan?
+✅ Misspelled_Name_2: Tell me about Nkiru Okoli
+✅ Incomplete_1: Who is the
+✅ Incomplete_2: What was Jaiz Bank
+✅ Case_Test_1: who is the managing director?
+✅ Case_Test_2: WHAT IS THE ROLE OF NKIRU OKOLI?
+✅ Question_Format_1: Can you tell me who the MD is?
+✅ Question_Format_2: I would like to know about the CFO
+✅ Ambiguous_1: Who runs Skyview Capital?
+✅ Ambiguous_2: Who handles the finances?
+✅ Complex_1: What can you tell me about Skyview's team structure?
+✅ Complex_2: How is Skyview Capital's financial performance?
+✅ Complex_3: What makes Skyview Capital different?
+✅ Conceptual_1: What is Skyview Capital's mission?
+✅ Conceptual_2: Who are Skyview Capital's clients?
