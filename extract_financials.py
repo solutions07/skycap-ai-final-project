@@ -67,6 +67,20 @@ PRIMARY_METRICS = [
     'earnings per share'
 ]
 
+# Human-readable magnitude formatting
+def format_currency(value: float) -> str:
+    try:
+        abs_v = abs(value)
+        if abs_v >= 1_000_000_000:
+            return f"₦{value/1_000_000_000:.3f} billion".rstrip('0').rstrip('.')
+        if abs_v >= 1_000_000:
+            return f"₦{value/1_000_000:.3f} million".rstrip('0').rstrip('.')
+        if abs_v >= 1_000:
+            return f"₦{value/1_000:.3f} thousand".rstrip('0').rstrip('.')
+        return f"₦{value:,.2f}"  # fallback with comma formatting
+    except Exception:
+        return f"₦{value}"
+
 # Synonym / variant patterns (lowercase keys)
 METRIC_SYNONYMS: Dict[str, List[str]] = {
     'total assets': [
@@ -218,6 +232,13 @@ def extract_metrics_from_pdf(path: Path) -> Dict[str, Any]:
                 reasons['_general'] = 'no text extracted'
                 return {'file_name': str(path), 'metrics': {}, 'reasons': reasons}
             scale = _global_scale(lines)
+            scale_hint = None
+            if scale == 1_000.0:
+                scale_hint = 'thousands'
+            elif scale == 1_000_000.0:
+                scale_hint = 'millions'
+            elif scale == 1_000_000_000.0:
+                scale_hint = 'billions'
 
             # PASS 1: Structured lines (label : number or split by multiple spaces)
             for line in lines:

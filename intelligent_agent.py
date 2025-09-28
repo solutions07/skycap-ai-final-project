@@ -25,6 +25,19 @@ import requests
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple, Literal
 
+# Structured logging (soft dependency)
+try:
+    from logging_utils import log_debug, log_info, log_warn, log_error
+except Exception:  # pragma: no cover - fallback to print
+    def log_debug(event, **f):
+        print(f"DEBUG_EVT {event} {f}")
+    def log_info(event, **f):
+        print(f"INFO_EVT {event} {f}")
+    def log_warn(event, **f):
+        print(f"WARN_EVT {event} {f}")
+    def log_error(event, **f):
+        print(f"ERROR_EVT {event} {f}")
+
 # Set knowledge base path
 KB_PATH = os.getenv('SKYCAP_KB_PATH', 'master_knowledge_base.json')
 
@@ -469,7 +482,18 @@ class FinancialDataEngine:
         if best_match:
             date, value, is_exact = best_match
             try:
-                formatted_value = f"₦{float(value):,.2f}"
+                fv = float(value)
+                # Re-use local lightweight formatter (avoid circular import)
+                def _fmt(v: float) -> str:
+                    abs_v = abs(v)
+                    if abs_v >= 1_000_000_000:
+                        return f"₦{v/1_000_000_000:.3f} billion".rstrip('0').rstrip('.')
+                    if abs_v >= 1_000_000:
+                        return f"₦{v/1_000_000:.3f} million".rstrip('0').rstrip('.')
+                    if abs_v >= 1_000:
+                        return f"₦{v/1_000:.3f} thousand".rstrip('0').rstrip('.')
+                    return f"₦{v:,.2f}"
+                formatted_value = _fmt(fv)
             except (ValueError, TypeError):
                 formatted_value = str(value)
             
@@ -788,8 +812,29 @@ class SemanticFallback:
                 print(f"DEBUG: Failed to build semantic embeddings: {e}")
                 self.emb = None
 
+    def _dynamic_threshold(self, question: str) -> float:
+        """Adaptive similarity threshold.
+        Lower for conceptual / multi-term or personnel style descriptive queries.
+        Higher for numeric / metric specific questions to avoid hallucination."""
+        ql = question.lower()
+        # Base threshold
+        base = 0.30
+        # Increase for explicit financial metric numeric queries
+        if any(tok in ql for tok in ['eps', 'earnings per share', 'profit before tax', 'total assets', 'gross earnings']):
+            base = 0.40
+        # Lower for conceptual definitional or multi-term (>8 words) queries
+        if any(pat in ql for pat in ['what is', 'define', 'explain', 'how does', 'how is', 'describe']):
+            base -= 0.05
+        # Lower for personnel/team queries
+        if any(p in ql for p in ['team', 'member', 'managing director', 'cfo', 'compliance officer', 'risk officer', 'head of admin', 'who leads', 'who is in charge']):
+            base -= 0.05
+        # Additional lowering for multi-term descriptive queries
+        if len(ql.split()) > 12:
+            base -= 0.02
+        return max(0.15, min(base, 0.5))
+
     def query(self, question: str) -> Optional[str]:
-        """Query semantic index with Read and Reason functionality."""
+        """Query semantic index with Read and Reason functionality using adaptive thresholds."""
         if not self.model or self.emb is None or not self.texts:
             # Lightweight deterministic fallback: simple substring search over stored texts
             ql = question.lower()
@@ -808,8 +853,8 @@ class SemanticFallback:
             v = np.asarray(self.model.encode([question], convert_to_numpy=True))[0]
             sims = (self.emb @ v) / (np.linalg.norm(self.emb, axis=1) * (np.linalg.norm(v) + 1e-12))
             idx = int(sims.argmax())
-            
-            if sims[idx] > 0.3:  # Threshold
+            threshold = self._dynamic_threshold(question)
+            if sims[idx] > threshold:
                 # Read and Reason: Parse the JSON context and provide professional answer
                 try:
                     context_data = json.loads(self.texts[idx])
@@ -928,13 +973,23 @@ class IntentClassifier:
     Order of evaluation is important—stop at first decisive category.
     """
 
+    # Reordered with PERSONNEL elevated before FINANCIAL_METRIC to reduce false positives
     INTENTS = [
-        'NEWS', 'MARKET_PRICE', 'FINANCIAL_METRIC', 'PERSONNEL', 'COMPANY_PROFILE',
+        'NEWS', 'MARKET_PRICE', 'PERSONNEL', 'FINANCIAL_METRIC', 'COMPANY_PROFILE',
         'SUMMARY', 'CONCEPT', 'GENERAL_FINANCE', 'UNKNOWN'
     ]
 
     def __init__(self, kb: Dict[str, Any]):
         self.kb = kb
+        # Build known symbol set (lowercase, sans whitespace) for defensive market price detection
+        self._symbols: set[str] = set()
+        for md in kb.get('market_data', []) or []:
+            sym = md.get('symbol') or md.get('ticker')
+            if sym and isinstance(sym, str):
+                base = sym.strip().lower()
+                if base:
+                    self._symbols.add(base)
+                    self._symbols.add(base.replace(' ', ''))
 
     def classify(self, question: str) -> str:
         ql = question.lower().strip()
@@ -959,11 +1014,12 @@ class IntentClassifier:
         ]):
             return 'NEWS'
 
-        # MARKET PRICE
-        if 'price' in ql or 'share price' in ql or 'stock price' in ql:
-            # Avoid summary queries containing 'summary of price performance'
-            if 'summary' not in ql and 'overview' not in ql:
-                return 'MARKET_PRICE'
+        # MARKET PRICE (defensive – require actual known symbol mention)
+        if ('price' in ql or 'share price' in ql or 'stock price' in ql) and 'summary' not in ql and 'overview' not in ql:
+            if 'minister' not in ql:  # guard against minister queries
+                compact = ql.replace(' ', '')
+                if any(sym in compact or f" {sym} " in f" {ql} " for sym in self._symbols):
+                    return 'MARKET_PRICE'
 
         # FINANCIAL METRIC (assets, pbt, eps, gross earnings)
         if any(k in ql for k in [
@@ -1048,12 +1104,12 @@ class IntelligentAgent:
             return result
         
         q = question.strip()
-        print(f"DEBUG: Processing query: '{q}'")
+        log_info('query_received', query=q)
 
         ql = q.lower()
         intent = self.classifier.classify(q)
         result['intent'] = intent
-        print(f"DEBUG: Classified intent = {intent}")
+        log_debug('intent_classified', intent=intent)
 
         def _cite(source: str):
             result['source_citation'] = f"Source: {source}"
@@ -1086,13 +1142,41 @@ class IntelligentAgent:
                 return result
 
         if intent == 'PERSONNEL':
+            # Structured personnel lookup first
             ans = self.personnel.search_personnel(q)
             if ans:
                 result['answer'] = ans
                 result['provenance'] = 'personnel'
                 _cite('client_profile')
                 result['response_time'] = (datetime.utcnow() - start).total_seconds()
+                log_debug('answer_personnel', answer_length=len(ans))
                 return result
+            # If not found structured, cautiously attempt semantic (lower threshold internally handled)
+            if self.semantic:
+                semantic_ans = self.semantic.query(q)
+                if semantic_ans:
+                    result['answer'] = semantic_ans
+                    result['provenance'] = 'semantic'
+                    _cite('semantic_context')
+                    result['response_time'] = (datetime.utcnow() - start).total_seconds()
+                    log_debug('answer_personnel_semantic_fallback')
+                    return result
+            # Defer to web analysis only if both structured and semantic absent
+            if self.web_analysis:
+                try:
+                    web_results = self.web_analysis.search_web(q, num_results=2)
+                    if web_results:
+                        web_answer = self.web_analysis.analyze_with_context(q, web_results)
+                        if web_answer:
+                            result['answer'] = web_answer
+                            result['brain_used'] = 'Brain 2'
+                            result['provenance'] = 'web_analysis'
+                            result['web_sources'] = [r.get('displayLink', '') for r in web_results]
+                            _cite(', '.join({r.get('displayLink','') for r in web_results if r.get('displayLink')}))
+                            result['response_time'] = (datetime.utcnow() - start).total_seconds()
+                            return result
+                except Exception as e:
+                    log_warn('personnel_web_fallback_error', error=str(e))
 
         if intent == 'FINANCIAL_METRIC':
             ans = self.financial.search_financial_metric(q)
@@ -1101,6 +1185,7 @@ class IntelligentAgent:
                 result['provenance'] = 'financial'
                 _cite('financial_reports')
                 result['response_time'] = (datetime.utcnow() - start).total_seconds()
+                log_debug('answer_financial_metric')
                 return result
 
         if intent == 'MARKET_PRICE':
@@ -1110,6 +1195,7 @@ class IntelligentAgent:
                 result['provenance'] = 'market_price'
                 _cite('market_data')
                 result['response_time'] = (datetime.utcnow() - start).total_seconds()
+                log_debug('answer_market_price')
                 return result
 
         if intent == 'COMPANY_PROFILE':
@@ -1207,17 +1293,16 @@ class IntelligentAgent:
                     result['provenance'] = 'semantic'
                     result['source_citation'] = 'Source: semantic_context'
                     result['response_time'] = (datetime.utcnow() - start).total_seconds()
-                    print("DEBUG: Answer found by semantic fallback")
+                    log_debug('answer_semantic')
                     return result
             except Exception as e:
-                print(f"DEBUG: Semantic fallback failed: {e}")
+                log_warn('semantic_error', error=str(e))
         
         # Brain 2: Live Web Analysis if still unanswered
         if self.web_analysis:
             try:
-                print("DEBUG: Attempting Live Web Analysis")
+                log_debug('web_analysis_attempt')
                 web_results = self.web_analysis.search_web(q, num_results=3)
-                
                 if web_results:
                     web_answer = self.web_analysis.analyze_with_context(q, web_results)
                     if web_answer:
@@ -1227,10 +1312,10 @@ class IntelligentAgent:
                         result['web_sources'] = [r.get('displayLink', '') for r in web_results]
                         result['source_citation'] = 'Source: ' + ', '.join({r.get('displayLink','') for r in web_results if r.get('displayLink')})
                         result['response_time'] = (datetime.utcnow() - start).total_seconds()
-                        print("DEBUG: Answer found by Live Web Analysis")
+                        log_debug('answer_web_analysis')
                         return result
             except Exception as e:
-                print(f"DEBUG: Live Web Analysis failed: {e}")
+                log_warn('web_analysis_error', error=str(e))
         
         # Brain 3: General Knowledge Fallback
         general_answer = self.general_knowledge.lookup(question)
@@ -1240,7 +1325,7 @@ class IntelligentAgent:
             result['provenance'] = 'general_knowledge'
             result['source_citation'] = 'Source: general financial knowledge'
             result['response_time'] = (datetime.utcnow() - start).total_seconds()
-            print("DEBUG: Answer found by GeneralKnowledgeEngine fallback")
+            log_debug('answer_general_knowledge')
             return result
         
         # Default response with incomplete query handling
@@ -1250,7 +1335,7 @@ class IntelligentAgent:
         else:
             result['answer'] = "I don't have specific information about that query in my knowledge base."
         result['response_time'] = (datetime.utcnow() - start).total_seconds()
-        print("DEBUG: No answer found - returning default response")
+        log_info('answer_default')
         return result
     
     def _is_general_knowledge_query(self, question: str) -> bool:

@@ -286,11 +286,31 @@ def ask_skycap():
     # Return structured response expected by validation harness
     return jsonify(final_payload), 200
 
-# Health check endpoint - responds immediately without loading agent
+def _kb_stats():
+    """Lightweight KB statistics for health endpoints."""
+    try:
+        import json as _json
+        if not os.path.exists(KNOWLEDGE_BASE_FILE):
+            return {}
+        # Only read first 200KB to avoid huge loads (KB is small in current design)
+        with open(KNOWLEDGE_BASE_FILE, 'r', encoding='utf-8') as fh:
+            kb = _json.load(fh)
+        fr = kb.get('financial_reports', []) or []
+        md = kb.get('market_data', []) or []
+        cp = kb.get('client_profile', {}) or {}
+        return {
+            'financial_reports': len(fr),
+            'market_data_rows': len(md),
+            'has_client_profile': bool(cp),
+        }
+    except Exception as e:  # pragma: no cover
+        return {'kb_error': str(e)}
+
+# Existing lightweight health (backward compatibility)
 @app.route('/health', methods=['GET'])
 def health():
     try:
-        health_data = {
+        base = {
             'status': 'ok',
             'service': 'SkyCap AI',
             'agent_loaded': agent is not None and agent != "ERROR",
@@ -298,14 +318,39 @@ def health():
             'working_directory': os.getcwd(),
             'port': os.environ.get('PORT', 'NOT SET')
         }
-        logger.info(f"Health check: {health_data}")
-        return jsonify(health_data), 200
+        base.update(_kb_stats())
+        return jsonify(base), 200
     except Exception as e:
         logger.error(f"Health check failed: {e}")
-        return jsonify({
-            'status': 'error',
-            'error': str(e)
-        }), 500
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+# Extended production-grade health endpoint (/healthz standard naming)
+@app.route('/healthz', methods=['GET'])
+def healthz():
+    try:
+        # Do not force-load the agent; only inspect if already loaded
+        loaded = isinstance(agent, object) and agent not in (None, "ERROR")
+        kb_stats = _kb_stats()
+        # Basic latency probe by trivial operation
+        status = 'ok'
+        if not kb_stats or 'kb_error' in kb_stats:
+            status = 'degraded'
+        if not os.path.exists(KNOWLEDGE_BASE_FILE):
+            status = 'not_ready'
+        payload = {
+            'status': status,
+            'service': 'SkyCap AI',
+            'version': _get_build_version(),
+            'timestamp': datetime.utcnow().isoformat() + 'Z',
+            'agent_loaded': loaded,
+            'kb': kb_stats,
+            'kb_file': KNOWLEDGE_BASE_FILE,
+            'kb_exists': os.path.exists(KNOWLEDGE_BASE_FILE),
+        }
+        return jsonify(payload), 200 if status == 'ok' else 503
+    except Exception as e:
+        logger.error(f"/healthz failed: {e}")
+        return jsonify({'status': 'error', 'error': str(e)}), 500
 
 # Lightweight version / build info endpoint for deployment verification
 def _get_build_version():
