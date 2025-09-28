@@ -1,0 +1,19 @@
+steps:
+  # Build the optimized container
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-f'
+      - 'Dockerfile.optimized'
+      - '-t'
+      - 'gcr.io/skycap-ai-final-project/skycap-ai-service:optimized'
+      - '.'
+      
+  # Push the container
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/skycap-ai-final-project/skycap-ai-service:optimized'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

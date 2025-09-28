@@ -1,0 +1,14 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-f'
+      - 'Dockerfile.test'
+      - '-t'
+      - 'gcr.io/skycap-ai-final-project/skycap-test:latest'
+      - '.'
+      
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/skycap-ai-final-project/skycap-test:latest'

@@ -1,0 +1,14 @@
+# Exclude common Python artifacts
+.venv
+.pytest_cache
+__pycache__
+*.pyc
+
+# Exclude common project/editor files
+.git
+.vscode
+*.log
+_archive/
+
+# IMPORTANT: Explicitly INCLUDE our essential credential file
+!skycap-ai-final-project-da89fd1502fd.json

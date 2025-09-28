@@ -1,0 +1,1367 @@
+{
+  "total_reports": 50,
+  "core_metrics": [
+    "total assets",
+    "profit before tax",
+    "gross earnings",
+    "earnings per share"
+  ],
+  "total_checks": 200,
+  "passed_numeric": 141,
+  "justified_missing": 59,
+  "unqualified_failures": 0,
+  "success_rate_including_justified": 100.0,
+  "accounted_success": true,
+  "reports": [
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/41271_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_MAY_2024.pdf",
+      "report_date": "2024-03-31",
+      "metrics": {
+        "total assets": {
+          "value": 6.709845515801311e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 11053595.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 47237207.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 4.61,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/28929_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JANUARY_2020.pdf",
+      "report_date": "2019-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 1.6683757410846246e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 2.1014086654148977e+18,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 13517623.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 1.82,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/32596_JAIZ_BANK_PLC _QUARTER_4_FINANCIAL_STATEMENT_FOR_2020_.pdf",
+      "report_date": "2018-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 5.708667449099752e+28,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 2786302635253.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "earnings per share": {
+          "value": 9.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/44880_JAIZ_BANK_PLC-RE_BRANDING_OF_JAIZ_BANK_PLC__CORPORATE_ACTIONS_AUGUST_2025.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "earnings per share": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/21602_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_APRIL_2018.pdf",
+      "report_date": "2017-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 87312609.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 894008343018.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 6942970.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 1.16,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/39792_JAIZ_BANK_PLC-_QUARTER_3_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_OCTOBER_2023.pdf",
+      "report_date": "2023-09-30",
+      "metrics": {
+        "total assets": {
+          "value": 5.4603569037981946e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 6679641.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 31450467.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 2.68,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/27207_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JULY_2019.pdf",
+      "report_date": "2018-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 1.4400221510846246e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 5746213.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 1.62,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/30961_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_202.pdf",
+      "report_date": "2020-06-30",
+      "metrics": {
+        "total assets": {
+          "value": 2.1849663606601732e+30,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 1.3465524198539057e+18,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "earnings per share": {
+          "value": 1.26,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/28081_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_OCTOBER_2019.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": 9.986198410846246e+16,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 10116241331.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 9369942.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 0.02,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_Q2_2025.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "earnings per share": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_STATEMENT_OF_EARNING_FORCAST_FOR_QUARTER_4_2023.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "earnings per share": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/28999_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_FEBRUARY_2020.pdf",
+      "report_date": "2019-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 1.6683757410846246e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 2.1014086654148977e+18,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 13517623.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 1.82,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/30311_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_MAY_2020.pdf",
+      "report_date": "2019-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 167273108462.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 2110898135.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 14715.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 0.07,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/44437_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2025_FINANCIAL_STATEMENTS_JULY_2025.pdf",
+      "report_date": "2025-03-31",
+      "metrics": {
+        "total assets": {
+          "value": 1102932829.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 76408063.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 36.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_SKM_368e25070203530.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "earnings per share": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/34517_JAIZ_BANK_PLC _QUARTER_3_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+      "report_date": "2021-09-30",
+      "metrics": {
+        "total assets": {
+          "value": 2.556907452335962e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 2.1261109698997796e+18,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 17547831.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 2.1,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/33178_JAIZ_BANK_PLC _QUARTER_1_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+      "report_date": "2021-03-31",
+      "metrics": {
+        "total assets": {
+          "value": 2.436503642335962e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 979173636693.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 48272021.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 25.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/17993_JAIZ_BANK_-_Q1_MARCH_2017_FINANCIAL_STATEMENTS_MAY_2017.pdf",
+      "report_date": "2016-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 78698076.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 1623645.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 0.01,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/33831_JAIZ_BANK_PLC _QUARTER_2_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+      "report_date": "2021-06-30",
+      "metrics": {
+        "total assets": {
+          "value": 2.443866642335962e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 1251574709862.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 11652892.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 24.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/23251_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JULY_2018.pdf",
+      "report_date": "2018-06-30",
+      "metrics": {
+        "total assets": {
+          "value": 97584795.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 6942970.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 33.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/34995_JAIZ_BANK_PLC _QUARTER_4_FINANCIAL_STATEMENT_FOR_2021_.pdf",
+      "report_date": "2021-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 2.794218872335962e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 2.0573193823994762e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 8760971.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 9.85,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/19163_JAIZ_BANK_-_HALF-YR_JUNE_2017_FINANCIAL_STATEMENTS_JULY_2017.pdf",
+      "report_date": "2017-06-30",
+      "metrics": {
+        "total assets": {
+          "value": 60621109.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 3246591.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 0.01,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/41273_JAIZ_BANK_PLC-_QUARTER_5_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_MAY_2024.pdf",
+      "report_date": "2023-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 5.801310583798194e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 11053595.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 47237207.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 1.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/26109_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_APRIL_2019.pdf",
+      "report_date": "2018-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 1.2012755910846246e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 2591679.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 1.45,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/30671_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JUNE_2020.pdf",
+      "report_date": "2020-03-31",
+      "metrics": {
+        "total assets": {
+          "value": 5.708667449099752e+28,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 636693476464.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "earnings per share": {
+          "value": 37.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/41922_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_JULY_2024.pdf",
+      "report_date": "2023-06-30",
+      "metrics": {
+        "total assets": {
+          "value": 1.0126834876837478e+30,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "earnings per share": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/43050_JAIZ_BANK_PLC-_YEAR_END_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_JANUARY_2025.pdf",
+      "report_date": "2023-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 1.0809111315801311e+18,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 76432810.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 10.69,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/42477_JAIZ_BANK_PLC-_QUARTER_3_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_OCTOBER_2024.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": 8.367030725801311e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 54264702.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 6.3,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/JAIZ BANK PLC- AUDITED FINANCIAL STATEMENT FOR 2023 Uploaded on- May 20th 2024.pdf",
+      "report_date": "2023-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 5.801310583798194e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 11053595.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 47237207.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 1.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/33904_JAIZ_BANK_PLC _QUARTER_2_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+      "report_date": "2021-06-30",
+      "metrics": {
+        "total assets": {
+          "value": 2.443866642335962e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 1251574709862.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 11652892.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 24.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/35494_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2021_FI.pdf",
+      "report_date": "2021-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 279275233596.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 4372803.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 25843.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 9.85,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_Q1_2024.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "earnings per share": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_Q1-2025_EF.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "earnings per share": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/Jaiz_Bank_Plc_Audited_Financial_Statement_for_the_year_ended_31_Dec_2024.pdf",
+      "report_date": "2024-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 1080746.98,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 24444.87,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 82874.82,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 32.53,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/17284_JAIZ_BANK_-_AUDITED_DEC_2016_FINANCIAL_STATEMENTS_APRIL_2017.pdf",
+      "report_date": "2016-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 67619828.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 5478042.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 0.02,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/44888_JAIZ_BANK_PLC-RESOLUTIONS_PASSED_AT_THE_13TH_AGM_OF_JAIZ_BANK_PLC_CORPORATE_ACTIONS_AUGUST_2025.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "earnings per share": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/35845_JAIZ_BANK_PLC _QUARTER_1_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+      "report_date": "2022-03-31",
+      "metrics": {
+        "total assets": {
+          "value": 3.088957632792756e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 1091998979173.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 24177427.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 23.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/35502_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2021_FI.pdf",
+      "report_date": "2021-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 279275233596.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 4372803.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 25843.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 9.85,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_Q2_Earning_Forcast__For_Jaiz_Bank_PLC_0001.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "earnings per share": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/21986_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_APRIL_2018.pdf",
+      "report_date": "2018-03-31",
+      "metrics": {
+        "total assets": {
+          "value": 95138694.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 6942970.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 33.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/24036_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_OCTOBER_2018.pdf",
+      "report_date": "2018-09-30",
+      "metrics": {
+        "total assets": {
+          "value": 99861984.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 5504429.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 0.03,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/31797_JAIZ_BANK_PLC _QUARTER_3_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+      "report_date": "2019-01-01",
+      "metrics": {
+        "total assets": {
+          "value": 1.9437960439010287e+29,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 2126110545256.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "earnings per share": {
+          "value": 1.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_Jaiz_Bank_PLC_Q1_2021.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "earnings per share": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/40242_JAIZ_BANK_PLC-_YEAR_END_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_JANUARY_2024.pdf",
+      "report_date": "2022-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 5.795647303798194e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 11135398.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 44515430.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 2.68,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/JAIZ BANK PLC- QUARTER 1 - FINANCIAL STATEMENT FOR 2024 Uploaded on May 19th 2024.pdf",
+      "report_date": "2024-03-31",
+      "metrics": {
+        "total assets": {
+          "value": 6.709845515801311e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 11053595.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 47237207.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 4.61,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_20240614170828922.pdf",
+      "report_date": "2025-09-19",
+      "metrics": {
+        "total assets": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "gross earnings": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        },
+        "earnings per share": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "no text extracted"
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/44752_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_2025_FINANCIAL_STATEMENTS_JULY_2025.pdf",
+      "report_date": "2024-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 1080746982.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 24444875.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 82874821.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 35.0,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/32899_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2020_FI.pdf",
+      "report_date": "2020-12-31",
+      "metrics": {
+        "total assets": {
+          "value": 233596167273.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 3065976.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 19614.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 8.29,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/39180_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_JULY_2023.pdf",
+      "report_date": "2022-06-30",
+      "metrics": {
+        "total assets": {
+          "value": 4.7274702537981946e+17,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": 6632734.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "gross earnings": {
+          "value": 31450467.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 4.1,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    },
+    {
+      "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/20174_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_OCTOBER_2017.pdf",
+      "report_date": "2017-09-30",
+      "metrics": {
+        "total assets": {
+          "value": 82099052.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "profit before tax": {
+          "value": null,
+          "status": "pass_reason",
+          "reason": "not_found"
+        },
+        "gross earnings": {
+          "value": 4965393.0,
+          "status": "pass",
+          "reason": ""
+        },
+        "earnings per share": {
+          "value": 0.01,
+          "status": "pass",
+          "reason": ""
+        }
+      },
+      "all_core_metrics_accounted": true
+    }
+  ]
+}

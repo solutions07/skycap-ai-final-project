@@ -5,13 +5,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/41271_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_MAY_2024.pdf",
         "report_date": "2024-03-31",
         "metrics": {
-          "total assets": 670984551.0,
-          "profit before tax": 6000136.0,
-          "gross earnings": 16508278.0,
-          "earnings per share": 0.0
+          "total assets": 6.709845515801311e+17,
+          "gross earnings": 47237207.0,
+          "profit before tax": 11053595.0,
+          "earnings per share": 4.61
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 749065
+        "_extraction_reasons": {}
       }
     },
     {
@@ -19,13 +18,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/28929_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JANUARY_2020.pdf",
         "report_date": "2019-12-31",
         "metrics": {
-          "total assets": 166837574.0,
-          "profit before tax": 630568.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "total assets": 1.6683757410846246e+17,
+          "gross earnings": 13517623.0,
+          "profit before tax": 2.1014086654148977e+18,
+          "earnings per share": 1.82
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 1098782
+        "_extraction_reasons": {}
       }
     },
     {
@@ -33,27 +31,28 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/32596_JAIZ_BANK_PLC _QUARTER_4_FINANCIAL_STATEMENT_FOR_2020_.pdf",
         "report_date": "2018-12-31",
         "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 660192.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "profit before tax": 2786302635253.0,
+          "earnings per share": 9.0,
+          "total assets": 5.708667449099752e+28
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 1429369
+        "_extraction_reasons": {
+          "total assets": "fallback_largest_number",
+          "gross earnings": "not_found"
+        }
       }
     },
     {
       "report_metadata": {
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/44880_JAIZ_BANK_PLC-RE_BRANDING_OF_JAIZ_BANK_PLC__CORPORATE_ACTIONS_AUGUST_2025.pdf",
         "report_date": "2025-09-19",
-        "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
-        },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 71706
+        "metrics": {},
+        "_extraction_reasons": {
+          "total assets": "no text extracted",
+          "profit before tax": "no text extracted",
+          "gross earnings": "no text extracted",
+          "earnings per share": "no text extracted",
+          "_general": "no text extracted"
+        }
       }
     },
     {
@@ -62,12 +61,15 @@
         "report_date": "2017-12-31",
         "metrics": {
           "total assets": 87312609.0,
-          "profit before tax": 894008.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "gross earnings": 6942970.0,
+          "earnings per share": 1.16,
+          "profit before tax": 894008343018.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 6376687
+        "_extraction_reasons": {
+          "profit before tax": "rejected_sanity:201.0",
+          "gross earnings": "rejected_sanity:201.0",
+          "total assets": "rejected_sanity:201.0"
+        }
       }
     },
     {
@@ -75,13 +77,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/39792_JAIZ_BANK_PLC-_QUARTER_3_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_OCTOBER_2023.pdf",
         "report_date": "2023-09-30",
         "metrics": {
-          "total assets": 546035690.0,
+          "total assets": 5.4603569037981946e+17,
+          "gross earnings": 31450467.0,
           "profit before tax": 6679641.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "earnings per share": 2.68
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 388411
+        "_extraction_reasons": {}
       }
     },
     {
@@ -89,13 +90,13 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/27207_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JULY_2019.pdf",
         "report_date": "2018-12-31",
         "metrics": {
-          "total assets": 144002215.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 2.77
+          "total assets": 1.4400221510846246e+17,
+          "gross earnings": 5746213.0,
+          "earnings per share": 1.62
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 511186
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     },
     {
@@ -103,13 +104,14 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/30961_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_202.pdf",
         "report_date": "2020-06-30",
         "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 709862.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "profit before tax": 1.3465524198539057e+18,
+          "earnings per share": 1.26,
+          "total assets": 2.1849663606601732e+30
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 344874
+        "_extraction_reasons": {
+          "total assets": "fallback_largest_number",
+          "gross earnings": "not_found"
+        }
       }
     },
     {
@@ -117,41 +119,40 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/28081_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_OCTOBER_2019.pdf",
         "report_date": "2025-09-19",
         "metrics": {
-          "total assets": 151945196.0,
-          "profit before tax": 563941.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "total assets": 9.986198410846246e+16,
+          "gross earnings": 9369942.0,
+          "profit before tax": 10116241331.0,
+          "earnings per share": 0.02
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 985169
+        "_extraction_reasons": {}
       }
     },
     {
       "report_metadata": {
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_Q2_2025.pdf",
         "report_date": "2025-09-19",
-        "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
-        },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 291453
+        "metrics": {},
+        "_extraction_reasons": {
+          "total assets": "no text extracted",
+          "profit before tax": "no text extracted",
+          "gross earnings": "no text extracted",
+          "earnings per share": "no text extracted",
+          "_general": "no text extracted"
+        }
       }
     },
     {
       "report_metadata": {
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_STATEMENT_OF_EARNING_FORCAST_FOR_QUARTER_4_2023.pdf",
         "report_date": "2025-09-19",
-        "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
-        },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 427719
+        "metrics": {},
+        "_extraction_reasons": {
+          "total assets": "no text extracted",
+          "profit before tax": "no text extracted",
+          "gross earnings": "no text extracted",
+          "earnings per share": "no text extracted",
+          "_general": "no text extracted"
+        }
       }
     },
     {
@@ -159,13 +160,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/28999_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_FEBRUARY_2020.pdf",
         "report_date": "2019-12-31",
         "metrics": {
-          "total assets": 166837574.0,
-          "profit before tax": 630568.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "total assets": 1.6683757410846246e+17,
+          "gross earnings": 13517623.0,
+          "profit before tax": 2.1014086654148977e+18,
+          "earnings per share": 1.82
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 1181396
+        "_extraction_reasons": {}
       }
     },
     {
@@ -173,13 +173,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/30311_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_MAY_2020.pdf",
         "report_date": "2019-12-31",
         "metrics": {
-          "total assets": 167273.0,
-          "profit before tax": 2110017.0,
+          "total assets": 167273108462.0,
           "gross earnings": 14715.0,
-          "earnings per share": 0.0
+          "profit before tax": 2110898135.0,
+          "earnings per share": 0.07
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 2674501
+        "_extraction_reasons": {}
       }
     },
     {
@@ -188,26 +187,26 @@
         "report_date": "2025-03-31",
         "metrics": {
           "total assets": 1102932829.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "gross earnings": 76408063.0,
+          "earnings per share": 36.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 1470292
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     },
     {
       "report_metadata": {
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_SKM_368e25070203530.pdf",
         "report_date": "2025-09-19",
-        "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
-        },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 82092
+        "metrics": {},
+        "_extraction_reasons": {
+          "total assets": "no text extracted",
+          "profit before tax": "no text extracted",
+          "gross earnings": "no text extracted",
+          "earnings per share": "no text extracted",
+          "_general": "no text extracted"
+        }
       }
     },
     {
@@ -215,13 +214,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/34517_JAIZ_BANK_PLC _QUARTER_3_ _FINANCIAL_STATEMENT_FOR_202.pdf",
         "report_date": "2021-09-30",
         "metrics": {
-          "total assets": 255690745.0,
-          "profit before tax": 3267492.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "gross earnings": 17547831.0,
+          "total assets": 2.556907452335962e+17,
+          "profit before tax": 2.1261109698997796e+18,
+          "earnings per share": 2.1
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 577960
+        "_extraction_reasons": {}
       }
     },
     {
@@ -229,13 +227,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/33178_JAIZ_BANK_PLC _QUARTER_1_ _FINANCIAL_STATEMENT_FOR_202.pdf",
         "report_date": "2021-03-31",
         "metrics": {
-          "total assets": 243650364.0,
-          "profit before tax": 979173.0,
-          "gross earnings": 0.0,
-          "earnings per share": 64232955.0
+          "gross earnings": 48272021.0,
+          "total assets": 2.436503642335962e+17,
+          "profit before tax": 979173636693.0,
+          "earnings per share": 25.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 4452557
+        "_extraction_reasons": {}
       }
     },
     {
@@ -244,12 +241,12 @@
         "report_date": "2016-12-31",
         "metrics": {
           "total assets": 78698076.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
+          "gross earnings": 1623645.0,
           "earnings per share": 0.01
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 1196222
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     },
     {
@@ -257,13 +254,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/33831_JAIZ_BANK_PLC _QUARTER_2_ _FINANCIAL_STATEMENT_FOR_202.pdf",
         "report_date": "2021-06-30",
         "metrics": {
-          "total assets": 244386664.0,
-          "profit before tax": 2297591.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "gross earnings": 11652892.0,
+          "total assets": 2.443866642335962e+17,
+          "profit before tax": 1251574709862.0,
+          "earnings per share": 24.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 2962267
+        "_extraction_reasons": {}
       }
     },
     {
@@ -272,12 +268,12 @@
         "report_date": "2018-06-30",
         "metrics": {
           "total assets": 97584795.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 2.0
+          "gross earnings": 6942970.0,
+          "earnings per share": 33.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 1075551
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     },
     {
@@ -285,13 +281,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/34995_JAIZ_BANK_PLC _QUARTER_4_FINANCIAL_STATEMENT_FOR_2021_.pdf",
         "report_date": "2021-12-31",
         "metrics": {
-          "total assets": 279421887.0,
-          "profit before tax": 4.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "gross earnings": 8760971.0,
+          "profit before tax": 2.0573193823994762e+17,
+          "earnings per share": 9.85,
+          "total assets": 2.794218872335962e+17
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 567697
+        "_extraction_reasons": {}
       }
     },
     {
@@ -300,12 +295,12 @@
         "report_date": "2017-06-30",
         "metrics": {
           "total assets": 60621109.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.03
+          "gross earnings": 3246591.0,
+          "earnings per share": 0.01
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 1104304
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     },
     {
@@ -313,13 +308,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/41273_JAIZ_BANK_PLC-_QUARTER_5_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_MAY_2024.pdf",
         "report_date": "2023-12-31",
         "metrics": {
-          "total assets": 580131058.0,
+          "gross earnings": 47237207.0,
+          "total assets": 5.801310583798194e+17,
           "profit before tax": 11053595.0,
-          "gross earnings": 2023.0,
-          "earnings per share": 0.0
+          "earnings per share": 1.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 4161878
+        "_extraction_reasons": {}
       }
     },
     {
@@ -327,13 +321,13 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/26109_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_APRIL_2019.pdf",
         "report_date": "2018-12-31",
         "metrics": {
-          "total assets": 120127559.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "total assets": 1.2012755910846246e+17,
+          "gross earnings": 2591679.0,
+          "earnings per share": 1.45
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 953209
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     },
     {
@@ -341,13 +335,14 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/30671_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JUNE_2020.pdf",
         "report_date": "2020-03-31",
         "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 636693.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "profit before tax": 636693476464.0,
+          "earnings per share": 37.0,
+          "total assets": 5.708667449099752e+28
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 373789
+        "_extraction_reasons": {
+          "total assets": "fallback_largest_number",
+          "gross earnings": "not_found"
+        }
       }
     },
     {
@@ -355,13 +350,14 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/41922_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_JULY_2024.pdf",
         "report_date": "2023-06-30",
         "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "total assets": 1.0126834876837478e+30
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 965281
+        "_extraction_reasons": {
+          "total assets": "fallback_largest_number",
+          "profit before tax": "not_found",
+          "gross earnings": "not_found",
+          "earnings per share": "not_found"
+        }
       }
     },
     {
@@ -369,13 +365,13 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/43050_JAIZ_BANK_PLC-_YEAR_END_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_JANUARY_2025.pdf",
         "report_date": "2023-12-31",
         "metrics": {
-          "total assets": 1080911131.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "total assets": 1.0809111315801311e+18,
+          "gross earnings": 76432810.0,
+          "earnings per share": 10.69
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 792702
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     },
     {
@@ -383,13 +379,13 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/42477_JAIZ_BANK_PLC-_QUARTER_3_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_OCTOBER_2024.pdf",
         "report_date": "2025-09-19",
         "metrics": {
-          "total assets": 836703072.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "total assets": 8.367030725801311e+17,
+          "gross earnings": 54264702.0,
+          "earnings per share": 6.3
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 469943
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     },
     {
@@ -397,13 +393,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/JAIZ BANK PLC- AUDITED FINANCIAL STATEMENT FOR 2023 Uploaded on- May 20th 2024.pdf",
         "report_date": "2023-12-31",
         "metrics": {
-          "total assets": 580131058.0,
+          "gross earnings": 47237207.0,
+          "total assets": 5.801310583798194e+17,
           "profit before tax": 11053595.0,
-          "gross earnings": 2023.0,
-          "earnings per share": 0.0
+          "earnings per share": 1.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 4161878
+        "_extraction_reasons": {}
       }
     },
     {
@@ -411,13 +406,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/33904_JAIZ_BANK_PLC _QUARTER_2_ _FINANCIAL_STATEMENT_FOR_202.pdf",
         "report_date": "2021-06-30",
         "metrics": {
-          "total assets": 244386664.0,
-          "profit before tax": 2297591.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "gross earnings": 11652892.0,
+          "total assets": 2.443866642335962e+17,
+          "profit before tax": 1251574709862.0,
+          "earnings per share": 24.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 2978590
+        "_extraction_reasons": {}
       }
     },
     {
@@ -425,41 +419,42 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/35494_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2021_FI.pdf",
         "report_date": "2021-12-31",
         "metrics": {
-          "total assets": 279275.0,
-          "profit before tax": 4372803.0,
+          "total assets": 279275233596.0,
           "gross earnings": 25843.0,
-          "earnings per share": 0.0
+          "earnings per share": 9.85,
+          "profit before tax": 4372803.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 1369720
+        "_extraction_reasons": {
+          "profit before tax": "rejected_sanity:4373.0"
+        }
       }
     },
     {
       "report_metadata": {
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_Q1_2024.pdf",
         "report_date": "2025-09-19",
-        "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
-        },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 298672
+        "metrics": {},
+        "_extraction_reasons": {
+          "total assets": "no text extracted",
+          "profit before tax": "no text extracted",
+          "gross earnings": "no text extracted",
+          "earnings per share": "no text extracted",
+          "_general": "no text extracted"
+        }
       }
     },
     {
       "report_metadata": {
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_Q1-2025_EF.pdf",
         "report_date": "2025-09-19",
-        "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
-        },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 422744
+        "metrics": {},
+        "_extraction_reasons": {
+          "total assets": "no text extracted",
+          "profit before tax": "no text extracted",
+          "gross earnings": "no text extracted",
+          "earnings per share": "no text extracted",
+          "_general": "no text extracted"
+        }
       }
     },
     {
@@ -467,13 +462,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/Jaiz_Bank_Plc_Audited_Financial_Statement_for_the_year_ended_31_Dec_2024.pdf",
         "report_date": "2024-12-31",
         "metrics": {
-          "total assets": 1.0,
-          "profit before tax": 24.0,
-          "gross earnings": 82.0,
-          "earnings per share": 0.0
+          "total assets": 1080746.98,
+          "gross earnings": 82874.82,
+          "profit before tax": 24444.87,
+          "earnings per share": 32.53
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 2500598
+        "_extraction_reasons": {}
       }
     },
     {
@@ -482,26 +476,26 @@
         "report_date": "2016-12-31",
         "metrics": {
           "total assets": 67619828.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
+          "gross earnings": 5478042.0,
           "earnings per share": 0.02
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 6235625
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     },
     {
       "report_metadata": {
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/44888_JAIZ_BANK_PLC-RESOLUTIONS_PASSED_AT_THE_13TH_AGM_OF_JAIZ_BANK_PLC_CORPORATE_ACTIONS_AUGUST_2025.pdf",
         "report_date": "2025-09-19",
-        "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
-        },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 83146
+        "metrics": {},
+        "_extraction_reasons": {
+          "total assets": "no text extracted",
+          "profit before tax": "no text extracted",
+          "gross earnings": "no text extracted",
+          "earnings per share": "no text extracted",
+          "_general": "no text extracted"
+        }
       }
     },
     {
@@ -509,13 +503,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/35845_JAIZ_BANK_PLC _QUARTER_1_ _FINANCIAL_STATEMENT_FOR_202.pdf",
         "report_date": "2022-03-31",
         "metrics": {
-          "total assets": 308895763.0,
-          "profit before tax": 1091998.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "gross earnings": 24177427.0,
+          "total assets": 3.088957632792756e+17,
+          "profit before tax": 1091998979173.0,
+          "earnings per share": 23.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 653475
+        "_extraction_reasons": {}
       }
     },
     {
@@ -523,27 +516,28 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/35502_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2021_FI.pdf",
         "report_date": "2021-12-31",
         "metrics": {
-          "total assets": 279275.0,
-          "profit before tax": 4372803.0,
+          "total assets": 279275233596.0,
           "gross earnings": 25843.0,
-          "earnings per share": 0.0
+          "earnings per share": 9.85,
+          "profit before tax": 4372803.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 1369720
+        "_extraction_reasons": {
+          "profit before tax": "rejected_sanity:4373.0"
+        }
       }
     },
     {
       "report_metadata": {
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_Q2_Earning_Forcast__For_Jaiz_Bank_PLC_0001.pdf",
         "report_date": "2025-09-19",
-        "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
-        },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 305940
+        "metrics": {},
+        "_extraction_reasons": {
+          "total assets": "no text extracted",
+          "profit before tax": "no text extracted",
+          "gross earnings": "no text extracted",
+          "earnings per share": "no text extracted",
+          "_general": "no text extracted"
+        }
       }
     },
     {
@@ -552,12 +546,12 @@
         "report_date": "2018-03-31",
         "metrics": {
           "total assets": 95138694.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "gross earnings": 6942970.0,
+          "earnings per share": 33.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 250430
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     },
     {
@@ -566,12 +560,12 @@
         "report_date": "2018-09-30",
         "metrics": {
           "total assets": 99861984.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 9.0
+          "gross earnings": 5504429.0,
+          "earnings per share": 0.03
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 1468644
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     },
     {
@@ -579,27 +573,28 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/31797_JAIZ_BANK_PLC _QUARTER_3_ _FINANCIAL_STATEMENT_FOR_202.pdf",
         "report_date": "2019-01-01",
         "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 779557.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "profit before tax": 2126110545256.0,
+          "earnings per share": 1.0,
+          "total assets": 1.9437960439010287e+29
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 735920
+        "_extraction_reasons": {
+          "total assets": "fallback_largest_number",
+          "gross earnings": "not_found"
+        }
       }
     },
     {
       "report_metadata": {
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_Jaiz_Bank_PLC_Q1_2021.pdf",
         "report_date": "2025-09-19",
-        "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
-        },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 130807
+        "metrics": {},
+        "_extraction_reasons": {
+          "total assets": "no text extracted",
+          "profit before tax": "no text extracted",
+          "gross earnings": "no text extracted",
+          "earnings per share": "no text extracted",
+          "_general": "no text extracted"
+        }
       }
     },
     {
@@ -607,13 +602,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/40242_JAIZ_BANK_PLC-_YEAR_END_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_JANUARY_2024.pdf",
         "report_date": "2022-12-31",
         "metrics": {
-          "total assets": 579564730.0,
+          "total assets": 5.795647303798194e+17,
+          "gross earnings": 44515430.0,
           "profit before tax": 11135398.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "earnings per share": 2.68
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 403940
+        "_extraction_reasons": {}
       }
     },
     {
@@ -621,27 +615,26 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/JAIZ BANK PLC- QUARTER 1 - FINANCIAL STATEMENT FOR 2024 Uploaded on May 19th 2024.pdf",
         "report_date": "2024-03-31",
         "metrics": {
-          "total assets": 670984551.0,
-          "profit before tax": 6000136.0,
-          "gross earnings": 16508278.0,
-          "earnings per share": 0.0
+          "total assets": 6.709845515801311e+17,
+          "gross earnings": 47237207.0,
+          "profit before tax": 11053595.0,
+          "earnings per share": 4.61
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 749065
+        "_extraction_reasons": {}
       }
     },
     {
       "report_metadata": {
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/209_20240614170828922.pdf",
         "report_date": "2025-09-19",
-        "metrics": {
-          "total assets": 0.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
-        },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 62088
+        "metrics": {},
+        "_extraction_reasons": {
+          "total assets": "no text extracted",
+          "profit before tax": "no text extracted",
+          "gross earnings": "no text extracted",
+          "earnings per share": "no text extracted",
+          "_general": "no text extracted"
+        }
       }
     },
     {
@@ -649,13 +642,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/44752_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_2025_FINANCIAL_STATEMENTS_JULY_2025.pdf",
         "report_date": "2024-12-31",
         "metrics": {
-          "total assets": 964086334.0,
-          "profit before tax": 14756904.0,
-          "gross earnings": 45192852.0,
-          "earnings per share": 32.46
+          "total assets": 1080746982.0,
+          "gross earnings": 82874821.0,
+          "profit before tax": 24444875.0,
+          "earnings per share": 35.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 1683738
+        "_extraction_reasons": {}
       }
     },
     {
@@ -663,13 +655,14 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/32899_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2020_FI.pdf",
         "report_date": "2020-12-31",
         "metrics": {
-          "total assets": 233596.0,
-          "profit before tax": 3065976.0,
+          "total assets": 233596167273.0,
           "gross earnings": 19614.0,
-          "earnings per share": 609.0
+          "earnings per share": 8.29,
+          "profit before tax": 3065976.0
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 4147479
+        "_extraction_reasons": {
+          "profit before tax": "rejected_sanity:19.0"
+        }
       }
     },
     {
@@ -677,13 +670,12 @@
         "file_name": "/Users/mac/Desktop/sky cap AI Project/source_data/39180_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_JULY_2023.pdf",
         "report_date": "2022-06-30",
         "metrics": {
-          "total assets": 472747025.0,
-          "profit before tax": 3928833.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.0
+          "total assets": 4.7274702537981946e+17,
+          "gross earnings": 31450467.0,
+          "profit before tax": 6632734.0,
+          "earnings per share": 4.1
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 756125
+        "_extraction_reasons": {}
       }
     },
     {
@@ -692,12 +684,12 @@
         "report_date": "2017-09-30",
         "metrics": {
           "total assets": 82099052.0,
-          "profit before tax": 0.0,
-          "gross earnings": 0.0,
-          "earnings per share": 0.05
+          "gross earnings": 4965393.0,
+          "earnings per share": 0.01
         },
-        "_processed_date": "2025-09-19",
-        "_file_size_bytes": 431273
+        "_extraction_reasons": {
+          "profit before tax": "not_found"
+        }
       }
     }
   ],
@@ -2963,7 +2955,7 @@
         "Name: Skyview Capital Limited",
         "Business: Financial service provider, licensed by the Nigerian Stock Exchange (NSE) and the Securities and Exchange Commission (SEC) as a Broker/Dealer.",
         "Stated Philosophy/Mission: \"Understand that excellent service and professionalism distinguish results from extraordinary results. We attach great importance to quality delivery of life-changing products and services to all our clients and customers with strong emphasis on excellent customer satisfaction.\" Aims to be \"always ahead\" and provide \"Professional Solutions for Your Business.\"",
-        "Year of Operation Implied: Website copyright ©2020.",
+        "Year of Operation Implied: Website copyright \u00a92020.",
         "Website Developer: \"Designed and Developed by Skyview Capital IT.\""
       ],
       "services offered by skyview capital limited": [
@@ -2980,7 +2972,7 @@
         "Nkiru Modesta Okoli (Chief Financial Officer): B.Sc. Accounting, ACA, CFA Level 2 candidate, over 10 years experience. Expertise in financial reporting, audit, tax, internal controls. (AI will know a portrait is associated).",
         "Asomugha Chidozie Stephen (Chief Compliance Officer): MBA, B.Sc. Industrial Chemistry, ACS, over 14 years in capital markets. Expertise in regulatory filings, AML, policy. (AI will know a portrait is associated).",
         "Uche Ronald Bekee (Chief Risk Officer): MBA Marketing, B.Sc. Banking & Finance. Joined Skyview 2014 (initially as Head, Marketing & Client Services). Experienced in corporate finance, marketing, capital raising. (AI will know a portrait is associated).",
-        "Atigan Neville (Head, Admin/HR): Master’s Public Administration. Joined Skyview 2008. Prior experience in admin for large projects (SPDC, Daewoo). (AI will know a portrait is associated)."
+        "Atigan Neville (Head, Admin/HR): Master\u2019s Public Administration. Joined Skyview 2008. Prior experience in admin for large projects (SPDC, Daewoo). (AI will know a portrait is associated)."
       ],
       "contact information & locations for skyview capital limited": [
         "Head Office: 71, Norman Williams St, Ikoyi, Lagos, NG.",
