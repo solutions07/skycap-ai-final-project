@@ -37,3 +37,29 @@ All tests should pass along with the existing hardening and routing tests.
 - Backend: `intelligent_agent.py` contains the hardened comparison logic in the `FinancialDataEngine` and resilience improvements in `_find_best_date_match`.
 - Frontend: `index.html` includes the Dark Mode toggle and the expanded suggestions list.
 - No new runtime dependencies were added in this release.
+
+## New in V1.2
+
+### 1) Currency Scaling Correction
+- Financial metrics sourced from reports are expressed in thousands. The formatter now multiplies by 1,000 before rendering values with NGN units and appropriate magnitude (Million/Billion/Trillion).
+- Example: `580131058.0` is displayed as `₦580.131 Billion`.
+
+### 2) Profile Q&A Enhancements
+- Company profile engine answers:
+  - Client types/clientele (e.g., government parastatals, multinational/indigenous companies, HNIs).
+  - Research report types (e.g., Skyview Research Report, Weekly, Monthly, Quarterly, Annual Reports).
+
+### 3) New Automated Tests
+- `test_profile_queries.py` validates the new profile answers for client types and research report types.
+- Full suite (including comparison tests) remains green.
+
+## How scaling works (examples)
+
+Source financial metrics in the knowledge base are expressed in thousands. The formatter converts them to full NGN amounts and applies a readable unit (Million/Billion/Trillion). Earnings per share (EPS) is not scaled and shows as a plain number.
+
+- Input (thousands): 580131058.0 — Metric: Total Assets → Output: ₦580.131 Billion
+- Input (thousands): 11053595.0 — Metric: Profit Before Tax → Output: ₦11.054 Billion
+- Input (thousands): 16508278.0 — Metric: Gross Earnings → Output: ₦16.508 Billion
+- Input (plain): 2.77 — Metric: Earnings per share (EPS) → Output: 2.77 (no currency, no scaling)
+
+Implementation note: Scaling and formatting are handled in `intelligent_agent.py` by `_format_large_number` (thousands → NGN with units) and `_format_metric_value` (routes currency metrics vs EPS).

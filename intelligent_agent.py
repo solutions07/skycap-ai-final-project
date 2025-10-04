@@ -8,16 +8,43 @@ from datetime import datetime
 # --- Helper Functions ---
 
 def _format_large_number(value):
-    """Format large numbers with Nigerian Naira currency and appropriate units."""
-    if not isinstance(value, (int, float)): 
+    """Format large numbers with Nigerian Naira currency and appropriate units.
+
+    NOTE (V1.2): Source metrics are expressed in thousands; convert to full value before formatting.
+    Example: 580131058.0 (thousands) -> ₦580.131 Billion
+    """
+    if not isinstance(value, (int, float)):
         return str(value)
-    if value >= 1_000_000_000_000: 
-        return f"₦{value / 1_000_000_000_000:.3f} Trillion"
-    if value >= 1_000_000_000: 
-        return f"₦{value / 1_000_000_000:.3f} Billion"
-    if value >= 1_000_000: 
-        return f"₦{value / 1_000_000:.3f} Million"
-    return f"₦{value:,.2f}"
+    try:
+        scaled = float(value) * 1_000.0  # convert 'in thousands' to actual ₦
+    except Exception:
+        scaled = 0.0
+    if scaled >= 1_000_000_000_000:
+        return f"₦{scaled / 1_000_000_000_000:.3f} Trillion"
+    if scaled >= 1_000_000_000:
+        return f"₦{scaled / 1_000_000_000:.3f} Billion"
+    if scaled >= 1_000_000:
+        return f"₦{scaled / 1_000_000:.3f} Million"
+    return f"₦{scaled:,.2f}"
+
+def _format_metric_value(metric_name: str, value):
+    """Format metric values smartly based on their type.
+
+    - Currency-like metrics (assets, PBT, gross earnings) are in thousands and use _format_large_number.
+    - Earnings per share (EPS) is a plain number; no currency symbol or thousands scaling.
+    """
+    if metric_name and isinstance(metric_name, str) and metric_name.strip().lower() in {
+        'total assets', 'profit before tax', 'gross earnings'
+    }:
+        return _format_large_number(value)
+    # EPS and others: return as-is, formatted to sensible precision
+    try:
+        if isinstance(value, (int, float)):
+            # show up to 4 decimals for small EPS
+            return f"{float(value):g}"
+    except Exception:
+        pass
+    return str(value)
 
 def _load_kb(path):
     """Load knowledge base from JSON file."""
@@ -135,14 +162,14 @@ class FinancialDataEngine:
                             change_str = "an increase" if delta > 0 else ("a decrease" if delta < 0 else "no change")
                             return (
                                 f"Comparing {metric_display_name} between {old['year']} and {new['year']}: "
-                                f"The value changed from {_format_large_number(old_val)} (as of {old_date}) "
-                                f"to {_format_large_number(new_val)} (as of {new_date}). "
-                                f"This represents {change_str} of {_format_large_number(abs(delta))} ({pct_change:+.2f}%)."
+                                f"The value changed from {_format_metric_value(metric_display_name, old_val)} (as of {old_date}) "
+                                f"to {_format_metric_value(metric_display_name, new_val)} (as of {new_date}). "
+                                f"This represents {change_str} of {_format_metric_value(metric_display_name, abs(delta))} ({pct_change:+.2f}%)."
                             )
                         else:
                             return (
                                 f"Comparing {metric_display_name} from {old['year']} to {new['year']}: "
-                                f"The value went from ₦0 (as of {old_date}) to {_format_large_number(new_val)} (as of {new_date})."
+                                f"The value went from ₦0 (as of {old_date}) to {_format_metric_value(metric_display_name, new_val)} (as of {new_date})."
                             )
                     except Exception as e:
                         logging.error(f"Unhandled error in comparative analysis: {e}", exc_info=True)
@@ -154,7 +181,7 @@ class FinancialDataEngine:
                 best_match = self._find_best_date_match(norm_metric_key_for_index, year_match, quarter_match)
                 if best_match:
                     metric_value, date = best_match
-                    formatted_value = _format_large_number(metric_value)
+                    formatted_value = _format_metric_value(metric_display_name, metric_value)
                     return f"The {metric_display_name} for Jaiz Bank as of {date} was {formatted_value}."
         
         return None
@@ -381,9 +408,10 @@ class CompanyProfileEngine:
 
     def search_profile_info(self, question):
         """Search for keywords in the company overview and services sections."""
-        if 'philosophy' in question.lower() or 'mission' in question.lower():
-            return self.profile_data.get('company overview', [None])[2] # Return the mission statement
-        if 'services' in question.lower():
+        ql = question.lower()
+        if 'philosophy' in ql or 'mission' in ql:
+            return self.profile_data.get('company overview', [None])[2]  # Return the mission statement
+        if 'services' in ql:
             # --- START: Professional Synthesis Module ---
             services_list = self.profile_data.get('services offered by skyview capital limited', [])
             if not services_list: return None
@@ -392,6 +420,36 @@ class CompanyProfileEngine:
                          "Key services include retainer-ships for listed companies, acting as a Receiving Agency for IPOs and Public Offerings, and utilizing advanced tools for asset valuation.")
             return synthesis
             # --- END: Professional Synthesis Module ---
+        # V1.2: Client types
+        if any(k in ql for k in ['client types', 'types of clients', 'what types of clients', 'clients does skyview capital serve', 'clientele']):
+            # Search text lines for 'Clientele:'
+            try:
+                blob = []
+                for v in self.profile_data.values():
+                    if isinstance(v, list):
+                        blob.extend([str(x) for x in v])
+                for line in blob:
+                    if 'clientele' in line.lower():
+                        # Return the part after 'Clientele:' if present
+                        m = re.search(r'clientele\s*:\s*(.*)', line, flags=re.I)
+                        return m.group(1).strip() if m else line.strip()
+            except Exception:
+                pass
+            return None
+        # V1.2: Research report types
+        if any(k in ql for k in ['research report types', 'types of research', 'research provide', 'types of research reports']):
+            try:
+                blob = []
+                for v in self.profile_data.values():
+                    if isinstance(v, list):
+                        blob.extend([str(x) for x in v])
+                for line in blob:
+                    if 'report types' in line.lower() or 'research report' in line.lower():
+                        m = re.search(r'report types .*?:\s*(.*)', line, flags=re.I)
+                        return m.group(1).strip() if m else line.strip()
+            except Exception:
+                pass
+            return None
         return None
 
 class LocationDataEngine:
