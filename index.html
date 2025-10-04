@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SkyCap AI • Intelligent Financial Assistant</title>
+    <meta name="description" content="SkyCap AI – Secure, fast, intelligent financial insights for Skyview Capital." />
+  <style>
+    :root {
+            --bg-start:#261b48; /* deep purple */
+            --bg-end:#1d2f5d;   /* blue tone */
+      --surface:#ffffff;
+      --surface-alt:#f5f7fb;
+      --primary:#3d4f91;
+      --primary-dark:#2a3863;
+      --accent:#D4AF37;
+            --accent-soft:#e3c86d;
+            --danger:#d64545;
+            --warn:#c59d2a;
+            --ok:#2e8a52;
+      --text:#1e2433;
+      --text-light:#758197;
+      --border:#d1d9e3;
+      --hover-surface:#f2f6fb;
+            --radius-xs:4px; --radius-sm:8px; --radius-md:14px; --radius-lg:22px; --radius-pill:999px;
+            --shadow-sm:0 2px 5px rgba(0,0,0,.08);
+            --shadow-md:0 6px 22px -4px rgba(0,0,0,.22);
+            --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+            --grad-panel:linear-gradient(180deg,#ffffff 0%,#fcfcfe 65%,#f2f5fa 100%);
+        }
+    /* Dark mode variables */
+    :root[data-theme="dark"]{
+      --bg-start:#0e1116; /* dark slate */
+      --bg-end:#141a24;   /* deeper slate */
+      --surface:#101419;
+      --surface-alt:#111723;
+      --primary:#6b7cff;
+      --primary-dark:#4d5de0;
+      --accent:#d4af37;
+      --accent-soft:#b7992e;
+      --danger:#ff6b6b;
+      --warn:#ffcc66;
+      --ok:#4cd964;
+      --text:#e6edf3;
+      --text-light:#9aa7b3;
+            --border:#2a3550;
+            --hover-surface:#141c2a;
+            --grad-panel:linear-gradient(180deg,#0f141b 0%,#0f1621 55%,#0d1521 100%);
+    }
+        *{box-sizing:border-box;}
+        html,body{height:100%;margin:0;font-family:var(--font);color:var(--text);}
+        body{background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.08),transparent 60%),linear-gradient(135deg,var(--bg-start),var(--bg-end));display:flex;flex-direction:column;}
+        h1,h2,h3{margin:0;font-weight:600;}
+        a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+        /* Layout */
+        .app-shell{flex:1;display:flex;justify-content:center;padding:1.8rem clamp(.75rem,2vw,2.5rem);}
+  .panel{width:100%;max-width:1040px;background:var(--grad-panel);border-radius:32px;padding:1.9rem 2rem 1.3rem;box-shadow:var(--shadow-md);display:flex;flex-direction:column;gap:1.4rem;position:relative;overflow:hidden;border:1px solid var(--border);}        
+        .panel:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 92% 12%,rgba(212,175,55,.18),transparent 55%);pointer-events:none;}
+
+        header{display:flex;flex-direction:column;gap:.85rem;padding-bottom:.4rem;border-bottom:1px solid #e2e6ee;}
+        .title-row{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;}
+        .badge{background:linear-gradient(145deg,var(--accent),var(--accent-soft));color:#222;font-size:.63rem;font-weight:600;letter-spacing:.7px;padding:.33rem .6rem;border-radius:var(--radius-pill);text-transform:uppercase;box-shadow:var(--shadow-sm);} 
+        h1{font-size:clamp(1.95rem,3.6vw,2.65rem);background:linear-gradient(90deg,#ffffff 5%,#e6e9f2 20%,#d4af37 55%,#ffffff 90%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18));}
+        .subtitle{font-size:.92rem;color:var(--text-light);max-width:760px;line-height:1.35rem;}
+
+        /* Status */
+        .status-bar{display:flex;align-items:center;gap:.55rem;font-size:.74rem;}
+        .status-pill{display:inline-flex;align-items:center;gap:.45rem;padding:.38rem .75rem;border-radius:var(--radius-pill);font-weight:500;background:#e3f7ec;color:var(--ok);border:1px solid #b6e5c5;transition:.18s ease;}
+        .status-pill[data-state=thinking]{background:#fff6db;color:var(--warn);border-color:#efd796;}
+        .status-pill[data-state=error]{background:#ffe6e6;color:var(--danger);border-color:#f3b2b2;}
+        .status-dot{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(46,138,82,.15);} 
+        .status-pill[data-state=thinking] .status-dot{background:var(--accent);box-shadow:0 0 0 3px rgba(212,175,55,.25);animation:pulse 1.15s infinite ease-in-out;} 
+        .status-pill[data-state=error] .status-dot{background:var(--danger);box-shadow:0 0 0 3px rgba(214,69,69,.25);} 
+        @keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(.55);opacity:.6;}}
+
+        /* Chat Area */
+        .chat-area{flex:1;display:flex;gap:1.25rem;min-height:340px;}
+        .conversation{flex:1;display:flex;flex-direction:column;gap:.9rem;overflow-y:auto;padding:.2rem .2rem 0;scroll-behavior:smooth;}
+        .bubble{max-width:780px;padding:.85rem 1.05rem;border-radius:18px;line-height:1.38;font-size:.93rem;position:relative;animation:fade .35s ease;word-wrap:break-word;white-space:pre-wrap;}
+        .bubble.user{align-self:flex-end;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border-bottom-right-radius:6px;box-shadow:0 4px 12px -3px rgba(0,0,0,.35);} 
+  .bubble.ai{align-self:flex-start;background:var(--surface);color:var(--text);border:1px solid var(--border);box-shadow:var(--shadow-sm);border-bottom-left-radius:6px;}
+        @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+        .bubble-meta{display:flex;align-items:center;gap:.4rem;margin-top:.45rem;}
+  .source-btn{font-size:.6rem;letter-spacing:.5px;padding:.32rem .55rem;border-radius:var(--radius-pill);background:var(--surface);border:1px solid var(--border);cursor:pointer;font-weight:500;color:var(--primary);} 
+  .source-btn:hover{background:var(--hover-surface);}
+  .provenance-panel{margin-top:.45rem;border:1px dashed var(--border);padding:.6rem .7rem;background:var(--surface);color:var(--text-light);font-size:.65rem;border-radius:12px;display:none;white-space:pre-wrap;}
+
+        /* Input Dock */
+        .input-dock{margin-top:.25rem;display:flex;flex-direction:column;gap:.85rem;position:relative;}
+        .query-row{display:flex;gap:.7rem;flex-wrap:wrap;align-items:stretch;}
+  #query-input{flex:1;min-width:260px;padding:1rem 1.05rem .95rem;border:1.5px solid var(--border);border-radius:18px;background:var(--surface);color:var(--text);backdrop-filter:blur(4px);font-size:.95rem;transition:.2s ease;} 
+  #query-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(212,175,55,.25);background:var(--surface);}
+  .ask-btn{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;font-weight:600;border:none;padding:.95rem 1.55rem;font-size:.92rem;letter-spacing:.4px;border-radius:18px;cursor:pointer;display:inline-flex;align-items:center;gap:.55rem;box-shadow:0 5px 14px -4px rgba(0,0,0,.4);transition:.25s ease;} 
+        .ask-btn:hover{background:linear-gradient(135deg,#465aa5,#33467b);} .ask-btn:active{transform:translateY(1px);} 
+
+        /* Dropdown Suggestion Menu */
+  .dropdown{position:absolute;top:100%;left:0;right:0;margin-top:.45rem;background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:0 10px 28px -6px rgba(0,0,0,.28);max-height:260px;overflow-y:auto;z-index:50;padding:.4rem .55rem;display:none;} 
+        .dropdown.open{display:block;}
+  .dropdown-item{padding:.55rem .65rem;border-radius:12px;font-size:.78rem;line-height:1.15rem;cursor:pointer;display:flex;align-items:flex-start;gap:.55rem;position:relative;color:var(--text);} 
+  .dropdown-item:hover{background:var(--hover-surface);} 
+        .dropdown-item span.key{display:inline-block;min-width:12px;font-weight:600;color:var(--accent);} 
+
+        /* Example Shortcuts */
+        .shortcuts{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.1rem;}
+  .shortcut-btn{background:var(--surface);color:var(--primary);border:1px solid var(--border);border-radius:var(--radius-pill);padding:.55rem .9rem;font-size:.68rem;font-weight:500;cursor:pointer;transition:.2s ease;} 
+  .shortcut-btn:hover{background:var(--hover-surface);}        
+
+        /* Followups */
+        .followups{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem;}
+  .followup-btn{background:var(--surface);color:var(--primary);border:1px solid var(--border);border-radius:var(--radius-pill);padding:.45rem .8rem;font-size:.62rem;font-weight:500;cursor:pointer;} 
+  .followup-btn:hover{background:var(--hover-surface);}        
+
+  footer{margin-top:.35rem;padding-top:.75rem;border-top:1px solid var(--border);font-size:.62rem;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:space-between;color:var(--text-light);} 
+        footer strong{color:var(--accent);} 
+        .footer-status{display:flex;align-items:center;gap:.45rem;} .footer-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(46,138,82,.18);} 
+        footer[data-state=thinking] .footer-dot{background:var(--accent);} 
+        footer[data-state=error] .footer-dot{background:var(--danger);} 
+
+        /* Scrollbar subtle styling */
+        .conversation::-webkit-scrollbar,.dropdown::-webkit-scrollbar{width:10px;} 
+        .conversation::-webkit-scrollbar-track,.dropdown::-webkit-scrollbar-track{background:transparent;} 
+        .conversation::-webkit-scrollbar-thumb,.dropdown::-webkit-scrollbar-thumb{background:#d3dae3;border-radius:20px;border:2px solid #f0f3f8;} 
+        .conversation::-webkit-scrollbar-thumb:hover,.dropdown::-webkit-scrollbar-thumb:hover{background:#c2cad3;} 
+
+        @media (max-width:860px){
+  .panel{border-radius:26px;padding:1.4rem 1.25rem 1.2rem;} 
+  #query-input{font-size:.9rem;padding:.9rem .95rem .85rem;} 
+  .ask-btn{width:100%;justify-content:center;} 
+  .conversation{max-height:50vh;} 
+}
+@media (max-width:540px){
+  h1{font-size:2rem;} .subtitle{font-size:.85rem;} .bubble{font-size:.88rem;} .dropdown-item{font-size:.72rem;} 
+}
+    </style>
+</head>
+<body>
+    <div class="app-shell">
+        <div class="panel" role="main" aria-labelledby="app-title">
+      <header>
+                <div class="title-row">
+                    <span class="badge" aria-label="environment">Brain 1</span>
+                    <h1 id="app-title">SkyCap AI</h1>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:.55rem;">
+            <label for="theme-toggle" style="font-size:.78rem;color:var(--text-light);">Dark Mode</label>
+            <input id="theme-toggle" type="checkbox" aria-label="Toggle dark mode" />
+          </div>
+                </div>
+                <div class="status-bar">
+                    <div id="status-pill" class="status-pill" data-state="ready" aria-live="polite" aria-label="System status">
+                        <span class="status-dot"></span><span class="status-text">Live & Ready</span>
+                    </div>
+                </div>
+                <p class="subtitle">Secure, on-prem intelligence for financial and organizational insight. Ask a question, pick a shortcut, or select from the dropdown suggestions.</p>
+            </header>
+            <div class="chat-area" id="chat-area">
+                <div class="conversation" id="conversation" aria-live="polite" aria-label="Conversation transcript"></div>
+            </div>
+            <div class="input-dock">
+                <div class="query-row">
+                    <div style="flex:1;position:relative;">
+                        <input id="query-input" placeholder="Type your question..." aria-label="Your question" autocomplete="off" />
+                        <div id="dropdown" class="dropdown" role="listbox" aria-label="Suggested questions"></div>
+                    </div>
+                    <button id="ask-btn" class="ask-btn" type="button">Ask</button>
+                </div>
+                <div class="shortcuts" id="shortcuts"></div>
+                <div class="followups" id="followups" hidden></div>
+            </div>
+            <footer id="footer" data-state="ready">
+                <div>Developed by <strong>AMD ASCEND Solutions</strong> • Secure & Private</div>
+                <div class="footer-status"><span class="footer-dot"></span><span id="footer-status-text">Live & Ready</span></div>
+            </footer>
+        </div>
+    </div>
+    <script>
+        // ================= Configuration =================
+    const SUGGESTIONS = [
+      // Identity & Meta
+      'Who are you?',
+      'What is the primary objective of the SkyCap AI project?',
+      'How many total PDF financial reports are available?',
+      // Personnel
+      'Who is the Managing Director of Skyview Capital?',
+      'What is the full role and background of Nkiru Modesta Okoli?',
+      'What do you know about Asomugha Chidozie Stephen?',
+      // Company Profile
+      'List the key services offered by Skyview Capital.',
+      "What is the company's stated philosophy or mission?",
+      'What types of clients does Skyview Capital serve?',
+      'What types of research reports does Skyview Research provide?',
+      // Contact & Location
+      'What is the official email address for client complaints?',
+      'What is the full address of the branch office in Rivers State?',
+      'What is the address for the FCT (Abuja) branch?',
+      // Financial Metrics
+      'What were the total assets for Jaiz Bank in the year-end 2024 report?',
+      'What was the Profit Before Tax for Jaiz Bank in 2023?',
+      'Find the gross earnings for Jaiz Bank in the 2024 year-end report.',
+      'What was the earnings per share for Jaiz Bank in 2017?',
+      // Comparative Analysis
+      'Compare the Total Assets for Jaiz Bank between 2022 and 2023.',
+      'How did the Profit Before Tax for Jaiz Bank change from 2021 to 2022?',
+      // Market Data
+      'What is the stock price for JAIZBANK?',
+      'What is the most recent closing price for UBA?',
+      'List the top 3 market losers.',
+      'Which stock had the highest percentage gain in the recent market data?'
+    ];
+
+        const SHORTCUTS = [
+  'Who is the Managing Director of Skyview Capital?',
+  'Compare the Total Assets for Jaiz Bank between 2022 and 2023.',
+  'What is the stock price for JAIZBANK?',
+  'List the key services offered by Skyview Capital.'
+];
+
+        const STATUS = {
+  ready:{label:'Live & Ready'},
+  thinking:{label:'Thinking...'},
+  error:{label:'Error'}
+};
+
+        // API base resolution to support file:// usage
+        const API_BASE = (() => {
+          try {
+            const params = new URLSearchParams(location.search);
+            const apiParam = params.get('api');
+            if (apiParam) return apiParam.replace(/\/$/, '');
+            if (window.BACKEND_URL) return String(window.BACKEND_URL).replace(/\/$/, '');
+            if (location.protocol === 'file:') {
+              console.info('[SkyCap] Detected file:// protocol. Defaulting API base to http://127.0.0.1:5000');
+              return 'http://127.0.0.1:5000';
+            }
+          } catch(_) { /* no-op */ }
+          return '';
+        })();
+
+// ================= State & Elements =================
+const conversationEl = document.getElementById('conversation');
+const dropdownEl = document.getElementById('dropdown');
+const inputEl = document.getElementById('query-input');
+const askBtn = document.getElementById('ask-btn');
+const statusPill = document.getElementById('status-pill');
+const shortcutsWrap = document.getElementById('shortcuts');
+const followupsWrap = document.getElementById('followups');
+const footer = document.getElementById('footer');
+const footerStatusText = document.getElementById('footer-status-text');
+const themeToggle = document.getElementById('theme-toggle');
+let dropdownOpen = false;
+let typingActive = false;
+let lastQuestion = '';
+
+// ================= Utilities =================
+function setStatus(mode){
+  statusPill.dataset.state = mode;
+  statusPill.querySelector('.status-text').textContent = STATUS[mode].label;
+  footer.dataset.state = mode;
+  footerStatusText.textContent = STATUS[mode].label;
+}
+
+function createBubble(text, role='ai', options={}){
+  const div = document.createElement('div');
+  div.className = `bubble ${role}`;
+  if(options.id) div.id = options.id;
+  div.textContent = text;
+  return div;
+}
+
+function scrollToBottom(){
+  requestAnimationFrame(()=>{ conversationEl.scrollTop = conversationEl.scrollHeight; });
+}
+
+function openDropdown(){ if(!dropdownOpen){ dropdownEl.classList.add('open'); dropdownOpen = true; } }
+function closeDropdown(){ if(dropdownOpen){ dropdownEl.classList.remove('open'); dropdownOpen = false; } }
+
+function renderDropdown(filter=''){
+  dropdownEl.innerHTML='';
+  const f = filter.trim().toLowerCase();
+  SUGGESTIONS.filter(q=>!f || q.toLowerCase().includes(f)).forEach((q,i)=>{
+    const item = document.createElement('div');
+    item.className='dropdown-item';
+    item.setAttribute('role','option');
+    item.innerHTML = `<span class="key">${i+1}.</span><span>${q}</span>`;
+    item.addEventListener('click',()=>{ inputEl.value=q; closeDropdown(); inputEl.focus(); });
+    dropdownEl.appendChild(item);
+  });
+  if(!dropdownEl.children.length){
+    const empty=document.createElement('div');
+    empty.className='dropdown-item';
+    empty.textContent='No matches';
+    dropdownEl.appendChild(empty);
+  }
+}
+
+function clearFollowups(){ followupsWrap.innerHTML=''; followupsWrap.hidden=true; }
+function renderFollowups(question, answer){
+  clearFollowups();
+  const suggestions = new Set();
+  const ql = question.toLowerCase();
+  if(/total assets/.test(ql)){ suggestions.add('Show Profit Before Tax'); suggestions.add('What were gross earnings?'); suggestions.add('Compare with last year'); }
+  if(/profit before tax|pbt/.test(ql)){ suggestions.add('Show gross earnings'); suggestions.add('Compare PBT over last 2 years'); }
+  if(/gross earnings/.test(ql)){ suggestions.add('Show total assets for same period'); suggestions.add('Compare gross earnings year over year'); }
+  if(/managing director/.test(ql)){ suggestions.add('List the key services offered by Skyview Capital.'); suggestions.add('What is the company\'s stated philosophy or mission?'); }
+  if(/services/.test(ql)){ suggestions.add('What is the company\'s stated philosophy or mission?'); suggestions.add('Who is the Managing Director of Skyview Capital?'); }
+  if(!suggestions.size){ suggestions.add('Who are you?'); suggestions.add('How many total PDF financial reports are available?'); }
+  const list = Array.from(suggestions).slice(0,3);
+  list.forEach(txt=>{ const b=document.createElement('button'); b.type='button'; b.className='followup-btn'; b.textContent=txt; b.addEventListener('click',()=>{ inputEl.value=txt; submitQuery(); }); followupsWrap.appendChild(b); });
+  if(list.length) followupsWrap.hidden=false;
+}
+
+function renderShortcuts(){ SHORTCUTS.forEach(q=>{ const b=document.createElement('button'); b.type='button'; b.className='shortcut-btn'; b.textContent=q.length>42? q.slice(0,39)+'…':q; b.title=q; b.addEventListener('click',()=>{ inputEl.value=q; submitQuery(); }); shortcutsWrap.appendChild(b); }); }
+
+// Typing effect word-by-word
+async function typeWriter(el, fullText, speed=25){
+  typingActive = true; el.textContent='';
+  const words = fullText.split(/(\s+)/); let i=0;
+  while(i < words.length){ el.textContent += words[i]; i++; scrollToBottom(); await new Promise(r=>setTimeout(r,speed)); }
+  typingActive = false;
+}
+
+function renderSourceControls(container, provenance){
+  if(!provenance) return;
+  const btn = document.createElement('button');
+  btn.type='button';
+  btn.className='source-btn';
+  btn.textContent='[ Source ]';
+  const panel = document.createElement('div');
+  panel.className='provenance-panel';
+  panel.textContent=provenance;
+  btn.addEventListener('click',()=>{ panel.style.display = panel.style.display==='none'? 'block':'none'; scrollToBottom(); });
+  container.appendChild(btn);
+  container.appendChild(panel);
+}
+
+async function submitQuery(){
+  const question = inputEl.value.trim();
+  if(!question || typingActive) return;
+  closeDropdown();
+  lastQuestion = question;
+  setStatus('thinking');
+  // User bubble
+  const userBubble = createBubble(question,'user');
+  conversationEl.appendChild(userBubble);
+  scrollToBottom();
+  inputEl.value='';
+  // AI placeholder bubble
+  const aiBubble = createBubble('','ai');
+  conversationEl.appendChild(aiBubble);
+  const meta = document.createElement('div'); meta.className='bubble-meta'; aiBubble.appendChild(meta);
+  scrollToBottom();
+  try {
+  const res = await fetch('https://skycap-ai-service-472059152731.europe-west1.run.app/ask', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query:question}) });
+    if(!res.ok) throw new Error('Network error');
+    const data = await res.json();
+    const answer = data.answer || 'No answer available.';
+    await typeWriter(aiBubble, answer, 25);
+    renderSourceControls(meta, data.provenance);
+    renderFollowups(question, answer);
+    setStatus('ready');
+  } catch (err){
+    console.error(err);
+    aiBubble.textContent='An error occurred. Please try again.';
+    setStatus('error');
+  }
+}
+
+// ====== Events ======
+inputEl.addEventListener('focus', ()=>{ renderDropdown(inputEl.value); openDropdown(); });
+inputEl.addEventListener('input', ()=>{ renderDropdown(inputEl.value); openDropdown(); });
+document.addEventListener('click', (e)=>{ if(!e.target.closest('#dropdown') && !e.target.closest('#query-input')) closeDropdown(); });
+askBtn.addEventListener('click', submitQuery);
+inputEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); submitQuery(); } });
+
+function init(){ renderDropdown(); renderShortcuts(); setStatus('ready'); }
+document.addEventListener('DOMContentLoaded', init);
+
+// ============ Theme Handling (Dark Mode) ============
+function applyTheme(theme){
+  const root = document.documentElement;
+  if(theme === 'dark'){
+    root.setAttribute('data-theme','dark');
+    themeToggle.checked = true;
+  } else {
+    root.removeAttribute('data-theme');
+    themeToggle.checked = false;
+  }
+}
+
+function loadTheme(){
+  try{
+    const saved = localStorage.getItem('skycap_theme');
+    if(saved === 'dark' || saved === 'light'){
+      applyTheme(saved);
+      return;
+    }
+    // Prefer system dark if no saved preference
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark ? 'dark' : 'light');
+  }catch(_){ applyTheme('light'); }
+}
+
+document.addEventListener('DOMContentLoaded', loadTheme);
+themeToggle?.addEventListener('change', (e)=>{
+  const next = e.target.checked ? 'dark' : 'light';
+  applyTheme(next);
+  try{ localStorage.setItem('skycap_theme', next); }catch(_){ /* ignore */ }
+});
+    </script>
+</body>
+</html>

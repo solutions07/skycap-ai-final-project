@@ -1,0 +1,3042 @@
+{
+  "financial_reports": [
+    {
+      "report_metadata": {
+        "file_name": "41271_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_MAY_2024.pdf",
+        "report_date": "2024-03-31",
+        "metrics": {
+          "total assets": 670984551.0,
+          "profit before tax": 6000136.0,
+          "gross earnings": 16508278.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 749065
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "28929_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JANUARY_2020.pdf",
+        "report_date": "2019-12-31",
+        "metrics": {
+          "total assets": 166837574.0,
+          "profit before tax": 630568.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 1098782
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "32596_JAIZ_BANK_PLC _QUARTER_4_FINANCIAL_STATEMENT_FOR_2020_.pdf",
+        "report_date": "2018-12-31",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 660192.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 1429369
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "44880_JAIZ_BANK_PLC-RE_BRANDING_OF_JAIZ_BANK_PLC__CORPORATE_ACTIONS_AUGUST_2025.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 71706
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "21602_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_APRIL_2018.pdf",
+        "report_date": "2017-12-31",
+        "metrics": {
+          "total assets": 87312609.0,
+          "profit before tax": 894008.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 6376687
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "39792_JAIZ_BANK_PLC-_QUARTER_3_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_OCTOBER_2023.pdf",
+        "report_date": "2023-09-30",
+        "metrics": {
+          "total assets": 546035690.0,
+          "profit before tax": 6679641.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 388411
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "27207_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JULY_2019.pdf",
+        "report_date": "2018-12-31",
+        "metrics": {
+          "total assets": 144002215.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 2.77
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 511186
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "30961_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_202.pdf",
+        "report_date": "2020-06-30",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 709862.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 344874
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "28081_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_OCTOBER_2019.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 151945196.0,
+          "profit before tax": 563941.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 985169
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "209_Q2_2025.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 291453
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "209_STATEMENT_OF_EARNING_FORCAST_FOR_QUARTER_4_2023.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 427719
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "28999_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_FEBRUARY_2020.pdf",
+        "report_date": "2019-12-31",
+        "metrics": {
+          "total assets": 166837574.0,
+          "profit before tax": 630568.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 1181396
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "30311_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_MAY_2020.pdf",
+        "report_date": "2019-12-31",
+        "metrics": {
+          "total assets": 167273.0,
+          "profit before tax": 2110017.0,
+          "gross earnings": 14715.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 2674501
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "44437_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2025_FINANCIAL_STATEMENTS_JULY_2025.pdf",
+        "report_date": "2025-03-31",
+        "metrics": {
+          "total assets": 1102932829.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 1470292
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "209_SKM_368e25070203530.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 82092
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "34517_JAIZ_BANK_PLC _QUARTER_3_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "report_date": "2021-09-30",
+        "metrics": {
+          "total assets": 255690745.0,
+          "profit before tax": 3267492.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 577960
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "33178_JAIZ_BANK_PLC _QUARTER_1_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "report_date": "2021-03-31",
+        "metrics": {
+          "total assets": 243650364.0,
+          "profit before tax": 979173.0,
+          "gross earnings": 0.0,
+          "earnings per share": 64232955.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 4452557
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "17993_JAIZ_BANK_-_Q1_MARCH_2017_FINANCIAL_STATEMENTS_MAY_2017.pdf",
+        "report_date": "2016-12-31",
+        "metrics": {
+          "total assets": 78698076.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.01
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 1196222
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "33831_JAIZ_BANK_PLC _QUARTER_2_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "report_date": "2021-06-30",
+        "metrics": {
+          "total assets": 244386664.0,
+          "profit before tax": 2297591.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 2962267
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "23251_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JULY_2018.pdf",
+        "report_date": "2018-06-30",
+        "metrics": {
+          "total assets": 97584795.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 2.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 1075551
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "34995_JAIZ_BANK_PLC _QUARTER_4_FINANCIAL_STATEMENT_FOR_2021_.pdf",
+        "report_date": "2021-12-31",
+        "metrics": {
+          "total assets": 279421887.0,
+          "profit before tax": 4.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 567697
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "19163_JAIZ_BANK_-_HALF-YR_JUNE_2017_FINANCIAL_STATEMENTS_JULY_2017.pdf",
+        "report_date": "2017-06-30",
+        "metrics": {
+          "total assets": 60621109.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.03
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 1104304
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "41273_JAIZ_BANK_PLC-_QUARTER_5_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_MAY_2024.pdf",
+        "report_date": "2023-12-31",
+        "metrics": {
+          "total assets": 580131058.0,
+          "profit before tax": 11053595.0,
+          "gross earnings": 2023.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 4161878
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "26109_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_APRIL_2019.pdf",
+        "report_date": "2018-12-31",
+        "metrics": {
+          "total assets": 120127559.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 953209
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "30671_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JUNE_2020.pdf",
+        "report_date": "2020-03-31",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 636693.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 373789
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "41922_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_JULY_2024.pdf",
+        "report_date": "2023-06-30",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 965281
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "43050_JAIZ_BANK_PLC-_YEAR_END_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_JANUARY_2025.pdf",
+        "report_date": "2023-12-31",
+        "metrics": {
+          "total assets": 1080911131.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 792702
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "42477_JAIZ_BANK_PLC-_QUARTER_3_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_OCTOBER_2024.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 836703072.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 469943
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "JAIZ BANK PLC- AUDITED FINANCIAL STATEMENT FOR 2023 Uploaded on- May 20th 2024.pdf",
+        "report_date": "2023-12-31",
+        "metrics": {
+          "total assets": 580131058.0,
+          "profit before tax": 11053595.0,
+          "gross earnings": 2023.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 4161878
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "33904_JAIZ_BANK_PLC _QUARTER_2_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "report_date": "2021-06-30",
+        "metrics": {
+          "total assets": 244386664.0,
+          "profit before tax": 2297591.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 2978590
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "35494_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2021_FI.pdf",
+        "report_date": "2021-12-31",
+        "metrics": {
+          "total assets": 279275.0,
+          "profit before tax": 4372803.0,
+          "gross earnings": 25843.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 1369720
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "209_Q1_2024.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 298672
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "209_Q1-2025_EF.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 422744
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "Jaiz_Bank_Plc_Audited_Financial_Statement_for_the_year_ended_31_Dec_2024.pdf",
+        "report_date": "2024-12-31",
+        "metrics": {
+          "earnings per share": 0.0
+        },
+        "_extraction_reasons": {
+          "total assets": "rejected_sanity:1.0",
+          "profit before tax": "rejected_sanity:24.0",
+          "gross earnings": "rejected_sanity:82.0"
+        }
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "17284_JAIZ_BANK_-_AUDITED_DEC_2016_FINANCIAL_STATEMENTS_APRIL_2017.pdf",
+        "report_date": "2016-12-31",
+        "metrics": {
+          "total assets": 67619828.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.02
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 6235625
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "44888_JAIZ_BANK_PLC-RESOLUTIONS_PASSED_AT_THE_13TH_AGM_OF_JAIZ_BANK_PLC_CORPORATE_ACTIONS_AUGUST_2025.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 83146
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "35845_JAIZ_BANK_PLC _QUARTER_1_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "report_date": "2022-03-31",
+        "metrics": {
+          "total assets": 308895763.0,
+          "profit before tax": 1091998.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 653475
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "35502_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2021_FI.pdf",
+        "report_date": "2021-12-31",
+        "metrics": {
+          "total assets": 279275.0,
+          "profit before tax": 4372803.0,
+          "gross earnings": 25843.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 1369720
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "209_Q2_Earning_Forcast__For_Jaiz_Bank_PLC_0001.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 305940
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "21986_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_APRIL_2018.pdf",
+        "report_date": "2018-03-31",
+        "metrics": {
+          "total assets": 95138694.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 250430
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "24036_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_OCTOBER_2018.pdf",
+        "report_date": "2018-09-30",
+        "metrics": {
+          "total assets": 99861984.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 9.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 1468644
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "31797_JAIZ_BANK_PLC _QUARTER_3_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "report_date": "2019-01-01",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 779557.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 735920
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "209_Jaiz_Bank_PLC_Q1_2021.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 130807
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "40242_JAIZ_BANK_PLC-_YEAR_END_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_JANUARY_2024.pdf",
+        "report_date": "2022-12-31",
+        "metrics": {
+          "total assets": 579564730.0,
+          "profit before tax": 11135398.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 403940
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "JAIZ BANK PLC- QUARTER 1 - FINANCIAL STATEMENT FOR 2024 Uploaded on May 19th 2024.pdf",
+        "report_date": "2024-03-31",
+        "metrics": {
+          "total assets": 670984551.0,
+          "profit before tax": 6000136.0,
+          "gross earnings": 16508278.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 749065
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "209_20240614170828922.pdf",
+        "report_date": "2025-09-19",
+        "metrics": {
+          "total assets": 0.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 62088
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "44752_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_2025_FINANCIAL_STATEMENTS_JULY_2025.pdf",
+        "report_date": "2024-12-31",
+        "metrics": {
+          "total assets": 964086334.0,
+          "profit before tax": 14756904.0,
+          "gross earnings": 45192852.0,
+          "earnings per share": 32.46
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 1683738
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "32899_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2020_FI.pdf",
+        "report_date": "2020-12-31",
+        "metrics": {
+          "total assets": 233596.0,
+          "profit before tax": 3065976.0,
+          "gross earnings": 19614.0,
+          "earnings per share": 609.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 4147479
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "39180_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_JULY_2023.pdf",
+        "report_date": "2022-06-30",
+        "metrics": {
+          "total assets": 472747025.0,
+          "profit before tax": 3928833.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.0
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 756125
+      }
+    },
+    {
+      "report_metadata": {
+        "file_name": "20174_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_OCTOBER_2017.pdf",
+        "report_date": "2017-09-30",
+        "metrics": {
+          "total assets": 82099052.0,
+          "profit before tax": 0.0,
+          "gross earnings": 0.0,
+          "earnings per share": 0.05
+        },
+        "_processed_date": "2025-09-19",
+        "_file_size_bytes": 431273
+      }
+    }
+  ],
+  "market_data": [
+    {
+      "pricedate": "2025-09-17",
+      "symbol": "JAIZBANK",
+      "symbolname": "JAIZ BANK PLC",
+      "openingprice": 4.58,
+      "closingprice": 4.55,
+      "_row_number": 1,
+      "_source_file": "pricehistory.csv",
+      "_processed_date": "2025-09-19T13:16:10.168460",
+      "newpricedate": "17-Sep-2025"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "FGSUK2033S6",
+      "symbolname": "15.75% FGN OCT 2033",
+      "openingprice": 99.98,
+      "closingprice": 95.0,
+      "_row_number": 1,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936291"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ABBEYBDS",
+      "symbolname": "ABBEY BUILDING SOCIETY PLC",
+      "openingprice": 6.5,
+      "closingprice": 6.5,
+      "_row_number": 2,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936371"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ACADEMY",
+      "symbolname": "ACADEMY PRESS PLC",
+      "openingprice": 9.55,
+      "closingprice": 9.55,
+      "_row_number": 3,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936407"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ACCESSCORP",
+      "symbolname": "ACCESS HOLDINGS PLC",
+      "openingprice": 26.5,
+      "closingprice": 26.2,
+      "_row_number": 4,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936437"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "AFRIPRUD",
+      "symbolname": "AFRICA PRUDENTIAL REGISTRARS PLC",
+      "openingprice": 16.05,
+      "closingprice": 16.0,
+      "_row_number": 5,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936466"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "AIICO",
+      "symbolname": "AIICO INSURANCE PLC",
+      "openingprice": 4.04,
+      "closingprice": 3.8,
+      "_row_number": 6,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936494"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "AIRTELAFRI",
+      "symbolname": "AIRTEL AFRICA PLC",
+      "openingprice": 2310.5,
+      "closingprice": 2310.5,
+      "_row_number": 7,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936522"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ALEX",
+      "symbolname": "ALUMINIUM EXTRUSION INDUSTRIES",
+      "openingprice": 7.15,
+      "closingprice": 7.15,
+      "_row_number": 8,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936549"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ARADEL",
+      "symbolname": "ARADEL HOLDINGS PLC",
+      "openingprice": 510.0,
+      "closingprice": 513.5,
+      "_row_number": 9,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936576"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ABCTRANS",
+      "symbolname": "ASSOCIATED BUS COMPANY PLC",
+      "openingprice": 4.51,
+      "closingprice": 4.51,
+      "_row_number": 10,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936603"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NCR",
+      "symbolname": "AT & T GLOBAL INFORMATION SOLUTIONS PLC",
+      "openingprice": 11.55,
+      "closingprice": 11.55,
+      "_row_number": 11,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936630"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "AUSTINLAZ",
+      "symbolname": "AUSTINLAZ COMPANY PLC",
+      "openingprice": 2.9,
+      "closingprice": 2.9,
+      "_row_number": 12,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936656"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MANSARD",
+      "symbolname": "AXAMansard Insurance Plc",
+      "openingprice": 15.6,
+      "closingprice": 15.6,
+      "_row_number": 13,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936703"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "BERGER",
+      "symbolname": "BERGER PAINTS NIGERIA PLC",
+      "openingprice": 36.9,
+      "closingprice": 38.0,
+      "_row_number": 14,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936742"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "BETAGLAS",
+      "symbolname": "BETA GLASS COMPANY (NIG) PLC",
+      "openingprice": 486.0,
+      "closingprice": 486.0,
+      "_row_number": 15,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936771"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "BUACEMENT",
+      "symbolname": "BUA CEMENT COMPANY PLC",
+      "openingprice": 151.8,
+      "closingprice": 151.8,
+      "_row_number": 16,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936799"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "BUAFOODS",
+      "symbolname": "BUA FOODS PLC",
+      "openingprice": 590.0,
+      "closingprice": 590.0,
+      "_row_number": 17,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936826"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CILEASING",
+      "symbolname": "C & I LEASING PLC",
+      "openingprice": 6.9,
+      "closingprice": 6.9,
+      "_row_number": 18,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936853"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CADBURY",
+      "symbolname": "CADBURY PLC",
+      "openingprice": 60.0,
+      "closingprice": 60.0,
+      "_row_number": 19,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936878"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CAP",
+      "symbolname": "CAP PLC",
+      "openingprice": 70.2,
+      "closingprice": 70.2,
+      "_row_number": 20,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936904"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CAVERTON",
+      "symbolname": "CAVERTON OFFSHORE SUPPORT GRP PLC",
+      "openingprice": 6.9,
+      "closingprice": 6.6,
+      "_row_number": 21,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936930"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CHAMPION",
+      "symbolname": "CHAMPION BREWERIES",
+      "openingprice": 17.3,
+      "closingprice": 17.3,
+      "_row_number": 22,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936956"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CHAMS",
+      "symbolname": "CHAMS PLC",
+      "openingprice": 2.93,
+      "closingprice": 2.65,
+      "_row_number": 23,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.936982"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NIDF",
+      "symbolname": "CHAPEL HILL DENHAM NIG. INFRAS DEBT FUN",
+      "openingprice": 113.0,
+      "closingprice": 113.0,
+      "_row_number": 24,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937009"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CHELLARAM",
+      "symbolname": "CHELLARAMS PLC",
+      "openingprice": 10.5,
+      "closingprice": 10.5,
+      "_row_number": 25,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937035"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CWG",
+      "symbolname": "COMPUTER WAREHOUSE GROUP PLC",
+      "openingprice": 15.7,
+      "closingprice": 16.05,
+      "_row_number": 26,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937063"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CONOIL",
+      "symbolname": "CONOIL PLC",
+      "openingprice": 211.1,
+      "closingprice": 211.1,
+      "_row_number": 27,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937088"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CONHALLPLC",
+      "symbolname": "CONSOLIDATED HALLMARK INSURANCE PLC",
+      "openingprice": 4.3,
+      "closingprice": 4.3,
+      "_row_number": 28,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937114"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CORNERST",
+      "symbolname": "CORNERSTONE INSURANCE PLC",
+      "openingprice": 6.39,
+      "closingprice": 6.9,
+      "_row_number": 29,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937140"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "WAPIC",
+      "symbolname": "CORONATION INSURANCE PLC",
+      "openingprice": 3.62,
+      "closingprice": 3.45,
+      "_row_number": 30,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937165"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CUSTODIAN",
+      "symbolname": "CUSTODIAN INVESTMENT PLC",
+      "openingprice": 40.75,
+      "closingprice": 40.75,
+      "_row_number": 31,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937190"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CUTIX",
+      "symbolname": "CUTIX PLC",
+      "openingprice": 3.5,
+      "closingprice": 3.23,
+      "_row_number": 32,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937215"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "DAARCOMM",
+      "symbolname": "DAAR COMMUNICATIONS PLC",
+      "openingprice": 1.09,
+      "closingprice": 1.05,
+      "_row_number": 33,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937241"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "DANGCEM",
+      "symbolname": "DANGOTE CEMENT PLC",
+      "openingprice": 520.2,
+      "closingprice": 520.2,
+      "_row_number": 34,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937291"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "DANGSUGAR",
+      "symbolname": "DANGOTE SUGAR REFINERY PLC",
+      "openingprice": 58.0,
+      "closingprice": 58.0,
+      "_row_number": 35,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937321"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "DEAPCAP",
+      "symbolname": "DEAP CAPITAL MANAGEMENT & TRUST PLC",
+      "openingprice": 1.81,
+      "closingprice": 1.71,
+      "_row_number": 36,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937348"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ETRANZACT",
+      "symbolname": "E-TRANZACT INTERNATIONAL PLC",
+      "openingprice": 10.85,
+      "closingprice": 10.85,
+      "_row_number": 37,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937374"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ETI",
+      "symbolname": "ECOBANK TRANSNATIONAL INCORPORATED",
+      "openingprice": 36.55,
+      "closingprice": 36.1,
+      "_row_number": 38,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937400"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ELLAHLAKES",
+      "symbolname": "ELLAH LAKES",
+      "openingprice": 14.1,
+      "closingprice": 12.69,
+      "_row_number": 39,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937426"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ETERNA",
+      "symbolname": "ETERNA  PLC",
+      "openingprice": 38.0,
+      "closingprice": 34.2,
+      "_row_number": 40,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937452"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "EUNISELL",
+      "symbolname": "EUNISELL INTERLINKED PLC",
+      "openingprice": 25.45,
+      "closingprice": 25.45,
+      "_row_number": 41,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937477"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "FCMB",
+      "symbolname": "FCMB GROUP PLC",
+      "openingprice": 10.85,
+      "closingprice": 10.9,
+      "_row_number": 42,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937504"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "FIDELITYBK",
+      "symbolname": "FIDELITY BANK PLC",
+      "openingprice": 21.3,
+      "closingprice": 21.0,
+      "_row_number": 43,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937529"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "FIDSON",
+      "symbolname": "FIDSON HEALTHCARE PLC",
+      "openingprice": 43.0,
+      "closingprice": 43.0,
+      "_row_number": 44,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937555"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "FIRSTHOLDCO",
+      "symbolname": "FIRST HOLDCO PLC",
+      "openingprice": 32.5,
+      "closingprice": 32.3,
+      "_row_number": 45,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937580"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "FTNCOCOA",
+      "symbolname": "FTN COCOA PROCESSORS PLC",
+      "openingprice": 6.3,
+      "closingprice": 6.29,
+      "_row_number": 46,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937605"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "GEREGU",
+      "symbolname": "GEREGU POWER PLC",
+      "openingprice": 1141.5,
+      "closingprice": 1141.5,
+      "_row_number": 47,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937631"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "GREENWETF",
+      "symbolname": "GREENWICH ASSET ETF",
+      "openingprice": 284.5,
+      "closingprice": 284.5,
+      "_row_number": 48,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937658"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "GTCO",
+      "symbolname": "GUARANTY TRUST HOLDING COMPANY PLC",
+      "openingprice": 92.0,
+      "closingprice": 92.0,
+      "_row_number": 49,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937684"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "GUINEAINS",
+      "symbolname": "GUINEA INSURANCE PLC",
+      "openingprice": 1.42,
+      "closingprice": 1.53,
+      "_row_number": 50,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937709"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "GUINNESS",
+      "symbolname": "GUINNESS NIGERIA PLC",
+      "openingprice": 130.0,
+      "closingprice": 130.0,
+      "_row_number": 51,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937806"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "HMCALL",
+      "symbolname": "HALDANE MCCALL PLC",
+      "openingprice": 4.28,
+      "closingprice": 4.28,
+      "_row_number": 52,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.937931"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "HONYFLOUR",
+      "symbolname": "HONEYWELL FLOUR MILL PLC",
+      "openingprice": 22.55,
+      "closingprice": 21.6,
+      "_row_number": 53,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.938312"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "IKEJAHOTEL",
+      "symbolname": "IKEJA HOTEL PLC",
+      "openingprice": 22.95,
+      "closingprice": 22.95,
+      "_row_number": 54,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.938399"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "IMG",
+      "symbolname": "INDUSTRIAL & MEDICAL GASES NIGERIA PLC",
+      "openingprice": 37.0,
+      "closingprice": 37.0,
+      "_row_number": 55,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.938461"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "INTBREW",
+      "symbolname": "INTERNATIONAL BREWRIES PLC",
+      "openingprice": 12.65,
+      "closingprice": 12.65,
+      "_row_number": 56,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.938517"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "INTENEGINS",
+      "symbolname": "INTERNATIONAL ENERGY INSURANCE PLC",
+      "openingprice": 3.25,
+      "closingprice": 3.34,
+      "_row_number": 57,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.938573"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "JAIZBANK",
+      "symbolname": "JAIZ BANK PLC",
+      "openingprice": 4.65,
+      "closingprice": 4.6,
+      "_row_number": 58,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.938628"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "JAPAULGOLD",
+      "symbolname": "JAPAUL GOLD & VENTURES PLC",
+      "openingprice": 2.8,
+      "closingprice": 2.72,
+      "_row_number": 59,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.938683"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "JOHNHOLT",
+      "symbolname": "JOHNHOLT PLC",
+      "openingprice": 6.3,
+      "closingprice": 6.3,
+      "_row_number": 60,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.938816"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "JULI",
+      "symbolname": "JULI PLC",
+      "openingprice": 9.9,
+      "closingprice": 9.9,
+      "_row_number": 61,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.938888"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "JBERGER",
+      "symbolname": "JULIUS BERGER PLC",
+      "openingprice": 146.1,
+      "closingprice": 146.1,
+      "_row_number": 62,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.938943"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "WAPCO",
+      "symbolname": "LAFARGE AFRICA PLC",
+      "openingprice": 130.0,
+      "closingprice": 123.0,
+      "_row_number": 63,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.938997"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "LASACO",
+      "symbolname": "LASACO INSURANCE PLC",
+      "openingprice": 3.0,
+      "closingprice": 3.1,
+      "_row_number": 64,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939054"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "LEARNAFRCA",
+      "symbolname": "LEARN AFRICA PLC",
+      "openingprice": 7.8,
+      "closingprice": 7.8,
+      "_row_number": 65,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939108"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "LEGENDINT",
+      "symbolname": "LEGEND INTERNET PLC",
+      "openingprice": 5.35,
+      "closingprice": 5.35,
+      "_row_number": 66,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939197"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "LINKASSURE",
+      "symbolname": "LINKAGE ASSURANCE PLC",
+      "openingprice": 2.25,
+      "closingprice": 2.19,
+      "_row_number": 67,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939254"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "LIVESTOCK",
+      "symbolname": "LIVESTOCK FEEDS",
+      "openingprice": 8.0,
+      "closingprice": 8.0,
+      "_row_number": 68,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939308"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "LOTUSHAL15",
+      "symbolname": "LOTUS HALAL EQUITY ETF",
+      "openingprice": 63.1,
+      "closingprice": 57.0,
+      "_row_number": 69,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939361"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MAYBAKER",
+      "symbolname": "MAY & BAKER NIGERIA PLC",
+      "openingprice": 18.05,
+      "closingprice": 18.05,
+      "_row_number": 70,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939420"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MCNICHOLS",
+      "symbolname": "MCNICHOLS PLC",
+      "openingprice": 3.8,
+      "closingprice": 3.8,
+      "_row_number": 71,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939474"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MECURE",
+      "symbolname": "MECURE INDUSTRIES PLC",
+      "openingprice": 19.5,
+      "closingprice": 19.5,
+      "_row_number": 72,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939531"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MERGROWTH",
+      "symbolname": "MERISTEM GROWTH ETFMERISTEM GROWTH ETF",
+      "openingprice": 653.0,
+      "closingprice": 590.0,
+      "_row_number": 73,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939654"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MERVALUE",
+      "symbolname": "MERISTEM VALUE ETF",
+      "openingprice": 204.9,
+      "closingprice": 204.9,
+      "_row_number": 74,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939713"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MEYER",
+      "symbolname": "MEYER PLC",
+      "openingprice": 16.75,
+      "closingprice": 16.75,
+      "_row_number": 75,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939769"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MTNN",
+      "symbolname": "MTN NIGERIA COMMUNICATIONS PLC",
+      "openingprice": 435.0,
+      "closingprice": 435.0,
+      "_row_number": 76,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939823"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MULTIVERSE",
+      "symbolname": "MULTIVERSE MINING AND EXPLORATION PLC",
+      "openingprice": 10.9,
+      "closingprice": 10.9,
+      "_row_number": 77,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939879"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MBENEFIT",
+      "symbolname": "MUTUAL BENEFIT ASSURANCE PLC",
+      "openingprice": 3.9,
+      "closingprice": 3.71,
+      "_row_number": 78,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939942"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NASCON",
+      "symbolname": "NASCON ALLIED INDUSTRIES PLC",
+      "openingprice": 89.0,
+      "closingprice": 90.0,
+      "_row_number": 79,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.939999"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NAHCO",
+      "symbolname": "NATIONAL AVIATION HANDLING COMPANY PLC",
+      "openingprice": 103.5,
+      "closingprice": 103.5,
+      "_row_number": 80,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940054"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NSLTECH",
+      "symbolname": "NATIONAL SPORTS LOTTERY PLC",
+      "openingprice": 0.86,
+      "closingprice": 0.89,
+      "_row_number": 81,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940110"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NEIMETH",
+      "symbolname": "NEIMETH INTERNATIONAL PHARMACEUTICALS",
+      "openingprice": 6.6,
+      "closingprice": 6.6,
+      "_row_number": 82,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940166"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NEM",
+      "symbolname": "NEM INSURANCE PLC",
+      "openingprice": 31.2,
+      "closingprice": 31.2,
+      "_row_number": 83,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940220"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NESTLE",
+      "symbolname": "NESTLE FOODS PLC",
+      "openingprice": 1870.0,
+      "closingprice": 1870.0,
+      "_row_number": 84,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940277"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NEWGOLD",
+      "symbolname": "NEWGOLD EXCHANGE TRADED FUND",
+      "openingprice": 55000.0,
+      "closingprice": 54500.0,
+      "_row_number": 85,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940783"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NB",
+      "symbolname": "NIGERIAN BREWERIES PLC",
+      "openingprice": 70.2,
+      "closingprice": 70.2,
+      "_row_number": 86,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940818"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ENAMELWA",
+      "symbolname": "NIGERIAN ENAMELWARE PLC",
+      "openingprice": 39.0,
+      "closingprice": 39.0,
+      "_row_number": 87,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940846"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NGXGROUP",
+      "symbolname": "NIGERIAN EXCHANGE GROUP",
+      "openingprice": 57.8,
+      "closingprice": 57.8,
+      "_row_number": 88,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940873"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NNFM",
+      "symbolname": "NORTHERN NIGERIA FLOUR MILLS PLC",
+      "openingprice": 86.7,
+      "closingprice": 86.7,
+      "_row_number": 89,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940898"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NPFMCRFBK",
+      "symbolname": "NPF MICRO FINANCE BANK PLC",
+      "openingprice": 3.1,
+      "closingprice": 3.1,
+      "_row_number": 90,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940925"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "OANDO",
+      "symbolname": "OANDO PLC",
+      "openingprice": 51.2,
+      "closingprice": 48.0,
+      "_row_number": 91,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940950"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "OMATEK",
+      "symbolname": "OMATEK VENTURES PLC",
+      "openingprice": 1.4,
+      "closingprice": 1.32,
+      "_row_number": 92,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.940996"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "PZ",
+      "symbolname": "P.Z. INDUSTRIES PLC",
+      "openingprice": 36.9,
+      "closingprice": 36.9,
+      "_row_number": 93,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941027"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "PRESCO",
+      "symbolname": "PRESCO PLC",
+      "openingprice": 1480.0,
+      "closingprice": 1480.0,
+      "_row_number": 94,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941061"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "PRESTIGE",
+      "symbolname": "PRESTIGE ASSURANCE PLC",
+      "openingprice": 1.74,
+      "closingprice": 1.8,
+      "_row_number": 95,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941101"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "RTBRISCOE",
+      "symbolname": "R.T BRISCOE NIGERIA",
+      "openingprice": 3.54,
+      "closingprice": 3.42,
+      "_row_number": 96,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941130"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "REDSTAREX",
+      "symbolname": "RED STAR EXPRESS PLC",
+      "openingprice": 12.0,
+      "closingprice": 12.0,
+      "_row_number": 97,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941156"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "REGALINS",
+      "symbolname": "REGENCY ASSURANCE PLC",
+      "openingprice": 1.31,
+      "closingprice": 1.3,
+      "_row_number": 98,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941182"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ROYALEX",
+      "symbolname": "ROYAL EXCHANGE ASSURANCE",
+      "openingprice": 2.0,
+      "closingprice": 2.08,
+      "_row_number": 99,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941212"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "SCOA",
+      "symbolname": "SCOA NIGERIA PLC",
+      "openingprice": 6.0,
+      "closingprice": 6.59,
+      "_row_number": 100,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941238"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "SEPLAT",
+      "symbolname": "SEPLAT PETROLEUM DEVELOPMENT COMPANY PLC",
+      "openingprice": 5379.3,
+      "closingprice": 5379.3,
+      "_row_number": 101,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941267"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "SFSREIT",
+      "symbolname": "SFS REAL EST. INV. TRUST FUND",
+      "openingprice": 301.55,
+      "closingprice": 301.55,
+      "_row_number": 102,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941295"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "SKYAVN",
+      "symbolname": "SKYWAY AVIATION HANDLING COMPANY PLC",
+      "openingprice": 90.05,
+      "closingprice": 90.05,
+      "_row_number": 103,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941322"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "SOVRENINS",
+      "symbolname": "SOVEREIGN TRUST INSURANCE PLC",
+      "openingprice": 2.6,
+      "closingprice": 2.86,
+      "_row_number": 104,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941348"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "STANBICETF30",
+      "symbolname": "STANBIC IBTC ETF 30",
+      "openingprice": 420.0,
+      "closingprice": 378.0,
+      "_row_number": 105,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941375"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "STANBIC",
+      "symbolname": "STANBIC IBTC HOLDINGS PLC",
+      "openingprice": 100.0,
+      "closingprice": 100.0,
+      "_row_number": 106,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941401"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "STERLINGNG",
+      "symbolname": "STERLING FINANCIAL HOLDINGS COMPANY PLC",
+      "openingprice": 7.8,
+      "closingprice": 7.5,
+      "_row_number": 107,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941428"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "SUNUASSUR",
+      "symbolname": "SUNU ASSURANCE NIGERIA PLC",
+      "openingprice": 5.54,
+      "closingprice": 5.54,
+      "_row_number": 108,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941468"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "TANTALIZER",
+      "symbolname": "TANTALIZER PLC",
+      "openingprice": 2.48,
+      "closingprice": 2.3,
+      "_row_number": 109,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941495"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "TIP",
+      "symbolname": "THE INITIATES PLC",
+      "openingprice": 12.01,
+      "closingprice": 12.01,
+      "_row_number": 110,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941525"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "OKOMUOIL",
+      "symbolname": "THE OKOMU OIL PALM",
+      "openingprice": 1020.0,
+      "closingprice": 1020.0,
+      "_row_number": 111,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941551"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "SIAMLETF40",
+      "symbolname": "THE SIAML PENSION ETF 40",
+      "openingprice": 586.1,
+      "closingprice": 586.11,
+      "_row_number": 112,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941586"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "THOMASWY",
+      "symbolname": "THOMAS WYATT PLC",
+      "openingprice": 3.0,
+      "closingprice": 3.0,
+      "_row_number": 113,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941617"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "TOTAL",
+      "symbolname": "TOTALFINAELF NIGERIA PLC",
+      "openingprice": 640.0,
+      "closingprice": 640.0,
+      "_row_number": 114,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941644"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "TRANSEXPR",
+      "symbolname": "TRANS-NATIONWIDE EXPRESS PLC",
+      "openingprice": 2.15,
+      "closingprice": 2.15,
+      "_row_number": 115,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941671"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "TRANSCOHOT",
+      "symbolname": "TRANSCORP HOTELS PLC",
+      "openingprice": 164.6,
+      "closingprice": 164.6,
+      "_row_number": 116,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941707"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "TRANSPOWER",
+      "symbolname": "TRANSCORP POWER PLC",
+      "openingprice": 286.5,
+      "closingprice": 286.5,
+      "_row_number": 117,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941734"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "TRANSCORP",
+      "symbolname": "TRANSNATIONAL CORPORATION OF NIG PLC",
+      "openingprice": 47.0,
+      "closingprice": 47.0,
+      "_row_number": 118,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941760"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "TRIPPLEG",
+      "symbolname": "TRIPPLE GEE & CO PLC",
+      "openingprice": 5.6,
+      "closingprice": 5.6,
+      "_row_number": 119,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941786"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UACN",
+      "symbolname": "U A C NIGERIA PLC",
+      "openingprice": 73.0,
+      "closingprice": 73.0,
+      "_row_number": 120,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941812"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UNILEVER",
+      "symbolname": "UNILEVER NIGERIA PLC",
+      "openingprice": 73.0,
+      "closingprice": 73.0,
+      "_row_number": 121,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941837"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UNIONDICON",
+      "symbolname": "UNION DICON SALT PLC",
+      "openingprice": 12.1,
+      "closingprice": 12.1,
+      "_row_number": 122,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941862"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UHOMREIT",
+      "symbolname": "UNION HOMES REAL ESTATE INVESTMENT TRUST",
+      "openingprice": 57.6,
+      "closingprice": 57.6,
+      "_row_number": 123,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941888"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UBA",
+      "symbolname": "UNITED BANK FOR AFRICA",
+      "openingprice": 48.65,
+      "closingprice": 47.25,
+      "_row_number": 124,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941915"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UCAP",
+      "symbolname": "UNITED CAPITAL PLC",
+      "openingprice": 19.3,
+      "closingprice": 18.95,
+      "_row_number": 125,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941940"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UNIVINSURE",
+      "symbolname": "UNIVERSAL INSURANCE PLC",
+      "openingprice": 1.2,
+      "closingprice": 1.25,
+      "_row_number": 126,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941966"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UPL",
+      "symbolname": "UNIVERSITY PRESS PLC",
+      "openingprice": 5.54,
+      "closingprice": 5.54,
+      "_row_number": 127,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.941991"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UPDC",
+      "symbolname": "UPDC PLC",
+      "openingprice": 6.5,
+      "closingprice": 6.1,
+      "_row_number": 128,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.942016"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UPDCREIT",
+      "symbolname": "UPDC REAL ESTATE INVESTMENT TRUST",
+      "openingprice": 7.85,
+      "closingprice": 7.65,
+      "_row_number": 129,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.942042"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "VERITASKAP",
+      "symbolname": "VERITAS KAPITAL ASSURANCE PLC",
+      "openingprice": 2.1,
+      "closingprice": 1.89,
+      "_row_number": 130,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.942073"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "VETGRIF30",
+      "symbolname": "VETIVA GRIFFIN 30 ETF SECURITIES",
+      "openingprice": 51.0,
+      "closingprice": 56.1,
+      "_row_number": 131,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.942108"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "VETINDETF",
+      "symbolname": "VETIVA INDUSTRIAL ETF",
+      "openingprice": 49.5,
+      "closingprice": 49.22,
+      "_row_number": 132,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.942136"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "VSPBONDETF",
+      "symbolname": "VETIVA S & P NIGERIA SOVEREIGN BOND ETF",
+      "openingprice": 248.57,
+      "closingprice": 211.11,
+      "_row_number": 133,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.942164"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "VFDGROUP",
+      "symbolname": "VFD GROUP PLC",
+      "openingprice": 11.0,
+      "closingprice": 11.0,
+      "_row_number": 134,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.942189"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "VITAFOAM",
+      "symbolname": "VITAFOAM NIGERIA PLC",
+      "openingprice": 81.9,
+      "closingprice": 81.9,
+      "_row_number": 135,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.942225"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "WEMABANK",
+      "symbolname": "WEMA BANK",
+      "openingprice": 23.0,
+      "closingprice": 23.0,
+      "_row_number": 136,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.942251"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ZENITHBANK",
+      "symbolname": "ZENITH BANK PLC",
+      "openingprice": 66.0,
+      "closingprice": 64.4,
+      "_row_number": 137,
+      "_source_file": "Dailypricelist 02-09-2025.csv",
+      "_processed_date": "2025-09-19T13:16:10.942277"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NEWGOLD",
+      "symbolname": "NEWGOLD EXCHANGE TRADED FUND",
+      "openingprice": 55000.0,
+      "closingprice": 54500.0,
+      "loss": -500.0,
+      "pcent": -0.9090909090909091,
+      "_row_number": 1,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.946165"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MERGROWTH",
+      "symbolname": "MERISTEM GROWTH ETFMERISTEM GROWTH ETF",
+      "openingprice": 653.0,
+      "closingprice": 590.0,
+      "loss": -63.0,
+      "pcent": -9.647779479326188,
+      "_row_number": 2,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.959624"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "STANBICETF30",
+      "symbolname": "STANBIC IBTC ETF 30",
+      "openingprice": 420.0,
+      "closingprice": 378.0,
+      "loss": -42.0,
+      "pcent": -10.0,
+      "_row_number": 3,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.959810"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "VSPBONDETF",
+      "symbolname": "VETIVA S & P NIGERIA SOVEREIGN BOND ETF",
+      "openingprice": 248.57,
+      "closingprice": 211.11,
+      "loss": -37.46,
+      "pcent": -15.070201552882487,
+      "_row_number": 4,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.959934"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "WAPCO",
+      "symbolname": "LAFARGE AFRICA PLC",
+      "openingprice": 130.0,
+      "closingprice": 123.0,
+      "loss": -7.0,
+      "pcent": -5.384615384615385,
+      "_row_number": 5,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.960025"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "LOTUSHAL15",
+      "symbolname": "LOTUS HALAL EQUITY ETF",
+      "openingprice": 63.1,
+      "closingprice": 57.0,
+      "loss": -6.1,
+      "pcent": -9.667194928684628,
+      "_row_number": 6,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.960108"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "FGSUK2033S6",
+      "symbolname": "15.75% FGN OCT 2033",
+      "openingprice": 99.98,
+      "closingprice": 95.0,
+      "loss": -4.98,
+      "pcent": -4.980996199239848,
+      "_row_number": 7,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.960216"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ETERNA",
+      "symbolname": "ETERNA  PLC",
+      "openingprice": 38.0,
+      "closingprice": 34.2,
+      "loss": -3.8,
+      "pcent": -10.0,
+      "_row_number": 8,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.960751"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "OANDO",
+      "symbolname": "OANDO PLC",
+      "openingprice": 51.2,
+      "closingprice": 48.0,
+      "loss": -3.2,
+      "pcent": -6.25,
+      "_row_number": 9,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.960871"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ZENITHBANK",
+      "symbolname": "ZENITH BANK PLC",
+      "openingprice": 66.0,
+      "closingprice": 64.4,
+      "loss": -1.6,
+      "pcent": -2.4242424242424243,
+      "_row_number": 10,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961210"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ELLAHLAKES",
+      "symbolname": "ELLAH LAKES",
+      "openingprice": 14.1,
+      "closingprice": 12.69,
+      "loss": -1.41,
+      "pcent": -10.0,
+      "_row_number": 11,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961300"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UBA",
+      "symbolname": "UNITED BANK FOR AFRICA",
+      "openingprice": 48.65,
+      "closingprice": 47.25,
+      "loss": -1.4,
+      "pcent": -2.8776978417266186,
+      "_row_number": 12,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961354"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "HONYFLOUR",
+      "symbolname": "HONEYWELL FLOUR MILL PLC",
+      "openingprice": 22.55,
+      "closingprice": 21.6,
+      "loss": -0.95,
+      "pcent": -4.212860310421286,
+      "_row_number": 13,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961418"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ETI",
+      "symbolname": "ECOBANK TRANSNATIONAL INCORPORATED",
+      "openingprice": 36.55,
+      "closingprice": 36.1,
+      "loss": -0.45,
+      "pcent": -1.231190150478796,
+      "_row_number": 14,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961461"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UPDC",
+      "symbolname": "UPDC PLC",
+      "openingprice": 6.5,
+      "closingprice": 6.1,
+      "loss": -0.4,
+      "pcent": -6.153846153846154,
+      "_row_number": 15,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961513"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UCAP",
+      "symbolname": "UNITED CAPITAL PLC",
+      "openingprice": 19.3,
+      "closingprice": 18.95,
+      "loss": -0.35,
+      "pcent": -1.8134715025906736,
+      "_row_number": 16,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961552"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "FIDELITYBK",
+      "symbolname": "FIDELITY BANK PLC",
+      "openingprice": 21.3,
+      "closingprice": 21.0,
+      "loss": -0.3,
+      "pcent": -1.408450704225352,
+      "_row_number": 17,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961592"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CAVERTON",
+      "symbolname": "CAVERTON OFFSHORE SUPPORT GRP PLC",
+      "openingprice": 6.9,
+      "closingprice": 6.6,
+      "loss": -0.3,
+      "pcent": -4.3478260869565215,
+      "_row_number": 18,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961632"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "STERLINGNG",
+      "symbolname": "STERLING FINANCIAL HOLDINGS COMPANY PLC",
+      "openingprice": 7.8,
+      "closingprice": 7.5,
+      "loss": -0.3,
+      "pcent": -3.8461538461538463,
+      "_row_number": 19,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961670"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ACCESSCORP",
+      "symbolname": "ACCESS HOLDINGS PLC",
+      "openingprice": 26.5,
+      "closingprice": 26.2,
+      "loss": -0.3,
+      "pcent": -1.1320754716981132,
+      "_row_number": 20,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961708"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CHAMS",
+      "symbolname": "CHAMS PLC",
+      "openingprice": 2.93,
+      "closingprice": 2.65,
+      "loss": -0.28,
+      "pcent": -9.556313993174061,
+      "_row_number": 21,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961745"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "VETINDETF",
+      "symbolname": "VETIVA INDUSTRIAL ETF",
+      "openingprice": 49.5,
+      "closingprice": 49.22,
+      "loss": -0.28,
+      "pcent": -0.5656565656565656,
+      "_row_number": 22,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961784"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CUTIX",
+      "symbolname": "CUTIX PLC",
+      "openingprice": 3.5,
+      "closingprice": 3.23,
+      "loss": -0.27,
+      "pcent": -7.714285714285714,
+      "_row_number": 23,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961820"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "AIICO",
+      "symbolname": "AIICO INSURANCE PLC",
+      "openingprice": 4.04,
+      "closingprice": 3.8,
+      "loss": -0.24,
+      "pcent": -5.9405940594059405,
+      "_row_number": 24,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961856"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "VERITASKAP",
+      "symbolname": "VERITAS KAPITAL ASSURANCE PLC",
+      "openingprice": 2.1,
+      "closingprice": 1.89,
+      "loss": -0.21,
+      "pcent": -10.0,
+      "_row_number": 25,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961890"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "FIRSTHOLDCO",
+      "symbolname": "FIRST HOLDCO PLC",
+      "openingprice": 32.5,
+      "closingprice": 32.3,
+      "loss": -0.2,
+      "pcent": -0.6153846153846154,
+      "_row_number": 26,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961928"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UPDCREIT",
+      "symbolname": "UPDC REAL ESTATE INVESTMENT TRUST",
+      "openingprice": 7.85,
+      "closingprice": 7.65,
+      "loss": -0.2,
+      "pcent": -2.5477707006369426,
+      "_row_number": 27,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.961966"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "MBENEFIT",
+      "symbolname": "MUTUAL BENEFIT ASSURANCE PLC",
+      "openingprice": 3.9,
+      "closingprice": 3.71,
+      "loss": -0.19,
+      "pcent": -4.871794871794871,
+      "_row_number": 28,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962001"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "TANTALIZER",
+      "symbolname": "TANTALIZER PLC",
+      "openingprice": 2.48,
+      "closingprice": 2.3,
+      "loss": -0.18,
+      "pcent": -7.258064516129032,
+      "_row_number": 29,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962036"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "WAPIC",
+      "symbolname": "CORONATION INSURANCE PLC",
+      "openingprice": 3.62,
+      "closingprice": 3.45,
+      "loss": -0.17,
+      "pcent": -4.696132596685083,
+      "_row_number": 30,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962072"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "RTBRISCOE",
+      "symbolname": "R.T BRISCOE NIGERIA",
+      "openingprice": 3.54,
+      "closingprice": 3.42,
+      "loss": -0.12,
+      "pcent": -3.389830508474576,
+      "_row_number": 31,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962107"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "DEAPCAP",
+      "symbolname": "DEAP CAPITAL MANAGEMENT & TRUST PLC",
+      "openingprice": 1.81,
+      "closingprice": 1.71,
+      "loss": -0.1,
+      "pcent": -5.524861878453039,
+      "_row_number": 32,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962154"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "JAPAULGOLD",
+      "symbolname": "JAPAUL GOLD & VENTURES PLC",
+      "openingprice": 2.8,
+      "closingprice": 2.72,
+      "loss": -0.08,
+      "pcent": -2.857142857142857,
+      "_row_number": 33,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962192"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "OMATEK",
+      "symbolname": "OMATEK VENTURES PLC",
+      "openingprice": 1.4,
+      "closingprice": 1.32,
+      "loss": -0.08,
+      "pcent": -5.714285714285714,
+      "_row_number": 34,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962231"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "LINKASSURE",
+      "symbolname": "LINKAGE ASSURANCE PLC",
+      "openingprice": 2.25,
+      "closingprice": 2.19,
+      "loss": -0.06,
+      "pcent": -2.6666666666666665,
+      "_row_number": 35,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962268"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "JAIZBANK",
+      "symbolname": "JAIZ BANK PLC",
+      "openingprice": 4.65,
+      "closingprice": 4.6,
+      "loss": -0.05,
+      "pcent": -1.075268817204301,
+      "_row_number": 36,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962304"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "AFRIPRUD",
+      "symbolname": "AFRICA PRUDENTIAL REGISTRARS PLC",
+      "openingprice": 16.05,
+      "closingprice": 16.0,
+      "loss": -0.05,
+      "pcent": -0.3115264797507788,
+      "_row_number": 37,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962344"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "DAARCOMM",
+      "symbolname": "DAAR COMMUNICATIONS PLC",
+      "openingprice": 1.09,
+      "closingprice": 1.05,
+      "loss": -0.04,
+      "pcent": -3.669724770642202,
+      "_row_number": 38,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962380"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "REGALINS",
+      "symbolname": "REGENCY ASSURANCE PLC",
+      "openingprice": 1.31,
+      "closingprice": 1.3,
+      "loss": -0.01,
+      "pcent": -0.7633587786259542,
+      "_row_number": 39,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962417"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "FTNCOCOA",
+      "symbolname": "FTN COCOA PROCESSORS PLC",
+      "openingprice": 6.3,
+      "closingprice": 6.29,
+      "loss": -0.01,
+      "pcent": -0.15873015873015872,
+      "_row_number": 40,
+      "_source_file": "Jaiz loserslist.csv",
+      "_processed_date": "2025-09-19T13:16:10.962453"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "JAIZBANK",
+      "symbolname": "JAIZ BANK PLC",
+      "openingprice": 4.65,
+      "closingprice": 4.6,
+      "_row_number": 1,
+      "_source_file": "Jaiz Bank Pricehistory.csv",
+      "_processed_date": "2025-09-19T13:16:10.967403",
+      "newpricedate": "01-Sep-2025"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "VETGRIF30",
+      "symbolname": "VETIVA GRIFFIN 30 ETF SECURITIES",
+      "openingprice": 51.0,
+      "closingprice": 56.1,
+      "gain": 5.1,
+      "pcent": 10.0,
+      "_row_number": 1,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.172860"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ARADEL",
+      "symbolname": "ARADEL HOLDINGS PLC",
+      "openingprice": 510.0,
+      "closingprice": 513.5,
+      "gain": 3.5,
+      "pcent": 0.6862745098039216,
+      "_row_number": 2,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.172961"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "BERGER",
+      "symbolname": "BERGER PAINTS NIGERIA PLC",
+      "openingprice": 36.9,
+      "closingprice": 38.0,
+      "gain": 1.1,
+      "pcent": 2.9810298102981028,
+      "_row_number": 3,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173017"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NASCON",
+      "symbolname": "NASCON ALLIED INDUSTRIES PLC",
+      "openingprice": 89.0,
+      "closingprice": 90.0,
+      "gain": 1.0,
+      "pcent": 1.1235955056179776,
+      "_row_number": 4,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173066"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "SCOA",
+      "symbolname": "SCOA NIGERIA PLC",
+      "openingprice": 6.0,
+      "closingprice": 6.59,
+      "gain": 0.59,
+      "pcent": 9.833333333333334,
+      "_row_number": 5,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173110"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CORNERST",
+      "symbolname": "CORNERSTONE INSURANCE PLC",
+      "openingprice": 6.39,
+      "closingprice": 6.9,
+      "gain": 0.51,
+      "pcent": 7.981220657276995,
+      "_row_number": 6,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173152"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "CWG",
+      "symbolname": "COMPUTER WAREHOUSE GROUP PLC",
+      "openingprice": 15.7,
+      "closingprice": 16.05,
+      "gain": 0.35,
+      "pcent": 2.229299363057325,
+      "_row_number": 7,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173191"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "SOVRENINS",
+      "symbolname": "SOVEREIGN TRUST INSURANCE PLC",
+      "openingprice": 2.6,
+      "closingprice": 2.86,
+      "gain": 0.26,
+      "pcent": 10.0,
+      "_row_number": 8,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173226"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "GUINEAINS",
+      "symbolname": "GUINEA INSURANCE PLC",
+      "openingprice": 1.42,
+      "closingprice": 1.53,
+      "gain": 0.11,
+      "pcent": 7.746478873239437,
+      "_row_number": 9,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173263"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "LASACO",
+      "symbolname": "LASACO INSURANCE PLC",
+      "openingprice": 3.0,
+      "closingprice": 3.1,
+      "gain": 0.1,
+      "pcent": 3.3333333333333335,
+      "_row_number": 10,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173302"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "INTENEGINS",
+      "symbolname": "INTERNATIONAL ENERGY INSURANCE PLC",
+      "openingprice": 3.25,
+      "closingprice": 3.34,
+      "gain": 0.09,
+      "pcent": 2.769230769230769,
+      "_row_number": 11,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173357"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ROYALEX",
+      "symbolname": "ROYAL EXCHANGE ASSURANCE",
+      "openingprice": 2.0,
+      "closingprice": 2.08,
+      "gain": 0.08,
+      "pcent": 4.0,
+      "_row_number": 12,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173395"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "PRESTIGE",
+      "symbolname": "PRESTIGE ASSURANCE PLC",
+      "openingprice": 1.74,
+      "closingprice": 1.8,
+      "gain": 0.06,
+      "pcent": 3.4482758620689653,
+      "_row_number": 13,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173433"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "FCMB",
+      "symbolname": "FCMB GROUP PLC",
+      "openingprice": 10.85,
+      "closingprice": 10.9,
+      "gain": 0.05,
+      "pcent": 0.4608294930875576,
+      "_row_number": 14,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173471"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "UNIVINSURE",
+      "symbolname": "UNIVERSAL INSURANCE PLC",
+      "openingprice": 1.2,
+      "closingprice": 1.25,
+      "gain": 0.05,
+      "pcent": 4.166666666666667,
+      "_row_number": 15,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173507"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "NSLTECH",
+      "symbolname": "NATIONAL SPORTS LOTTERY PLC",
+      "openingprice": 0.86,
+      "closingprice": 0.89,
+      "gain": 0.03,
+      "pcent": 3.488372093023256,
+      "_row_number": 16,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173542"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "SIAMLETF40",
+      "symbolname": "THE SIAML PENSION ETF 40",
+      "openingprice": 586.1,
+      "closingprice": 586.11,
+      "gain": 0.01,
+      "pcent": 0.0017061934823408974,
+      "_row_number": 17,
+      "_source_file": "Jaiz gainerslist.csv",
+      "_processed_date": "2025-09-19T13:16:11.173593"
+    },
+    {
+      "symbol": "FBNH",
+      "gain": 5.5,
+      "_processed_date": "2025-09-19T13:16:11.216986",
+      "category": "Equity"
+    },
+    {
+      "symbol": "UBA",
+      "gain": 4.2,
+      "_processed_date": "2025-09-19T13:16:11.218523",
+      "category": "Equity"
+    },
+    {
+      "symbol": "ACCESS",
+      "gain": 3.15,
+      "_processed_date": "2025-09-19T13:16:11.218538",
+      "category": "Equity"
+    },
+    {
+      "symbol": "ZENITHBANK",
+      "gain": 2.75,
+      "_processed_date": "2025-09-19T13:16:11.218546",
+      "category": "Equity"
+    },
+    {
+      "symbol": "STANBIC",
+      "gain": 1.85,
+      "_processed_date": "2025-09-19T13:16:11.218554",
+      "category": "Equity"
+    },
+    {
+      "symbol": "GTBANK",
+      "gain": -1.2,
+      "_processed_date": "2025-09-19T13:16:11.231504",
+      "category": "Equity"
+    },
+    {
+      "pricedate": "2025-09-02",
+      "symbol": "ZENITHBANK",
+      "closingprice": 36.5,
+      "_processed_date": "2025-09-19T13:16:11.248546",
+      "close": 36.5,
+      "date": "2025-09-02"
+    },
+    {
+      "pricedate": "2025-09-01",
+      "symbol": "ZENITHBANK",
+      "closingprice": 35.75,
+      "_processed_date": "2025-09-19T13:16:11.248592",
+      "close": 35.75,
+      "date": "2025-09-01"
+    },
+    {
+      "pricedate": "2025-08-31",
+      "symbol": "ZENITHBANK",
+      "closingprice": 34.9,
+      "_processed_date": "2025-09-19T13:16:11.248611",
+      "close": 34.9,
+      "date": "2025-08-31"
+    },
+    {
+      "pricedate": "2025-09-02",
+      "symbol": "GTBANK",
+      "closingprice": 52.8,
+      "gain": -1.2,
+      "_processed_date": "2025-09-19T13:16:11.256955",
+      "category": "Equity",
+      "close": 52.8,
+      "date": "2025-09-02"
+    },
+    {
+      "pricedate": "2025-09-02",
+      "symbol": "ACCESS",
+      "closingprice": 23.45,
+      "gain": 3.15,
+      "_processed_date": "2025-09-19T13:16:11.256977",
+      "category": "Equity",
+      "close": 23.45,
+      "date": "2025-09-02"
+    },
+    {
+      "pricedate": "2025-09-02",
+      "symbol": "UBA",
+      "closingprice": 28.9,
+      "gain": 4.2,
+      "_processed_date": "2025-09-19T13:16:11.256992",
+      "category": "Equity",
+      "close": 28.9,
+      "date": "2025-09-02"
+    },
+    {
+      "pricedate": "2025-09-02",
+      "symbol": "FBNH",
+      "closingprice": 19.3,
+      "gain": 5.5,
+      "_processed_date": "2025-09-19T13:16:11.257008",
+      "category": "Equity",
+      "close": 19.3,
+      "date": "2025-09-02"
+    }
+  ],
+  "metadata": {
+    "created_date": "2025-09-19T14:09:40.511973",
+    "total_csv_files": 5,
+    "total_pdf_files": 50,
+    "processed_csv_files": 5,
+    "processed_pdf_files": 50,
+    "market_data_records": 209,
+    "financial_reports_count": 50,
+    "processing_errors": [],
+    "data_sources": {
+      "csv_files": [
+        "pricehistory.csv",
+        "Dailypricelist 02-09-2025.csv",
+        "Jaiz loserslist.csv",
+        "Jaiz Bank Pricehistory.csv",
+        "Jaiz gainerslist.csv"
+      ],
+      "pdf_files": [
+        "41271_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_MAY_2024.pdf",
+        "28929_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JANUARY_2020.pdf",
+        "32596_JAIZ_BANK_PLC _QUARTER_4_FINANCIAL_STATEMENT_FOR_2020_.pdf",
+        "44880_JAIZ_BANK_PLC-RE_BRANDING_OF_JAIZ_BANK_PLC__CORPORATE_ACTIONS_AUGUST_2025.pdf",
+        "21602_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_APRIL_2018.pdf",
+        "39792_JAIZ_BANK_PLC-_QUARTER_3_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_OCTOBER_2023.pdf",
+        "27207_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JULY_2019.pdf",
+        "30961_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_202.pdf",
+        "28081_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_OCTOBER_2019.pdf",
+        "209_Q2_2025.pdf",
+        "209_STATEMENT_OF_EARNING_FORCAST_FOR_QUARTER_4_2023.pdf",
+        "28999_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_FEBRUARY_2020.pdf",
+        "30311_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_MAY_2020.pdf",
+        "44437_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2025_FINANCIAL_STATEMENTS_JULY_2025.pdf",
+        "209_SKM_368e25070203530.pdf",
+        "34517_JAIZ_BANK_PLC _QUARTER_3_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "33178_JAIZ_BANK_PLC _QUARTER_1_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "17993_JAIZ_BANK_-_Q1_MARCH_2017_FINANCIAL_STATEMENTS_MAY_2017.pdf",
+        "33831_JAIZ_BANK_PLC _QUARTER_2_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "23251_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JULY_2018.pdf",
+        "34995_JAIZ_BANK_PLC _QUARTER_4_FINANCIAL_STATEMENT_FOR_2021_.pdf",
+        "19163_JAIZ_BANK_-_HALF-YR_JUNE_2017_FINANCIAL_STATEMENTS_JULY_2017.pdf",
+        "41273_JAIZ_BANK_PLC-_QUARTER_5_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_MAY_2024.pdf",
+        "26109_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_APRIL_2019.pdf",
+        "30671_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_JUNE_2020.pdf",
+        "41922_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_JULY_2024.pdf",
+        "43050_JAIZ_BANK_PLC-_YEAR_END_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_JANUARY_2025.pdf",
+        "42477_JAIZ_BANK_PLC-_QUARTER_3_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_OCTOBER_2024.pdf",
+        "JAIZ BANK PLC- AUDITED FINANCIAL STATEMENT FOR 2023 Uploaded on- May 20th 2024.pdf",
+        "33904_JAIZ_BANK_PLC _QUARTER_2_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "35494_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2021_FI.pdf",
+        "209_Q1_2024.pdf",
+        "209_Q1-2025_EF.pdf",
+        "Jaiz_Bank_Plc_Audited_Financial_Statement_for_the_year_ended_31_Dec_2024.pdf",
+        "17284_JAIZ_BANK_-_AUDITED_DEC_2016_FINANCIAL_STATEMENTS_APRIL_2017.pdf",
+        "44888_JAIZ_BANK_PLC-RESOLUTIONS_PASSED_AT_THE_13TH_AGM_OF_JAIZ_BANK_PLC_CORPORATE_ACTIONS_AUGUST_2025.pdf",
+        "35845_JAIZ_BANK_PLC _QUARTER_1_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "35502_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2021_FI.pdf",
+        "209_Q2_Earning_Forcast__For_Jaiz_Bank_PLC_0001.pdf",
+        "21986_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_APRIL_2018.pdf",
+        "24036_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_OCTOBER_2018.pdf",
+        "31797_JAIZ_BANK_PLC _QUARTER_3_ _FINANCIAL_STATEMENT_FOR_202.pdf",
+        "209_Jaiz_Bank_PLC_Q1_2021.pdf",
+        "40242_JAIZ_BANK_PLC-_YEAR_END_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_JANUARY_2024.pdf",
+        "JAIZ BANK PLC- QUARTER 1 - FINANCIAL STATEMENT FOR 2024 Uploaded on May 19th 2024.pdf",
+        "209_20240614170828922.pdf",
+        "44752_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_2025_FINANCIAL_STATEMENTS_JULY_2025.pdf",
+        "32899_JAIZ_BANK_PLC _AUDITED_FINANCIAL_STATEMENT_FOR_2020_FI.pdf",
+        "39180_JAIZ_BANK_PLC-_QUARTER_2_-_FINANCIAL_STATEMENT_FOR_2023_FINANCIAL_STATEMENTS_JULY_2023.pdf",
+        "20174_JAIZ_BANK_PLC_FINANCIAL_STATEMENTS_OCTOBER_2017.pdf"
+      ],
+      "json_files": [
+        "Jaiz gainerslist.json",
+        "skycap-ai-final-project-da89fd1502fd.json",
+        "Jaiz loserslist.json",
+        "Jaiz Bank Pricehistory.json",
+        "Dailypricelist 02-09-2025.json"
+      ]
+    }
+  },
+  "client_profile": {
+    "skyview knowledge pack": {
+      "company overview": [
+        "Name: Skyview Capital Limited",
+        "Business: Financial service provider, licensed by the Nigerian Stock Exchange (NSE) and the Securities and Exchange Commission (SEC) as a Broker/Dealer.",
+        "Stated Philosophy/Mission: \"Understand that excellent service and professionalism distinguish results from extraordinary results. We attach great importance to quality delivery of life-changing products and services to all our clients and customers with strong emphasis on excellent customer satisfaction.\" Aims to be \"always ahead\" and provide \"Professional Solutions for Your Business.\"",
+        "Year of Operation Implied: Website copyright ©2020.",
+        "Website Developer: \"Designed and Developed by Skyview Capital IT.\""
+      ],
+      "services offered by skyview capital limited": [
+        "Clientele: Government parastatals, multinational and indigenous companies, high net worth individuals.",
+        "Supported by: \"Seasoned professional researchers\" for stock analysis.",
+        "Sub-services: Retainer-ship for listed companies, Certificate Verification (phasing out), Receiving Agency for IPOs/POs.",
+        "Features an experienced research department.",
+        "Report types mentioned: Skyview Research Report, Weekly, Monthly, Quarterly, Annual Reports.",
+        "Utilizes in-house researchers for daily securities updates for clients.",
+        "Employs tools for valuing assets, debts, warrants, and equity using public information/financial statements."
+      ],
+      "key team members at skyview capital limited (summary)": [
+        "Olufemi Adesiyan (Managing Director): M.Sc. Statistics, over 10 years in Capital Markets, experienced in Securities Trading, former Acting CEO/Head of Stockbroking at WT Securities Ltd. (AI will know a portrait and an \"at desk\" image are associated).",
+        "Nkiru Modesta Okoli (Chief Financial Officer): B.Sc. Accounting, ACA, CFA Level 2 candidate, over 10 years experience. Expertise in financial reporting, audit, tax, internal controls. (AI will know a portrait is associated).",
+        "Asomugha Chidozie Stephen (Chief Compliance Officer): MBA, B.Sc. Industrial Chemistry, ACS, over 14 years in capital markets. Expertise in regulatory filings, AML, policy. (AI will know a portrait is associated).",
+        "Uche Ronald Bekee (Chief Risk Officer): MBA Marketing, B.Sc. Banking & Finance. Joined Skyview 2014 (initially as Head, Marketing & Client Services). Experienced in corporate finance, marketing, capital raising. (AI will know a portrait is associated).",
+        "Atigan Neville (Head, Admin/HR): Master’s Public Administration. Joined Skyview 2008. Prior experience in admin for large projects (SPDC, Daewoo). (AI will know a portrait is associated)."
+      ],
+      "contact information & locations for skyview capital limited": [
+        "Head Office: 71, Norman Williams St, Ikoyi, Lagos, NG.",
+        "Branch - Rivers State: 26 Aba Road, Ground Floor UPDC Building, Port Harcourt.",
+        "Branch - FCT (Abuja): Plot 1723, Ademola Adetokunbo Crescent, Nurnberger Plaza, Suite 45, Wuse II.",
+        "Phone: +234 8066994792",
+        "Emails: info@skyviewcapitalng.com; complaints@skyviewcapitalng.com"
+      ],
+      "website structure & client interaction points (skyview capital limited)": [
+        "Key Sections: Home, About Us, Services, Our Team, Account Info, News, Contact, Customer Login.",
+        "Account Forms Available (names): Account Opening, Sales Mandate, Stock/Shares Transfer, Purchase Mandate, Inter-Member Transfer, CSS - Direct Settlement Form.",
+        "Market Information Mentioned: \"Market Prices\" section with \"Today's Price Gainers & Losers,\" \"Prices Index,\" and \"Price Movement.\""
+      ],
+      "testimonials for skyview capital limited": [
+        "Emmanuel Oladimeji (Marketing Head, Xayeed Group of Industries): Positive testimonial (\"Awesome support...\").",
+        "Mojisola George (Founder, The Daily World Finance): Testimonial provided (content noted as placeholder).",
+        "Adebimpe Ayoade (CEO, Financial Report Limited): Testimonial provided."
+      ],
+      "skycap ai project": [
+        "To enhance Client Advisory services.",
+        "Desired outcomes include improved prediction accuracy and faster insights.",
+        "Real-time trend prediction and current position for NGX-listed stocks (particularly banking and industrial sectors).",
+        "Market sentiment analysis based on local financial news (sources mentioned include Bloomberg Africa, Proshare, Nairametrics), social media, and analyst reports relevant to Nigeria.",
+        "Automated alerts for predefined market events or indicator thresholds.",
+        "Note on CRM: Skyview mentioned a CRM. For the SkyCap project, any insights from CRM data would need to be handled via securely provided, anonymized data extracts or a future dedicated API, not direct login by external systems.",
+        "Historical Data: To be provided by Skyview in CSV & PDF formats.",
+        "Market Data Feeds: Nigerian Exchange Group (NGX) feeds.",
+        "News/Sentiment Analysis Sources: Bloomberg Africa, Proshare, Nairametrics, and information from websites of all NGX-listed industries.",
+        "Data Access Methods to be supported by SkyCap: APIs (for NGX/news if available), and processing of CSV, Excel & PDF files.",
+        "Markets: Equities listed on the NGX (all tiers).",
+        "Asset Classes: Nigerian equities, government bonds, treasury bills, corporate bonds, mutual funds, ETFs.",
+        "(Skyview will provide a list of specific stocks, sectors, or indices for prioritized analysis).",
+        "Frequency: Real-time, daily, weekly, monthly, and yearly.",
+        "Formats: Interactive web dashboards, PDF summaries, Excel exports, and email notifications.",
+        "(Skyview will specify preferred charts, graphs, or data tables).",
+        "Alert Delivery: Email, SMS, or platform notifications.",
+        "Skyview has stated NO current requirement for SkyCap to integrate directly with their existing trading platforms, portfolio management systems, internal databases, or CRM software.",
+        "Accuracy of market trend or price predictions (target percentage to be defined).",
+        "Improvement in portfolio performance (Return on Investment).",
+        "Time saved by Skyview staff in research and analysis tasks.",
+        "Effectiveness in identifying profitable trading opportunities or mitigating risks.",
+        "User adoption rates within the Skyview team.",
+        "Users: Skyview Staff (for detailed analysis and advisory preparation) and Skyview Clients (likely receiving reports or simplified insights generated by SkyCap via staff).",
+        "Technical Constraints: None specified by Skyview."
+      ],
+      "key external contact & introducer (mr. emmanuel oladimeji)": [
+        "Name: Mr. Emmanuel Oladimeji",
+        "Title: Marketing Head",
+        "Company: Xayeed Group of Industries",
+        "Significance: Mr. Oladimeji is the key individual who facilitated the introduction between AMD SOLUTIONS and Skyview Capital Limited.",
+        "Testimonial for Skyview Capital (from provided image): \"Awesome support and service. They are most recommanded for the all the financial service. Love to here that. In a free hour.\" (Awareness that a visual graphic of this testimonial exists)."
+      ]
+    },
+    "skyweb info assistant - draft introductory script & dialogue approach:": {
+      "ai's opening statement (if mr. emmanuel asks, \"what do you know about skyview capital?\" or a similar general query)": [],
+      "handling specific questions (examples": []
+    }
+  }
+}
