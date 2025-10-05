@@ -29,7 +29,7 @@ steps:
     '--image','gcr.io/$PROJECT_ID/skycap-ai:latest',
         '--platform','managed',
         '--allow-unauthenticated',
-        '--set-env-vars','GOOGLE_CLOUD_PROJECT=$_GCP_PROJECT,GOOGLE_CLOUD_REGION=$_REGION,VERTEX_MODEL_NAME=$_VERTEX_MODEL_NAME'
+        '--set-env-vars','GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_REGION=$_REGION,VERTEX_MODEL_NAME=$_VERTEX_MODEL_NAME'
       ]
 
 images:
