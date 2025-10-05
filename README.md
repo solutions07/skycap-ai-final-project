@@ -64,6 +64,9 @@ Source financial metrics in the knowledge base are expressed in thousands. The f
 
 Implementation note: Scaling and formatting are handled in `intelligent_agent.py` by `_format_large_number` (thousands → NGN with units) and `_format_metric_value` (routes currency metrics vs EPS).
 
+# Table of Contents
+- [AMD AI Synergy Hub: Standard Operating Procedure (SOP) V1.0](#amd-ai-synergy-hub-standard-operating-procedure-sop-v10)
+
 ## AMD AI Synergy Hub: Standard Operating Procedure (SOP) V1.0
 
 This document outlines the mandatory, professional workflow for all AI agent development. It is designed to ensure stability, prevent errors, and maintain a high standard of quality.
