@@ -1,0 +1,61 @@
+name: Deploy to Cloud Run via Cloud Build
+
+on:
+  push:
+    branches:
+      - main
+
+# Set defaults; override using repository Variables/Secrets as needed
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: europe-west1
+  SERVICE_NAME: skycap-ai-service
+  VERTEX_MODEL_NAME: gemini-1.0-pro
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write  # required for Workload Identity Federation
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up gcloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: ">= 450.0.0"
+
+      # Authentication: prefer Workload Identity Federation
+      # Configure repository/environment secrets:
+      #   - GCP_PROJECT_ID: your GCP project ID
+      #   - GCP_WIF_PROVIDER: resource name of the Workload Identity Provider
+      #   - GCP_SERVICE_ACCOUNT_EMAIL: deployer service account email
+      # Alternatively, use a service account key secret (GCP_SA_KEY) instead of WIF.
+      - name: Authenticate to Google Cloud (WIF)
+        if: ${{ secrets.GCP_WIF_PROVIDER && secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Authenticate to Google Cloud (SA Key)
+        if: ${{ !secrets.GCP_WIF_PROVIDER && secrets.GCP_SA_KEY }}
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Configure gcloud project
+        run: |
+          if [[ -z "${PROJECT_ID}" ]]; then
+            echo "PROJECT_ID secret not set (GCP_PROJECT_ID)." >&2
+            exit 1
+          fi
+          gcloud config set project "${PROJECT_ID}"
+
+      - name: Submit Cloud Build
+        run: |
+          gcloud builds submit --config cloudbuild.yaml \
+            --substitutions=_SERVICE_NAME=${SERVICE_NAME},_REGION=${REGION},_VERTEX_MODEL_NAME=${VERTEX_MODEL_NAME}
