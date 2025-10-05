@@ -1,0 +1,19 @@
+# Ignore local-only and heavy files from Cloud Build context
+.venv/
+node_modules/
+.git/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+.env
+.env.*
+*.log
+semantic_index.pkl
+semantic_index.json
+
+# Docker build cache dirs (if any)
+.build/
+.dist/
+.tmp/

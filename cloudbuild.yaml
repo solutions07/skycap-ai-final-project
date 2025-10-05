@@ -7,8 +7,10 @@ options:
 substitutions:
   _SERVICE_NAME: skycap-ai-service
   _REGION: europe-west1
-  _GCP_PROJECT: $PROJECT_ID
-  _IMAGE: gcr.io/$PROJECT_ID/skycap-ai:latest
+  # Default to the current project ID via built-in substitution
+  _GCP_PROJECT: ${PROJECT_ID}
+  # Derive image from the resolved _GCP_PROJECT
+  _IMAGE: gcr.io/$_GCP_PROJECT/skycap-ai:latest
   _VERTEX_MODEL_NAME: gemini-1.0-pro
 
 steps:
