@@ -1,0 +1,38 @@
+# Cloud Build configuration for SkyCap AI
+# Builds the container and deploys to Cloud Run with required env vars.
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _SERVICE_NAME: skycap-ai-service
+  _REGION: europe-west1
+  _GCP_PROJECT: $PROJECT_ID
+  _IMAGE: gcr.io/$PROJECT_ID/skycap-ai:latest
+  _VERTEX_MODEL_NAME: gemini-1.0-pro
+
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build image'
+    args: [ 'build', '-t', '$_IMAGE', '.', '--build-arg', 'GCP_PROJECT=$_GCP_PROJECT', '--build-arg', 'GCP_REGION=$_REGION', '--build-arg', 'VERTEX_MODEL_NAME=$_VERTEX_MODEL_NAME' ]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push image'
+    args: [ 'push', '$_IMAGE' ]
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'Deploy to Cloud Run'
+    entrypoint: gcloud
+    args:
+      [
+        'run','deploy','$_SERVICE_NAME',
+        '--project','$_GCP_PROJECT',
+        '--region','$_REGION',
+        '--image','$_IMAGE',
+        '--platform','managed',
+        '--allow-unauthenticated',
+        '--set-env-vars','GOOGLE_CLOUD_PROJECT=$_GCP_PROJECT,GOOGLE_CLOUD_REGION=$_REGION,VERTEX_MODEL_NAME=$_VERTEX_MODEL_NAME'
+      ]
+
+images:
+  - '$_IMAGE'

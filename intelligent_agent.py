@@ -2,6 +2,7 @@
 import json
 import re
 import logging
+import os
 from datetime import datetime
 from typing import Optional
 
@@ -66,6 +67,18 @@ try:
     from search_index import SemanticSearcher  # type: ignore
 except Exception:
     SemanticSearcher = None  # type: ignore
+
+# Vertex AI (external brains) - optional import
+try:  # pragma: no cover - environment dependent
+    import vertexai  # type: ignore
+    try:
+        # Newer stable import path
+        from vertexai.generative_models import GenerativeModel  # type: ignore
+    except Exception:  # fallback for older versions
+        from vertexai.preview.generative_models import GenerativeModel  # type: ignore
+except Exception:  # pragma: no cover
+    vertexai = None  # type: ignore
+    GenerativeModel = None  # type: ignore
 
 class FinancialDataEngine:
     """Engine for searching financial data from the knowledge base."""
@@ -556,17 +569,20 @@ class MetadataEngine:
 
 
 class IntelligentAgent:
-    """Brain 1 Only - Simplified Intelligent Agent for local knowledge base queries."""
+    """Hybrid Brain Agent with Chain of Command.
+
+    Brain 1: Local engines (financial, metadata, personnel, market, profile, location, general)
+    Brain 1 (extended): Local semantic fallback (if index/model available locally)
+    Brain 2/3: Vertex AI (Gemini) as final fallback for live/general knowledge
+    """
 
     def __init__(self, kb_path):
         self.kb = _load_kb(kb_path)
         if not self.kb:
             raise ValueError("Knowledge base failed to load.")
 
-        # --- START: FIX 3 (Disable External Brains) ---
-        # External brain model is explicitly disabled.
+        # External brains (Vertex AI Gemini) - lazy/safe initialization
         self.vertex_model = None
-        # --- END: FIX 3 (Disable External Brains) ---
 
         # Initialize Brain 1 engines
         self.financial_engine = FinancialDataEngine(self.kb)
@@ -579,10 +595,31 @@ class IntelligentAgent:
         # Semantic searcher (lazy init on first use)
         self._semantic_searcher: Optional[object] = None
 
+        # Attempt to initialize Vertex AI client and model (non-fatal on failure)
+        try:  # pragma: no cover - depends on env
+            if vertexai is not None and GenerativeModel is not None:
+                project = os.getenv('GOOGLE_CLOUD_PROJECT') or os.getenv('GCLOUD_PROJECT')
+                location = os.getenv('GOOGLE_CLOUD_REGION') or os.getenv('VERTEX_LOCATION') or os.getenv('GOOGLE_CLOUD_LOCATION')
+                if project and location:
+                    vertexai.init(project=project, location=location)  # type: ignore
+                    # Model per mandate; can be overridden via env
+                    model_name = os.getenv('VERTEX_MODEL_NAME', 'gemini-1.0-pro')
+                    self.vertex_model = GenerativeModel(model_name)  # type: ignore
+                else:
+                    logging.info("Vertex AI not initialized: missing GOOGLE_CLOUD_PROJECT/REGION env vars.")
+            else:
+                logging.info("Vertex AI SDK not available; external brains disabled.")
+        except Exception as e:
+            logging.error(f"Failed to initialize Vertex AI: {e}")
+            self.vertex_model = None
+
     def ask(self, question):
-        """
-        Brain 1 Only - Query local knowledge base engines.
-        Returns structured response with answer, brain used, and data provenance.
+        """Chain of Command query resolution.
+
+        1) Brain 1 engines (deterministic/local)
+        2) Local semantic fallback (if available)
+        3) Vertex AI Gemini (Brain 2/3) as final fallback
+        Returns structured response with answer, brain used, and provenance.
         """
         if not question or not question.strip():
             return {
@@ -654,8 +691,7 @@ class IntelligentAgent:
                 'provenance': 'GeneralKnowledgeEngine'
             }
         
-        # Professional default response when no data is found
-        # Try semantic search as final fallback
+        # Chain of Command stage 2: try semantic search (local)
         try:
             if SemanticSearcher is not None:
                 if self._semantic_searcher is None:
@@ -668,15 +704,58 @@ class IntelligentAgent:
                         answer_text = top_doc.get('text') if isinstance(top_doc, dict) else str(top_doc)
                         return {
                             'answer': answer_text,
-                            'brain_used': 'Brain 1',
+                            'brain_used': 'Brain 1',  # still local
                             'provenance': 'SemanticSearchFallback'
                         }
         except Exception as e:
             logging.error(f"Semantic fallback failed: {e}")
 
-        # Final message if semantic search also unavailable
+        # Chain of Command stage 3: Vertex AI Gemini (final fallback)
+        try:  # pragma: no cover - external dependency
+            if self.vertex_model is not None:
+                # Minimal, safe prompt: ask Gemini to provide a concise, factual response.
+                prompt = (
+                    "You are SkyCap AI's external brain. Provide a concise, factual answer to the user's question. "
+                    "If you are unsure, say you don't have enough information.\n\n"
+                    f"Question: {question}"
+                )
+                result = self.vertex_model.generate_content(prompt)  # type: ignore[attr-defined]
+                answer_text = None
+                try:
+                    # Prefer .text if present (newer SDK)
+                    if hasattr(result, 'text') and result.text:
+                        answer_text = str(result.text).strip()
+                    # Fallback to candidates structure
+                    elif hasattr(result, 'candidates') and result.candidates:
+                        # Extract first non-empty text
+                        for c in result.candidates:
+                            try:
+                                # newer SDK: c.content.parts[0].text
+                                parts = getattr(getattr(c, 'content', None), 'parts', [])
+                                for p in parts:
+                                    t = getattr(p, 'text', None)
+                                    if t:
+                                        answer_text = str(t).strip()
+                                        break
+                                if answer_text:
+                                    break
+                            except Exception:
+                                continue
+                except Exception:
+                    answer_text = None
+
+                if answer_text:
+                    return {
+                        'answer': answer_text,
+                        'brain_used': 'Brain 2/3',
+                        'provenance': 'VertexAI'
+                    }
+        except Exception as e:
+            logging.error(f"Vertex AI call failed: {e}")
+
+        # Final message if all brains unavailable
         return {
-            'answer': "I don't have specific information about that query in my knowledge base. Please try rephrasing or asking about financial data, stock prices, or company information.",
-            'brain_used': 'Brain 1',
+            'answer': "I couldn't find a specific answer in local knowledge and external search is unavailable or inconclusive. Please try rephrasing or ask about financial data, stock prices, or company information.",
+            'brain_used': 'Hybrid Brain',
             'provenance': 'Default Fallback'
         }
