@@ -63,3 +63,49 @@ Source financial metrics in the knowledge base are expressed in thousands. The f
 - Input (plain): 2.77 — Metric: Earnings per share (EPS) → Output: 2.77 (no currency, no scaling)
 
 Implementation note: Scaling and formatting are handled in `intelligent_agent.py` by `_format_large_number` (thousands → NGN with units) and `_format_metric_value` (routes currency metrics vs EPS).
+
+## AMD AI Synergy Hub: Standard Operating Procedure (SOP) V1.0
+
+This document outlines the mandatory, professional workflow for all AI agent development. It is designed to ensure stability, prevent errors, and maintain a high standard of quality.
+
+Core Principles
+Work in an Isolated Environment: All development must occur on the designated development VM and within a project-specific Python virtual environment (.venv).
+
+Never Work on main Directly: The main branch is the stable Master Blueprint. It is for production-ready code only.
+
+Create a "Photocopy" Branch for All New Work: All new features and bug fixes must be developed on a separate, temporary branch.
+
+Test Before You Merge: All new code must be accompanied by automated tests, and the full test suite must pass before merging.
+
+The 5-Phase Development Protocol
+Phase 1: Mission Briefing & Setup
+
+Start and connect to the development VM.
+
+Navigate to the project folder and activate the virtual environment: source .venv/bin/activate.
+
+Ensure you have the latest code: git checkout main followed by git pull origin main.
+
+Phase 2: Create a Safe Workspace
+
+Create a new branch for your task: git checkout -b [your-feature-name].
+
+Phase 3: Development & Local Validation
+
+Perform the mandated coding tasks.
+
+Create or update automated tests for the new code.
+
+Run the full test suite to ensure no regressions: python3 -m unittest -q.
+
+Phase 4: Code Review & Merge
+
+Save the work to the feature branch: git add ., git commit -m "Your message.", git push -u origin [your-feature-name].
+
+Merge the perfected code into the Master Blueprint: git checkout main followed by git merge [your-feature-name].
+
+Phase 5: Final Launch (Deployment)
+
+Push the updated main branch to the official repository: git push origin main.
+
+Deploy the final backend service: gcloud run deploy ....
