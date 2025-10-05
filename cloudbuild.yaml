@@ -7,20 +7,16 @@ options:
 substitutions:
   _SERVICE_NAME: skycap-ai-service
   _REGION: europe-west1
-  # Default to the current project ID via built-in substitution
-  _GCP_PROJECT: ${PROJECT_ID}
-  # Derive image from the resolved _GCP_PROJECT
-  _IMAGE: gcr.io/$_GCP_PROJECT/skycap-ai:latest
   _VERTEX_MODEL_NAME: gemini-1.0-pro
 
 steps:
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build image'
-    args: [ 'build', '-t', '$_IMAGE', '.', '--build-arg', 'GCP_PROJECT=$_GCP_PROJECT', '--build-arg', 'GCP_REGION=$_REGION', '--build-arg', 'VERTEX_MODEL_NAME=$_VERTEX_MODEL_NAME' ]
+    args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/skycap-ai:latest', '.', '--build-arg', 'GCP_PROJECT=$PROJECT_ID', '--build-arg', 'GCP_REGION=$_REGION', '--build-arg', 'VERTEX_MODEL_NAME=$_VERTEX_MODEL_NAME' ]
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Push image'
-    args: [ 'push', '$_IMAGE' ]
+    args: [ 'push', 'gcr.io/$PROJECT_ID/skycap-ai:latest' ]
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: 'Deploy to Cloud Run'
@@ -28,13 +24,13 @@ steps:
     args:
       [
         'run','deploy','$_SERVICE_NAME',
-        '--project','$_GCP_PROJECT',
+    '--project','$PROJECT_ID',
         '--region','$_REGION',
-        '--image','$_IMAGE',
+    '--image','gcr.io/$PROJECT_ID/skycap-ai:latest',
         '--platform','managed',
         '--allow-unauthenticated',
         '--set-env-vars','GOOGLE_CLOUD_PROJECT=$_GCP_PROJECT,GOOGLE_CLOUD_REGION=$_REGION,VERTEX_MODEL_NAME=$_VERTEX_MODEL_NAME'
       ]
 
 images:
-  - '$_IMAGE'
+  - 'gcr.io/$PROJECT_ID/skycap-ai:latest'
