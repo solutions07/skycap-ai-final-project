@@ -3,6 +3,7 @@ import json
 import re
 import logging
 from datetime import datetime
+from typing import Optional
 
 
 # --- Helper Functions ---
@@ -60,6 +61,11 @@ def _load_kb(path):
         return None
 
 # --- Engine Classes ---
+try:
+    # Local import to avoid hard dependency during unit tests w/o index
+    from search_index import SemanticSearcher  # type: ignore
+except Exception:
+    SemanticSearcher = None  # type: ignore
 
 class FinancialDataEngine:
     """Engine for searching financial data from the knowledge base."""
@@ -91,14 +97,19 @@ class FinancialDataEngine:
     def search_financial_metric(self, question):
         """Search for financial metrics based on the question."""
         q_lower = question.lower()
+        norm_q = re.sub(r'[^a-z0-9]', '', q_lower)
         
         # Define metric patterns and their normalized keys
         # Use constants for metric names
+        # Define metric patterns with improved specificity and priority order
+        # 1) EPS first to avoid collision with 'gross earnings'
+        # 2) Gross Earnings requires explicit phrasing or synonyms like 'revenue'
+        # 3) Total Assets and PBT are specific, avoid overly-generic tokens
         metric_patterns = {
-            self.METRIC_TOTAL_ASSETS: ['totalassets', 'assets'],
-            self.METRIC_PROFIT_BEFORE_TAX: ['profitbeforetax', 'pbt', 'profit'],
-            self.METRIC_GROSS_EARNINGS: ['grossearnings', 'earnings', 'revenue'],
-            self.METRIC_EARNINGS_PER_SHARE: ['earningspershare', 'eps']
+            self.METRIC_EARNINGS_PER_SHARE: ['earningspershare', 'eps'],
+            self.METRIC_GROSS_EARNINGS: ['grossearnings', 'revenue', 'grossincome'],
+            self.METRIC_TOTAL_ASSETS: ['totalassets'],
+            self.METRIC_PROFIT_BEFORE_TAX: ['profitbeforetax', 'pbt']
         }
         
         # Extract year/date from question
@@ -113,7 +124,10 @@ class FinancialDataEngine:
 
                 # --- Enhanced Logic for Comparative Queries ---
                 comparison_keywords = ['compare', 'vs', 'versus', 'between']
-                is_comparison = any(keyword in q_lower for keyword in comparison_keywords)
+                # Recognize conversational phrasing like: "how did X change from 2021 to 2022"
+                change_from_to = bool(re.search(r'change\s+from\s+20\d{2}\s+to\s+20\d{2}', q_lower))
+                from_to_years = bool(re.search(r'from\s+20\d{2}.*to\s+20\d{2}', q_lower))
+                is_comparison = any(keyword in q_lower for keyword in comparison_keywords) or change_from_to or from_to_years
                 
                 if is_comparison:
                     # --- START: Comparative Analysis Module (Hardened) ---
@@ -460,6 +474,24 @@ class LocationDataEngine:
     def search_location_info(self, question):
         """Search for location information."""
         q_lower = question.lower()
+
+        # Phone number lookup (handle before generic location keyword filter)
+        phone_keywords = ['phone', 'telephone', 'phone number', 'contact number', 'mobile', 'tel']
+        if any(k in q_lower for k in phone_keywords):
+            # Search contact info lines for a phone entry
+            for line in self.contact_info:
+                try:
+                    if 'phone' in line.lower():
+                        m = re.search(r'phone\s*:\s*([+0-9()\-\s]+)', line, flags=re.I)
+                        if m:
+                            number = m.group(1).strip()
+                            return f"The official phone number for Skyview Capital is {number}."
+                        # Fallback: return the full line if regex fails
+                        return f"{line}"
+                except Exception:
+                    continue
+            # If nothing found, indicate unavailability
+            return None
         
         # Keywords to identify location queries
         location_keywords = ['address', 'location', 'where', 'branch', 'office']
@@ -544,6 +576,8 @@ class IntelligentAgent:
         self.profile_engine = CompanyProfileEngine(self.kb)
         self.location_engine = LocationDataEngine(self.kb)
         self.general_engine = GeneralKnowledgeEngine(self.kb)
+        # Semantic searcher (lazy init on first use)
+        self._semantic_searcher: Optional[object] = None
 
     def ask(self, question):
         """
@@ -621,6 +655,26 @@ class IntelligentAgent:
             }
         
         # Professional default response when no data is found
+        # Try semantic search as final fallback
+        try:
+            if SemanticSearcher is not None:
+                if self._semantic_searcher is None:
+                    self._semantic_searcher = SemanticSearcher()
+                searcher = self._semantic_searcher
+                if hasattr(searcher, 'available') and searcher.available():  # type: ignore[attr-defined]
+                    results = searcher.search(question, k=1)  # type: ignore[attr-defined]
+                    if results:
+                        top_score, top_doc = results[0]
+                        answer_text = top_doc.get('text') if isinstance(top_doc, dict) else str(top_doc)
+                        return {
+                            'answer': answer_text,
+                            'brain_used': 'Brain 1',
+                            'provenance': 'SemanticSearchFallback'
+                        }
+        except Exception as e:
+            logging.error(f"Semantic fallback failed: {e}")
+
+        # Final message if semantic search also unavailable
         return {
             'answer': "I don't have specific information about that query in my knowledge base. Please try rephrasing or asking about financial data, stock prices, or company information.",
             'brain_used': 'Brain 1',
