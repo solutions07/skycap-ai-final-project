@@ -175,7 +175,48 @@ curl -sS -X POST 'https://<your-cloud-run-url>/ask' \
 curl -sS https://<your-cloud-run-url>/status | jq .
 ```
 
-### Environment variables
-- `GOOGLE_CLOUD_PROJECT`, `GOOGLE_CLOUD_REGION` used to initialize Vertex AI (Brain 2/3).
-- `VERTEX_MODEL_NAME` (default: `gemini-1.0-pro`).
-- Optional: `SEMANTIC_INDEX_GCS_URI` to download a precomputed index at startup; otherwise, the image‑baked or lazy‑generated index is used.
+
+## Final Handover (V1.3.1)
+
+### Final Status
+- Mission Status: SUCCESS. The intelligence overhaul (Relevance Gate, intent classification, precise entity extraction) was validated and deployed to production per protocol.
+- Non‑compliant service decommissioned: the unauthorized `skycap-ai` Cloud Run service has been removed. Production is served exclusively by `skycap-ai-service`.
+
+### Final Live URLs
+- Frontend (GitHub Pages): https://solutions07.github.io/skycap-ai-final-project
+- Backend (Cloud Run): https://skycap-ai-service-472059152731.europe-west1.run.app
+
+### Final Deployment Protocol
+- All production deployments MUST use the Master Blueprint command:
+
+```bash
+gcloud run deploy skycap-ai-service \
+  --source . \
+  --project=skycap-ai-final-project \
+  --platform managed \
+  --region europe-west1 \
+  --allow-unauthenticated \
+  --memory=2Gi \
+  --cpu=1 \
+  --timeout=600
+```
+
+- CI/CD summary:
+  - Builds are orchestrated by `cloudbuild.yaml`, which also attempts best‑effort semantic index baking during the image build.
+  - Deployments are executed via Cloud Build using the dedicated service account “skycap-ai-server,” with least‑privilege roles for Cloud Run and Artifact Registry.
+  - Tagging v* triggers a GitHub Actions workflow that drafts a GitHub Release from `CHANGELOG.md`.
+
+### Key Achievements (Final Debugging & Deployment)
+- Git history cleanup: removed accidentally tracked `.venv/` and large artifacts; reinforced `.gitignore` rules.
+- Automated Releases: release workflow added and permissions fixed to auto‑create draft releases from `CHANGELOG.md`.
+- Dispatcher Overhaul:
+  - Relevance Gate to skip Brain 1 on clearly non‑local questions.
+  - Intent classification routing for conceptual/advisory queries to Brain 2/3.
+  - Precise entity extraction for identity queries (e.g., creator of SkyCap AI).
+- Financial Engine: comparison hardening, P/E guardrails, and NGN scaling corrections.
+- Market/Metadata/Location: stricter ticker detection, gainers/losers ranking, and additional contact/branch lookups.
+- CORS: consistent cross‑origin policy for `https://solutions07.github.io` with robust preflight handling.
+- Production: successful rollout to Cloud Run using the Master Blueprint; traffic at 100% on `skycap-ai-service`.
+
+---
+This README serves as the final handover document. For enhancements, open issues or follow the standard branch → PR → tag → release flow.
