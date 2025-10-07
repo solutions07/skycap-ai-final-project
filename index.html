@@ -101,10 +101,7 @@
   .dropdown-item:hover{background:var(--hover-surface);} 
         .dropdown-item span.key{display:inline-block;min-width:12px;font-weight:600;color:var(--accent);} 
 
-        /* Example Shortcuts */
-        .shortcuts{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.1rem;}
-  .shortcut-btn{background:var(--surface);color:var(--primary);border:1px solid var(--border);border-radius:var(--radius-pill);padding:.55rem .9rem;font-size:.68rem;font-weight:500;cursor:pointer;transition:.2s ease;} 
-  .shortcut-btn:hover{background:var(--hover-surface);}        
+    /* Example Shortcuts removed per client request */
 
         /* Followups */
         .followups{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem;}
@@ -151,7 +148,7 @@
                         <span class="status-dot"></span><span class="status-text">Live & Ready</span>
                     </div>
                 </div>
-                <p class="subtitle">Secure, on-prem intelligence for financial and organizational insight. Ask a question, pick a shortcut, or select from the dropdown suggestions.</p>
+                <p class="subtitle">Secure, on-prem intelligence for financial and organizational insight. Ask a question, or select from the dropdown suggestions.</p>
             </header>
             <div class="chat-area" id="chat-area">
                 <div class="conversation" id="conversation" aria-live="polite" aria-label="Conversation transcript"></div>
@@ -164,7 +161,7 @@
                     </div>
                     <button id="ask-btn" class="ask-btn" type="button">Ask</button>
                 </div>
-                <div class="shortcuts" id="shortcuts"></div>
+                
                 <div class="followups" id="followups" hidden></div>
             </div>
             <footer id="footer" data-state="ready">
@@ -215,13 +212,7 @@
       'List the top 3 market losers.',
       'Which stock had the highest percentage gain in the recent market data?'
     ];
-
-        const SHORTCUTS = [
-  'Who is the Managing Director of Skyview Capital?',
-  'Compare the Total Assets for Jaiz Bank between 2022 and 2023.',
-  'What is Atigan Neville\'s prior experience?',
-  'List the top 3 market losers.'
-];
+        // SHORTCUTS removed per client request
 
         const STATUS = {
   ready:{label:'Live & Ready'},
@@ -250,7 +241,7 @@ const dropdownEl = document.getElementById('dropdown');
 const inputEl = document.getElementById('query-input');
 const askBtn = document.getElementById('ask-btn');
 const statusPill = document.getElementById('status-pill');
-const shortcutsWrap = document.getElementById('shortcuts');
+// Shortcuts feature removed per client request
 const followupsWrap = document.getElementById('followups');
 const footer = document.getElementById('footer');
 const footerStatusText = document.getElementById('footer-status-text');
@@ -317,7 +308,7 @@ function renderFollowups(question, answer){
   if(list.length) followupsWrap.hidden=false;
 }
 
-function renderShortcuts(){ SHORTCUTS.forEach(q=>{ const b=document.createElement('button'); b.type='button'; b.className='shortcut-btn'; b.textContent=q.length>42? q.slice(0,39)+'…':q; b.title=q; b.addEventListener('click',()=>{ inputEl.value=q; submitQuery(); }); shortcutsWrap.appendChild(b); }); }
+// renderShortcuts removed
 
 // Typing effect word-by-word
 async function typeWriter(el, fullText, speed=25){
@@ -380,7 +371,7 @@ document.addEventListener('click', (e)=>{ if(!e.target.closest('#dropdown') && !
 askBtn.addEventListener('click', submitQuery);
 inputEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); submitQuery(); } });
 
-function init(){ renderDropdown(); renderShortcuts(); setStatus('ready'); }
+function init(){ renderDropdown(); setStatus('ready'); }
 document.addEventListener('DOMContentLoaded', init);
 
 // ============ Theme Handling (Dark Mode) ============

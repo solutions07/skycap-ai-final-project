@@ -112,3 +112,70 @@ Phase 5: Final Launch (Deployment)
 Push the updated main branch to the official repository: git push origin main.
 
 Deploy the final backend service: gcloud run deploy ....
+# Final Deployment Trigger
+
+## Operations Notes (V1.3)
+
+### CORS configuration
+- Origin allowed: `https://solutions07.github.io`
+- Applied globally across all routes. Preflight (OPTIONS) is handled via a global hook and a catch‑all route.
+- Response headers include:
+  - `Access-Control-Allow-Origin: https://solutions07.github.io`
+  - `Access-Control-Allow-Methods: GET,POST,OPTIONS`
+  - `Access-Control-Allow-Headers: Content-Type, Authorization`
+  - `Access-Control-Max-Age: 3600`
+
+Quick test:
+
+```bash
+curl -i -X OPTIONS \
+  'https://<your-cloud-run-url>/ask' \
+  -H 'Origin: https://solutions07.github.io' \
+  -H 'Access-Control-Request-Method: POST' \
+  -H 'Access-Control-Request-Headers: content-type'
+```
+
+### Deployment status
+- Backend: Cloud Run service is healthy and publicly reachable.
+- Health check: `GET /` returns `{"status":"ok"}`.
+- Detailed status: `GET /status` reports semantic flags and health.
+- CI/CD: Deployed via Cloud Build using `cloudbuild.yaml`; the Docker image bakes a best‑effort semantic index during build.
+
+### Semantic search: lazy embedding behavior
+- The semantic index ships with documents and may or may not include embeddings. If embeddings are missing:
+  - At startup, the app attempts a one‑time repair; failing that, embeddings are generated lazily on the first semantic query and persisted to `/tmp/semantic_index.pkl`.
+  - `search_index.py` checks `/tmp` first for `semantic_index.pkl` and falls back to the working directory.
+- `/status` fields:
+  - `has_documents`: true when KB facts are loaded.
+  - `model_loaded`: true when SentenceTransformer is loaded.
+  - `has_embeddings`: flips to true after repair or first semantic query.
+  - `available`: true when documents + model are present (embeddings created on demand).
+
+Verification steps:
+
+```bash
+# 1) Health
+curl -sS https://<your-cloud-run-url>/ | jq .
+
+# 2) Preflight
+curl -i -X OPTIONS 'https://<your-cloud-run-url>/ask' \
+  -H 'Origin: https://solutions07.github.io' \
+  -H 'Access-Control-Request-Method: POST' \
+  -H 'Access-Control-Request-Headers: content-type'
+
+# 3) Status before first semantic query
+curl -sS https://<your-cloud-run-url>/status | jq .
+
+# 4) Trigger semantic path (example)
+curl -sS -X POST 'https://<your-cloud-run-url>/ask' \
+  -H 'Content-Type: application/json' \
+  -d '{"query":"What is the mission?"}' | jq .
+
+# 5) Status after first semantic query (has_embeddings likely true)
+curl -sS https://<your-cloud-run-url>/status | jq .
+```
+
+### Environment variables
+- `GOOGLE_CLOUD_PROJECT`, `GOOGLE_CLOUD_REGION` used to initialize Vertex AI (Brain 2/3).
+- `VERTEX_MODEL_NAME` (default: `gemini-1.0-pro`).
+- Optional: `SEMANTIC_INDEX_GCS_URI` to download a precomputed index at startup; otherwise, the image‑baked or lazy‑generated index is used.

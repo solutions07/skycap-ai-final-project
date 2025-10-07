@@ -91,6 +91,20 @@ class FinancialDataEngine:
     def __init__(self, kb):
         self.reports = kb.get('financial_reports', [])
         self.metrics = {}
+        # Market data for JAIZBANK symbol to compute price-based ratios (e.g., P/E)
+        self.market_data = sorted(
+            [d for d in kb.get('market_data', []) if d.get('symbol') == 'JAIZBANK' and 'pricedate' in d and 'closingprice' in d],
+            key=lambda x: x.get('pricedate') or ''
+        )
+        # Guardrail thresholds (can be tuned via env vars)
+        try:
+            self.min_eps_for_pe = float(os.getenv('MIN_EPS_FOR_PE', '0.05'))  # ignore micro-EPS noise
+        except Exception:
+            self.min_eps_for_pe = 0.05
+        try:
+            self.max_pe_allowed = float(os.getenv('MAX_PE_ALLOWED', '150'))    # filter unrealistic outliers
+        except Exception:
+            self.max_pe_allowed = 150.0
         self._build_index()
 
     def _build_index(self):
@@ -111,6 +125,40 @@ class FinancialDataEngine:
         """Search for financial metrics based on the question."""
         q_lower = question.lower()
         norm_q = re.sub(r'[^a-z0-9]', '', q_lower)
+
+        # Special handling for P/E ratio queries to avoid EPS confusion
+        if re.search(r"\b(p\/?e|pe\s*ratio|price\s*to\s*earnings)\b", q_lower):
+            try:
+                pe_records = self._compute_pe_records()
+                if not pe_records:
+                    return "I couldn't compute a P/E ratio due to missing or zero EPS and/or price data."
+                # Highest P/E across available records
+                if any(k in q_lower for k in ['highest', 'max', 'maximum']):
+                    best = max(pe_records, key=lambda r: r['pe'])
+                    return (
+                        f"The highest P/E ratio for Jaiz Bank was {best['pe']:.2f} on {best['price_date']} "
+                        f"(price ₦{best['price']:,.2f} ÷ EPS {best['eps']})."
+                    )
+                # Year-specific query
+                m_year = re.search(r'(20\d{2})', question)
+                if m_year:
+                    y = m_year.group(1)
+                    candidates = [r for r in pe_records if r['price_date'].startswith(y)]
+                    if candidates:
+                        latest = candidates[-1]
+                        return (
+                            f"The P/E ratio for Jaiz Bank in {y} was {latest['pe']:.2f} on {latest['price_date']} "
+                            f"(price ₦{latest['price']:,.2f} ÷ EPS {latest['eps']})."
+                        )
+                # Default: latest available P/E
+                latest = pe_records[-1]
+                return (
+                    f"The latest P/E ratio for Jaiz Bank is {latest['pe']:.2f} (as of {latest['price_date']}), "
+                    f"based on price ₦{latest['price']:,.2f} and EPS {latest['eps']}."
+                )
+            except Exception as e:
+                logging.error(f"P/E computation failed: {e}", exc_info=True)
+                return "Unable to compute the P/E ratio due to data alignment issues."
         
         # Define metric patterns and their normalized keys
         # Use constants for metric names
@@ -303,6 +351,53 @@ class FinancialDataEngine:
         # If no year is specified, do not guess. Return the latest available record.
         return candidates[0] if candidates else None
 
+    def _compute_pe_records(self):
+        """Compute P/E ratios by aligning EPS from reports with nearest market closing price.
+
+        Strategy:
+        - Collect EPS entries with valid numeric values > 0 and a parseable report_date (YYYY-MM-DD).
+        - For each EPS date, find the first market price on or after that date; if none, use the last prior price.
+        - Compute P/E = price / EPS. Return sorted list by price_date ascending.
+        """
+        # Collect EPS records
+        eps_items = []
+        for report in self.reports:
+            try:
+                meta = report.get('report_metadata', {})
+                date = meta.get('report_date')
+                eps = meta.get('metrics', {}).get('earnings per share')
+                # Guardrail: require EPS above minimal threshold to avoid infinite/unrealistic P/E
+                if date and isinstance(eps, (int, float)) and float(eps) >= self.min_eps_for_pe:
+                    eps_items.append({'date': date, 'eps': float(eps)})
+            except Exception:
+                continue
+        if not eps_items or not self.market_data:
+            return []
+        # Ensure market data sorted by date
+        md = [d for d in self.market_data if isinstance(d.get('pricedate'), str) and isinstance(d.get('closingprice'), (int, float))]
+        md.sort(key=lambda x: x['pricedate'])
+
+        def find_price_on_or_after(date_str: str):
+            # linear scan is acceptable for small datasets; can be optimized if needed
+            for rec in md:
+                if rec['pricedate'] >= date_str:
+                    return float(rec['closingprice']), rec['pricedate']
+            # fallback to last available price
+            last = md[-1]
+            return float(last['closingprice']), last['pricedate']
+
+        out = []
+        for item in sorted(eps_items, key=lambda x: x['date']):
+            try:
+                price, price_date = find_price_on_or_after(item['date'])
+                pe = price / item['eps'] if item['eps'] else None
+                # Guardrail: filter out unrealistic P/E outliers
+                if pe and 0 < pe <= self.max_pe_allowed:
+                    out.append({'price': price, 'price_date': price_date, 'eps': item['eps'], 'pe': pe})
+            except Exception:
+                continue
+        return out
+
 
 class PersonnelDataEngine:
     """Engine for searching personnel/organizational data."""
@@ -434,11 +529,23 @@ class CompanyProfileEngine:
         self.profile_data = kb.get('client_profile', {}).get('skyview knowledge pack', {})
 
     def search_profile_info(self, question):
-        """Search for keywords in the company overview and services sections."""
+        """Search for keywords in the company overview and services sections.
+
+        Note: Avoid triggering on generic phrases like 'financial services firm' that appear in
+        complex policy questions (e.g., zero-trust). Only answer explicit requests about Skyview's
+        services/offerings.
+        """
         ql = question.lower()
         if 'philosophy' in ql or 'mission' in ql:
             return self.profile_data.get('company overview', [None])[2]  # Return the mission statement
-        if 'services' in ql:
+        # Restrict services queries to explicit intents and exclude policy/security contexts
+        explicit_services_phrases = [
+            'services offered', 'services provided', 'what services', 'list of services',
+            'service offerings', 'our services', 'company services', 'services at skyview'
+        ]
+        if any(p in ql for p in explicit_services_phrases) and not any(
+            x in ql for x in ['zero-trust', 'policy', 'principles']
+        ) and 'financial services firm' not in ql:
             # --- START: Professional Synthesis Module ---
             services_list = self.profile_data.get('services offered by skyview capital limited', [])
             if not services_list: return None
@@ -599,12 +706,20 @@ class IntelligentAgent:
         try:  # pragma: no cover - depends on env
             if vertexai is not None and GenerativeModel is not None:
                 project = os.getenv('GOOGLE_CLOUD_PROJECT') or os.getenv('GCLOUD_PROJECT')
-                location = os.getenv('GOOGLE_CLOUD_REGION') or os.getenv('VERTEX_LOCATION') or os.getenv('GOOGLE_CLOUD_LOCATION')
+                # Prefer explicit Vertex location over Cloud Run region
+                location = (
+                    os.getenv('GOOGLE_CLOUD_LOCATION')
+                    or os.getenv('VERTEX_LOCATION')
+                    or os.getenv('GOOGLE_CLOUD_REGION')
+                )
+                model_name = os.getenv('VERTEX_MODEL_NAME', 'gemini-1.0-pro')
                 if project and location:
-                    vertexai.init(project=project, location=location)  # type: ignore
-                    # Model per mandate; can be overridden via env
-                    model_name = os.getenv('VERTEX_MODEL_NAME', 'gemini-1.0-pro')
-                    self.vertex_model = GenerativeModel(model_name)  # type: ignore
+                    try:
+                        vertexai.init(project=project, location=location)  # type: ignore
+                        self.vertex_model = GenerativeModel(model_name)  # type: ignore
+                    except Exception as e:
+                        logging.error(f"Vertex init failed for {model_name} in {location}: {e}")
+                        self.vertex_model = None
                 else:
                     logging.info("Vertex AI not initialized: missing GOOGLE_CLOUD_PROJECT/REGION env vars.")
             else:
@@ -612,6 +727,113 @@ class IntelligentAgent:
         except Exception as e:
             logging.error(f"Failed to initialize Vertex AI: {e}")
             self.vertex_model = None
+
+    def _is_complex_llm_query(self, question: str) -> bool:
+        """Heuristic to detect complex/general queries better handled by an LLM.
+
+        Triggers for: policy/principles/guidelines, comparisons/explanations not tied to KB,
+        general knowledge (capitals, current ministers), 'draft/write' instructions, etc.
+        Avoids triggering for explicit Skyview/Jaiz metric/company lookups.
+        """
+        ql = (question or '').lower()
+        if not ql:
+            return False
+        complex_markers = [
+            'zero-trust', 'policy', 'principles', 'best practices',
+            'explain the difference', 'difference between', 'explain', 'define', 'definition',
+            'capital of', 'current finance minister', 'who is the current finance minister',
+            'draft', 'write', 'guidelines'
+        ]
+        local_anchors = ['jaiz', 'skyview', 'skycap', 'report', 'total assets', 'profit before tax', 'gross earnings', 'earnings per share']
+        if any(m in ql for m in complex_markers) and not any(a in ql for a in local_anchors):
+            return True
+        # Very short generic Qs like capitals should go to LLM
+        if re.search(r'\b(capital of|minister of)\b', ql):
+            return True
+        return False
+
+    def _ask_vertex(self, question: str):
+        """Call Vertex AI with robust extraction and fallback; return answer dict or None."""
+        try:
+            if self.vertex_model is None:
+                # Try one-time fallback init if not available
+                self._init_vertex_fallback()
+            if self.vertex_model is None:
+                return None
+            prompt = (
+                "You are SkyCap AI's external brain. Provide a concise, factual answer to the user's question. "
+                "If you are unsure, say you don't have enough information.\n\n"
+                f"Question: {question}"
+            )
+            result = self.vertex_model.generate_content(prompt)  # type: ignore[attr-defined]
+            answer_text = None
+            if hasattr(result, 'text') and result.text:
+                answer_text = str(result.text).strip()
+            elif hasattr(result, 'candidates') and result.candidates:
+                for c in result.candidates:
+                    parts = getattr(getattr(c, 'content', None), 'parts', [])
+                    for p in parts:
+                        t = getattr(p, 'text', None)
+                        if t:
+                            answer_text = str(t).strip()
+                            break
+                    if answer_text:
+                        break
+            if answer_text:
+                return {
+                    'answer': answer_text,
+                    'brain_used': 'Brain 2/3',
+                    'provenance': 'VertexAI'
+                }
+            # Retry once with fallback init
+            if self._init_vertex_fallback():
+                result2 = self.vertex_model.generate_content(prompt)  # type: ignore[attr-defined]
+                ans2 = None
+                if hasattr(result2, 'text') and result2.text:
+                    ans2 = str(result2.text).strip()
+                elif hasattr(result2, 'candidates') and result2.candidates:
+                    for c in result2.candidates:
+                        parts = getattr(getattr(c, 'content', None), 'parts', [])
+                        for p in parts:
+                            t = getattr(p, 'text', None)
+                            if t:
+                                ans2 = str(t).strip()
+                                break
+                        if ans2:
+                            break
+                if ans2:
+                    return {
+                        'answer': ans2,
+                        'brain_used': 'Brain 2/3',
+                        'provenance': 'VertexAI'
+                    }
+        except Exception as e:
+            logging.error(f"Vertex AI call failed: {e}")
+        return None
+
+    def _init_vertex_fallback(self) -> bool:
+        """Attempt a robust Vertex model/location fallback when a 404 or config error occurs.
+
+        Strategy: prefer europe-west1 with model 'gemini-2.5-flash' (configurable via env).
+        Honors optional env overrides VERTEX_FALLBACK_MODEL and VERTEX_FALLBACK_LOCATION.
+        Returns True on success.
+        """
+        try:
+            if vertexai is None or GenerativeModel is None:
+                return False
+            project = os.getenv('GOOGLE_CLOUD_PROJECT') or os.getenv('GCLOUD_PROJECT')
+            fb_location = os.getenv('VERTEX_FALLBACK_LOCATION', 'europe-west1')
+            fb_model = os.getenv('VERTEX_FALLBACK_MODEL', 'gemini-2.5-flash')
+            if not project:
+                return False
+            vertexai.init(project=project, location=fb_location)  # type: ignore
+            self.vertex_model = GenerativeModel(fb_model)  # type: ignore
+            logging.info(f"Vertex fallback initialized: model={fb_model} location={fb_location}")
+            return True
+        except Exception as e:
+            logging.error(f"Vertex fallback init failed: {e}")
+            self.vertex_model = None
+            return False
 
     def ask(self, question):
         """Chain of Command query resolution.
@@ -627,6 +849,15 @@ class IntelligentAgent:
                 'brain_used': 'Brain 1',
                 'provenance': 'Input Validation'
             }
+
+        # Prioritize LLM for complex/general queries
+        try:
+            if self._is_complex_llm_query(question):
+                vertex_ans = self._ask_vertex(question)
+                if vertex_ans:
+                    return vertex_ans
+        except Exception as e:
+            logging.error(f"Complex routing pre-check failed: {e}")
         
         # Try financial data engine first (most common queries)
         financial_answer = self.financial_engine.search_financial_metric(question)
@@ -750,7 +981,64 @@ class IntelligentAgent:
                         'brain_used': 'Brain 2/3',
                         'provenance': 'VertexAI'
                     }
+                # If we didn't get text, try one fallback init and retry once
+                if self._init_vertex_fallback():
+                    try:
+                        result2 = self.vertex_model.generate_content(prompt)  # type: ignore[attr-defined]
+                        ans2 = None
+                        if hasattr(result2, 'text') and result2.text:
+                            ans2 = str(result2.text).strip()
+                        elif hasattr(result2, 'candidates') and result2.candidates:
+                            for c in result2.candidates:
+                                parts = getattr(getattr(c, 'content', None), 'parts', [])
+                                for p in parts:
+                                    t = getattr(p, 'text', None)
+                                    if t:
+                                        ans2 = str(t).strip()
+                                        break
+                                if ans2:
+                                    break
+                        if ans2:
+                            return {
+                                'answer': ans2,
+                                'brain_used': 'Brain 2/3',
+                                'provenance': 'VertexAI'
+                            }
+                    except Exception as e2:
+                        logging.error(f"Vertex AI call (fallback) failed: {e2}")
         except Exception as e:
+            # Detect model-not-found or bad location and attempt a one-time fallback
+            emsg = str(e)
+            if 'Publisher Model' in emsg or 'was not found' in emsg or '404' in emsg:
+                if self._init_vertex_fallback():
+                    try:
+                        prompt = (
+                            "You are SkyCap AI's external brain. Provide a concise, factual answer to the user's question. "
+                            "If you are unsure, say you don't have enough information.\n\n"
+                            f"Question: {question}"
+                        )
+                        result3 = self.vertex_model.generate_content(prompt)  # type: ignore[attr-defined]
+                        ans3 = None
+                        if hasattr(result3, 'text') and result3.text:
+                            ans3 = str(result3.text).strip()
+                        elif hasattr(result3, 'candidates') and result3.candidates:
+                            for c in result3.candidates:
+                                parts = getattr(getattr(c, 'content', None), 'parts', [])
+                                for p in parts:
+                                    t = getattr(p, 'text', None)
+                                    if t:
+                                        ans3 = str(t).strip()
+                                        break
+                                if ans3:
+                                    break
+                        if ans3:
+                            return {
+                                'answer': ans3,
+                                'brain_used': 'Brain 2/3',
+                                'provenance': 'VertexAI'
+                            }
+                    except Exception as e3:
+                        logging.error(f"Vertex AI call (post-fallback) failed: {e3}")
             logging.error(f"Vertex AI call failed: {e}")
 
         # Final message if all brains unavailable

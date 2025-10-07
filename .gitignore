@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environments and tooling
+.venv/
+.env
+.env.*
+
+# OS / Editor
+.DS_Store
+.vscode/
+
+# Build artifacts
+semantic_index.pkl
+semantic_index.json
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# Node (if any)
+node_modules/

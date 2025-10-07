@@ -1,0 +1,93 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    run.googleapis.com/build-enable-automatic-updates: 'false'
+    run.googleapis.com/build-id: acce28c4-e7ba-433f-bd0a-660dc1509bc7
+    run.googleapis.com/build-image-uri: europe-west1-docker.pkg.dev/skycap-ai-final-project/cloud-run-source-deploy/skycap-ai-service
+    run.googleapis.com/build-name: projects/472059152731/locations/europe-west1/builds/acce28c4-e7ba-433f-bd0a-660dc1509bc7
+    run.googleapis.com/build-source-location: gs://run-sources-skycap-ai-final-project-europe-west1/services/skycap-ai-service/1759605408.298436-0f93ce68041a43aa8f2af51a35a5333f.zip#1759607398367752
+    run.googleapis.com/client-name: gcloud
+    run.googleapis.com/client-version: 541.0.0
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+    run.googleapis.com/operation-id: 0fedd241-fb25-4756-b14d-232cd20a7e36
+    run.googleapis.com/urls: '["https://skycap-ai-service-472059152731.europe-west1.run.app","https://skycap-ai-service-idzo2jxfpa-ew.a.run.app"]'
+    serving.knative.dev/creator: amdmediaoffice@gmail.com
+    serving.knative.dev/lastModifier: skycap-ai-server@skycap-ai-final-project.iam.gserviceaccount.com
+  creationTimestamp: '2025-09-26T05:55:50.688301Z'
+  generation: 106
+  labels:
+    cloud.googleapis.com/location: europe-west1
+  name: skycap-ai-service
+  namespace: '472059152731'
+  resourceVersion: AAZAizOvqoA
+  selfLink: /apis/serving.knative.dev/v1/namespaces/472059152731/services/skycap-ai-service
+  uid: 762c776b-ffa1-4f4c-bb29-f83553c5fc6e
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '3'
+        autoscaling.knative.dev/minScale: '1'
+        run.googleapis.com/client-name: gcloud
+        run.googleapis.com/client-version: 541.0.0
+        run.googleapis.com/cpu-throttling: 'false'
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/startup-cpu-boost: 'true'
+      labels:
+        client.knative.dev/nonce: mokadvskal
+        run.googleapis.com/startupProbeType: Default
+    spec:
+      containerConcurrency: 1
+      containers:
+      - env:
+        - name: GOOGLE_CLOUD_PROJECT
+          value: skycap-ai-final-project
+        - name: GOOGLE_CLOUD_REGION
+          value: europe-west1
+        - name: GOOGLE_CLOUD_LOCATION
+          value: europe-west1
+        - name: VERTEX_MODEL_NAME
+          value: gemini-2.5-flash
+        - name: SEMANTIC_INDEX_GCS_URI
+        image: europe-west1-docker.pkg.dev/skycap-ai-final-project/skycap-ai/skycap-ai:latest
+        ports:
+        - containerPort: 8080
+          name: http1
+        resources:
+          limits:
+            cpu: '2'
+            memory: 2Gi
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 240
+      serviceAccountName: skycap-ai-server@skycap-ai-final-project.iam.gserviceaccount.com
+      timeoutSeconds: 900
+  traffic:
+  - latestRevision: true
+    percent: 100
+status:
+  address:
+    url: https://skycap-ai-service-idzo2jxfpa-ew.a.run.app
+  conditions:
+  - lastTransitionTime: '2025-10-07T05:54:32.046208Z'
+    status: 'True'
+    type: Ready
+  - lastTransitionTime: '2025-10-07T05:54:30.769299Z'
+    status: 'True'
+    type: ConfigurationsReady
+  - lastTransitionTime: '2025-10-07T05:54:32.015592Z'
+    status: 'True'
+    type: RoutesReady
+  latestCreatedRevisionName: skycap-ai-service-00106-xh4
+  latestReadyRevisionName: skycap-ai-service-00106-xh4
+  observedGeneration: 106
+  traffic:
+  - latestRevision: true
+    percent: 100
+    revisionName: skycap-ai-service-00106-xh4
+  url: https://skycap-ai-service-idzo2jxfpa-ew.a.run.app

@@ -94,8 +94,9 @@ if [[ -f cloudbuild.yaml ]]; then
   : "${GOOGLE_CLOUD_REGION:?Set GOOGLE_CLOUD_REGION env var}"
   SERVICE_NAME=${SERVICE_NAME:-skycap-ai-service}
   VERTEX_MODEL_NAME=${VERTEX_MODEL_NAME:-gemini-1.0-pro}
+  SEMANTIC_INDEX_GCS_URI_SUB=${SEMANTIC_INDEX_GCS_URI:-}
   log "Deploying to Cloud Run via Cloud Build (service=${SERVICE_NAME}, region=${GOOGLE_CLOUD_REGION})"
-  gcloud builds submit --config cloudbuild.yaml --substitutions=_SERVICE_NAME=${SERVICE_NAME},_REGION=${GOOGLE_CLOUD_REGION},_VERTEX_MODEL_NAME=${VERTEX_MODEL_NAME}
+  gcloud builds submit --config cloudbuild.yaml --substitutions=_SERVICE_NAME=${SERVICE_NAME},_REGION=${GOOGLE_CLOUD_REGION},_VERTEX_MODEL_NAME=${VERTEX_MODEL_NAME},_SEMANTIC_INDEX_GCS_URI=${SEMANTIC_INDEX_GCS_URI_SUB}
   ok "Deployment triggered"
 else
   err "cloudbuild.yaml not found; cannot deploy"

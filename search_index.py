@@ -44,12 +44,18 @@ class SemanticSearcher:
         self._load_model()
 
     def available(self) -> bool:
-        # Available only when we have documents, embeddings, and a loaded model
-        return bool(self.documents) and (self.embeddings is not None) and (self.model is not None)
+        # Available when we have documents and a loaded model. Embeddings may be lazily generated on first use.
+        return bool(self.documents) and (self.model is not None)
 
     def _default_index_path(self) -> str | None:
-        # Prefer pickle, then JSON
-        for cand in ("semantic_index.pkl", "semantic_index.json"):
+        # Check writable runtime tmp, then app working dir; prefer pickle, then JSON
+        preferred = [
+            "/tmp/semantic_index.pkl",
+            "/tmp/semantic_index.json",
+            "semantic_index.pkl",
+            "semantic_index.json",
+        ]
+        for cand in preferred:
             if os.path.exists(cand):
                 return cand
         return None
@@ -100,9 +106,25 @@ class SemanticSearcher:
         return np.asarray(vecs, dtype=np.float32)
 
     def search(self, query: str, k: int = 1) -> List[Tuple[float, Dict[str, Any]]]:
-        if not query or not self.available():
+        if not query or not bool(self.documents) or self.model is None:
             return []
         try:
+            # Lazily generate document embeddings if missing
+            if self.embeddings is None:
+                texts = [d.get("text", "") for d in self.documents]
+                self.embeddings = self._embed(texts)
+                # Best-effort: persist to /tmp for subsequent requests
+                try:
+                    payload = {
+                        "model": self.model_name,
+                        "documents": self.documents,
+                        "embeddings": self.embeddings.tolist(),
+                    }
+                    out_path = "/tmp/semantic_index.pkl"
+                    with open(out_path, "wb") as f:
+                        pickle.dump(payload, f)
+                except Exception:
+                    pass
             q_vec = self._embed([query])  # shape (1, d)
             embs = self.embeddings
             if embs is None or q_vec is None:
