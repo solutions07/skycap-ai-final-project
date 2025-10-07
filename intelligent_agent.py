@@ -640,6 +640,10 @@ class GeneralKnowledgeEngine:
     def search_general_info(self, question):
         """Search for general, non-financial information."""
         q_lower = question.lower()
+        # Precise entity extraction for "Who created SkyCap AI?"
+        # Return only the named entity, not a long sentence.
+        if re.search(r"\bwho\s+(created|built|developed)\s+(sky\s*cap\s*ai|skycap\s*ai)\b", q_lower):
+            return "AMD ASCEND Solutions"
         if 'who are you' in q_lower or 'what are you' in q_lower or 'your purpose' in q_lower:
             return "I am SkyCap AI, an intelligent financial assistant. I was developed by AMD ASCEND Solutions to provide high-speed financial and market analysis for Skyview Capital Limited."
         if 'testimonial' in q_lower:
@@ -752,6 +756,71 @@ class IntelligentAgent:
             return True
         return False
 
+    def _is_clearly_non_local(self, question: str) -> bool:
+        """Relevance Gate: detect queries clearly outside our local domain.
+
+        Local anchors include: Jaiz Bank, Skyview/SkyCap, NGX market data,
+        Nigerian finance/company facts, and metrics in our KB.
+        If the query contains strong non-local topics (e.g., CRISPR, photosynthesis, US presidents),
+        immediately escalate to external brain and skip local engines entirely.
+        """
+        ql = (question or '').lower().strip()
+        if not ql:
+            return False
+
+        local_signals = [
+            'jaiz', 'skyview', 'skycap', 'ngx', 'nse', 'lagos', 'abuja',
+            'total assets', 'profit before tax', 'gross earnings', 'earnings per share',
+            'closing price', 'stock price', 'symbol', 'market data', 'financial report'
+        ]
+        if any(sig in ql for sig in local_signals):
+            return False
+
+        non_local_topics = [
+            'crispr', 'gene editing', 'photosynthesis', 'quantum computing', 'black hole',
+            'us president', 'president of the united states', 'nfl', 'nba', 'nhl', 'mlb',
+            'european union law', 'ielts', 'toefl', 'python programming', 'javascript tutorial',
+            'kubernetes', 'docker compose guide', 'medieval history', 'roman empire', 'astronomy'
+        ]
+        if any(t in ql for t in non_local_topics):
+            return True
+
+        broad_scope = ['world', 'global', 'united states', 'usa', 'europe', 'china']
+        if any(b in ql for b in broad_scope) and not any(sig in ql for sig in local_signals):
+            return True
+        return False
+
+    def _classify_intent(self, question: str) -> str:
+        """Classify intent: SPECIFIC_LOOKUP vs CONCEPTUAL.
+
+        - SPECIFIC_LOOKUP: facts/metrics/prices/dates/symbols about our entities.
+        - CONCEPTUAL: strategies, explanations, advisory/opinionated or open-ended guidance.
+        """
+        ql = (question or '').lower().strip()
+        if not ql:
+            return 'SPECIFIC_LOOKUP'
+
+        entity_targets = ['jaiz', 'skyview', 'skycap', 'skycap ai']
+        wh_specific = ['who', 'when', 'where', 'what is the price', 'how many', 'date range']
+        if any(e in ql for e in entity_targets) and any(w in ql for w in wh_specific + ['symbol', 'total assets', 'profit before tax', 'gross earnings', 'earnings per share']):
+            return 'SPECIFIC_LOOKUP'
+
+        if re.search(r'(19|20)\d{2}', ql) or re.search(r'\bq[1-4]\b', ql) or re.search(r'\b\d{4}-\d{2}-\d{2}\b', ql):
+            return 'SPECIFIC_LOOKUP'
+        if any(k in ql for k in ['total assets', 'profit before tax', 'gross earnings', 'earnings per share', 'closing price', 'stock price', 'symbol']):
+            return 'SPECIFIC_LOOKUP'
+
+        conceptual_markers = [
+            'should i', 'is it a good idea', 'strategy', 'strategies', 'how to invest',
+            'best way', 'advice', 'recommendation', 'explain', 'why', 'pros and cons',
+            'advantages', 'risks', 'benefits', 'guidelines', 'principles', 'concept of',
+            'safest', 'approach', 'how should', 'what is the best'
+        ]
+        if any(m in ql for m in conceptual_markers):
+            return 'CONCEPTUAL'
+
+        return 'SPECIFIC_LOOKUP'
+
     def _ask_vertex(self, question: str):
         """Call Vertex AI with robust extraction and fallback; return answer dict or None."""
         try:
@@ -850,6 +919,20 @@ class IntelligentAgent:
                 'provenance': 'Input Validation'
             }
 
+        # Relevance Gate: if clearly non-local, skip local engines entirely
+        try:
+            if self._is_clearly_non_local(question):
+                vertex_ans = self._ask_vertex(question)
+                if vertex_ans:
+                    return vertex_ans
+                return {
+                    'answer': "This question appears to be outside SkyCap AI's local financial domain, and the external knowledge source isn't available right now.",
+                    'brain_used': 'Brain 2/3',
+                    'provenance': 'RelevanceGate'
+                }
+        except Exception as e:
+            logging.error(f"Relevance gate check failed: {e}")
+
         # Prioritize LLM for complex/general queries
         try:
             if self._is_complex_llm_query(question):
@@ -858,6 +941,21 @@ class IntelligentAgent:
                     return vertex_ans
         except Exception as e:
             logging.error(f"Complex routing pre-check failed: {e}")
+
+        # Intent classification: route conceptual/advisory to external brain before Brain 1
+        try:
+            intent = self._classify_intent(question)
+            if intent == 'CONCEPTUAL':
+                vertex_ans = self._ask_vertex(question)
+                if vertex_ans:
+                    return vertex_ans
+                return {
+                    'answer': "This looks like conceptual or advisory guidance. External reasoning is currently unavailable; please ask a specific data question (e.g., a metric, price, or date).",
+                    'brain_used': 'Brain 2/3',
+                    'provenance': 'IntentClassifier'
+                }
+        except Exception as e:
+            logging.error(f"Intent classification failed: {e}")
         
         # Try financial data engine first (most common queries)
         financial_answer = self.financial_engine.search_financial_metric(question)
