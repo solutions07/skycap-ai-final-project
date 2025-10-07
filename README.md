@@ -220,3 +220,4 @@ gcloud run deploy skycap-ai-service \
 
 ---
 This README serves as the final handover document. For enhancements, open issues or follow the standard branch → PR → tag → release flow.
+\n* CI/CD pipeline successfully activated and tested.
