@@ -7,7 +7,7 @@ from typing import List, Dict, Any
 from intelligent_agent import IntelligentAgent
 
 KB_PATH = 'data/master_knowledge_base.json'
-DEFAULT_QUESTIONS_PATH = 'data/gauntlet_questions.json'
+DEFAULT_QUESTIONS_PATH = 'data/gauntlet_questions_full.json'
 REPORT_PATH = 'gauntlet_report.json'
 
 # Failure phrases to flag generic or fallback responses
