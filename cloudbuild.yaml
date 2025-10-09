@@ -20,7 +20,7 @@ steps:
     args:
       - build
       - -t
-      - '$_AR_LOCATION-docker.pkg.dev/$PROJECT_ID/$_AR_REPO/skycap-ai:latest'
+      - '$_AR_LOCATION-docker.pkg.dev/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:latest'
       - .
       - --build-arg
       - 'GCP_PROJECT=$PROJECT_ID'
@@ -33,7 +33,7 @@ steps:
     id: 'Push image'
     args:
       - push
-      - '$_AR_LOCATION-docker.pkg.dev/$PROJECT_ID/$_AR_REPO/skycap-ai:latest'
+      - '$_AR_LOCATION-docker.pkg.dev/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:latest'
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: 'Deploy to Cloud Run'
@@ -47,7 +47,7 @@ steps:
       - --region
       - '$_REGION'
       - --image
-      - '$_AR_LOCATION-docker.pkg.dev/$PROJECT_ID/$_AR_REPO/skycap-ai:latest'
+      - '$_AR_LOCATION-docker.pkg.dev/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:latest'
       - --platform
       - managed
       - --allow-unauthenticated
@@ -57,4 +57,4 @@ steps:
       - 'GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_REGION=$_REGION,GOOGLE_CLOUD_LOCATION=$_VERTEX_LOCATION,VERTEX_MODEL_NAME=$_VERTEX_MODEL_NAME,SEMANTIC_INDEX_GCS_URI=$_SEMANTIC_INDEX_GCS_URI'
 
 images:
-  - '$_AR_LOCATION-docker.pkg.dev/$PROJECT_ID/$_AR_REPO/skycap-ai:latest'
+  - '$_AR_LOCATION-docker.pkg.dev/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:latest'
