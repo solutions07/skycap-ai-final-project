@@ -1162,23 +1162,7 @@ class IntelligentAgent:
             }
         
         # Chain of Command stage 2: try semantic search (local)
-        try:
-            if SemanticSearcher is not None:
-                if self._semantic_searcher is None:
-                    self._semantic_searcher = SemanticSearcher()
-                searcher = self._semantic_searcher
-                if hasattr(searcher, 'available') and searcher.available():  # type: ignore[attr-defined]
-                    results = searcher.search(question, k=1)  # type: ignore[attr-defined]
-                    if results:
-                        top_score, top_doc = results[0]
-                        answer_text = top_doc.get('text') if isinstance(top_doc, dict) else str(top_doc)
-                        return {
-                            'answer': answer_text,
-                            'brain_used': 'Brain 1',  # still local
-                            'provenance': 'SemanticSearchFallback'
-                        }
-        except Exception as e:
-            logging.error(f"Semantic fallback failed: {e}")
+        # --- FIX 3: Semantic Fallback Engine Disabled ---
 
         # Chain of Command stage 3: Vertex AI Gemini (final fallback)
         try:  # pragma: no cover - external dependency
