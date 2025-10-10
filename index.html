@@ -349,7 +349,7 @@ async function submitQuery(){
   const meta = document.createElement('div'); meta.className='bubble-meta'; aiBubble.appendChild(meta);
   scrollToBottom();
   try {
-  const res = await fetch('https://skycap-ai-service-472059152731.europe-west1.run.app/ask', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query:question}) });
+  const res = await fetch('https://skycap-live-service-472059152731.europe-west1.run.app/ask', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query:question}) });
     if(!res.ok) throw new Error('Network error');
     const data = await res.json();
     const answer = data.answer || 'No answer available.';
