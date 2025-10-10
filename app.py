@@ -13,6 +13,8 @@ except Exception:  # pragma: no cover
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 app = Flask(__name__)
+# FIX: Allow GitHub Pages frontend to access the /ask API endpoint
+CORS(app, resources={r"/ask": {"origins": "https://solutions07.github.io"}})
 # CORS: allow GitHub Pages origin across all routes, including preflight
 ALLOWED_ORIGIN = "https://solutions07.github.io"
 CORS(app, resources={r"/*": {"origins": [ALLOWED_ORIGIN]}}, supports_credentials=False)
