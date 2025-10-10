@@ -1,0 +1,3065 @@
+{
+  "generated_at": "2025-10-09T14:36:27.783664Z",
+  "kb_path": "data/master_knowledge_base.json",
+  "total": 382,
+  "passed": 382,
+  "failed": 0,
+  "results": [
+    {
+      "n": 1,
+      "question": "What was the total assets for Jaiz Bank in 2024?",
+      "answer": "The total assets for Jaiz Bank as of 2024-12-31 was \u20a6964.086 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 2,
+      "question": "What was the profit before tax for Jaiz Bank in 2024?",
+      "answer": "The profit before tax for Jaiz Bank as of 2024-12-31 was \u20a614.757 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 3,
+      "question": "What was the gross earnings for Jaiz Bank in 2024?",
+      "answer": "The gross earnings for Jaiz Bank as of 2024-12-31 was \u20a645.193 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 4,
+      "question": "What was the earnings per share for Jaiz Bank in 2024?",
+      "answer": "The earnings per share for Jaiz Bank as of 2024-12-31 was 32.46.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 5,
+      "question": "What was the total assets for Jaiz Bank in 2019?",
+      "answer": "The total assets for Jaiz Bank as of 2019-12-31 was \u20a6167.273 Million.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 6,
+      "question": "What was the profit before tax for Jaiz Bank in 2019?",
+      "answer": "The profit before tax for Jaiz Bank as of 2019-12-31 was \u20a62.110 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 7,
+      "question": "What was the gross earnings for Jaiz Bank in 2019?",
+      "answer": "The gross earnings for Jaiz Bank as of 2019-12-31 was \u20a614.715 Million.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 8,
+      "question": "What was the earnings per share for Jaiz Bank in 2019?",
+      "answer": "The earnings per share for Jaiz Bank as of 2019-12-31 was 0.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 9,
+      "question": "What was the total assets for Jaiz Bank in 2018?",
+      "answer": "The total assets for Jaiz Bank as of 2018-12-31 was \u20a6120.128 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 10,
+      "question": "What was the profit before tax for Jaiz Bank in 2018?",
+      "answer": "No reported value for profit before tax for Jaiz Bank as of 2018-12-31.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 11,
+      "question": "What was the gross earnings for Jaiz Bank in 2018?",
+      "answer": "No reported value for gross earnings for Jaiz Bank as of 2018-12-31.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 12,
+      "question": "What was the earnings per share for Jaiz Bank in 2018?",
+      "answer": "The earnings per share for Jaiz Bank as of 2018-12-31 was 0.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 13,
+      "question": "What was the total assets for Jaiz Bank in 2025?",
+      "answer": "No reported value for total assets for Jaiz Bank as of 2025-09-19.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 14,
+      "question": "What was the profit before tax for Jaiz Bank in 2025?",
+      "answer": "No reported value for profit before tax for Jaiz Bank as of 2025-09-19.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 15,
+      "question": "What was the gross earnings for Jaiz Bank in 2025?",
+      "answer": "No reported value for gross earnings for Jaiz Bank as of 2025-09-19.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 16,
+      "question": "What was the earnings per share for Jaiz Bank in 2025?",
+      "answer": "The earnings per share for Jaiz Bank as of 2025-09-19 was 0.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 17,
+      "question": "What was the total assets for Jaiz Bank in 2017?",
+      "answer": "The total assets for Jaiz Bank as of 2017-12-31 was \u20a687.313 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 18,
+      "question": "What was the profit before tax for Jaiz Bank in 2017?",
+      "answer": "The profit before tax for Jaiz Bank as of 2017-12-31 was \u20a6894.008 Million.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 19,
+      "question": "What was the gross earnings for Jaiz Bank in 2017?",
+      "answer": "No reported value for gross earnings for Jaiz Bank as of 2017-12-31.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 20,
+      "question": "What was the earnings per share for Jaiz Bank in 2017?",
+      "answer": "The earnings per share for Jaiz Bank as of 2017-12-31 was 0.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 21,
+      "question": "What was the total assets for Jaiz Bank in 2023?",
+      "answer": "The total assets for Jaiz Bank as of 2023-12-31 was \u20a6580.131 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 22,
+      "question": "What was the profit before tax for Jaiz Bank in 2023?",
+      "answer": "The profit before tax for Jaiz Bank as of 2023-12-31 was \u20a611.054 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 23,
+      "question": "What was the gross earnings for Jaiz Bank in 2023?",
+      "answer": "The gross earnings for Jaiz Bank as of 2023-12-31 was \u20a62.023 Million.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 24,
+      "question": "What was the earnings per share for Jaiz Bank in 2023?",
+      "answer": "The earnings per share for Jaiz Bank as of 2023-12-31 was 0.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 25,
+      "question": "What was the total assets for Jaiz Bank in 2020?",
+      "answer": "The total assets for Jaiz Bank as of 2020-12-31 was \u20a6233.596 Million.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 26,
+      "question": "What was the profit before tax for Jaiz Bank in 2020?",
+      "answer": "The profit before tax for Jaiz Bank as of 2020-12-31 was \u20a63.066 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 27,
+      "question": "What was the gross earnings for Jaiz Bank in 2020?",
+      "answer": "The gross earnings for Jaiz Bank as of 2020-12-31 was \u20a619.614 Million.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 28,
+      "question": "What was the earnings per share for Jaiz Bank in 2020?",
+      "answer": "The earnings per share for Jaiz Bank as of 2020-12-31 was 609.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 29,
+      "question": "What was the total assets for Jaiz Bank in 2021?",
+      "answer": "The total assets for Jaiz Bank as of 2021-12-31 was \u20a6279.275 Million.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 30,
+      "question": "What was the profit before tax for Jaiz Bank in 2021?",
+      "answer": "The profit before tax for Jaiz Bank as of 2021-12-31 was \u20a64.373 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 31,
+      "question": "What was the gross earnings for Jaiz Bank in 2021?",
+      "answer": "The gross earnings for Jaiz Bank as of 2021-12-31 was \u20a625.843 Million.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 32,
+      "question": "What was the earnings per share for Jaiz Bank in 2021?",
+      "answer": "The earnings per share for Jaiz Bank as of 2021-12-31 was 0.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 33,
+      "question": "What was the total assets for Jaiz Bank in 2016?",
+      "answer": "The total assets for Jaiz Bank as of 2016-12-31 was \u20a667.620 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 34,
+      "question": "What was the profit before tax for Jaiz Bank in 2016?",
+      "answer": "No reported value for profit before tax for Jaiz Bank as of 2016-12-31.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 35,
+      "question": "What was the gross earnings for Jaiz Bank in 2016?",
+      "answer": "No reported value for gross earnings for Jaiz Bank as of 2016-12-31.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 36,
+      "question": "What was the earnings per share for Jaiz Bank in 2016?",
+      "answer": "The earnings per share for Jaiz Bank as of 2016-12-31 was 0.02.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 37,
+      "question": "What was the total assets for Jaiz Bank in 2022?",
+      "answer": "The total assets for Jaiz Bank as of 2022-12-31 was \u20a6579.565 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 38,
+      "question": "What was the profit before tax for Jaiz Bank in 2022?",
+      "answer": "The profit before tax for Jaiz Bank as of 2022-12-31 was \u20a611.135 Billion.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 39,
+      "question": "What was the gross earnings for Jaiz Bank in 2022?",
+      "answer": "No reported value for gross earnings for Jaiz Bank as of 2022-12-31.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 40,
+      "question": "What was the earnings per share for Jaiz Bank in 2022?",
+      "answer": "The earnings per share for Jaiz Bank as of 2022-12-31 was 0.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 41,
+      "question": "What is the price of JAIZBANK on 2025-09-17?",
+      "answer": "The closing price for JAIZBANK on 2025-09-17 was \u20a64.55.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 42,
+      "question": "What is the price of FGSUK2033S6 on 2025-09-01?",
+      "answer": "The closing price for FGSUK2033S6 on 2025-09-01 was \u20a695.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 43,
+      "question": "What is the price of ABBEYBDS on 2025-09-01?",
+      "answer": "The closing price for ABBEYBDS on 2025-09-01 was \u20a66.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 44,
+      "question": "What is the price of ACADEMY on 2025-09-01?",
+      "answer": "The closing price for ACADEMY on 2025-09-01 was \u20a69.55.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 45,
+      "question": "What is the price of ACCESSCORP on 2025-09-01?",
+      "answer": "The closing price for ACCESSCORP on 2025-09-01 was \u20a626.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 46,
+      "question": "What is the price of AFRIPRUD on 2025-09-01?",
+      "answer": "The closing price for AFRIPRUD on 2025-09-01 was \u20a616.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 47,
+      "question": "What is the price of AIICO on 2025-09-01?",
+      "answer": "The closing price for AIICO on 2025-09-01 was \u20a63.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 48,
+      "question": "What is the price of AIRTELAFRI on 2025-09-01?",
+      "answer": "The closing price for AIRTELAFRI on 2025-09-01 was \u20a62,310.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 49,
+      "question": "What is the price of ALEX on 2025-09-01?",
+      "answer": "The closing price for ALEX on 2025-09-01 was \u20a67.15.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 50,
+      "question": "What is the price of ARADEL on 2025-09-01?",
+      "answer": "The closing price for ARADEL on 2025-09-01 was \u20a6513.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 51,
+      "question": "What is the price of ABCTRANS on 2025-09-01?",
+      "answer": "The closing price for ABCTRANS on 2025-09-01 was \u20a64.51.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 52,
+      "question": "What is the price of NCR on 2025-09-01?",
+      "answer": "The closing price for NCR on 2025-09-01 was \u20a611.55.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 53,
+      "question": "What is the price of AUSTINLAZ on 2025-09-01?",
+      "answer": "The closing price for AUSTINLAZ on 2025-09-01 was \u20a62.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 54,
+      "question": "What is the price of MANSARD on 2025-09-01?",
+      "answer": "The closing price for MANSARD on 2025-09-01 was \u20a615.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 55,
+      "question": "What is the price of BERGER on 2025-09-01?",
+      "answer": "The closing price for BERGER on 2025-09-01 was \u20a638.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 56,
+      "question": "What is the price of BETAGLAS on 2025-09-01?",
+      "answer": "The closing price for BETAGLAS on 2025-09-01 was \u20a6486.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 57,
+      "question": "What is the price of BUACEMENT on 2025-09-01?",
+      "answer": "The closing price for BUACEMENT on 2025-09-01 was \u20a6151.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 58,
+      "question": "What is the price of BUAFOODS on 2025-09-01?",
+      "answer": "The closing price for BUAFOODS on 2025-09-01 was \u20a6590.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 59,
+      "question": "What is the price of CILEASING on 2025-09-01?",
+      "answer": "The closing price for CILEASING on 2025-09-01 was \u20a66.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 60,
+      "question": "What is the price of CADBURY on 2025-09-01?",
+      "answer": "The closing price for CADBURY on 2025-09-01 was \u20a660.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 61,
+      "question": "What is the price of CAP on 2025-09-01?",
+      "answer": "The closing price for CAP on 2025-09-01 was \u20a670.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 62,
+      "question": "What is the price of CAVERTON on 2025-09-01?",
+      "answer": "The closing price for CAVERTON on 2025-09-01 was \u20a66.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 63,
+      "question": "What is the price of CHAMPION on 2025-09-01?",
+      "answer": "The closing price for CHAMPION on 2025-09-01 was \u20a617.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 64,
+      "question": "What is the price of CHAMS on 2025-09-01?",
+      "answer": "The closing price for CHAMS on 2025-09-01 was \u20a62.65.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 65,
+      "question": "What is the price of NIDF on 2025-09-01?",
+      "answer": "The closing price for NIDF on 2025-09-01 was \u20a6113.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 66,
+      "question": "What is the price of CHELLARAM on 2025-09-01?",
+      "answer": "The closing price for CHELLARAM on 2025-09-01 was \u20a610.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 67,
+      "question": "What is the price of CWG on 2025-09-01?",
+      "answer": "The closing price for CWG on 2025-09-01 was \u20a616.05.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 68,
+      "question": "What is the price of CONOIL on 2025-09-01?",
+      "answer": "The closing price for CONOIL on 2025-09-01 was \u20a6211.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 69,
+      "question": "What is the price of CONHALLPLC on 2025-09-01?",
+      "answer": "The closing price for CONHALLPLC on 2025-09-01 was \u20a64.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 70,
+      "question": "What is the price of CORNERST on 2025-09-01?",
+      "answer": "The closing price for CORNERST on 2025-09-01 was \u20a66.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 71,
+      "question": "What is the price of WAPIC on 2025-09-01?",
+      "answer": "The closing price for WAPIC on 2025-09-01 was \u20a63.45.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 72,
+      "question": "What is the price of CUSTODIAN on 2025-09-01?",
+      "answer": "The closing price for CUSTODIAN on 2025-09-01 was \u20a640.75.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 73,
+      "question": "What is the price of CUTIX on 2025-09-01?",
+      "answer": "The closing price for CUTIX on 2025-09-01 was \u20a63.23.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 74,
+      "question": "What is the price of DAARCOMM on 2025-09-01?",
+      "answer": "The closing price for DAARCOMM on 2025-09-01 was \u20a61.05.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 75,
+      "question": "What is the price of DANGCEM on 2025-09-01?",
+      "answer": "The closing price for DANGCEM on 2025-09-01 was \u20a6520.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 76,
+      "question": "What is the price of DANGSUGAR on 2025-09-01?",
+      "answer": "The closing price for DANGSUGAR on 2025-09-01 was \u20a658.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 77,
+      "question": "What is the price of DEAPCAP on 2025-09-01?",
+      "answer": "The closing price for DEAPCAP on 2025-09-01 was \u20a61.71.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 78,
+      "question": "What is the price of ETRANZACT on 2025-09-01?",
+      "answer": "The closing price for ETRANZACT on 2025-09-01 was \u20a610.85.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 79,
+      "question": "What is the price of ETI on 2025-09-01?",
+      "answer": "The closing price for ETI on 2025-09-01 was \u20a636.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 80,
+      "question": "What is the price of ELLAHLAKES on 2025-09-01?",
+      "answer": "The closing price for ELLAHLAKES on 2025-09-01 was \u20a612.69.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 81,
+      "question": "What is the price of ETERNA on 2025-09-01?",
+      "answer": "The closing price for ETERNA on 2025-09-01 was \u20a634.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 82,
+      "question": "What is the price of EUNISELL on 2025-09-01?",
+      "answer": "The closing price for EUNISELL on 2025-09-01 was \u20a625.45.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 83,
+      "question": "What is the price of FCMB on 2025-09-01?",
+      "answer": "The closing price for FCMB on 2025-09-01 was \u20a610.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 84,
+      "question": "What is the price of FIDELITYBK on 2025-09-01?",
+      "answer": "The closing price for FIDELITYBK on 2025-09-01 was \u20a621.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 85,
+      "question": "What is the price of FIDSON on 2025-09-01?",
+      "answer": "The closing price for FIDSON on 2025-09-01 was \u20a643.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 86,
+      "question": "What is the price of FIRSTHOLDCO on 2025-09-01?",
+      "answer": "The closing price for FIRSTHOLDCO on 2025-09-01 was \u20a632.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 87,
+      "question": "What is the price of FTNCOCOA on 2025-09-01?",
+      "answer": "The closing price for FTNCOCOA on 2025-09-01 was \u20a66.29.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 88,
+      "question": "What is the price of GEREGU on 2025-09-01?",
+      "answer": "The closing price for GEREGU on 2025-09-01 was \u20a61,141.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 89,
+      "question": "What is the price of GREENWETF on 2025-09-01?",
+      "answer": "The closing price for GREENWETF on 2025-09-01 was \u20a6284.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 90,
+      "question": "What is the price of GTCO on 2025-09-01?",
+      "answer": "The closing price for GTCO on 2025-09-01 was \u20a692.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 91,
+      "question": "What is the price of GUINEAINS on 2025-09-01?",
+      "answer": "The closing price for GUINEAINS on 2025-09-01 was \u20a61.53.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 92,
+      "question": "What is the price of GUINNESS on 2025-09-01?",
+      "answer": "The closing price for GUINNESS on 2025-09-01 was \u20a6130.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 93,
+      "question": "What is the price of HMCALL on 2025-09-01?",
+      "answer": "The closing price for HMCALL on 2025-09-01 was \u20a64.28.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 94,
+      "question": "What is the price of HONYFLOUR on 2025-09-01?",
+      "answer": "The closing price for HONYFLOUR on 2025-09-01 was \u20a621.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 95,
+      "question": "What is the price of IKEJAHOTEL on 2025-09-01?",
+      "answer": "The closing price for IKEJAHOTEL on 2025-09-01 was \u20a622.95.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 96,
+      "question": "What is the price of IMG on 2025-09-01?",
+      "answer": "The closing price for IMG on 2025-09-01 was \u20a637.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 97,
+      "question": "What is the price of INTBREW on 2025-09-01?",
+      "answer": "The closing price for INTBREW on 2025-09-01 was \u20a612.65.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 98,
+      "question": "What is the price of INTENEGINS on 2025-09-01?",
+      "answer": "The closing price for INTENEGINS on 2025-09-01 was \u20a63.34.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 99,
+      "question": "What is the price of JAIZBANK on 2025-09-01?",
+      "answer": "The closing price for JAIZBANK on 2025-09-01 was \u20a64.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 100,
+      "question": "What is the price of JAPAULGOLD on 2025-09-01?",
+      "answer": "The closing price for JAPAULGOLD on 2025-09-01 was \u20a62.72.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 101,
+      "question": "What is the price of JOHNHOLT on 2025-09-01?",
+      "answer": "The closing price for JOHNHOLT on 2025-09-01 was \u20a66.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 102,
+      "question": "What is the price of JULI on 2025-09-01?",
+      "answer": "The closing price for JULI on 2025-09-01 was \u20a69.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 103,
+      "question": "What is the price of JBERGER on 2025-09-01?",
+      "answer": "The closing price for JBERGER on 2025-09-01 was \u20a6146.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 104,
+      "question": "What is the price of WAPCO on 2025-09-01?",
+      "answer": "The closing price for WAPCO on 2025-09-01 was \u20a6123.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 105,
+      "question": "What is the price of LASACO on 2025-09-01?",
+      "answer": "The closing price for LASACO on 2025-09-01 was \u20a63.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 106,
+      "question": "What is the price of LEARNAFRCA on 2025-09-01?",
+      "answer": "The closing price for LEARNAFRCA on 2025-09-01 was \u20a67.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 107,
+      "question": "What is the price of LEGENDINT on 2025-09-01?",
+      "answer": "The closing price for LEGENDINT on 2025-09-01 was \u20a65.35.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 108,
+      "question": "What is the price of LINKASSURE on 2025-09-01?",
+      "answer": "The closing price for LINKASSURE on 2025-09-01 was \u20a62.19.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 109,
+      "question": "What is the price of LIVESTOCK on 2025-09-01?",
+      "answer": "The closing price for LIVESTOCK on 2025-09-01 was \u20a68.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 110,
+      "question": "What is the price of LOTUSHAL15 on 2025-09-01?",
+      "answer": "The closing price for LOTUSHAL15 on 2025-09-01 was \u20a657.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 111,
+      "question": "What is the price of MAYBAKER on 2025-09-01?",
+      "answer": "The closing price for MAYBAKER on 2025-09-01 was \u20a618.05.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 112,
+      "question": "What is the price of MCNICHOLS on 2025-09-01?",
+      "answer": "The closing price for MCNICHOLS on 2025-09-01 was \u20a63.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 113,
+      "question": "What is the price of MECURE on 2025-09-01?",
+      "answer": "The closing price for MECURE on 2025-09-01 was \u20a619.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 114,
+      "question": "What is the price of MERGROWTH on 2025-09-01?",
+      "answer": "The closing price for MERGROWTH on 2025-09-01 was \u20a6590.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 115,
+      "question": "What is the price of MERVALUE on 2025-09-01?",
+      "answer": "The closing price for MERVALUE on 2025-09-01 was \u20a6204.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 116,
+      "question": "What is the price of MEYER on 2025-09-01?",
+      "answer": "The closing price for MEYER on 2025-09-01 was \u20a616.75.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 117,
+      "question": "What is the price of MTNN on 2025-09-01?",
+      "answer": "The closing price for MTNN on 2025-09-01 was \u20a6435.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 118,
+      "question": "What is the price of MULTIVERSE on 2025-09-01?",
+      "answer": "The closing price for MULTIVERSE on 2025-09-01 was \u20a610.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 119,
+      "question": "What is the price of MBENEFIT on 2025-09-01?",
+      "answer": "The closing price for MBENEFIT on 2025-09-01 was \u20a63.71.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 120,
+      "question": "What is the price of NASCON on 2025-09-01?",
+      "answer": "The closing price for NASCON on 2025-09-01 was \u20a690.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 121,
+      "question": "What is the price of NAHCO on 2025-09-01?",
+      "answer": "The closing price for NAHCO on 2025-09-01 was \u20a6103.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 122,
+      "question": "What is the price of NSLTECH on 2025-09-01?",
+      "answer": "The closing price for NSLTECH on 2025-09-01 was \u20a60.89.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 123,
+      "question": "What is the price of NEIMETH on 2025-09-01?",
+      "answer": "The closing price for NEIMETH on 2025-09-01 was \u20a66.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 124,
+      "question": "What is the price of NEM on 2025-09-01?",
+      "answer": "The closing price for NEM on 2025-09-01 was \u20a631.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 125,
+      "question": "What is the price of NESTLE on 2025-09-01?",
+      "answer": "The closing price for NESTLE on 2025-09-01 was \u20a61,870.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 126,
+      "question": "What is the price of NEWGOLD on 2025-09-01?",
+      "answer": "The closing price for NEWGOLD on 2025-09-01 was \u20a654,500.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 127,
+      "question": "What is the price of NB on 2025-09-01?",
+      "answer": "The closing price for NB on 2025-09-01 was \u20a670.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 128,
+      "question": "What is the price of ENAMELWA on 2025-09-01?",
+      "answer": "The closing price for ENAMELWA on 2025-09-01 was \u20a639.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 129,
+      "question": "What is the price of NGXGROUP on 2025-09-01?",
+      "answer": "The closing price for NGXGROUP on 2025-09-01 was \u20a657.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 130,
+      "question": "What is the price of NNFM on 2025-09-01?",
+      "answer": "The closing price for NNFM on 2025-09-01 was \u20a686.70.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 131,
+      "question": "What is the price of NPFMCRFBK on 2025-09-01?",
+      "answer": "The closing price for NPFMCRFBK on 2025-09-01 was \u20a63.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 132,
+      "question": "What is the price of OANDO on 2025-09-01?",
+      "answer": "The closing price for OANDO on 2025-09-01 was \u20a648.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 133,
+      "question": "What is the price of OMATEK on 2025-09-01?",
+      "answer": "The closing price for OMATEK on 2025-09-01 was \u20a61.32.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 134,
+      "question": "What is the price of PZ on 2025-09-01?",
+      "answer": "The closing price for PZ on 2025-09-01 was \u20a636.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 135,
+      "question": "What is the price of PRESCO on 2025-09-01?",
+      "answer": "The closing price for PRESCO on 2025-09-01 was \u20a61,480.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 136,
+      "question": "What is the price of PRESTIGE on 2025-09-01?",
+      "answer": "The closing price for PRESTIGE on 2025-09-01 was \u20a61.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 137,
+      "question": "What is the price of RTBRISCOE on 2025-09-01?",
+      "answer": "The closing price for RTBRISCOE on 2025-09-01 was \u20a63.42.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 138,
+      "question": "What is the price of REDSTAREX on 2025-09-01?",
+      "answer": "The closing price for REDSTAREX on 2025-09-01 was \u20a612.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 139,
+      "question": "What is the price of REGALINS on 2025-09-01?",
+      "answer": "The closing price for REGALINS on 2025-09-01 was \u20a61.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 140,
+      "question": "What is the price of ROYALEX on 2025-09-01?",
+      "answer": "The closing price for ROYALEX on 2025-09-01 was \u20a62.08.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 141,
+      "question": "What is the price of SCOA on 2025-09-01?",
+      "answer": "The closing price for SCOA on 2025-09-01 was \u20a66.59.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 142,
+      "question": "What is the price of SEPLAT on 2025-09-01?",
+      "answer": "The closing price for SEPLAT on 2025-09-01 was \u20a65,379.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 143,
+      "question": "What is the price of SFSREIT on 2025-09-01?",
+      "answer": "The closing price for SFSREIT on 2025-09-01 was \u20a6301.55.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 144,
+      "question": "What is the price of SKYAVN on 2025-09-01?",
+      "answer": "The closing price for SKYAVN on 2025-09-01 was \u20a690.05.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 145,
+      "question": "What is the price of SOVRENINS on 2025-09-01?",
+      "answer": "The closing price for SOVRENINS on 2025-09-01 was \u20a62.86.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 146,
+      "question": "What is the price of STANBICETF30 on 2025-09-01?",
+      "answer": "The closing price for STANBICETF30 on 2025-09-01 was \u20a6378.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 147,
+      "question": "What is the price of STANBIC on 2025-09-01?",
+      "answer": "The closing price for STANBIC on 2025-09-01 was \u20a6100.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 148,
+      "question": "What is the price of STERLINGNG on 2025-09-01?",
+      "answer": "The closing price for STERLINGNG on 2025-09-01 was \u20a67.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 149,
+      "question": "What is the price of SUNUASSUR on 2025-09-01?",
+      "answer": "The closing price for SUNUASSUR on 2025-09-01 was \u20a65.54.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 150,
+      "question": "What is the price of TANTALIZER on 2025-09-01?",
+      "answer": "The closing price for TANTALIZER on 2025-09-01 was \u20a62.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 151,
+      "question": "What is the price of TIP on 2025-09-01?",
+      "answer": "The closing price for TIP on 2025-09-01 was \u20a612.01.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 152,
+      "question": "What is the price of OKOMUOIL on 2025-09-01?",
+      "answer": "The closing price for OKOMUOIL on 2025-09-01 was \u20a61,020.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 153,
+      "question": "What is the price of SIAMLETF40 on 2025-09-01?",
+      "answer": "The closing price for SIAMLETF40 on 2025-09-01 was \u20a6586.11.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 154,
+      "question": "What is the price of THOMASWY on 2025-09-01?",
+      "answer": "The closing price for THOMASWY on 2025-09-01 was \u20a63.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 155,
+      "question": "What is the price of TOTAL on 2025-09-01?",
+      "answer": "The closing price for TOTAL on 2025-09-01 was \u20a6640.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 156,
+      "question": "What is the price of TRANSEXPR on 2025-09-01?",
+      "answer": "The closing price for TRANSEXPR on 2025-09-01 was \u20a62.15.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 157,
+      "question": "What is the price of TRANSCOHOT on 2025-09-01?",
+      "answer": "The closing price for TRANSCOHOT on 2025-09-01 was \u20a6164.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 158,
+      "question": "What is the price of TRANSPOWER on 2025-09-01?",
+      "answer": "The closing price for TRANSPOWER on 2025-09-01 was \u20a6286.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 159,
+      "question": "What is the price of TRANSCORP on 2025-09-01?",
+      "answer": "The closing price for TRANSCORP on 2025-09-01 was \u20a647.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 160,
+      "question": "What is the price of TRIPPLEG on 2025-09-01?",
+      "answer": "The closing price for TRIPPLEG on 2025-09-01 was \u20a65.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 161,
+      "question": "What is the price of UACN on 2025-09-01?",
+      "answer": "The closing price for UACN on 2025-09-01 was \u20a673.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 162,
+      "question": "What is the price of UNILEVER on 2025-09-01?",
+      "answer": "The closing price for UNILEVER on 2025-09-01 was \u20a673.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 163,
+      "question": "What is the price of UNIONDICON on 2025-09-01?",
+      "answer": "The closing price for UNIONDICON on 2025-09-01 was \u20a612.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 164,
+      "question": "What is the price of UHOMREIT on 2025-09-01?",
+      "answer": "The closing price for UHOMREIT on 2025-09-01 was \u20a657.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 165,
+      "question": "What is the price of UBA on 2025-09-01?",
+      "answer": "The closing price for UBA on 2025-09-01 was \u20a647.25.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 166,
+      "question": "What is the price of UCAP on 2025-09-01?",
+      "answer": "The closing price for UCAP on 2025-09-01 was \u20a618.95.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 167,
+      "question": "What is the price of UNIVINSURE on 2025-09-01?",
+      "answer": "The closing price for UNIVINSURE on 2025-09-01 was \u20a61.25.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 168,
+      "question": "What is the price of UPL on 2025-09-01?",
+      "answer": "The closing price for UPL on 2025-09-01 was \u20a65.54.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 169,
+      "question": "What is the price of UPDC on 2025-09-01?",
+      "answer": "The closing price for UPDC on 2025-09-01 was \u20a66.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 170,
+      "question": "What is the price of UPDCREIT on 2025-09-01?",
+      "answer": "The closing price for UPDCREIT on 2025-09-01 was \u20a67.65.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 171,
+      "question": "What is the price of VERITASKAP on 2025-09-01?",
+      "answer": "The closing price for VERITASKAP on 2025-09-01 was \u20a61.89.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 172,
+      "question": "What is the price of VETGRIF30 on 2025-09-01?",
+      "answer": "The closing price for VETGRIF30 on 2025-09-01 was \u20a656.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 173,
+      "question": "What is the price of VETINDETF on 2025-09-01?",
+      "answer": "The closing price for VETINDETF on 2025-09-01 was \u20a649.22.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 174,
+      "question": "What is the price of VSPBONDETF on 2025-09-01?",
+      "answer": "The closing price for VSPBONDETF on 2025-09-01 was \u20a6211.11.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 175,
+      "question": "What is the price of VFDGROUP on 2025-09-01?",
+      "answer": "The closing price for VFDGROUP on 2025-09-01 was \u20a611.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 176,
+      "question": "What is the price of VITAFOAM on 2025-09-01?",
+      "answer": "The closing price for VITAFOAM on 2025-09-01 was \u20a681.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 177,
+      "question": "What is the price of WEMABANK on 2025-09-01?",
+      "answer": "The closing price for WEMABANK on 2025-09-01 was \u20a623.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 178,
+      "question": "What is the price of ZENITHBANK on 2025-09-01?",
+      "answer": "The closing price for ZENITHBANK on 2025-09-01 was \u20a664.40.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 179,
+      "question": "What is the price of ZENITHBANK on 2025-09-02?",
+      "answer": "The closing price for ZENITHBANK on 2025-09-02 was \u20a636.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 180,
+      "question": "What is the price of ZENITHBANK on 2025-08-31?",
+      "answer": "The closing price for ZENITHBANK on 2025-08-31 was \u20a634.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 181,
+      "question": "What is the price of GTBANK on 2025-09-02?",
+      "answer": "The closing price for GTBANK on 2025-09-02 was \u20a652.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 182,
+      "question": "What is the price of ACCESS on 2025-09-02?",
+      "answer": "The closing price for ACCESS on 2025-09-02 was \u20a623.45.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 183,
+      "question": "What is the price of UBA on 2025-09-02?",
+      "answer": "The closing price for UBA on 2025-09-02 was \u20a628.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 184,
+      "question": "What is the price of FBNH on 2025-09-02?",
+      "answer": "The closing price for FBNH on 2025-09-02 was \u20a619.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 185,
+      "question": "What is the price of JAIZBANK?",
+      "answer": "The most recent closing price for JAIZBANK on 2025-09-17 was \u20a64.55.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 186,
+      "question": "What is the price of FGSUK2033S6?",
+      "answer": "The most recent closing price for FGSUK2033S6 on 2025-09-01 was \u20a695.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 187,
+      "question": "What is the price of ABBEYBDS?",
+      "answer": "The most recent closing price for ABBEYBDS on 2025-09-01 was \u20a66.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 188,
+      "question": "What is the price of ACADEMY?",
+      "answer": "The most recent closing price for ACADEMY on 2025-09-01 was \u20a69.55.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 189,
+      "question": "What is the price of ACCESSCORP?",
+      "answer": "The most recent closing price for ACCESSCORP on 2025-09-01 was \u20a626.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 190,
+      "question": "What is the price of AFRIPRUD?",
+      "answer": "The most recent closing price for AFRIPRUD on 2025-09-01 was \u20a616.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 191,
+      "question": "What is the price of AIICO?",
+      "answer": "The most recent closing price for AIICO on 2025-09-01 was \u20a63.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 192,
+      "question": "What is the price of AIRTELAFRI?",
+      "answer": "The most recent closing price for AIRTELAFRI on 2025-09-01 was \u20a62,310.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 193,
+      "question": "What is the price of ALEX?",
+      "answer": "The most recent closing price for ALEX on 2025-09-01 was \u20a67.15.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 194,
+      "question": "What is the price of ARADEL?",
+      "answer": "The most recent closing price for ARADEL on 2025-09-01 was \u20a6513.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 195,
+      "question": "What is the price of ABCTRANS?",
+      "answer": "The most recent closing price for ABCTRANS on 2025-09-01 was \u20a64.51.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 196,
+      "question": "What is the price of NCR?",
+      "answer": "The most recent closing price for NCR on 2025-09-01 was \u20a611.55.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 197,
+      "question": "What is the price of AUSTINLAZ?",
+      "answer": "The most recent closing price for AUSTINLAZ on 2025-09-01 was \u20a62.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 198,
+      "question": "What is the price of MANSARD?",
+      "answer": "The most recent closing price for MANSARD on 2025-09-01 was \u20a615.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 199,
+      "question": "What is the price of BERGER?",
+      "answer": "The most recent closing price for BERGER on 2025-09-01 was \u20a638.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 200,
+      "question": "What is the price of BETAGLAS?",
+      "answer": "The most recent closing price for BETAGLAS on 2025-09-01 was \u20a6486.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 201,
+      "question": "What is the price of BUACEMENT?",
+      "answer": "The most recent closing price for BUACEMENT on 2025-09-01 was \u20a6151.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 202,
+      "question": "What is the price of BUAFOODS?",
+      "answer": "The most recent closing price for BUAFOODS on 2025-09-01 was \u20a6590.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 203,
+      "question": "What is the price of CILEASING?",
+      "answer": "The most recent closing price for CILEASING on 2025-09-01 was \u20a66.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 204,
+      "question": "What is the price of CADBURY?",
+      "answer": "The most recent closing price for CADBURY on 2025-09-01 was \u20a660.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 205,
+      "question": "What is the price of CAP?",
+      "answer": "The most recent closing price for CAP on 2025-09-01 was \u20a670.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 206,
+      "question": "What is the price of CAVERTON?",
+      "answer": "The most recent closing price for CAVERTON on 2025-09-01 was \u20a66.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 207,
+      "question": "What is the price of CHAMPION?",
+      "answer": "The most recent closing price for CHAMPION on 2025-09-01 was \u20a617.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 208,
+      "question": "What is the price of CHAMS?",
+      "answer": "The most recent closing price for CHAMS on 2025-09-01 was \u20a62.65.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 209,
+      "question": "What is the price of NIDF?",
+      "answer": "The most recent closing price for NIDF on 2025-09-01 was \u20a6113.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 210,
+      "question": "What is the price of CHELLARAM?",
+      "answer": "The most recent closing price for CHELLARAM on 2025-09-01 was \u20a610.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 211,
+      "question": "What is the price of CWG?",
+      "answer": "The most recent closing price for CWG on 2025-09-01 was \u20a616.05.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 212,
+      "question": "What is the price of CONOIL?",
+      "answer": "The most recent closing price for CONOIL on 2025-09-01 was \u20a6211.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 213,
+      "question": "What is the price of CONHALLPLC?",
+      "answer": "The most recent closing price for CONHALLPLC on 2025-09-01 was \u20a64.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 214,
+      "question": "What is the price of CORNERST?",
+      "answer": "The most recent closing price for CORNERST on 2025-09-01 was \u20a66.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 215,
+      "question": "What is the price of WAPIC?",
+      "answer": "The most recent closing price for WAPIC on 2025-09-01 was \u20a63.45.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 216,
+      "question": "What is the price of CUSTODIAN?",
+      "answer": "The most recent closing price for CUSTODIAN on 2025-09-01 was \u20a640.75.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 217,
+      "question": "What is the price of CUTIX?",
+      "answer": "The most recent closing price for CUTIX on 2025-09-01 was \u20a63.23.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 218,
+      "question": "What is the price of DAARCOMM?",
+      "answer": "The most recent closing price for DAARCOMM on 2025-09-01 was \u20a61.05.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 219,
+      "question": "What is the price of DANGCEM?",
+      "answer": "The most recent closing price for DANGCEM on 2025-09-01 was \u20a6520.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 220,
+      "question": "What is the price of DANGSUGAR?",
+      "answer": "The most recent closing price for DANGSUGAR on 2025-09-01 was \u20a658.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 221,
+      "question": "What is the price of DEAPCAP?",
+      "answer": "The most recent closing price for DEAPCAP on 2025-09-01 was \u20a61.71.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 222,
+      "question": "What is the price of ETRANZACT?",
+      "answer": "The most recent closing price for ETRANZACT on 2025-09-01 was \u20a610.85.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 223,
+      "question": "What is the price of ETI?",
+      "answer": "The most recent closing price for ETI on 2025-09-01 was \u20a636.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 224,
+      "question": "What is the price of ELLAHLAKES?",
+      "answer": "The most recent closing price for ELLAHLAKES on 2025-09-01 was \u20a612.69.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 225,
+      "question": "What is the price of ETERNA?",
+      "answer": "The most recent closing price for ETERNA on 2025-09-01 was \u20a634.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 226,
+      "question": "What is the price of EUNISELL?",
+      "answer": "The most recent closing price for EUNISELL on 2025-09-01 was \u20a625.45.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 227,
+      "question": "What is the price of FCMB?",
+      "answer": "The most recent closing price for FCMB on 2025-09-01 was \u20a610.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 228,
+      "question": "What is the price of FIDELITYBK?",
+      "answer": "The most recent closing price for FIDELITYBK on 2025-09-01 was \u20a621.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 229,
+      "question": "What is the price of FIDSON?",
+      "answer": "The most recent closing price for FIDSON on 2025-09-01 was \u20a643.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 230,
+      "question": "What is the price of FIRSTHOLDCO?",
+      "answer": "The most recent closing price for FIRSTHOLDCO on 2025-09-01 was \u20a632.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 231,
+      "question": "What is the price of FTNCOCOA?",
+      "answer": "The most recent closing price for FTNCOCOA on 2025-09-01 was \u20a66.29.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 232,
+      "question": "What is the price of GEREGU?",
+      "answer": "The most recent closing price for GEREGU on 2025-09-01 was \u20a61,141.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 233,
+      "question": "What is the price of GREENWETF?",
+      "answer": "The most recent closing price for GREENWETF on 2025-09-01 was \u20a6284.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 234,
+      "question": "What is the price of GTCO?",
+      "answer": "The most recent closing price for GTCO on 2025-09-01 was \u20a692.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 235,
+      "question": "What is the price of GUINEAINS?",
+      "answer": "The most recent closing price for GUINEAINS on 2025-09-01 was \u20a61.53.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 236,
+      "question": "What is the price of GUINNESS?",
+      "answer": "The most recent closing price for GUINNESS on 2025-09-01 was \u20a6130.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 237,
+      "question": "What is the price of HMCALL?",
+      "answer": "The most recent closing price for HMCALL on 2025-09-01 was \u20a64.28.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 238,
+      "question": "What is the price of HONYFLOUR?",
+      "answer": "The most recent closing price for HONYFLOUR on 2025-09-01 was \u20a621.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 239,
+      "question": "What is the price of IKEJAHOTEL?",
+      "answer": "The most recent closing price for IKEJAHOTEL on 2025-09-01 was \u20a622.95.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 240,
+      "question": "What is the price of IMG?",
+      "answer": "The most recent closing price for IMG on 2025-09-01 was \u20a637.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 241,
+      "question": "What is the price of INTBREW?",
+      "answer": "The most recent closing price for INTBREW on 2025-09-01 was \u20a612.65.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 242,
+      "question": "What is the price of INTENEGINS?",
+      "answer": "The most recent closing price for INTENEGINS on 2025-09-01 was \u20a63.34.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 243,
+      "question": "What is the price of JAPAULGOLD?",
+      "answer": "The most recent closing price for JAPAULGOLD on 2025-09-01 was \u20a62.72.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 244,
+      "question": "What is the price of JOHNHOLT?",
+      "answer": "The most recent closing price for JOHNHOLT on 2025-09-01 was \u20a66.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 245,
+      "question": "What is the price of JULI?",
+      "answer": "The most recent closing price for JULI on 2025-09-01 was \u20a69.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 246,
+      "question": "What is the price of JBERGER?",
+      "answer": "The most recent closing price for JBERGER on 2025-09-01 was \u20a6146.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 247,
+      "question": "What is the price of WAPCO?",
+      "answer": "The most recent closing price for WAPCO on 2025-09-01 was \u20a6123.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 248,
+      "question": "What is the price of LASACO?",
+      "answer": "The most recent closing price for LASACO on 2025-09-01 was \u20a63.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 249,
+      "question": "What is the price of LEARNAFRCA?",
+      "answer": "The most recent closing price for LEARNAFRCA on 2025-09-01 was \u20a67.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 250,
+      "question": "What is the price of LEGENDINT?",
+      "answer": "The most recent closing price for LEGENDINT on 2025-09-01 was \u20a65.35.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 251,
+      "question": "What is the price of LINKASSURE?",
+      "answer": "The most recent closing price for LINKASSURE on 2025-09-01 was \u20a62.19.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 252,
+      "question": "What is the price of LIVESTOCK?",
+      "answer": "The most recent closing price for LIVESTOCK on 2025-09-01 was \u20a68.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 253,
+      "question": "What is the price of LOTUSHAL15?",
+      "answer": "The most recent closing price for LOTUSHAL15 on 2025-09-01 was \u20a657.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 254,
+      "question": "What is the price of MAYBAKER?",
+      "answer": "The most recent closing price for MAYBAKER on 2025-09-01 was \u20a618.05.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 255,
+      "question": "What is the price of MCNICHOLS?",
+      "answer": "The most recent closing price for MCNICHOLS on 2025-09-01 was \u20a63.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 256,
+      "question": "What is the price of MECURE?",
+      "answer": "The most recent closing price for MECURE on 2025-09-01 was \u20a619.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 257,
+      "question": "What is the price of MERGROWTH?",
+      "answer": "The most recent closing price for MERGROWTH on 2025-09-01 was \u20a6590.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 258,
+      "question": "What is the price of MERVALUE?",
+      "answer": "The most recent closing price for MERVALUE on 2025-09-01 was \u20a6204.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 259,
+      "question": "What is the price of MEYER?",
+      "answer": "The most recent closing price for MEYER on 2025-09-01 was \u20a616.75.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 260,
+      "question": "What is the price of MTNN?",
+      "answer": "The most recent closing price for MTNN on 2025-09-01 was \u20a6435.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 261,
+      "question": "What is the price of MULTIVERSE?",
+      "answer": "The most recent closing price for MULTIVERSE on 2025-09-01 was \u20a610.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 262,
+      "question": "What is the price of MBENEFIT?",
+      "answer": "The most recent closing price for MBENEFIT on 2025-09-01 was \u20a63.71.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 263,
+      "question": "What is the price of NASCON?",
+      "answer": "The most recent closing price for NASCON on 2025-09-01 was \u20a690.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 264,
+      "question": "What is the price of NAHCO?",
+      "answer": "The most recent closing price for NAHCO on 2025-09-01 was \u20a6103.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 265,
+      "question": "What is the price of NSLTECH?",
+      "answer": "The most recent closing price for NSLTECH on 2025-09-01 was \u20a60.89.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 266,
+      "question": "What is the price of NEIMETH?",
+      "answer": "The most recent closing price for NEIMETH on 2025-09-01 was \u20a66.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 267,
+      "question": "What is the price of NEM?",
+      "answer": "The most recent closing price for NEM on 2025-09-01 was \u20a631.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 268,
+      "question": "What is the price of NESTLE?",
+      "answer": "The most recent closing price for NESTLE on 2025-09-01 was \u20a61,870.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 269,
+      "question": "What is the price of NEWGOLD?",
+      "answer": "The most recent closing price for NEWGOLD on 2025-09-01 was \u20a654,500.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 270,
+      "question": "What is the price of NB?",
+      "answer": "The most recent closing price for NB on 2025-09-01 was \u20a670.20.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 271,
+      "question": "What is the price of ENAMELWA?",
+      "answer": "The most recent closing price for ENAMELWA on 2025-09-01 was \u20a639.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 272,
+      "question": "What is the price of NGXGROUP?",
+      "answer": "The most recent closing price for NGXGROUP on 2025-09-01 was \u20a657.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 273,
+      "question": "What is the price of NNFM?",
+      "answer": "The most recent closing price for NNFM on 2025-09-01 was \u20a686.70.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 274,
+      "question": "What is the price of NPFMCRFBK?",
+      "answer": "The most recent closing price for NPFMCRFBK on 2025-09-01 was \u20a63.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 275,
+      "question": "What is the price of OANDO?",
+      "answer": "The most recent closing price for OANDO on 2025-09-01 was \u20a648.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 276,
+      "question": "What is the price of OMATEK?",
+      "answer": "The most recent closing price for OMATEK on 2025-09-01 was \u20a61.32.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 277,
+      "question": "What is the price of PZ?",
+      "answer": "The most recent closing price for PZ on 2025-09-01 was \u20a636.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 278,
+      "question": "What is the price of PRESCO?",
+      "answer": "The most recent closing price for PRESCO on 2025-09-01 was \u20a61,480.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 279,
+      "question": "What is the price of PRESTIGE?",
+      "answer": "The most recent closing price for PRESTIGE on 2025-09-01 was \u20a61.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 280,
+      "question": "What is the price of RTBRISCOE?",
+      "answer": "The most recent closing price for RTBRISCOE on 2025-09-01 was \u20a63.42.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 281,
+      "question": "What is the price of REDSTAREX?",
+      "answer": "The most recent closing price for REDSTAREX on 2025-09-01 was \u20a612.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 282,
+      "question": "What is the price of REGALINS?",
+      "answer": "The most recent closing price for REGALINS on 2025-09-01 was \u20a61.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 283,
+      "question": "What is the price of ROYALEX?",
+      "answer": "The most recent closing price for ROYALEX on 2025-09-01 was \u20a62.08.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 284,
+      "question": "What is the price of SCOA?",
+      "answer": "The most recent closing price for SCOA on 2025-09-01 was \u20a66.59.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 285,
+      "question": "What is the price of SEPLAT?",
+      "answer": "The most recent closing price for SEPLAT on 2025-09-01 was \u20a65,379.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 286,
+      "question": "What is the price of SFSREIT?",
+      "answer": "The most recent closing price for SFSREIT on 2025-09-01 was \u20a6301.55.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 287,
+      "question": "What is the price of SKYAVN?",
+      "answer": "The most recent closing price for SKYAVN on 2025-09-01 was \u20a690.05.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 288,
+      "question": "What is the price of SOVRENINS?",
+      "answer": "The most recent closing price for SOVRENINS on 2025-09-01 was \u20a62.86.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 289,
+      "question": "What is the price of STANBICETF30?",
+      "answer": "The most recent closing price for STANBICETF30 on 2025-09-01 was \u20a6378.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 290,
+      "question": "What is the price of STANBIC?",
+      "answer": "The most recent closing price for STANBIC on 2025-09-01 was \u20a6100.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 291,
+      "question": "What is the price of STERLINGNG?",
+      "answer": "The most recent closing price for STERLINGNG on 2025-09-01 was \u20a67.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 292,
+      "question": "What is the price of SUNUASSUR?",
+      "answer": "The most recent closing price for SUNUASSUR on 2025-09-01 was \u20a65.54.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 293,
+      "question": "What is the price of TANTALIZER?",
+      "answer": "The most recent closing price for TANTALIZER on 2025-09-01 was \u20a62.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 294,
+      "question": "What is the price of TIP?",
+      "answer": "The most recent closing price for TIP on 2025-09-01 was \u20a612.01.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 295,
+      "question": "What is the price of OKOMUOIL?",
+      "answer": "The most recent closing price for OKOMUOIL on 2025-09-01 was \u20a61,020.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 296,
+      "question": "What is the price of SIAMLETF40?",
+      "answer": "The most recent closing price for SIAMLETF40 on 2025-09-01 was \u20a6586.11.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 297,
+      "question": "What is the price of THOMASWY?",
+      "answer": "The most recent closing price for THOMASWY on 2025-09-01 was \u20a63.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 298,
+      "question": "What is the price of TOTAL?",
+      "answer": "The most recent closing price for TOTAL on 2025-09-01 was \u20a6640.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 299,
+      "question": "What is the price of TRANSEXPR?",
+      "answer": "The most recent closing price for TRANSEXPR on 2025-09-01 was \u20a62.15.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 300,
+      "question": "What is the price of TRANSCOHOT?",
+      "answer": "The most recent closing price for TRANSCOHOT on 2025-09-01 was \u20a6164.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 301,
+      "question": "What is the price of TRANSPOWER?",
+      "answer": "The most recent closing price for TRANSPOWER on 2025-09-01 was \u20a6286.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 302,
+      "question": "What is the price of TRANSCORP?",
+      "answer": "The most recent closing price for TRANSCORP on 2025-09-01 was \u20a647.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 303,
+      "question": "What is the price of TRIPPLEG?",
+      "answer": "The most recent closing price for TRIPPLEG on 2025-09-01 was \u20a65.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 304,
+      "question": "What is the price of UACN?",
+      "answer": "The most recent closing price for UACN on 2025-09-01 was \u20a673.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 305,
+      "question": "What is the price of UNILEVER?",
+      "answer": "The most recent closing price for UNILEVER on 2025-09-01 was \u20a673.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 306,
+      "question": "What is the price of UNIONDICON?",
+      "answer": "The most recent closing price for UNIONDICON on 2025-09-01 was \u20a612.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 307,
+      "question": "What is the price of UHOMREIT?",
+      "answer": "The most recent closing price for UHOMREIT on 2025-09-01 was \u20a657.60.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 308,
+      "question": "What is the price of UBA?",
+      "answer": "The most recent closing price for UBA on 2025-09-02 was \u20a628.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 309,
+      "question": "What is the price of UCAP?",
+      "answer": "The most recent closing price for UCAP on 2025-09-01 was \u20a618.95.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 310,
+      "question": "What is the price of UNIVINSURE?",
+      "answer": "The most recent closing price for UNIVINSURE on 2025-09-01 was \u20a61.25.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 311,
+      "question": "What is the price of UPL?",
+      "answer": "The most recent closing price for UPL on 2025-09-01 was \u20a65.54.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 312,
+      "question": "What is the price of UPDC?",
+      "answer": "The most recent closing price for UPDC on 2025-09-01 was \u20a66.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 313,
+      "question": "What is the price of UPDCREIT?",
+      "answer": "The most recent closing price for UPDCREIT on 2025-09-01 was \u20a67.65.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 314,
+      "question": "What is the price of VERITASKAP?",
+      "answer": "The most recent closing price for VERITASKAP on 2025-09-01 was \u20a61.89.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 315,
+      "question": "What is the price of VETGRIF30?",
+      "answer": "The most recent closing price for VETGRIF30 on 2025-09-01 was \u20a656.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 316,
+      "question": "What is the price of VETINDETF?",
+      "answer": "The most recent closing price for VETINDETF on 2025-09-01 was \u20a649.22.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 317,
+      "question": "What is the price of VSPBONDETF?",
+      "answer": "The most recent closing price for VSPBONDETF on 2025-09-01 was \u20a6211.11.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 318,
+      "question": "What is the price of VFDGROUP?",
+      "answer": "The most recent closing price for VFDGROUP on 2025-09-01 was \u20a611.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 319,
+      "question": "What is the price of VITAFOAM?",
+      "answer": "The most recent closing price for VITAFOAM on 2025-09-01 was \u20a681.90.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 320,
+      "question": "What is the price of WEMABANK?",
+      "answer": "The most recent closing price for WEMABANK on 2025-09-01 was \u20a623.00.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 321,
+      "question": "What is the price of ZENITHBANK?",
+      "answer": "The most recent closing price for ZENITHBANK on 2025-09-02 was \u20a636.50.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 322,
+      "question": "What is the price of FBNH?",
+      "answer": "The most recent closing price for FBNH on 2025-09-02 was \u20a619.30.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 323,
+      "question": "What is the price of ACCESS?",
+      "answer": "The most recent closing price for ACCESS on 2025-09-02 was \u20a623.45.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 324,
+      "question": "What is the price of GTBANK?",
+      "answer": "The most recent closing price for GTBANK on 2025-09-02 was \u20a652.80.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 325,
+      "question": "Provide the exact line: 'Name: Skyview Capital Limited'",
+      "answer": "Name: Skyview Capital Limited",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 326,
+      "question": "Provide the exact line: 'Business: Financial service provider, licensed by the Nigerian Stock Exchange (NSE) and the Securities and Exchange Commission (SEC) as a Broker/Dealer.'",
+      "answer": "Stated Philosophy/Mission: \"Understand that excellent service and professionalism distinguish results from extraordinary results. We attach great importance to quality delivery of life-changing products and services to all our clients and customers with strong emphasis on excellent customer satisfaction.\" Aims to be \"always ahead\" and provide \"Professional Solutions for Your Business.\"",
+      "brain_used": "Brain 1",
+      "provenance": "CompanyProfileEngine",
+      "pass": true
+    },
+    {
+      "n": 327,
+      "question": "Provide the exact line: 'Stated Philosophy/Mission: \"Understand that excellent service and professionalism distinguish results from extraordinary results. We attach great importance to quality delivery of life-changing products and services to all our clients and customers with strong emphasis on excellent customer satisfaction.\" Aims to be \"always ahead\" and provide \"Professional Solutions for Your Business.\"'",
+      "answer": "Stated Philosophy/Mission: \"Understand that excellent service and professionalism distinguish results from extraordinary results. We attach great importance to quality delivery of life-changing products and services to all our clients and customers with strong emphasis on excellent customer satisfaction.\" Aims to be \"always ahead\" and provide \"Professional Solutions for Your Business.\"",
+      "brain_used": "Brain 1",
+      "provenance": "CompanyProfileEngine",
+      "pass": true
+    },
+    {
+      "n": 328,
+      "question": "Provide the exact line: 'Year of Operation Implied: Website copyright \u00a92020.'",
+      "answer": "Year of Operation Implied: Website copyright \u00a92020.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 329,
+      "question": "Provide the exact line: 'Website Developer: \"Designed and Developed by Skyview Capital IT.\"'",
+      "answer": "Website Developer: \"Designed and Developed by Skyview Capital IT.\"",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 330,
+      "question": "Provide the exact line: 'Clientele: Government parastatals, multinational and indigenous companies, high net worth individuals.'",
+      "answer": "Government parastatals, multinational and indigenous companies, high net worth individuals.",
+      "brain_used": "Brain 1",
+      "provenance": "CompanyProfileEngine",
+      "pass": true
+    },
+    {
+      "n": 331,
+      "question": "Provide the exact line: 'Supported by: \"Seasoned professional researchers\" for stock analysis.'",
+      "answer": "Supported by: \"Seasoned professional researchers\" for stock analysis.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 332,
+      "question": "Provide the exact line: 'Sub-services: Retainer-ship for listed companies, Certificate Verification (phasing out), Receiving Agency for IPOs/POs.'",
+      "answer": "Sub-services: Retainer-ship for listed companies, Certificate Verification (phasing out), Receiving Agency for IPOs/POs.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 333,
+      "question": "Provide the exact line: 'Features an experienced research department.'",
+      "answer": "Features an experienced research department.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 334,
+      "question": "Provide the exact line: 'Report types mentioned: Skyview Research Report, Weekly, Monthly, Quarterly, Annual Reports.'",
+      "answer": "Report types mentioned: Skyview Research Report, Weekly, Monthly, Quarterly, Annual Reports.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 335,
+      "question": "Provide the exact line: 'Utilizes in-house researchers for daily securities updates for clients.'",
+      "answer": "Utilizes in-house researchers for daily securities updates for clients.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 336,
+      "question": "Provide the exact line: 'Employs tools for valuing assets, debts, warrants, and equity using public information/financial statements.'",
+      "answer": "No reported value for total assets for Jaiz Bank as of 2025-09-19.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 337,
+      "question": "Provide the exact line: 'Olufemi Adesiyan (Managing Director): M.Sc. Statistics, over 10 years in Capital Markets, experienced in Securities Trading, former Acting CEO/Head of Stockbroking at WT Securities Ltd. (AI will know a portrait and an \"at desk\" image are associated).'",
+      "answer": "Olufemi Adesiyan (Managing Director): M.Sc. Statistics, over 10 years in Capital Markets, experienced in Securities Trading, former Acting CEO/Head of Stockbroking at WT Securities Ltd. (AI will know a portrait and an \"at desk\" image are associated).",
+      "brain_used": "Brain 1",
+      "provenance": "PersonnelDataEngine",
+      "pass": true
+    },
+    {
+      "n": 338,
+      "question": "Provide the exact line: 'Nkiru Modesta Okoli (Chief Financial Officer): B.Sc. Accounting, ACA, CFA Level 2 candidate, over 10 years experience. Expertise in financial reporting, audit, tax, internal controls. (AI will know a portrait is associated).'",
+      "answer": "Nkiru Modesta Okoli (Chief Financial Officer): B.Sc. Accounting, ACA, CFA Level 2 candidate, over 10 years experience. Expertise in financial reporting, audit, tax, internal controls. (AI will know a portrait is associated).",
+      "brain_used": "Brain 1",
+      "provenance": "PersonnelDataEngine",
+      "pass": true
+    },
+    {
+      "n": 339,
+      "question": "Provide the exact line: 'Asomugha Chidozie Stephen (Chief Compliance Officer): MBA, B.Sc. Industrial Chemistry, ACS, over 14 years in capital markets. Expertise in regulatory filings, AML, policy. (AI will know a portrait is associated).'",
+      "answer": "Asomugha Chidozie Stephen (Chief Compliance Officer): MBA, B.Sc. Industrial Chemistry, ACS, over 14 years in capital markets. Expertise in regulatory filings, AML, policy.",
+      "brain_used": "Brain 2/3",
+      "provenance": "VertexAI",
+      "pass": true
+    },
+    {
+      "n": 340,
+      "question": "Provide the exact line: 'Uche Ronald Bekee (Chief Risk Officer): MBA Marketing, B.Sc. Banking & Finance. Joined Skyview 2014 (initially as Head, Marketing & Client Services). Experienced in corporate finance, marketing, capital raising. (AI will know a portrait is associated).'",
+      "answer": "Uche Ronald Bekee (Chief Risk Officer): MBA Marketing, B.Sc. Banking & Finance. Joined Skyview 2014 (initially as Head, Marketing & Client Services). Experienced in corporate finance, marketing, capital raising. (AI will know a portrait is associated).",
+      "brain_used": "Brain 1",
+      "provenance": "PersonnelDataEngine",
+      "pass": true
+    },
+    {
+      "n": 341,
+      "question": "Provide the exact line: 'Atigan Neville (Head, Admin/HR): Master\u2019s Public Administration. Joined Skyview 2008. Prior experience in admin for large projects (SPDC, Daewoo). (AI will know a portrait is associated).'",
+      "answer": "Atigan Neville (Head, Admin/HR): Master\u2019s Public Administration. Joined Skyview 2008. Prior experience in admin for large projects (SPDC, Daewoo). (AI will know a portrait is associated).",
+      "brain_used": "Brain 1",
+      "provenance": "PersonnelDataEngine",
+      "pass": true
+    },
+    {
+      "n": 342,
+      "question": "Provide the exact line: 'Head Office: 71, Norman Williams St, Ikoyi, Lagos, NG.'",
+      "answer": "The head office of Skyview Capital Limited is located at: Head Office: 71, Norman Williams St, Ikoyi, Lagos, NG.",
+      "brain_used": "Brain 1",
+      "provenance": "LocationDataEngine",
+      "pass": true
+    },
+    {
+      "n": 343,
+      "question": "Provide the exact line: 'Branch - Rivers State: 26 Aba Road, Ground Floor UPDC Building, Port Harcourt.'",
+      "answer": "The most recent closing price for UPDC on 2025-09-01 was \u20a66.10.",
+      "brain_used": "Brain 1",
+      "provenance": "MarketDataEngine",
+      "pass": true
+    },
+    {
+      "n": 344,
+      "question": "Provide the exact line: 'Branch - FCT (Abuja): Plot 1723, Ademola Adetokunbo Crescent, Nurnberger Plaza, Suite 45, Wuse II.'",
+      "answer": "The Abuja branch is located at: Branch - FCT (Abuja): Plot 1723, Ademola Adetokunbo Crescent, Nurnberger Plaza, Suite 45, Wuse II.",
+      "brain_used": "Brain 1",
+      "provenance": "LocationDataEngine",
+      "pass": true
+    },
+    {
+      "n": 345,
+      "question": "Provide the exact line: 'Phone: +234 8066994792'",
+      "answer": "The official phone number for Skyview Capital is +234 8066994792.",
+      "brain_used": "Brain 1",
+      "provenance": "LocationDataEngine",
+      "pass": true
+    },
+    {
+      "n": 346,
+      "question": "Provide the exact line: 'Emails: info@skyviewcapitalng.com; complaints@skyviewcapitalng.com'",
+      "answer": "For complaints, you can reach out to complaints@skyviewcapitalng.com.",
+      "brain_used": "Brain 1",
+      "provenance": "GeneralKnowledgeEngine",
+      "pass": true
+    },
+    {
+      "n": 347,
+      "question": "Provide the exact line: 'Key Sections: Home, About Us, Services, Our Team, Account Info, News, Contact, Customer Login.'",
+      "answer": "Key Sections: Home, About Us, Services, Our Team, Account Info, News, Contact, Customer Login.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 348,
+      "question": "Provide the exact line: 'Account Forms Available (names): Account Opening, Sales Mandate, Stock/Shares Transfer, Purchase Mandate, Inter-Member Transfer, CSS - Direct Settlement Form.'",
+      "answer": "No reported value for gross earnings for Jaiz Bank as of 2025-09-19.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 349,
+      "question": "Provide the exact line: 'Market Information Mentioned: \"Market Prices\" section with \"Today's Price Gainers & Losers,\" \"Prices Index,\" and \"Price Movement.\"'",
+      "answer": "Market Information Mentioned: \"Market Prices\" section with \"Today's Price Gainers & Losers,\" \"Prices Index,\" and \"Price Movement.\"",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 350,
+      "question": "Provide the exact line: 'Emmanuel Oladimeji (Marketing Head, Xayeed Group of Industries): Positive testimonial (\"Awesome support...\").'",
+      "answer": "I have access to testimonials from clients like Emmanuel Oladimeji of Xayeed Group, Mojisola George of The Daily World Finance, and Adebimpe Ayoade of Financial Report Limited.",
+      "brain_used": "Brain 1",
+      "provenance": "GeneralKnowledgeEngine",
+      "pass": true
+    },
+    {
+      "n": 351,
+      "question": "Provide the exact line: 'Mojisola George (Founder, The Daily World Finance): Testimonial provided (content noted as placeholder).'",
+      "answer": "Mojisola George (Founder, The Daily World Finance): Testimonial provided (content noted as placeholder).",
+      "brain_used": "Brain 2/3",
+      "provenance": "VertexAI",
+      "pass": true
+    },
+    {
+      "n": 352,
+      "question": "Provide the exact line: 'Adebimpe Ayoade (CEO, Financial Report Limited): Testimonial provided.'",
+      "answer": "I have access to testimonials from clients like Emmanuel Oladimeji of Xayeed Group, Mojisola George of The Daily World Finance, and Adebimpe Ayoade of Financial Report Limited.",
+      "brain_used": "Brain 1",
+      "provenance": "GeneralKnowledgeEngine",
+      "pass": true
+    },
+    {
+      "n": 353,
+      "question": "Provide the exact line: 'To enhance Client Advisory services.'",
+      "answer": "To enhance Client Advisory services.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 354,
+      "question": "Provide the exact line: 'Desired outcomes include improved prediction accuracy and faster insights.'",
+      "answer": "Desired outcomes include improved prediction accuracy and faster insights.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 355,
+      "question": "Provide the exact line: 'Real-time trend prediction and current position for NGX-listed stocks (particularly banking and industrial sectors).'",
+      "answer": "Real-time trend prediction and current position for NGX-listed stocks (particularly banking and industrial sectors).",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 356,
+      "question": "Provide the exact line: 'Market sentiment analysis based on local financial news (sources mentioned include Bloomberg Africa, Proshare, Nairametrics), social media, and analyst reports relevant to Nigeria.'",
+      "answer": "Market sentiment analysis based on local financial news (sources mentioned include Bloomberg Africa, Proshare, Nairametrics), social media, and analyst reports relevant to Nigeria.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 357,
+      "question": "Provide the exact line: 'Automated alerts for predefined market events or indicator thresholds.'",
+      "answer": "Automated alerts for predefined market events or indicator thresholds.",
+      "brain_used": "Brain 2/3",
+      "provenance": "VertexAI",
+      "pass": true
+    },
+    {
+      "n": 358,
+      "question": "Provide the exact line: 'Note on CRM: Skyview mentioned a CRM. For the SkyCap project, any insights from CRM data would need to be handled via securely provided, anonymized data extracts or a future dedicated API, not direct login by external systems.'",
+      "answer": "Note on CRM: Skyview mentioned a CRM. For the SkyCap project, any insights from CRM data would need to be handled via securely provided, anonymized data extracts or a future dedicated API, not direct login by external systems.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 359,
+      "question": "Provide the exact line: 'Historical Data: To be provided by Skyview in CSV & PDF formats.'",
+      "answer": "Historical Data: To be provided by Skyview in CSV & PDF formats.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 360,
+      "question": "Provide the exact line: 'Market Data Feeds: Nigerian Exchange Group (NGX) feeds.'",
+      "answer": "Market Data Feeds: Nigerian Exchange Group (NGX) feeds.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 361,
+      "question": "Provide the exact line: 'News/Sentiment Analysis Sources: Bloomberg Africa, Proshare, Nairametrics, and information from websites of all NGX-listed industries.'",
+      "answer": "News/Sentiment Analysis Sources: Bloomberg Africa, Proshare, Nairametrics, and information from websites of all NGX-listed industries.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 362,
+      "question": "Provide the exact line: 'Data Access Methods to be supported by SkyCap: APIs (for NGX/news if available), and processing of CSV, Excel & PDF files.'",
+      "answer": "Data Access Methods to be supported by SkyCap: APIs (for NGX/news if available), and processing of CSV, Excel & PDF files.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 363,
+      "question": "Provide the exact line: 'Markets: Equities listed on the NGX (all tiers).'",
+      "answer": "Markets: Equities listed on the NGX (all tiers).",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 364,
+      "question": "Provide the exact line: 'Asset Classes: Nigerian equities, government bonds, treasury bills, corporate bonds, mutual funds, ETFs.'",
+      "answer": "No reported value for total assets for Jaiz Bank as of 2025-09-19.",
+      "brain_used": "Brain 1",
+      "provenance": "FinancialDataEngine",
+      "pass": true
+    },
+    {
+      "n": 365,
+      "question": "Provide the exact line: '(Skyview will provide a list of specific stocks, sectors, or indices for prioritized analysis).'",
+      "answer": "(Skyview will provide a list of specific stocks, sectors, or indices for prioritized analysis).",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 366,
+      "question": "Provide the exact line: 'Frequency: Real-time, daily, weekly, monthly, and yearly.'",
+      "answer": "Frequency: Real-time, daily, weekly, monthly, and yearly.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 367,
+      "question": "Provide the exact line: 'Formats: Interactive web dashboards, PDF summaries, Excel exports, and email notifications.'",
+      "answer": "Formats: Interactive web dashboards, PDF summaries, Excel exports, and email notifications.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 368,
+      "question": "Provide the exact line: '(Skyview will specify preferred charts, graphs, or data tables).'",
+      "answer": "(Skyview will specify preferred charts, graphs, or data tables).",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 369,
+      "question": "Provide the exact line: 'Alert Delivery: Email, SMS, or platform notifications.'",
+      "answer": "Alert Delivery: Email, SMS, or platform notifications.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 370,
+      "question": "Provide the exact line: 'Skyview has stated NO current requirement for SkyCap to integrate directly with their existing trading platforms, portfolio management systems, internal databases, or CRM software.'",
+      "answer": "Skyview has stated NO current requirement for SkyCap to integrate directly with their existing trading platforms, portfolio management systems, internal databases, or CRM software.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 371,
+      "question": "Provide the exact line: 'Accuracy of market trend or price predictions (target percentage to be defined).'",
+      "answer": "Accuracy of market trend or price predictions (target percentage to be defined).",
+      "brain_used": "Brain 2/3",
+      "provenance": "VertexAI",
+      "pass": true
+    },
+    {
+      "n": 372,
+      "question": "Provide the exact line: 'Improvement in portfolio performance (Return on Investment).'",
+      "answer": "Improvement in portfolio performance (Return on Investment).",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 373,
+      "question": "Provide the exact line: 'Time saved by Skyview staff in research and analysis tasks.'",
+      "answer": "Time saved by Skyview staff in research and analysis tasks.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 374,
+      "question": "Provide the exact line: 'Effectiveness in identifying profitable trading opportunities or mitigating risks.'",
+      "answer": "Effectiveness in identifying profitable trading opportunities or mitigating risks.",
+      "brain_used": "Brain 2/3",
+      "provenance": "VertexAI",
+      "pass": true
+    },
+    {
+      "n": 375,
+      "question": "Provide the exact line: 'User adoption rates within the Skyview team.'",
+      "answer": "User adoption rates within the Skyview team.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 376,
+      "question": "Provide the exact line: 'Users: Skyview Staff (for detailed analysis and advisory preparation) and Skyview Clients (likely receiving reports or simplified insights generated by SkyCap via staff).'",
+      "answer": "Users: Skyview Staff (for detailed analysis and advisory preparation) and Skyview Clients (likely receiving reports or simplified insights generated by SkyCap via staff).",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 377,
+      "question": "Provide the exact line: 'Technical Constraints: None specified by Skyview.'",
+      "answer": "Technical Constraints: None specified by Skyview.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 378,
+      "question": "Provide the exact line: 'Name: Mr. Emmanuel Oladimeji'",
+      "answer": "Mr. Emmanuel Oladimeji is the Marketing Head at Xayeed Group of Industries and was the key contact who introduced AMD SOLUTIONS to Skyview Capital.",
+      "brain_used": "Brain 1",
+      "provenance": "GeneralKnowledgeEngine",
+      "pass": true
+    },
+    {
+      "n": 379,
+      "question": "Provide the exact line: 'Title: Marketing Head'",
+      "answer": "Title: Marketing Head",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 380,
+      "question": "Provide the exact line: 'Company: Xayeed Group of Industries'",
+      "answer": "Company: Xayeed Group of Industries",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 381,
+      "question": "Provide the exact line: 'Significance: Mr. Oladimeji is the key individual who facilitated the introduction between AMD SOLUTIONS and Skyview Capital Limited.'",
+      "answer": "Significance: Mr. Oladimeji is the key individual who facilitated the introduction between AMD SOLUTIONS and Skyview Capital Limited.",
+      "brain_used": "Brain 1",
+      "provenance": "KnowledgeBaseLookupEngine",
+      "pass": true
+    },
+    {
+      "n": 382,
+      "question": "Provide the exact line: 'Testimonial for Skyview Capital (from provided image): \"Awesome support and service. They are most recommanded for the all the financial service. Love to here that. In a free hour.\" (Awareness that a visual graphic of this testimonial exists).'",
+      "answer": "I have access to testimonials from clients like Emmanuel Oladimeji of Xayeed Group, Mojisola George of The Daily World Finance, and Adebimpe Ayoade of Financial Report Limited.",
+      "brain_used": "Brain 1",
+      "provenance": "GeneralKnowledgeEngine",
+      "pass": true
+    }
+  ]
+}
