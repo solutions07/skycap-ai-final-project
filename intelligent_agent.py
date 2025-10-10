@@ -120,6 +120,52 @@ class FinancialDataEngine:
                         self.metrics[(norm_key, date)] = float(value)
                     except (ValueError, TypeError): 
                         continue
+    def _collect_metric_series(self, metric_key: str, start_year: Optional[int] = None, end_year: Optional[int] = None, prefer_annual: bool = False):
+        """Collect one best value per year for a metric, optionally limited to a year range.
+
+        Selection per year prefers: month 12 > 09 > 06 > 03, non-zero over zero, and latest date.
+        If prefer_annual is True, month 12 is strongly preferred when available.
+        Returns list of tuples: (year:int, date:str, value:float), ordered by year ascending.
+        """
+        per_year = {}
+        for (key, date), value in self.metrics.items():
+            if key != metric_key:
+                continue
+            try:
+                if not isinstance(date, str) or len(date) < 7:
+                    continue
+                y = int(date[:4])
+            except Exception:
+                continue
+            if start_year is not None and y < start_year:
+                continue
+            if end_year is not None and y > end_year:
+                continue
+            per_year.setdefault(y, []).append((value, date))
+
+        def month_rank(month: int) -> int:
+            order = {12: 4, 9: 3, 6: 2, 3: 1}
+            return order.get(month, 0)
+
+        series = []
+        for y, cand in per_year.items():
+            scored = []
+            for value, date in cand:
+                try:
+                    m = int(date[5:7])
+                except Exception:
+                    m = 0
+                nz = 1 if (isinstance(value, (int, float)) and float(value) != 0.0) else 0
+                mr = month_rank(m)
+                annual_boost = 1 if (prefer_annual and m == 12) else 0
+                score = (annual_boost, nz, mr, date)
+                scored.append((score, value, date))
+            scored.sort(key=lambda x: x[0], reverse=True)
+            best = scored[0]
+            series.append((y, best[2], best[1]))
+
+        series.sort(key=lambda t: t[0])
+        return series
 
     def search_financial_metric(self, question):
         """Search for financial metrics based on the question."""
@@ -178,222 +224,208 @@ class FinancialDataEngine:
         # Examples: 'profit after tax', 'pat', 'net income', 'opex', 'operating cost'
         
         # Extract year/date from question
-        year_match = re.search(r'(20\d{2})', question)
+        year_match = re.search(r'(19|20)\d{2}', question)
         quarter_match = re.search(r'q([1-4])', q_lower)
-        
+        # Detect if annual report is explicitly requested
+        prefer_annual_flag = bool(re.search(r'\bannual\s+report\b', q_lower))
+
         # Search for matching metrics
         for metric_display_name, patterns in metric_patterns.items():
             for pattern in patterns:
                 if pattern not in re.sub(r'[^a-z0-9]', '', q_lower):
                     continue
 
-                # --- Enhanced Logic for Comparative Queries ---
+                # --- Enhanced Logic for Comparative & Trend Queries ---
                 comparison_keywords = ['compare', 'vs', 'versus', 'between']
-                # Recognize conversational phrasing like: "how did X change from 2021 to 2022"
-                change_from_to = bool(re.search(r'change\s+from\s+20\d{2}\s+to\s+20\d{2}', q_lower))
-                from_to_years = bool(re.search(r'from\s+20\d{2}.*to\s+20\d{2}', q_lower))
+                change_from_to = bool(re.search(r'(how\s+did\s+.*?\s+)?change\s+from\s+(19|20)\d{2}\s+to\s+(19|20)\d{2}', q_lower))
+                from_to_years = bool(re.search(r'from\s+(19|20)\d{2}.*to\s+(19|20)\d{2}', q_lower))
+                trend_keywords = ['trend', 'over time', 'evolution', 'progression', 'history']
+                trend_requested = any(k in q_lower for k in trend_keywords)
                 is_comparison = any(keyword in q_lower for keyword in comparison_keywords) or change_from_to or from_to_years
-                
-                if is_comparison:
-                    # --- START: Comparative Analysis Module (Hardened) ---
+
+                if trend_requested or is_comparison:
+                    # --- START: Comparative/Trend Analysis (Hardened) ---
                     try:
-                        # Extract at least two distinct years for a valid comparison
-                        all_year_matches = re.findall(r'(20\d{2})', question)
+                        all_year_matches = re.findall(r'(19|20)\d{2}', question)
                         unique_years = sorted({int(y) for y in all_year_matches})
-                        if len(unique_years) < 2:
-                            continue  # Not a valid comparison
-
-                        results = []
                         norm_metric_key = re.sub(r'[^a-z0-9]', '', metric_display_name.lower())
+                        start_year = unique_years[0] if len(unique_years) >= 1 else None
+                        end_year = unique_years[-1] if len(unique_years) >= 2 else None
+                        series = self._collect_metric_series(norm_metric_key, start_year, end_year, prefer_annual=prefer_annual_flag)
+                        if series:
+                            msg_parts = []
+                            if is_comparison and len(series) >= 2:
+                                old_y, old_date, old_val = series[0]
+                                new_y, new_date, new_val = series[-1]
+                                try:
+                                    delta = float(new_val) - float(old_val)
+                                except Exception:
+                                    delta = 0.0
+                                if float(old_val) != 0:
+                                    try:
+                                        pct_change = (delta / abs(float(old_val))) * 100.0
+                                    except Exception:
+                                        pct_change = 0.0
+                                    change_str = "an increase" if delta > 0 else ("a decrease" if delta < 0 else "no change")
+                                    msg_parts.append(
+                                        f"Change for {metric_display_name} from {old_y} to {new_y}: "
+                                        f"{_format_metric_value(metric_display_name, old_val)} (as of {old_date}) → "
+                                        f"{_format_metric_value(metric_display_name, new_val)} (as of {new_date}); "
+                                        f"{change_str} of {_format_metric_value(metric_display_name, abs(delta))} ({pct_change:+.2f}%)."
+                                    # --- END: Comparative/Trend Analysis (Hardened) ---
 
-                        # For each requested year, attempt to find a matching metric
-                        for y in unique_years:
+                                # --- Direct (non-trend) metric lookup ---
+                                try:
+                                    norm_metric_key = re.sub(r'[^a-z0-9]', '', metric_display_name.lower())
+                                    # Collect all candidates for the metric
+                                    candidates = [(val, dt) for (k, dt), val in self.metrics.items() if k == norm_metric_key]
+                                    if not candidates:
+                                        continue
+                                    # Sort most recent first by date
+                                    try:
+                                        candidates.sort(key=lambda x: x[1] or '', reverse=True)
+                                    except Exception:
+                                        candidates.sort(key=lambda x: str(x[1]))
+
+                                    # Year/Quarter handling
+                                    target_year = None
+                                    if year_match:
+                                        try:
+                                            if isinstance(year_match, str):
+                                                m = re.search(r'(19|20)\d{2}', year_match)
+                                                target_year = m.group(0) if m else None
+                                            elif hasattr(year_match, 'group'):
+                                                target_year = year_match.group(0)
+                                        except Exception:
+                                            target_year = None
+
+                                    if target_year:
+                                        year_candidates = []
+                                        for val, dt in candidates:
+                                            try:
+                                                if isinstance(dt, str) and dt.startswith(target_year):
+                                                    year_candidates.append((val, dt))
+                                            except Exception:
+                                                continue
+                                        if not year_candidates:
+                                            continue
+                                        # If quarter requested, select that month if present
+                                        q_val = None
+                                        if quarter_match:
+                                            try:
+                                                q_val = quarter_match.group(1) if hasattr(quarter_match, 'group') else None
+                                            except Exception:
+                                                q_val = None
+                                        if q_val:
+                                            quarter_months = {'1': '03', '2': '06', '3': '09', '4': '12'}
+                                            tmonth = quarter_months.get(q_val)
+                                            if tmonth:
+                                                for val, dt in year_candidates:
+                                                    try:
+                                                        if f"-{tmonth}-" in (dt or ''):
+                                                            return (
+                                                                f"{metric_display_name.title()} for {target_year} was "
+                                                                f"{_format_metric_value(metric_display_name, val)} (as of {dt})."
+                                                            )
+                                                    except Exception:
+                                                        continue
+                                        # Otherwise, score within the year (prefer annual month 12, non-zero, then month rank)
+                                        def _month_pref(m: int) -> int:
+                                            order = {12: 4, 9: 3, 6: 2, 3: 1}
+                                            return order.get(m, 0)
+                                        scored = []
+                                        for val, dt in year_candidates:
+                                            try:
+                                                m = int(dt[5:7]) if isinstance(dt, str) and len(dt) >= 7 else 0
+                                            except Exception:
+                                                m = 0
+                                            nz = 1 if (isinstance(val, (int, float)) and float(val) != 0.0) else 0
+                                            annual_boost = 1 if (prefer_annual_flag and m == 12) else 0
+                                            score = (annual_boost, nz, _month_pref(m), dt)
+                                            scored.append((score, val, dt))
+                                        scored.sort(key=lambda x: x[0], reverse=True)
+                                        best = scored[0]
+                                        return (
+                                            f"{metric_display_name.title()} for {target_year} was "
+                                            f"{_format_metric_value(metric_display_name, best[1])} (as of {best[2]})."
+                                        )
+
+                                    # No specific year: return latest
+                                    latest_val, latest_date = candidates[0]
+                                    return (
+                                        f"The latest {metric_display_name} is "
+                                        f"{_format_metric_value(metric_display_name, latest_val)} (as of {latest_date})."
+                                    )
+                                except Exception as e:
+                                    logging.error(f"Direct metric lookup failed: {e}", exc_info=True)
+                                    continue
+                        for val, dt in candidates:
                             try:
-                                match = self._find_best_date_match(norm_metric_key, str(y), None)
-                                if match and isinstance(match[0], (int, float)):
-                                    results.append({'value': float(match[0]), 'date': match[1], 'year': int(y)})
-                                else:
-                                    results.append({'value': None, 'date': None, 'year': int(y)})
-                            except Exception as e:
-                                logging.error(f"Error locating data for year {y}: {e}")
-                                results.append({'value': None, 'date': None, 'year': int(y)})
-
-                        # Discard years with no available value
-                        valid_results = [r for r in results if isinstance(r.get('value'), (int, float))]
-                        if len(valid_results) < 2:
-                            return "Insufficient data found for a comparative trend between the requested years."
-
-                        # Sort chronologically and compute change
-                        valid_results.sort(key=lambda x: x.get('year', 0))
-                        old, new = valid_results[0], valid_results[-1]
-
-                        old_val = float(old.get('value', 0))
-                        new_val = float(new.get('value', 0))
-                        old_date = old.get('date') or 'N/A'
-                        new_date = new.get('date') or 'N/A'
-
-                        delta = new_val - old_val
-                        if old_val != 0:
-                            try:
-                                pct_change = (delta / abs(old_val)) * 100.0
+                                if isinstance(dt, str) and dt.startswith(target_year):
+                                    year_candidates.append((val, dt))
                             except Exception:
-                                pct_change = 0.0
-                            change_str = "an increase" if delta > 0 else ("a decrease" if delta < 0 else "no change")
-                            return (
-                                f"Comparing {metric_display_name} between {old['year']} and {new['year']}: "
-                                f"The value changed from {_format_metric_value(metric_display_name, old_val)} (as of {old_date}) "
-                                f"to {_format_metric_value(metric_display_name, new_val)} (as of {new_date}). "
-                                f"This represents {change_str} of {_format_metric_value(metric_display_name, abs(delta))} ({pct_change:+.2f}%)."
-                            )
-                        else:
-                            return (
-                                f"Comparing {metric_display_name} from {old['year']} to {new['year']}: "
-                                f"The value went from ₦0 (as of {old_date}) to {_format_metric_value(metric_display_name, new_val)} (as of {new_date})."
-                            )
-                    except Exception as e:
-                        logging.error(f"Unhandled error in comparative analysis: {e}", exc_info=True)
-                        return "Unable to complete the comparison due to inconsistent data. Please refine the years or metric and try again."
-                    # --- END: Comparative Analysis Module (Hardened) ---
-
-                # --- Original Logic for Single Metric Queries ---
-                norm_metric_key_for_index = re.sub(r'[^a-z0-9]', '', metric_display_name.lower())
-                best_match = self._find_best_date_match(norm_metric_key_for_index, year_match, quarter_match)
-                if best_match:
-                    metric_value, date = best_match
-                    # Filter out placeholder zero values for major currency-like metrics
-                    if metric_display_name in {self.METRIC_TOTAL_ASSETS, self.METRIC_PROFIT_BEFORE_TAX, self.METRIC_GROSS_EARNINGS}:
-                        try:
-                            if float(metric_value) == 0.0:
-                                return f"No reported value for {metric_display_name} for Jaiz Bank as of {date}."
-                        except Exception:
-                            pass
-                    formatted_value = _format_metric_value(metric_display_name, metric_value)
-                    return f"The {metric_display_name} for Jaiz Bank as of {date} was {formatted_value}."
-        
-        # Fallback: try arbitrary metric phrase from the question and direct key match
-        try:
-            m = re.search(r"what\s+was\s+the\s+(.+?)\s+for\s+jaiz\s+bank\s+in\s+(20\d{2})", q_lower)
-            if m:
-                metric_phrase = m.group(1).strip()
-                year = m.group(2)
-                norm_metric = re.sub(r'[^a-z0-9]', '', metric_phrase)
-                match = self._find_best_date_match(norm_metric, year, None)
-                if match:
-                    value, date = match
-                    # For currency-like majors, filter zeros
-                    majors = {'total assets', 'profit before tax', 'gross earnings'}
-                    if metric_phrase.lower() in majors:
-                        try:
-                            if float(value) == 0.0:
-                                return f"No reported value for {metric_phrase} for Jaiz Bank as of {date}."
-                        except Exception:
-                            pass
-                    formatted = _format_metric_value(metric_phrase, value)
-                    return f"The {metric_phrase} for Jaiz Bank as of {date} was {formatted}."
-        except Exception:
-            pass
-
-        return None
-
-    def _find_best_date_match(self, metric_key, year_match, quarter_match):
-        """Find the best matching date for a given metric.
-
-        Accepts a year as a regex match object OR a plain string (e.g., '2023').
-        Quarter can be a match object or a string like 'Q1'/'1'.
-        Returns (value, date) tuple or None.
-        """
-        candidates = []
-
-        for (key, date), value in self.metrics.items():
-            if key == metric_key:
-                candidates.append((value, date))
-
-        if not candidates:
-            return None
-
-        # Sort by date (most recent first)
-        try:
-            candidates.sort(key=lambda x: x[1] or '', reverse=True)
-        except Exception:
-            # If any date is malformed, fall back to simple sort without reverse to avoid crash
-            candidates.sort(key=lambda x: str(x[1]))
-
-        # Helper to extract a 4-digit year
-        def _extract_year(y):
-            if not y:
-                return None
-            try:
-                # Handle if y is already a 4-digit string
-                if isinstance(y, str) and re.fullmatch(r'(19|20)\d{2}', y):
-                    return y
-
-                if isinstance(y, str):
-                    m = re.search(r'(19|20)\d{2}', y)
-                    return m.group(0) if m else None
-                if hasattr(y, 'group'):
-                    try:
-                        gy = y.group(1)
-                    except IndexError:
-                        gy = y.group(0)
-                    m = re.search(r'(19|20)\d{2}', gy)
-                    return m.group(0) if m else None
-            except Exception:
-                return None
-            return None
-
-        target_year = _extract_year(year_match)
-
-        # If specific year/quarter requested, try to match
-        if target_year:
-            year_candidates = []
-            # Strict filtering for the requested year
-            for value, date in candidates:
-                try:
-                    if isinstance(date, str) and date.startswith(target_year):
-                        year_candidates.append((value, date))
-                except Exception:
-                    continue
-
-            if not year_candidates:
-                # FIX 2: If no exact match, do not return None immediately.
-                # Allow fallback to latest available record if no strict year match is found.
-                # This handles cases where a year is mentioned but no data exists for it.
-                pass
-
-            # Extract quarter safely if provided
-            q_val = None
-            if quarter_match:
-                try:
-                    if isinstance(quarter_match, str):
-                        m = re.search(r'([1-4])', quarter_match)
-                        q_val = m.group(1) if m else None
-                    elif hasattr(quarter_match, 'group'):
-                        try:
-                            q_val = quarter_match.group(1)
-                        except IndexError:
-                            q_val = None
-                except Exception:
-                    q_val = None
-
-            if q_val:
-                quarter_months = {'1': '03', '2': '06', '3': '09', '4': '12'}
-                target_month = quarter_months.get(q_val)
-                if target_month:
-                    for value, date in year_candidates:
-                        try:
-                            if f"-{target_month}-" in (date or ''):
-                                return (value, date)
-                        except Exception:
+                                continue
+                        if not year_candidates:
                             continue
+                        # If quarter requested, select that month if present
+                        q_val = None
+                        if quarter_match:
+                            try:
+                                q_val = quarter_match.group(1) if hasattr(quarter_match, 'group') else None
+                            except Exception:
+                                q_val = None
+                        if q_val:
+                            quarter_months = {'1': '03', '2': '06', '3': '09', '4': '12'}
+                            tmonth = quarter_months.get(q_val)
+                            if tmonth:
+                                for val, dt in year_candidates:
+                                    try:
+                                        if f"-{tmonth}-" in (dt or ''):
+                                            return (
+                                                f"{metric_display_name.title()} for {target_year} was "
+                                                f"{_format_metric_value(metric_display_name, val)} (as of {dt})."
+                                            )
+                                    except Exception:
+                                        continue
+                        # Otherwise, score within the year (prefer annual month 12, non-zero, then month rank)
+                        def _month_pref(m: int) -> int:
+                            order = {12: 4, 9: 3, 6: 2, 3: 1}
+                            return order.get(m, 0)
+                        scored = []
+                        for val, dt in year_candidates:
+                            try:
+                                m = int(dt[5:7]) if isinstance(dt, str) and len(dt) >= 7 else 0
+                            except Exception:
+                                m = 0
+                            nz = 1 if (isinstance(val, (int, float)) and float(val) != 0.0) else 0
+                            annual_boost = 1 if (prefer_annual_flag and m == 12) else 0
+                            score = (annual_boost, nz, _month_pref(m), dt)
+                            scored.append((score, val, dt))
+                        scored.sort(key=lambda x: x[0], reverse=True)
+                        best = scored[0]
+                        return (
+                            f"{metric_display_name.title()} for {target_year} was "
+                            f"{_format_metric_value(metric_display_name, best[1])} (as of {best[2]})."
+                        )
 
-            # If no quarter match or no quarter requested, return the latest entry for that year
-            # FIX 2: Prioritize non-zero values if available for the year.
-            if year_candidates:
-                non_zero_candidates = [yc for yc in year_candidates if yc[0] != 0.0]
-                return non_zero_candidates[0] if non_zero_candidates else year_candidates[0]
-
-        # If no year is specified, do not guess. Return the latest available record.
-        return candidates[0] if candidates else None
+                    # No specific year: return latest
+                    latest_val, latest_date = candidates[0]
+                    return (
+                        f"The latest {metric_display_name} is "
+                        f"{_format_metric_value(metric_display_name, latest_val)} (as of {latest_date})."
+                    )
+                except Exception as e:
+                    logging.error(f"Direct metric lookup failed: {e}", exc_info=True)
+                    continue
+                    # No specific year: return latest
+                    latest_val, latest_date = candidates[0]
+                    return (
+                        f"The latest {metric_display_name} is "
+                        f"{_format_metric_value(metric_display_name, latest_val)} (as of {latest_date})."
+                    )
+                except Exception as e:
+                    logging.error(f"Direct metric lookup failed: {e}", exc_info=True)
+                    continue
 
     def _compute_pe_records(self):
         """Compute P/E ratios by aligning EPS from reports with nearest market closing price.
@@ -464,8 +496,6 @@ class PersonnelDataEngine:
 
         # Search for a specific person or role
         for member_details in self.team_members:
-            # Check if a name or role from the KB is in the question
-            # Example: "Olufemi Adesiyan (Managing Director): ..."
             name_match = re.match(r'([^()]+)', member_details)
             role_match = re.search(r'\((.*?)\)', member_details)
             name = name_match.group(1).strip() if name_match else ''
@@ -621,9 +651,10 @@ class CompanyProfileEngine:
                 "are centered around the public equity markets."
             )
         # FIX 3: Add keywords for news sources
-        news_source_phrases = [
-            'news sources', 'what news sources', 'where do you get news'
-        ]
+    news_source_phrases = [
+        'news source', 'news sources', 'what news sources', 'where do you get news',
+        'news feeds', 'sources of news', 'which news', 'market news sources', 'news providers'
+    ]
         if any(p in ql for p in explicit_services_phrases) and not any(
             x in ql for x in ['zero-trust', 'policy', 'principles']
         ) and 'financial services firm' not in ql:
@@ -636,12 +667,21 @@ class CompanyProfileEngine:
             return synthesis
             # --- END: Professional Synthesis Module ---
         if any(p in ql for p in news_source_phrases):
-            # This information is in the 'skycap ai project' section of the KB.
+            # Search across SkyCap AI project and any profile line containing 'news'
+            candidates = []
             project_info = self.profile_data.get('skycap ai project', [])
             for item in project_info:
-                if 'news sources' in item.lower():
-                    return item
-            return "The SkyCap AI project is designed to integrate with various news sources for real-time trend prediction, although specific sources are not listed."
+                if isinstance(item, str) and 'news' in item.lower():
+                    candidates.append(item)
+            for v in self.profile_data.values():
+                if isinstance(v, list):
+                    for line in v:
+                        if isinstance(line, str) and 'news' in line.lower():
+                            candidates.append(line)
+            if candidates:
+                candidates.sort(key=lambda s: len(s), reverse=True)
+                return candidates[0]
+            return "SkyCap AI integrates with market news to support real-time insights; specific news sources are noted in the internal project notes."
         # V1.2: Client types
         if any(k in ql for k in ['client types', 'types of clients', 'what types of clients', 'clients does skyview capital serve', 'clientele']):
             # Search text lines for 'Clientele:'
@@ -734,10 +774,9 @@ class GeneralKnowledgeEngine:
             return "AMD ASCEND Solutions"
         if 'who are you' in q_lower or 'what are you' in q_lower or 'your purpose' in q_lower:
             return "I am SkyCap AI, an intelligent financial assistant. I was developed by AMD ASCEND Solutions to provide high-speed financial and market analysis for Skyview Capital Limited."
-        # FIX 3: Strengthen testimonial matching
-        if 'testimonial' in q_lower:
-            if self.testimonials:
-                return "I have access to testimonials from clients like Emmanuel Oladimeji of Xayeed Group, Mojisola George of The Daily World Finance, and Adebimpe Ayoade of Financial Report Limited."
+        # FIX 2: Strengthen testimonial matching and ensure data exists before answering.
+        if 'testimonial' in q_lower and self.testimonials:
+            return "I have access to testimonials from clients like Emmanuel Oladimeji of Xayeed Group, Mojisola George of The Daily World Finance, and Adebimpe Ayoade of Financial Report Limited."
         if 'skycap ai project' in q_lower:
             return "The SkyCap AI project is designed to enhance client advisory services by providing faster insights and real-time trend predictions for NGX-listed stocks."
         # FIX 3: Strengthen key contact matching
