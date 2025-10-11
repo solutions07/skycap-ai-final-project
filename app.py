@@ -90,45 +90,48 @@ try:
     logging.info(f"Attempting to load knowledge base from: {KNOWLEDGE_BASE_PATH}")
     # Optionally download precomputed semantic index from GCS (Option B)
     maybe_download_semantic_index()
-    # If a semantic index exists but lacks embeddings, compute them now (one-time repair)
-    try:
-        from search_index import SemanticSearcher  # local import
-        import json as _json  # avoid clobber
-        import pickle as _pickle
-        searcher = SemanticSearcher()
-        if searcher.documents and searcher.embeddings is None and searcher.model is not None:
-            logging.info("Semantic index found without embeddings; computing embeddings now (one-time repair)...")
-            texts = [d.get("text", "") for d in searcher.documents]
-            vecs = searcher.model.encode(
-                texts,
-                batch_size=64,
-                show_progress_bar=False,
-                convert_to_numpy=True,
-                normalize_embeddings=True,
-            )
-            payload = {
-                "model": searcher.model_name,
-                "documents": searcher.documents,
-                "embeddings": vecs.tolist(),
-            }
-            idx_path = os.path.join("/tmp", "semantic_index.pkl")
-            try:
-                if str(idx_path).endswith(".json"):
-                    with open(idx_path, "w", encoding="utf-8") as f:
-                        _json.dump(payload, f, ensure_ascii=False)
-                else:
-                    with open(idx_path, "wb") as f:
-                        _pickle.dump(payload, f)
-                logging.info("Semantic index repaired successfully at %s", idx_path)
-            except Exception as _e:
-                logging.warning("Failed to save repaired semantic index (%s). Continuing without persisting.", _e)
-            # Even if saving failed, keep an in-memory embeddings for this process
-            try:
-                searcher.embeddings = vecs  # type: ignore[attr-defined]
-            except Exception:
-                pass
-    except Exception as _e:  # pragma: no cover - best-effort repair
-        logging.warning("Semantic index repair skipped (%s)", _e)
+    # If a semantic index exists but lacks embeddings, compute them now (one-time repair).
+    # Disabled by default in Cloud Run to ensure fast, reliable startup. Enable by setting
+    # ENABLE_SEMANTIC_REPAIR=1 if you explicitly want this at runtime.
+    if os.environ.get("ENABLE_SEMANTIC_REPAIR", "0") == "1":
+        try:
+            from search_index import SemanticSearcher  # local import
+            import json as _json  # avoid clobber
+            import pickle as _pickle
+            searcher = SemanticSearcher()
+            if searcher.documents and searcher.embeddings is None and searcher.model is not None:
+                logging.info("Semantic index found without embeddings; computing embeddings now (one-time repair)...")
+                texts = [d.get("text", "") for d in searcher.documents]
+                vecs = searcher.model.encode(
+                    texts,
+                    batch_size=64,
+                    show_progress_bar=False,
+                    convert_to_numpy=True,
+                    normalize_embeddings=True,
+                )
+                payload = {
+                    "model": searcher.model_name,
+                    "documents": searcher.documents,
+                    "embeddings": vecs.tolist(),
+                }
+                idx_path = os.path.join("/tmp", "semantic_index.pkl")
+                try:
+                    if str(idx_path).endswith(".json"):
+                        with open(idx_path, "w", encoding="utf-8") as f:
+                            _json.dump(payload, f, ensure_ascii=False)
+                    else:
+                        with open(idx_path, "wb") as f:
+                            _pickle.dump(payload, f)
+                    logging.info("Semantic index repaired successfully at %s", idx_path)
+                except Exception as _e:
+                    logging.warning("Failed to save repaired semantic index (%s). Continuing without persisting.", _e)
+                # Even if saving failed, keep an in-memory embeddings for this process
+                try:
+                    searcher.embeddings = vecs  # type: ignore[attr-defined]
+                except Exception:
+                    pass
+        except Exception as _e:  # pragma: no cover - best-effort repair
+            logging.warning("Semantic index repair skipped (%s)", _e)
     agent = IntelligentAgent(kb_path=KNOWLEDGE_BASE_PATH) 
     logging.info("=== SkyCap AI Server Initialization Successful ===")
 except Exception as e:
