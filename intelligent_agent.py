@@ -224,10 +224,11 @@ class FinancialDataEngine:
         # Examples: 'profit after tax', 'pat', 'net income', 'opex', 'operating cost'
         
         # Extract year/date from question
-        year_match = re.search(r'(19|20)\d{2}', question)
+        # Robust year extraction: non-capturing group, avoid partial group-only matches
+        year_match = re.search(r'(?<!\d)(?:19|20)\d{2}(?!\d)', question)
         quarter_match = re.search(r'q([1-4])', q_lower)
-        # Detect if annual report is explicitly requested
-        prefer_annual_flag = bool(re.search(r'\bannual\s+report\b', q_lower))
+        # Detect if annual report is explicitly requested (annual report / year-end)
+        prefer_annual_flag = bool(re.search(r'\b(annual\s+report|year[-\s]?end)\b', q_lower))
 
         # Search for matching metrics
         for metric_display_name, patterns in metric_patterns.items():
@@ -248,7 +249,8 @@ class FinancialDataEngine:
                 if trend_requested or is_comparison:
                     # --- START: Comparative/Trend Analysis (Hardened) ---
                     try:
-                        all_year_matches = re.findall(r'(19|20)\d{2}', question)
+                        # Non-capturing to get full years
+                        all_year_matches = re.findall(r'(?<!\d)(?:19|20)\d{2}(?!\d)', question)
                         unique_years = sorted({int(y) for y in all_year_matches})
                         start_year = unique_years[0] if len(unique_years) >= 1 else None
                         end_year = unique_years[-1] if len(unique_years) >= 2 else None
