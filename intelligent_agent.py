@@ -238,11 +238,15 @@ class FinancialDataEngine:
 
                 # --- Enhanced Logic for Comparative & Trend Queries ---
                 comparison_keywords = ['compare', 'vs', 'versus', 'between']
-                change_from_to = bool(re.search(r'(how\s+did\s+.*?\s+)?change\s+from\s+(19|20)\d{2}\s+to\s+(19|20)\d{2}', q_lower))
-                from_to_years = bool(re.search(r'from\s+(19|20)\d{2}.*to\s+(19|20)\d{2}', q_lower))
+                # Allow words between 'from' and years, and between 'to' and years
+                change_from_to = bool(re.search(r'(?:how\s+did\s+.*?\s+)?change\s+from.*?(?:19|20)\d{2}.*?to.*?(?:19|20)\d{2}', q_lower))
+                from_to_years = bool(re.search(r'from.*?(?:19|20)\d{2}.*?to.*?(?:19|20)\d{2}', q_lower))
                 trend_keywords = ['trend', 'over time', 'evolution', 'progression', 'history']
                 trend_requested = any(k in q_lower for k in trend_keywords)
-                is_comparison = any(keyword in q_lower for keyword in comparison_keywords) or change_from_to or from_to_years
+                # Additional guard: if we see two distinct years and 'change' or comparison words, treat as comparison
+                detected_years = re.findall(r'(?<!\d)(?:19|20)\d{2}(?!\d)', q_lower)
+                two_years_with_change = (len({*detected_years}) >= 2) and (change_from_to or any(k in q_lower for k in ['change'] + comparison_keywords))
+                is_comparison = any(keyword in q_lower for keyword in comparison_keywords) or change_from_to or from_to_years or two_years_with_change
 
                 norm_metric_key = re.sub(r'[^a-z0-9]', '', metric_display_name.lower())
 
