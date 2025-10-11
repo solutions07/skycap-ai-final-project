@@ -54,3 +54,28 @@ print(f"Summary: total={total} passed={passed} failed={failed} skipped={skipped}
 if isinstance(failed, int) and failed > 0:
     sys.exit(1)
 PY
+
+      - name: Slack alert on failures
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "SLACK_WEBHOOK_URL secret not set; skipping Slack alert."
+            exit 0
+          fi
+          python3 - << 'PY'
+import json, os
+with open('live_gauntlet_report.json','r', encoding='utf-8') as f:
+    data = json.load(f)
+s = data.get('summary', {})
+msg = (
+    f"Live Gauntlet FAILED for {os.environ.get('GITHUB_REPOSITORY')}@{os.environ.get('GITHUB_REF')}: "
+    f"total={s.get('total')} passed={s.get('passed')} failed={s.get('failed')} skipped={s.get('skipped')}\n"
+    f"Run: {os.environ.get('GITHUB_SERVER_URL')}/{os.environ.get('GITHUB_REPOSITORY')}/actions/runs/{os.environ.get('GITHUB_RUN_ID')}"
+)
+with open('slack_payload.json','w', encoding='utf-8') as f:
+    json.dump({'text': msg}, f)
+print(msg)
+PY
+          curl -X POST -H 'Content-type: application/json' --data @slack_payload.json "$SLACK_WEBHOOK_URL" || true
