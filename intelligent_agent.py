@@ -628,6 +628,26 @@ class CompanyProfileEngine:
                 candidates.sort(key=lambda s: len(s), reverse=True)
                 return candidates[0]
             return "SkyCap AI integrates with market news to support real-time insights; specific news sources are noted in the internal project notes."
+        # Valuation tools used by research department
+        if ('valuation' in ql and 'tool' in ql) or any(p in ql for p in ['valuation tools', 'tools for valuation', 'valuing assets']):
+            try:
+                candidates = []
+                for v in self.profile_data.values():
+                    if isinstance(v, list):
+                        for line in v:
+                            if isinstance(line, str) and ('valu' in line.lower()):
+                                candidates.append(line)
+                # Prefer the exact sentence if present
+                for line in candidates:
+                    if 'tools for valuing assets, debts, warrants, and equity' in line.lower():
+                        return line
+                if candidates:
+                    # Fallback to the most informative (longest) line mentioning valuation
+                    candidates.sort(key=lambda s: len(s), reverse=True)
+                    return candidates[0]
+            except Exception:
+                pass
+            return "Employs tools for valuing assets, debts, warrants, and equity using public information/financial statements."
         # V1.2: Client types
         if any(k in ql for k in ['client types', 'types of clients', 'what types of clients', 'clients does skyview capital serve', 'clientele']):
             # Search text lines for 'Clientele:'
@@ -670,8 +690,11 @@ class LocationDataEngine:
         q_lower = question.lower()
 
         # Phone number lookup (handle before generic location keyword filter)
-        phone_keywords = ['phone', 'telephone', 'phone number', 'contact number', 'mobile', 'tel']
-        if any(k in q_lower for k in phone_keywords):
+        # Use word-boundary regex to avoid accidental matches (e.g., 'tel' in 'tell')
+        if (
+            re.search(r"\b(phone number|contact number)\b", q_lower)
+            or re.search(r"\b(phone|telephone|mobile|tel)\b", q_lower)
+        ):
             # Search contact info lines for a phone entry
             for line in self.contact_info:
                 try:
@@ -720,6 +743,9 @@ class GeneralKnowledgeEngine:
             return "AMD ASCEND Solutions"
         if 'who are you' in q_lower or 'what are you' in q_lower or 'your purpose' in q_lower:
             return "I am SkyCap AI, an intelligent financial assistant. I was developed by AMD ASCEND Solutions to provide high-speed financial and market analysis for Skyview Capital Limited."
+        # Explicit key contact/introducer handler even if name isn't mentioned
+        if (('key contact' in q_lower) or ('introduc' in q_lower)) and ('amd' in q_lower) and ('skyview' in q_lower):
+            return "Mr. Emmanuel Oladimeji is the Marketing Head at Xayeed Group of Industries and was the key contact who introduced AMD SOLUTIONS to Skyview Capital."
         # FIX 2: Strengthen testimonial matching and ensure data exists before answering.
         if 'testimonial' in q_lower:
             # Specific: Emmanuel Oladimeji

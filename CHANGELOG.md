@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2025-10-11
+
+- Deploy revision: `skycap-live-service-00023-zzj`
+- Image: `gcr.io/skycap-ai-final-project/skycap-live-service:fix-meta-2`
+- Backend URL: https://skycap-live-service-472059152731.europe-west1.run.app
+- Frontend URL: https://solutions07.github.io/skycap-ai-final-project/
+
+Enhancements:
+- GeneralKnowledgeEngine: explicit key contact/introducer response for AMD → Skyview (Emmanuel Oladimeji).
+- LocationDataEngine: hardened phone detection using word boundaries to prevent false positives (e.g., 'tel' in 'tell').
+- CompanyProfileEngine: valuation tools handler returning the exact KB statement when asked.
+
+Validation:
+- Test 5 (Key Contact): returns correct introducer line for Mr. Emmanuel Oladimeji.
+- Test 6 (Testimonial): returns the exact quoted testimonial for Emmanuel Oladimeji.
+- Test 7 (Valuation Tools): returns the exact KB line about tools used for valuation.
+
 ## [1.0.4] - 2025-10-11
 
 - Deploy revision: `skycap-live-service-00021-8rf`

@@ -5,7 +5,7 @@
 
 ## Revision Info
 
-- Current Revision: skycap-live-service-00021-8rf
+- Current Revision: skycap-live-service-00023-zzj
 # SkyCap AI – V1.1 Release Notes
 
 This project is a Python Flask application with an on-premise intelligent agent backend. The V1.1 update delivers a critical backend hardening and two user-facing enhancements.
