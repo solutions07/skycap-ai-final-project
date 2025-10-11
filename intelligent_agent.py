@@ -341,6 +341,9 @@ class FinancialDataEngine:
                                     except Exception:
                                         continue
                         # Otherwise, score within the year (prefer annual month 12, non-zero, then month rank)
+                        # EPS special-case: always prefer year-end (Dec) snapshot when a year is specified
+                        norm_eps_key = re.sub(r'[^a-z0-9]', '', self.METRIC_EARNINGS_PER_SHARE)
+                        eps_always_annual = (norm_metric_key == norm_eps_key)
                         def _month_pref(m: int) -> int:
                             order = {12: 4, 9: 3, 6: 2, 3: 1}
                             return order.get(m, 0)
@@ -351,7 +354,7 @@ class FinancialDataEngine:
                             except Exception:
                                 m = 0
                             nz = 1 if (isinstance(val, (int, float)) and float(val) != 0.0) else 0
-                            annual_boost = 1 if (prefer_annual_flag and m == 12) else 0
+                            annual_boost = 1 if ((prefer_annual_flag or eps_always_annual) and m == 12) else 0
                             score = (annual_boost, nz, _month_pref(m), dt)
                             scored.append((score, val, dt))
                         scored.sort(key=lambda x: x[0], reverse=True)
@@ -1116,6 +1119,19 @@ class IntelligentAgent:
                 'provenance': 'Input Validation'
             }
 
+        # SPECIAL ROUTE: Structured KB exact lookup should take precedence to avoid accidental matches
+        try:
+            exact_line = self.kb_lookup_engine.search_exact_line(question)
+            if exact_line:
+                return {
+                    'answer': exact_line,
+                    'brain_used': 'Brain 1',
+                    'provenance': 'KnowledgeBaseLookupEngine'
+                }
+        except Exception:
+            # non-fatal; continue with normal chain
+            pass
+
         # Relevance Gate: if clearly non-local, skip local engines entirely
         try:
             if self._is_clearly_non_local(question):
@@ -1217,15 +1233,6 @@ class IntelligentAgent:
                 'provenance': 'GeneralKnowledgeEngine'
             }
 
-        # Structured KB exact lookup (for validation gauntlet)
-        exact_line = self.kb_lookup_engine.search_exact_line(question)
-        if exact_line:
-            return {
-                'answer': exact_line,
-                'brain_used': 'Brain 1',
-                'provenance': 'KnowledgeBaseLookupEngine'
-            }
-        
         # Chain of Command stage 2: try semantic search (local)
         # --- FIX 3: Semantic Fallback Engine Disabled ---
 
