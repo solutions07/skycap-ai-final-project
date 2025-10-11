@@ -1,0 +1,56 @@
+name: Live Gauntlet (Scheduled)
+
+on:
+  schedule:
+    - cron: '17 2 * * *'  # daily at 02:17 UTC
+  workflow_dispatch: {}
+
+jobs:
+  run-live-gauntlet:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies (minimal)
+        run: |
+          python -m pip install --upgrade pip
+          # Only runtime deps needed by run_live_gauntlet.py and intelligent_agent helpers
+          pip install -r requirements.txt
+
+      - name: Run live gauntlet
+        id: run
+        run: |
+          python3 run_live_gauntlet.py > live_gauntlet_report.json
+          echo "report_path=live_gauntlet_report.json" >> $GITHUB_OUTPUT
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-gauntlet-report
+          path: live_gauntlet_report.json
+
+      - name: Evaluate results
+        run: |
+          python3 - << 'PY'
+import json, sys
+with open('live_gauntlet_report.json','r', encoding='utf-8') as f:
+    data = json.load(f)
+sumry = data.get('summary', {})
+total = sumry.get('total')
+passed = sumry.get('passed')
+failed = sumry.get('failed')
+skipped = sumry.get('skipped')
+print(f"Summary: total={total} passed={passed} failed={failed} skipped={skipped}")
+if isinstance(failed, int) and failed > 0:
+    sys.exit(1)
+PY

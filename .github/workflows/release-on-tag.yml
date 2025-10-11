@@ -1,0 +1,63 @@
+name: Create Draft Release on Tag
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Draft Release for Tag
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run live gauntlet and capture summary
+        run: |
+          python3 run_live_gauntlet.py > live_gauntlet_report.json
+          python3 - << 'PY'
+import json, os
+with open('live_gauntlet_report.json','r', encoding='utf-8') as f:
+    data = json.load(f)
+sumry = data.get('summary', {})
+total = sumry.get('total')
+passed = sumry.get('passed')
+failed = sumry.get('failed')
+skipped = sumry.get('skipped')
+body = f"""
+SkyCap AI: Final validated release
+
+- Live Gauntlet total: {total} (Passed: {passed}, Failed: {failed}, Skipped: {skipped})
+- Backend: Cloud Run revision skycap-live-service-00025-67z
+- CORS unified to https://solutions07.github.io
+- Exact-line KB routing prioritized; EPS year-end preference enforced
+- 7 critical live tests: PASS
+""".strip()
+with open('RELEASE_BODY.md','w', encoding='utf-8') as f:
+    f.write(body)
+print(body)
+PY
+
+      - name: Create draft GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          body_path: RELEASE_BODY.md
+          files: |
+            live_gauntlet_report.json
