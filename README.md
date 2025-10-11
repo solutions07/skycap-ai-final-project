@@ -1,3 +1,11 @@
+## Deployment Information
+
+- Backend URL: https://skycap-live-service-472059152731.europe-west1.run.app
+- Frontend URL: https://solutions07.github.io/skycap-ai-final-project/
+
+## Revision Info
+
+- Current Revision: skycap-live-service-00021-8rf
 # SkyCap AI – V1.1 Release Notes
 
 This project is a Python Flask application with an on-premise intelligent agent backend. The V1.1 update delivers a critical backend hardening and two user-facing enhancements.

@@ -1,5 +1,37 @@
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
+## [1.0.4] - 2025-10-11
+
+- Deploy revision: `skycap-live-service-00021-8rf`
+- Image: `gcr.io/skycap-ai-final-project/skycap-live-service:feat-oladimeji-1`
+- Backend URL: https://skycap-live-service-472059152731.europe-west1.run.app
+- Frontend URL: https://solutions07.github.io/skycap-ai-final-project/
+
+Enhancements:
+- GeneralKnowledgeEngine: precise testimonial handling for Emmanuel Oladimeji, returns the exact quoted line from KB.
+- Financial comparative/trend logic hardening already live; preserved.
+- Unified CORS policy verified for origin https://solutions07.github.io.
+
+Validation:
+- OPTIONS /ask preflight: 204 with ACAO header set to GitHub Pages origin.
+- POST /ask with query "Share a testimonial from Emmanuel Oladimeji" returns the exact quote.
+
+## [1.0.3] - 2025-10-11
+- Comparative/trend year parsing fixes; year-end preference respected.
+- Redeployed with successful validation.
+
+## [1.0.2] - 2025-10-11
+- Fix SyntaxError in intelligent_agent.py causing 503s.
+- Health restored; CORS verified.
+
+## [1.0.1] - 2025-10-10
+- Unified CORS configuration in app.py; frontend wired to Cloud Run.
+
+## [1.0.0] - 2025-10-10
+- Initial hardened release with full Validation Gauntlet pass.# Changelog
+
 All notable changes for the final SkyCap AI deployment.
 
 ## v1.3.0 – 2025-10-07
