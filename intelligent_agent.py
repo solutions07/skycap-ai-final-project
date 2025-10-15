@@ -107,6 +107,95 @@ class FinancialDataEngine:
             self.max_pe_allowed = 150.0
         self._build_index()
 
+    def _interpret_financial_value(self, metric: str, value: float, report_metadata: dict) -> dict:
+        """Analyze if a financial value needs contextual explanation"""
+        
+        context_flags = []
+        confidence_level = "high"
+        
+        # Zero-value analysis with business context
+        if value == 0.0:
+            file_name = report_metadata.get('file_name', '')
+            report_date = report_metadata.get('report_date', '')
+            
+            # Check if this is quarterly vs annual (quarters might legitimately be zero)
+            # Be more precise: Q1-Q3 are interim, Q4/Quarter 4 and annual keywords indicate year-end
+            is_interim_quarter = any(q in file_name.lower() for q in ['quarter_1', 'quarter_2', 'quarter_3', 'q1', 'q2', 'q3'])
+            is_annual = any(a in file_name.lower() for a in ['annual', 'year_end', 'year-end', 'quarter_4', 'quarter_5']) or report_date.endswith('-12-31')
+            
+            if metric.lower() == 'earnings per share' and (is_annual or not is_interim_quarter):
+                context_flags.append("annual_eps_zero")
+                confidence_level = "medium"
+            
+            if metric.lower() == 'profit before tax' and value == 0.0:
+                context_flags.append("zero_profit_flagged")
+        
+        return {
+            "raw_value": value,
+            "confidence": confidence_level,
+            "context_flags": context_flags,
+            "needs_qualification": len(context_flags) > 0
+        }
+
+    def _validate_data_quality(self, reports: list) -> dict:
+        """Generate data quality insights for business review"""
+        
+        quality_report = {
+            "suspicious_zeros": [],
+            "missing_metrics": [],
+            "data_consistency_issues": []
+        }
+        
+        for report in reports:
+            meta = report.get('report_metadata', {})
+            metrics = meta.get('metrics', {})
+            file_name = meta.get('file_name', '')
+            report_date = meta.get('report_date', '')
+            
+            # Flag suspicious patterns - improved annual detection
+            is_annual_report = (any(a in file_name.lower() for a in ['annual', 'year_end', 'year-end', 'quarter_4', 'quarter_5']) 
+                              or (report_date and report_date.endswith('-12-31')))
+            if metrics.get('earnings per share') == 0.0 and is_annual_report:
+                quality_report["suspicious_zeros"].append({
+                    "metric": "earnings per share",
+                    "file": file_name,
+                    "date": report_date,
+                    "reason": "Annual EPS of zero unusual for operating bank"
+                })
+                
+            # Check for missing critical metrics in annual reports
+            if is_annual_report:
+                critical_metrics = ['total assets', 'profit before tax', 'earnings per share']
+                for metric in critical_metrics:
+                    if metric not in metrics or metrics[metric] is None:
+                        quality_report["missing_metrics"].append({
+                            "metric": metric,
+                            "file": file_name,
+                            "date": report_date
+                        })
+        
+        return quality_report
+
+    def _format_contextual_response(self, metric: str, analysis: dict, report_date: str) -> str:
+        """Generate professional response with appropriate context"""
+        
+        raw_value = analysis["raw_value"]
+        
+        if analysis["needs_qualification"]:
+            if "annual_eps_zero" in analysis["context_flags"]:
+                return (f"{metric.title()} for {report_date[:4]} shows {raw_value} in our records. "
+                       f"This may indicate no earnings distribution or require verification "
+                       f"against the source financial statement (as of {report_date}).")
+            
+            if raw_value == 0.0:
+                return (f"{metric.title()} for {report_date[:4]} was {raw_value} according to "
+                       f"available data (as of {report_date}). For critical decisions, "
+                       f"please verify against the original financial statement.")
+        
+        # Standard formatting for confident values
+        formatted_value = _format_metric_value(metric, raw_value)
+        return f"{metric.title()} for {report_date[:4]} was {formatted_value} (as of {report_date})."
+
     def _build_index(self):
         """Build an index of financial metrics for efficient searching."""
         for report in self.reports:
@@ -334,10 +423,21 @@ class FinancialDataEngine:
                                 for val, dt in year_candidates:
                                     try:
                                         if f"-{tmonth}-" in (dt or ''):
-                                            return (
-                                                f"{metric_display_name.title()} for {target_year} was "
-                                                f"{_format_metric_value(metric_display_name, val)} (as of {dt})."
-                                            )
+                                            # Use contextual response for quarterly data too
+                                            report_meta = None
+                                            for report in self.reports:
+                                                meta = report.get('report_metadata', {})
+                                                if meta.get('report_date') == dt:
+                                                    report_meta = meta
+                                                    break
+                                            if report_meta:
+                                                analysis = self._interpret_financial_value(metric_display_name, val, report_meta)
+                                                return self._format_contextual_response(metric_display_name, analysis, dt)
+                                            else:
+                                                return (
+                                                    f"{metric_display_name.title()} for {target_year} was "
+                                                    f"{_format_metric_value(metric_display_name, val)} (as of {dt})."
+                                                )
                                     except Exception:
                                         continue
                         # Otherwise, score within the year (prefer annual month 12, non-zero, then month rank)
@@ -359,22 +459,73 @@ class FinancialDataEngine:
                             scored.append((score, val, dt))
                         scored.sort(key=lambda x: x[0], reverse=True)
                         best = scored[0]
-                        return (
-                            f"{metric_display_name.title()} for {target_year} was "
-                            f"{_format_metric_value(metric_display_name, best[1])} (as of {best[2]})."
-                        )
+                        # Use contextual response system
+                        report_meta = None
+                        for report in self.reports:
+                            meta = report.get('report_metadata', {})
+                            if meta.get('report_date') == best[2]:
+                                report_meta = meta
+                                break
+                        if report_meta:
+                            analysis = self._interpret_financial_value(metric_display_name, best[1], report_meta)
+                            return self._format_contextual_response(metric_display_name, analysis, best[2])
+                        else:
+                            return (
+                                f"{metric_display_name.title()} for {target_year} was "
+                                f"{_format_metric_value(metric_display_name, best[1])} (as of {best[2]})."
+                            )
 
-                    # No specific year: return latest
+                    # No specific year: return latest with contextual analysis
                     latest_val, latest_date = candidates[0]
-                    return (
-                        f"The latest {metric_display_name} is "
-                        f"{_format_metric_value(metric_display_name, latest_val)} (as of {latest_date})."
-                    )
+                    report_meta = None
+                    for report in self.reports:
+                        meta = report.get('report_metadata', {})
+                        if meta.get('report_date') == latest_date:
+                            report_meta = meta
+                            break
+                    if report_meta:
+                        analysis = self._interpret_financial_value(metric_display_name, latest_val, report_meta)
+                        return f"The latest {self._format_contextual_response(metric_display_name, analysis, latest_date)}"
+                    else:
+                        return (
+                            f"The latest {metric_display_name} is "
+                            f"{_format_metric_value(metric_display_name, latest_val)} (as of {latest_date})."
+                        )
                 except Exception as e:
                     logging.error(f"Direct metric lookup failed: {e}", exc_info=True)
                     continue
 
         return None
+
+    def generate_data_quality_report(self) -> str:
+        """Generate a comprehensive data quality report for business review"""
+        quality_data = self._validate_data_quality(self.reports)
+        
+        report_lines = ["=== DATA QUALITY AUDIT REPORT ==="]
+        
+        if quality_data["suspicious_zeros"]:
+            report_lines.append("\n🚨 SUSPICIOUS ZERO VALUES:")
+            for item in quality_data["suspicious_zeros"]:
+                report_lines.append(f"  • {item['metric']} = 0.0 on {item['date']} ({item['reason']})")
+                report_lines.append(f"    File: {item['file']}")
+        
+        if quality_data["missing_metrics"]:
+            report_lines.append("\n⚠️  MISSING CRITICAL METRICS:")
+            for item in quality_data["missing_metrics"]:
+                report_lines.append(f"  • {item['metric']} missing from {item['date']}")
+                report_lines.append(f"    File: {item['file']}")
+        
+        if quality_data["data_consistency_issues"]:
+            report_lines.append("\n🔍 DATA CONSISTENCY ISSUES:")
+            for item in quality_data["data_consistency_issues"]:
+                report_lines.append(f"  • {item}")
+        
+        if not any([quality_data["suspicious_zeros"], quality_data["missing_metrics"], quality_data["data_consistency_issues"]]):
+            report_lines.append("\n✅ No data quality issues detected.")
+        
+        report_lines.append(f"\nReport generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        
+        return "\n".join(report_lines)
 
     def _compute_pe_records(self):
         """Compute P/E ratios by aligning EPS from reports with nearest market closing price.
