@@ -7,6 +7,46 @@ from datetime import datetime
 from typing import Optional
 
 
+# --- Compiled Regex & Metric Registry ---
+
+# Centralized compiled regex patterns
+YEAR_RE = re.compile(r'(?<!\d)(?:19|20)\d{2}(?!\d)')
+PE_QUERY_RE = re.compile(r"\b(p\/?e|pe\s*ratio|price\s*to\s*earnings)\b", re.IGNORECASE)
+CHANGE_FROM_TO_RE = re.compile(r'(?:how\s+did\s+.*?\s+)?change\s+from.*?(?:19|20)\d{2}.*?to.*?(?:19|20)\d{2}', re.IGNORECASE)
+FROM_TO_YEARS_RE = re.compile(r'from.*?(?:19|20)\d{2}.*?to.*?(?:19|20)\d{2}', re.IGNORECASE)
+
+# Central metric registry for core metrics
+METRIC_REGISTRY = {
+    'total assets': {
+        'canonical': 'total assets',
+        'synonyms': ['totalassets', 'asset', 'assets'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'profit before tax': {
+        'canonical': 'profit before tax',
+        'synonyms': ['profitbeforetax', 'pbt', 'pretax', 'pre-tax', 'pretaxprofit'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'gross earnings': {
+        'canonical': 'gross earnings',
+        'synonyms': ['grossearnings', 'revenue', 'grossincome', 'turnover', 'sales'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'earnings per share': {
+        'canonical': 'earnings per share',
+        'synonyms': ['earningspershare', 'eps', 'earningpershare'],
+        'scaling': 'unit',
+        'value_type': 'per_share',
+        'annual_preferred': True,
+    },
+}
+
 # --- Helper Functions ---
 
 def _format_large_number(value):
@@ -59,7 +99,9 @@ def _load_kb(path):
         logging.error(f"Error decoding JSON from {path}: {e}")
     except Exception as e: # Catch any other unexpected errors
         logging.error(f"Failed to load KB from {path}: {e}")
-        return None
+    self.last_source_refs = None
+    self.last_confidence = 'medium'
+    return None
 
 # --- Engine Classes ---
 try:
@@ -91,6 +133,10 @@ class FinancialDataEngine:
     def __init__(self, kb):
         self.reports = kb.get('financial_reports', [])
         self.metrics = {}
+        # Precomputed lookups and response metadata
+        self.date_to_meta = {}
+        self.last_source_refs = None
+        self.last_confidence = 'high'
         # Market data for JAIZBANK symbol to compute price-based ratios (e.g., P/E)
         self.market_data = sorted(
             [d for d in kb.get('market_data', []) if d.get('symbol') == 'JAIZBANK' and 'pricedate' in d and 'closingprice' in d],
@@ -183,14 +229,18 @@ class FinancialDataEngine:
         
         if analysis["needs_qualification"]:
             if "annual_eps_zero" in analysis["context_flags"]:
-                return (f"{metric.title()} for {report_date[:4]} shows {raw_value} in our records. "
-                       f"This may indicate no earnings distribution or require verification "
-                       f"against the source financial statement (as of {report_date}).")
+                return (f"Based on our records, the {metric.title()} for Jaiz Bank in {report_date[:4]} "
+                       f"is reported as {raw_value} (year-end {report_date}). "
+                       f"This zero value is unusual for an operating bank and may indicate: "
+                       f"(a) no earnings distribution for the period, (b) accounting adjustments, or "
+                       f"(c) a data extraction anomaly. For investment decisions, we recommend "
+                       f"cross-referencing with the audited financial statement.")
             
             if raw_value == 0.0:
-                return (f"{metric.title()} for {report_date[:4]} was {raw_value} according to "
-                       f"available data (as of {report_date}). For critical decisions, "
-                       f"please verify against the original financial statement.")
+                return (f"Our data shows {metric.title()} for {report_date[:4]} as {raw_value} "
+                       f"(as of {report_date}). While this reflects the available records, "
+                       f"we advise verifying this figure against the published financial statement "
+                       f"before making critical business decisions.")
         
         # Standard formatting for confident values
         formatted_value = _format_metric_value(metric, raw_value)
@@ -203,6 +253,8 @@ class FinancialDataEngine:
             date = meta.get('report_date')
             metrics = meta.get('metrics', {})
             if date and metrics:
+                # build date->meta map for fast provenance
+                self.date_to_meta.setdefault(date, []).append(meta)
                 for key, value in metrics.items():
                     norm_key = re.sub(r'[^a-z0-9]', '', key.lower())
                     try:
@@ -261,18 +313,22 @@ class FinancialDataEngine:
         q_lower = question.lower()
         norm_q = re.sub(r'[^a-z0-9]', '', q_lower)
 
+        # Reset provenance metadata for this query
+        self.last_source_refs = None
+        self.last_confidence = 'high'
+
         # Special handling for P/E ratio queries to avoid EPS confusion
-        if re.search(r"\b(p\/?e|pe\s*ratio|price\s*to\s*earnings)\b", q_lower):
+        if PE_QUERY_RE.search(q_lower):
             try:
                 pe_records = self._compute_pe_records()
                 if not pe_records:
-                    return "I couldn't compute a P/E ratio due to missing or zero EPS and/or price data."
+                    return "Unable to calculate a Price-to-Earnings ratio at this time. This typically occurs when EPS data is zero or unavailable, or when market price data is missing for the relevant period."
                 # Highest P/E across available records
                 if any(k in q_lower for k in ['highest', 'max', 'maximum']):
                     best = max(pe_records, key=lambda r: r['pe'])
                     return (
-                        f"The highest P/E ratio for Jaiz Bank was {best['pe']:.2f} on {best['price_date']} "
-                        f"(price ₦{best['price']:,.2f} ÷ EPS {best['eps']})."
+                        f"**Valuation Peak:** The highest recorded P/E ratio for Jaiz Bank was {best['pe']:.2f}x "
+                        f"on {best['price_date']} (market price: ₦{best['price']:,.2f}, EPS: {best['eps']})."
                     )
                 # Year-specific query
                 m_year = re.search(r'(20\d{2})', question)
@@ -282,18 +338,19 @@ class FinancialDataEngine:
                     if candidates:
                         latest = candidates[-1]
                         return (
-                            f"The P/E ratio for Jaiz Bank in {y} was {latest['pe']:.2f} on {latest['price_date']} "
-                            f"(price ₦{latest['price']:,.2f} ÷ EPS {latest['eps']})."
+                            f"**{y} Valuation:** Jaiz Bank's P/E ratio was {latest['pe']:.2f}x as of {latest['price_date']} "
+                            f"(market price: ₦{latest['price']:,.2f}, EPS: {latest['eps']})."
                         )
                 # Default: latest available P/E
                 latest = pe_records[-1]
                 return (
-                    f"The latest P/E ratio for Jaiz Bank is {latest['pe']:.2f} (as of {latest['price_date']}), "
-                    f"based on price ₦{latest['price']:,.2f} and EPS {latest['eps']}."
+                    f"**Current Valuation:** Jaiz Bank's most recent P/E ratio is {latest['pe']:.2f}x "
+                    f"(as of {latest['price_date']}), calculated from a market price of ₦{latest['price']:,.2f} "
+                    f"and earnings per share of {latest['eps']}."
                 )
             except Exception as e:
                 logging.error(f"P/E computation failed: {e}", exc_info=True)
-                return "Unable to compute the P/E ratio due to data alignment issues."
+                return "Unable to compute the P/E ratio due to data alignment issues. Please verify the availability of both market price and earnings data."
         
         # Define metric patterns and their normalized keys
         # Use constants for metric names
@@ -302,19 +359,18 @@ class FinancialDataEngine:
         # 2) Gross Earnings requires explicit phrasing or synonyms like 'revenue'
         # 3) Total Assets and PBT are specific, avoid overly-generic tokens
         # Synonym dictionary: map many aliases to our normalized keys
-        metric_patterns = {
-            self.METRIC_EARNINGS_PER_SHARE: ['earningspershare', 'eps', 'earningpershare'],
-            # Revenue/Turnover/Income → gross earnings
-            self.METRIC_GROSS_EARNINGS: ['grossearnings', 'revenue', 'grossincome', 'turnover', 'sales'],
-            self.METRIC_TOTAL_ASSETS: ['totalassets', 'asset', 'assets'],
-            self.METRIC_PROFIT_BEFORE_TAX: ['profitbeforetax', 'pbt', 'pretax', 'pre-tax', 'pretaxprofit']
-        }
+        metric_patterns = {}
+        for name, cfg in METRIC_REGISTRY.items():
+            tokens = set(cfg.get('synonyms', []))
+            canonical_token = re.sub(r'[^a-z0-9]', '', name.lower())
+            tokens.add(canonical_token)
+            metric_patterns[name] = tokens
         # Additional synonyms that may exist in the KB as-is; if present, we will match exactly by key name later
         # Examples: 'profit after tax', 'pat', 'net income', 'opex', 'operating cost'
         
         # Extract year/date from question
         # Robust year extraction: non-capturing group, avoid partial group-only matches
-        year_match = re.search(r'(?<!\d)(?:19|20)\d{2}(?!\d)', question)
+        year_match = YEAR_RE.search(question)
         quarter_match = re.search(r'q([1-4])', q_lower)
         # Detect if annual report is explicitly requested (annual report / year-end)
         prefer_annual_flag = bool(re.search(r'\b(annual\s+report|year[-\s]?end)\b', q_lower))
@@ -322,18 +378,18 @@ class FinancialDataEngine:
         # Search for matching metrics
         for metric_display_name, patterns in metric_patterns.items():
             for pattern in patterns:
-                if pattern not in re.sub(r'[^a-z0-9]', '', q_lower):
+                if pattern not in norm_q:
                     continue
 
                 # --- Enhanced Logic for Comparative & Trend Queries ---
                 comparison_keywords = ['compare', 'vs', 'versus', 'between']
                 # Allow words between 'from' and years, and between 'to' and years
-                change_from_to = bool(re.search(r'(?:how\s+did\s+.*?\s+)?change\s+from.*?(?:19|20)\d{2}.*?to.*?(?:19|20)\d{2}', q_lower))
-                from_to_years = bool(re.search(r'from.*?(?:19|20)\d{2}.*?to.*?(?:19|20)\d{2}', q_lower))
+                change_from_to = bool(CHANGE_FROM_TO_RE.search(q_lower))
+                from_to_years = bool(FROM_TO_YEARS_RE.search(q_lower))
                 trend_keywords = ['trend', 'over time', 'evolution', 'progression', 'history']
                 trend_requested = any(k in q_lower for k in trend_keywords)
                 # Additional guard: if we see two distinct years and 'change' or comparison words, treat as comparison
-                detected_years = re.findall(r'(?<!\d)(?:19|20)\d{2}(?!\d)', q_lower)
+                detected_years = YEAR_RE.findall(q_lower)
                 two_years_with_change = (len({*detected_years}) >= 2) and (change_from_to or any(k in q_lower for k in ['change'] + comparison_keywords))
                 is_comparison = any(keyword in q_lower for keyword in comparison_keywords) or change_from_to or from_to_years or two_years_with_change
 
@@ -343,7 +399,7 @@ class FinancialDataEngine:
                     # --- START: Comparative/Trend Analysis (Hardened) ---
                     try:
                         # Non-capturing to get full years
-                        all_year_matches = re.findall(r'(?<!\d)(?:19|20)\d{2}(?!\d)', question)
+                        all_year_matches = YEAR_RE.findall(question)
                         unique_years = sorted({int(y) for y in all_year_matches})
                         start_year = unique_years[0] if len(unique_years) >= 1 else None
                         end_year = unique_years[-1] if len(unique_years) >= 2 else None
@@ -361,20 +417,44 @@ class FinancialDataEngine:
                                     pct_change = (delta / abs(float(old_val))) * 100.0 if float(old_val) != 0 else 0.0
                                 except Exception:
                                     pct_change = 0.0
-                                change_str = "an increase" if delta > 0 else ("a decrease" if delta < 0 else "no change")
+                                
+                                # Enhanced analyst-style comparative narrative
+                                if delta > 0:
+                                    direction = "increased"
+                                    movement = "growth"
+                                elif delta < 0:
+                                    direction = "decreased"
+                                    movement = "decline"
+                                else:
+                                    direction = "remained stable"
+                                    movement = "no net change"
+                                
                                 parts.append(
-                                    f"Change for {metric_display_name} from {old_y} to {new_y}: "
-                                    f"{_format_metric_value(metric_display_name, old_val)} (as of {old_date}) → "
-                                    f"{_format_metric_value(metric_display_name, new_val)} (as of {new_date}); "
-                                    f"{change_str} of {_format_metric_value(metric_display_name, abs(delta))} ({pct_change:+.2f}%)."
+                                    f"**Comparative Analysis:** Jaiz Bank's {metric_display_name} {direction} from "
+                                    f"{_format_metric_value(metric_display_name, old_val)} in {old_y} (year-end {old_date}) to "
+                                    f"{_format_metric_value(metric_display_name, new_val)} in {new_y} (year-end {new_date}), "
+                                    f"representing {movement} of {_format_metric_value(metric_display_name, abs(delta))} "
+                                    f"({pct_change:+.2f}% period change)."
                                 )
                             if trend_requested:
+                                # Enhanced analyst-style trend narrative
+                                trend_intro = f"**Historical Trend ({series[0][0]}–{series[-1][0]}):** "
                                 trend_lines = [
-                                    f"{y}: {_format_metric_value(metric_display_name, v)} (as of {d})"
+                                    f"{y}: {_format_metric_value(metric_display_name, v)} (recorded {d})"
                                     for (y, d, v) in series
                                 ]
-                                parts.append("Trend: " + "; ".join(trend_lines))
+                                parts.append(trend_intro + " | ".join(trend_lines) + ".")
                             if parts:
+                                refs = []
+                                for _, d, _ in series:
+                                    meta = (self.date_to_meta.get(d) or [None])[0]
+                                    if meta:
+                                        refs.append({
+                                            'file_name': meta.get('file_name'),
+                                            'report_date': d
+                                        })
+                                self.last_source_refs = refs or None
+                                self.last_confidence = 'high'
                                 return " ".join(parts)
                     except Exception as e:
                         logging.error(f"Comparative/Trend analysis failed: {e}")
@@ -424,14 +504,14 @@ class FinancialDataEngine:
                                     try:
                                         if f"-{tmonth}-" in (dt or ''):
                                             # Use contextual response for quarterly data too
-                                            report_meta = None
-                                            for report in self.reports:
-                                                meta = report.get('report_metadata', {})
-                                                if meta.get('report_date') == dt:
-                                                    report_meta = meta
-                                                    break
+                                            report_meta = (self.date_to_meta.get(dt) or [None])[0]
                                             if report_meta:
                                                 analysis = self._interpret_financial_value(metric_display_name, val, report_meta)
+                                                self.last_source_refs = [{
+                                                    'file_name': report_meta.get('file_name'),
+                                                    'report_date': dt
+                                                }]
+                                                self.last_confidence = 'medium' if analysis.get('needs_qualification') else 'high'
                                                 return self._format_contextual_response(metric_display_name, analysis, dt)
                                             else:
                                                 return (
@@ -459,15 +539,15 @@ class FinancialDataEngine:
                             scored.append((score, val, dt))
                         scored.sort(key=lambda x: x[0], reverse=True)
                         best = scored[0]
-                        # Use contextual response system
-                        report_meta = None
-                        for report in self.reports:
-                            meta = report.get('report_metadata', {})
-                            if meta.get('report_date') == best[2]:
-                                report_meta = meta
-                                break
+                        # Use contextual response system (precomputed meta)
+                        report_meta = (self.date_to_meta.get(best[2]) or [None])[0]
                         if report_meta:
                             analysis = self._interpret_financial_value(metric_display_name, best[1], report_meta)
+                            self.last_source_refs = [{
+                                'file_name': report_meta.get('file_name'),
+                                'report_date': best[2]
+                            }]
+                            self.last_confidence = 'medium' if analysis.get('needs_qualification') else 'high'
                             return self._format_contextual_response(metric_display_name, analysis, best[2])
                         else:
                             return (
@@ -477,14 +557,14 @@ class FinancialDataEngine:
 
                     # No specific year: return latest with contextual analysis
                     latest_val, latest_date = candidates[0]
-                    report_meta = None
-                    for report in self.reports:
-                        meta = report.get('report_metadata', {})
-                        if meta.get('report_date') == latest_date:
-                            report_meta = meta
-                            break
+                    report_meta = (self.date_to_meta.get(latest_date) or [None])[0]
                     if report_meta:
                         analysis = self._interpret_financial_value(metric_display_name, latest_val, report_meta)
+                        self.last_source_refs = [{
+                            'file_name': report_meta.get('file_name'),
+                            'report_date': latest_date
+                        }]
+                        self.last_confidence = 'medium' if analysis.get('needs_qualification') else 'high'
                         return f"The latest {self._format_contextual_response(metric_display_name, analysis, latest_date)}"
                     else:
                         return (
@@ -1265,9 +1345,12 @@ class IntelligentAgent:
         """
         if not question or not question.strip():
             return {
+                'answer_text': "Please provide a specific question.",
                 'answer': "Please provide a specific question.",
                 'brain_used': 'Brain 1',
-                'provenance': 'Input Validation'
+                'provenance': 'Input Validation',
+                'confidence': 'high',
+                'source_refs': None
             }
 
         # SPECIAL ROUTE: Structured KB exact lookup should take precedence to avoid accidental matches
@@ -1275,9 +1358,12 @@ class IntelligentAgent:
             exact_line = self.kb_lookup_engine.search_exact_line(question)
             if exact_line:
                 return {
+                    'answer_text': exact_line,
                     'answer': exact_line,
                     'brain_used': 'Brain 1',
-                    'provenance': 'KnowledgeBaseLookupEngine'
+                    'provenance': 'KnowledgeBaseLookupEngine',
+                    'confidence': 'high',
+                    'source_refs': None
                 }
         except Exception:
             # non-fatal; continue with normal chain
@@ -1288,11 +1374,21 @@ class IntelligentAgent:
             if self._is_clearly_non_local(question):
                 vertex_ans = self._ask_vertex(question)
                 if vertex_ans:
-                    return vertex_ans
+                    # Ensure standardized shape from _ask_vertex
+                    if 'answer_text' not in vertex_ans:
+                        vertex_ans = {**vertex_ans, 'answer_text': vertex_ans.get('answer')}
+                    if 'confidence' not in vertex_ans:
+                        vertex_ans['confidence'] = 'low'
+                    if 'source_refs' not in vertex_ans:
+                        vertex_ans['source_refs'] = None
+                    return {**vertex_ans, 'answer': vertex_ans.get('answer_text')}
                 return {
-                    'answer': "This question appears to be outside SkyCap AI's local financial domain, and the external knowledge source isn't available right now.",
+                    'answer_text': "Your question appears to fall outside SkyCap AI's specialized domain of Nigerian financial markets and Skyview Capital services. My expertise covers:\n• Jaiz Bank financial statements and performance metrics\n• Nigerian Exchange (NGX) market data and stock prices\n• Skyview Capital Limited company information and services\n\nFor general knowledge queries, my external research capability is currently offline. Please ask a question within my core domain for the most accurate response.",
+                    'answer': "Your question appears to fall outside SkyCap AI's specialized domain of Nigerian financial markets and Skyview Capital services. My expertise covers:\n• Jaiz Bank financial statements and performance metrics\n• Nigerian Exchange (NGX) market data and stock prices\n• Skyview Capital Limited company information and services\n\nFor general knowledge queries, my external research capability is currently offline. Please ask a question within my core domain for the most accurate response.",
                     'brain_used': 'Brain 2/3',
-                    'provenance': 'RelevanceGate'
+                    'provenance': 'RelevanceGate',
+                    'confidence': 'low',
+                    'source_refs': None
                 }
         except Exception as e:
             logging.error(f"Relevance gate check failed: {e}")
@@ -1302,7 +1398,13 @@ class IntelligentAgent:
             if self._is_complex_llm_query(question):
                 vertex_ans = self._ask_vertex(question)
                 if vertex_ans:
-                    return vertex_ans
+                    if 'answer_text' not in vertex_ans:
+                        vertex_ans = {**vertex_ans, 'answer_text': vertex_ans.get('answer')}
+                    if 'confidence' not in vertex_ans:
+                        vertex_ans['confidence'] = 'low'
+                    if 'source_refs' not in vertex_ans:
+                        vertex_ans['source_refs'] = None
+                    return {**vertex_ans, 'answer': vertex_ans.get('answer_text')}
         except Exception as e:
             logging.error(f"Complex routing pre-check failed: {e}")
 
@@ -1312,11 +1414,20 @@ class IntelligentAgent:
             if intent == 'CONCEPTUAL':
                 vertex_ans = self._ask_vertex(question)
                 if vertex_ans:
-                    return vertex_ans
+                    if 'answer_text' not in vertex_ans:
+                        vertex_ans = {**vertex_ans, 'answer_text': vertex_ans.get('answer')}
+                    if 'confidence' not in vertex_ans:
+                        vertex_ans['confidence'] = 'low'
+                    if 'source_refs' not in vertex_ans:
+                        vertex_ans['source_refs'] = None
+                    return {**vertex_ans, 'answer': vertex_ans.get('answer_text')}
                 return {
-                    'answer': "This looks like conceptual or advisory guidance. External reasoning is currently unavailable; please ask a specific data question (e.g., a metric, price, or date).",
+                    'answer_text': "Your question seeks strategic advice or conceptual guidance, which requires broader analytical capabilities currently offline. SkyCap AI excels at providing:\n• Specific financial metrics and historical data\n• Market prices and stock performance indicators\n• Company information and operational details\n\nFor actionable insights, please ask about concrete data points (e.g., 'What was Jaiz Bank's profit before tax in 2023?' or 'What is the current price of JAIZBANK?').",
+                    'answer': "Your question seeks strategic advice or conceptual guidance, which requires broader analytical capabilities currently offline. SkyCap AI excels at providing:\n• Specific financial metrics and historical data\n• Market prices and stock performance indicators\n• Company information and operational details\n\nFor actionable insights, please ask about concrete data points (e.g., 'What was Jaiz Bank's profit before tax in 2023?' or 'What is the current price of JAIZBANK?').",
                     'brain_used': 'Brain 2/3',
-                    'provenance': 'IntentClassifier'
+                    'provenance': 'IntentClassifier',
+                    'confidence': 'low',
+                    'source_refs': None
                 }
         except Exception as e:
             logging.error(f"Intent classification failed: {e}")
@@ -1325,63 +1436,84 @@ class IntelligentAgent:
         financial_answer = self.financial_engine.search_financial_metric(question)
         if financial_answer:
             return {
+                'answer_text': financial_answer,
                 'answer': financial_answer,
                 'brain_used': 'Brain 1',
-                'provenance': 'FinancialDataEngine'
+                'provenance': 'FinancialDataEngine',
+                'confidence': getattr(self.financial_engine, 'last_confidence', 'high'),
+                'source_refs': getattr(self.financial_engine, 'last_source_refs', None)
             }
         
         # Try metadata engine for document/report queries
         metadata_answer = self.metadata_engine.search_metadata(question)
         if metadata_answer:
             return {
+                'answer_text': metadata_answer,
                 'answer': metadata_answer,
                 'brain_used': 'Brain 1',
-                'provenance': 'MetadataEngine'
+                'provenance': 'MetadataEngine',
+                'confidence': 'high',
+                'source_refs': None
             }
         
         # Try personnel engine for organizational queries
         personnel_answer = self.personnel_engine.search_personnel_info(question)
         if personnel_answer:
             return {
+                'answer_text': personnel_answer,
                 'answer': personnel_answer,
                 'brain_used': 'Brain 1',
-                'provenance': 'PersonnelDataEngine'
+                'provenance': 'PersonnelDataEngine',
+                'confidence': 'high',
+                'source_refs': None
             }
         
         # Try market data engine for industry/market queries
         market_answer = self.market_engine.search_market_info(question)
         if market_answer:
             return {
+                'answer_text': market_answer,
                 'answer': market_answer,
                 'brain_used': 'Brain 1',
-                'provenance': 'MarketDataEngine'
+                'provenance': 'MarketDataEngine',
+                'confidence': 'high',
+                'source_refs': None
             }
         
         # Try company profile engine
         profile_answer = self.profile_engine.search_profile_info(question)
         if profile_answer:
             return {
+                'answer_text': profile_answer,
                 'answer': profile_answer,
                 'brain_used': 'Brain 1',
-                'provenance': 'CompanyProfileEngine'
+                'provenance': 'CompanyProfileEngine',
+                'confidence': 'high',
+                'source_refs': None
             }
 
         # Try location engine
         location_answer = self.location_engine.search_location_info(question)
         if location_answer:
             return {
+                'answer_text': location_answer,
                 'answer': location_answer,
                 'brain_used': 'Brain 1',
-                'provenance': 'LocationDataEngine'
+                'provenance': 'LocationDataEngine',
+                'confidence': 'high',
+                'source_refs': None
             }
 
         # Try general knowledge engine
         general_answer = self.general_engine.search_general_info(question)
         if general_answer:
             return {
+                'answer_text': general_answer,
                 'answer': general_answer,
                 'brain_used': 'Brain 1',
-                'provenance': 'GeneralKnowledgeEngine'
+                'provenance': 'GeneralKnowledgeEngine',
+                'confidence': 'high',
+                'source_refs': None
             }
 
         # Chain of Command stage 2: try semantic search (local)
@@ -1423,9 +1555,12 @@ class IntelligentAgent:
 
                 if answer_text:
                     return {
+                        'answer_text': answer_text,
                         'answer': answer_text,
                         'brain_used': 'Brain 2/3',
-                        'provenance': 'VertexAI'
+                        'provenance': 'VertexAI',
+                        'confidence': 'low',
+                        'source_refs': None
                     }
                 # If we didn't get text, try one fallback init and retry once
                 if self._init_vertex_fallback():
@@ -1446,9 +1581,12 @@ class IntelligentAgent:
                                     break
                         if ans2:
                             return {
+                                'answer_text': ans2,
                                 'answer': ans2,
                                 'brain_used': 'Brain 2/3',
-                                'provenance': 'VertexAI'
+                                'provenance': 'VertexAI',
+                                'confidence': 'low',
+                                'source_refs': None
                             }
                     except Exception as e2:
                         logging.error(f"Vertex AI call (fallback) failed: {e2}")
@@ -1479,9 +1617,12 @@ class IntelligentAgent:
                                     break
                         if ans3:
                             return {
+                                'answer_text': ans3,
                                 'answer': ans3,
                                 'brain_used': 'Brain 2/3',
-                                'provenance': 'VertexAI'
+                                'provenance': 'VertexAI',
+                                'confidence': 'low',
+                                'source_refs': None
                             }
                     except Exception as e3:
                         logging.error(f"Vertex AI call (post-fallback) failed: {e3}")
@@ -1489,7 +1630,10 @@ class IntelligentAgent:
 
         # Final message if all brains unavailable
         return {
-            'answer': "I couldn't find a specific answer in local knowledge and external search is unavailable or inconclusive. Please try rephrasing or ask about financial data, stock prices, or company information.",
+            'answer_text': "I was unable to locate a definitive answer in my current knowledge base, and external research capabilities are currently unavailable. For best results, please try:\n• Rephrasing your question with specific dates or metrics\n• Asking about Jaiz Bank financials, NGX market data, or Skyview Capital services\n• Specifying the exact year or reporting period you're interested in",
+            'answer': "I was unable to locate a definitive answer in my current knowledge base, and external research capabilities are currently unavailable. For best results, please try:\n• Rephrasing your question with specific dates or metrics\n• Asking about Jaiz Bank financials, NGX market data, or Skyview Capital services\n• Specifying the exact year or reporting period you're interested in",
             'brain_used': 'Hybrid Brain',
-            'provenance': 'Default Fallback'
+            'provenance': 'Default Fallback',
+            'confidence': 'low',
+            'source_refs': None
         }
