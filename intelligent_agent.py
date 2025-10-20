@@ -19,35 +19,198 @@ FROM_TO_YEARS_RE = re.compile(r'from.*?(?:19|20)\d{2}.*?to.*?(?:19|20)\d{2}', re
 METRIC_REGISTRY = {
     'total assets': {
         'canonical': 'total assets',
-        'synonyms': ['totalassets', 'asset', 'assets'],
+        'synonyms': ['total asset', 'asset base', 'total assets value', 'asset balance'],
         'scaling': 'thousands',
         'value_type': 'currency',
         'annual_preferred': False,
     },
     'profit before tax': {
         'canonical': 'profit before tax',
-        'synonyms': ['profitbeforetax', 'pbt', 'pretax', 'pre-tax', 'pretaxprofit'],
+        'synonyms': ['pbt', 'pre-tax profit', 'pretax profit', 'profit before taxation', 'pretax'],
         'scaling': 'thousands',
         'value_type': 'currency',
         'annual_preferred': False,
     },
     'gross earnings': {
         'canonical': 'gross earnings',
-        'synonyms': ['grossearnings', 'revenue', 'grossincome', 'turnover', 'sales'],
+        'synonyms': ['gross income', 'total revenue', 'turnover', 'total sales'],
         'scaling': 'thousands',
         'value_type': 'currency',
         'annual_preferred': False,
     },
     'earnings per share': {
         'canonical': 'earnings per share',
-        'synonyms': ['earningspershare', 'eps', 'earningpershare'],
+        'synonyms': ['eps', 'earning per share', 'earnings-per-share'],
         'scaling': 'unit',
         'value_type': 'per_share',
         'annual_preferred': True,
     },
+    'return on equity': {
+        'canonical': 'return on equity',
+        'synonyms': ['roe', 'return on equity ratio', 'return on equity of investors'],
+        'scaling': 'unit',
+        'value_type': 'ratio',
+        'annual_preferred': False,
+    },
+    'net revenue from funds': {
+        'canonical': 'net revenue from funds',
+        'synonyms': ['net fund revenue', 'net revenue from fund operations'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'credit impairment charges': {
+        'canonical': 'credit impairment charges',
+        'synonyms': ['loan loss provisions', 'impairment charges', 'credit impairment charge'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'profit after tax': {
+        'canonical': 'profit after tax',
+        'synonyms': ['pat', 'net profit', 'net income', 'profit after taxation'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'income from financing and investment': {
+        'canonical': 'income from financing and investment',
+        'synonyms': ['financing and investment income', 'financing income', 'investment income'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'net operating income': {
+        'canonical': 'net operating income',
+        'synonyms': ['noi', 'net operating profit', 'operating income net'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'operating expenses': {
+        'canonical': 'operating expenses',
+        'synonyms': ['operating expense', 'opex', 'operating costs', 'operating expenditure'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'taxation expense': {
+        'canonical': 'taxation expense',
+        'synonyms': ['tax expense', 'tax charge', 'taxation'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'cash from operating activities': {
+        'canonical': 'cash from operating activities',
+        'synonyms': ['operating cash flow', 'cash flow from operating activities', 'cash generated from operations'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'operating cash flow before working capital charges': {
+        'canonical': 'operating cash flow before working capital charges',
+        'synonyms': ['operating cash flow before working capital', 'cash flow before working capital charges'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'net cash generated from operating activities': {
+        'canonical': 'net cash generated from operating activities',
+        'synonyms': ['net operating cash flow', 'net cash from operating activities'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'cash flow from investing activities': {
+        'canonical': 'cash flow from investing activities',
+        'synonyms': ['investing cash flow', 'cash used in investing activities'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'cash flow from financing activities': {
+        'canonical': 'cash flow from financing activities',
+        'synonyms': ['financing cash flow', 'cash from financing activities'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'net decrease in cash and cash equivalents': {
+        'canonical': 'net decrease in cash and cash equivalents',
+        'synonyms': ['net decrease in cash', 'net change in cash'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'cash and bank balance at beginning of period': {
+        'canonical': 'cash and bank balance at beginning of period',
+        'synonyms': ['opening cash balance', 'beginning cash balance', 'cash at the beginning of the period'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'cash and bank balance at end of period': {
+        'canonical': 'cash and bank balance at end of period',
+        'synonyms': ['closing cash balance', 'ending cash balance', 'cash at the end of the period'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'exceptional items': {
+        'canonical': 'exceptional items',
+        'synonyms': ['exceptional item', 'extraordinary items', 'one-off items'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+    'other income': {
+        'canonical': 'other income',
+        'synonyms': ['miscellaneous income', 'misc income', 'other revenues'],
+        'scaling': 'thousands',
+        'value_type': 'currency',
+        'annual_preferred': False,
+    },
+}
+
+# Quarter interpretation maps
+QUARTER_MONTH_MAP = {
+    '1': '03',
+    '2': '06',
+    '3': '09',
+    '4': '12',
+}
+
+QUARTER_WORD_MAP = {
+    'first': '1',
+    '1st': '1',
+    'second': '2',
+    '2nd': '2',
+    'third': '3',
+    '3rd': '3',
+    'fourth': '4',
+    '4th': '4',
 }
 
 # --- Helper Functions ---
+
+def _compile_metric_regex(alias: str) -> Optional[re.Pattern]:
+    """Compile a flexible regex for a metric alias (handles spaces, hyphens, slashes)."""
+    if not alias:
+        return None
+    cleaned = alias.strip().lower()
+    if not cleaned:
+        return None
+    tokens = re.split(r'[\s\-/&]+', cleaned)
+    tokens = [t for t in tokens if t]
+    if not tokens:
+        return None
+    if len(tokens) == 1:
+        pattern = rf"\\b{re.escape(tokens[0])}\\b"
+    else:
+        separator = r'(?:[\s\-/&]+)'
+        pattern = r'\b' + separator.join(re.escape(token) for token in tokens) + r'\b'
+    return re.compile(pattern, re.IGNORECASE)
 
 def _format_large_number(value):
     """Format large numbers with Nigerian Naira currency and appropriate units.
@@ -75,9 +238,9 @@ def _format_metric_value(metric_name: str, value):
     - Currency-like metrics (assets, PBT, gross earnings) are in thousands and use _format_large_number.
     - Earnings per share (EPS) is a plain number; no currency symbol or thousands scaling.
     """
-    if metric_name and isinstance(metric_name, str) and metric_name.strip().lower() in {
-        'total assets', 'profit before tax', 'gross earnings'
-    }:
+    metric_key = metric_name.strip().lower() if isinstance(metric_name, str) else None
+    metric_cfg = METRIC_REGISTRY.get(metric_key) if metric_key else None
+    if metric_cfg and metric_cfg.get('scaling') == 'thousands':
         return _format_large_number(value)
     # EPS and others: return as-is, formatted to sensible precision
     try:
@@ -99,8 +262,6 @@ def _load_kb(path):
         logging.error(f"Error decoding JSON from {path}: {e}")
     except Exception as e: # Catch any other unexpected errors
         logging.error(f"Failed to load KB from {path}: {e}")
-    self.last_source_refs = None
-    self.last_confidence = 'medium'
     return None
 
 # --- Engine Classes ---
@@ -308,10 +469,146 @@ class FinancialDataEngine:
         series.sort(key=lambda t: t[0])
         return series
 
+    def _extract_quarter_from_question(self, question: str) -> Optional[str]:
+        """Identify if the user referenced a specific quarter in the question."""
+        text = question.lower()
+
+        # Patterns like "Q3" or "Quarter 3"
+        numeric_patterns = [
+            re.search(r'\bq(?:uarter)?\s*([1-4])\b', text),
+            re.search(r'\bquarter\s*([1-4])\b', text),
+            re.search(r'([1-4])(?:st|nd|rd|th)?\s+(?:quarter|qtr)\b', text),
+        ]
+        for match in numeric_patterns:
+            if match:
+                return match.group(1)
+
+        # Textual labels like "third quarter" or "third-quarter"
+        for label, token in QUARTER_WORD_MAP.items():
+            if re.search(fr'\b{label}(?:\s+|-)?quarter\b', text):
+                return token
+
+        return None
+
+    def _find_best_date_match(
+        self,
+        norm_metric_key: str,
+        target_year: Optional[str],
+        quarter_token: Optional[str],
+        prefer_annual: bool,
+    ) -> Optional[tuple]:
+        """Select the most appropriate (value, date) tuple for a metric.
+
+        Honors explicit year and quarter requests while falling back to sensible defaults.
+        Returns None when no matching record satisfies the requested constraints.
+        """
+
+        candidates = [(val, dt) for (key, dt), val in self.metrics.items() if key == norm_metric_key]
+        if not candidates:
+            return None
+
+        try:
+            candidates.sort(key=lambda x: x[1] or '', reverse=True)
+        except Exception:
+            candidates.sort(key=lambda x: str(x[1]))
+
+        quarter_month = QUARTER_MONTH_MAP.get(quarter_token) if quarter_token else None
+
+        def _filter_by_year(items, year: str):
+            return [
+                (val, dt)
+                for val, dt in items
+                if isinstance(dt, str) and dt.startswith(year)
+            ]
+
+        filtered = candidates
+        if target_year:
+            filtered = _filter_by_year(candidates, target_year)
+            if not filtered:
+                return None
+
+        if quarter_month:
+            quarter_filtered = []
+            for val, dt in filtered:
+                try:
+                    if isinstance(dt, str) and len(dt) >= 7 and dt[5:7] == quarter_month:
+                        quarter_filtered.append((val, dt))
+                except Exception:
+                    continue
+            if quarter_filtered:
+                quarter_filtered.sort(key=lambda x: x[1], reverse=True)
+                return quarter_filtered[0]
+
+            if target_year:
+                # Requested quarter for a specific year but no exact match.
+                return None
+
+            # No year specified – allow best match across all years for this quarter.
+            quarter_all_years = []
+            for val, dt in candidates:
+                try:
+                    if isinstance(dt, str) and len(dt) >= 7 and dt[5:7] == quarter_month:
+                        quarter_all_years.append((val, dt))
+                except Exception:
+                    continue
+            if quarter_all_years:
+                quarter_all_years.sort(key=lambda x: x[1], reverse=True)
+                return quarter_all_years[0]
+
+        eps_norm_key = re.sub(r'[^a-z0-9]', '', self.METRIC_EARNINGS_PER_SHARE)
+        eps_always_annual = (norm_metric_key == eps_norm_key)
+
+        def month_pref(date_str: str) -> int:
+            try:
+                month = int(date_str[5:7]) if len(date_str) >= 7 else 0
+            except Exception:
+                month = 0
+            order = {12: 4, 9: 3, 6: 2, 3: 1}
+            return order.get(month, 0)
+
+        scored = []
+        for val, dt in filtered:
+            date_str = dt or ''
+            nz = 1 if isinstance(val, (int, float)) and float(val) != 0.0 else 0
+            annual_boost = 0
+            try:
+                month = int(date_str[5:7]) if len(date_str) >= 7 else 0
+            except Exception:
+                month = 0
+            if (prefer_annual or eps_always_annual) and month == 12:
+                annual_boost = 1
+            score = (annual_boost, nz, month_pref(date_str), date_str)
+            scored.append((score, val, dt))
+
+        if not scored:
+            return None
+
+        scored.sort(key=lambda x: x[0], reverse=True)
+        _, best_val, best_date = scored[0]
+        return best_val, best_date
+
+    def _resolve_metric_matches(self, question: str, metric_patterns: dict, registry_order: dict) -> list:
+        """Return metric names ordered by the strength of alias matches within the question."""
+        q_lower = question.lower()
+        matches = []
+        for metric_name, info in metric_patterns.items():
+            best_score = 0
+            for regex, alias in info.get('regexes', []):
+                try:
+                    if regex.search(q_lower):
+                        alias_score = len(re.sub(r'[^a-z0-9]', '', alias))
+                        if alias_score > best_score:
+                            best_score = alias_score
+                except Exception:
+                    continue
+            if best_score:
+                matches.append((best_score, registry_order.get(metric_name, 0), metric_name))
+        matches.sort(key=lambda item: (-item[0], item[1]))
+        return [name for _, _, name in matches]
+
     def search_financial_metric(self, question):
         """Search for financial metrics based on the question."""
         q_lower = question.lower()
-        norm_q = re.sub(r'[^a-z0-9]', '', q_lower)
 
         # Reset provenance metadata for this query
         self.last_source_refs = None
@@ -352,50 +649,49 @@ class FinancialDataEngine:
                 logging.error(f"P/E computation failed: {e}", exc_info=True)
                 return "Unable to compute the P/E ratio due to data alignment issues. Please verify the availability of both market price and earnings data."
         
-        # Define metric patterns and their normalized keys
-        # Use constants for metric names
-        # Define metric patterns with improved specificity and priority order
-        # 1) EPS first to avoid collision with 'gross earnings'
-        # 2) Gross Earnings requires explicit phrasing or synonyms like 'revenue'
-        # 3) Total Assets and PBT are specific, avoid overly-generic tokens
-        # Synonym dictionary: map many aliases to our normalized keys
+        # Build robust metric patterns leveraging canonical names and explicit aliases
+        registry_order = {metric: idx for idx, metric in enumerate(METRIC_REGISTRY.keys())}
         metric_patterns = {}
         for name, cfg in METRIC_REGISTRY.items():
-            tokens = set(cfg.get('synonyms', []))
-            canonical_token = re.sub(r'[^a-z0-9]', '', name.lower())
-            tokens.add(canonical_token)
-            metric_patterns[name] = tokens
-        # Additional synonyms that may exist in the KB as-is; if present, we will match exactly by key name later
-        # Examples: 'profit after tax', 'pat', 'net income', 'opex', 'operating cost'
+            alias_terms = {name.lower()}
+            for syn in cfg.get('synonyms', []) or []:
+                if syn:
+                    alias_terms.add(syn.lower())
+            regexes = []
+            for alias in alias_terms:
+                compiled = _compile_metric_regex(alias)
+                if compiled:
+                    regexes.append((compiled, alias))
+            metric_patterns[name] = {
+                'regexes': regexes,
+                'config': cfg,
+            }
         
         # Extract year/date from question
         # Robust year extraction: non-capturing group, avoid partial group-only matches
         year_match = YEAR_RE.search(question)
-        quarter_match = re.search(r'q([1-4])', q_lower)
+        quarter_token = self._extract_quarter_from_question(question)
         # Detect if annual report is explicitly requested (annual report / year-end)
         prefer_annual_flag = bool(re.search(r'\b(annual\s+report|year[-\s]?end)\b', q_lower))
 
         # Search for matching metrics
-        for metric_display_name, patterns in metric_patterns.items():
-            for pattern in patterns:
-                if pattern not in norm_q:
-                    continue
+        matched_metric_names = self._resolve_metric_matches(question, metric_patterns, registry_order)
+        for metric_display_name in matched_metric_names:
+            # --- Enhanced Logic for Comparative & Trend Queries ---
+            comparison_keywords = ['compare', 'vs', 'versus', 'between']
+            # Allow words between 'from' and years, and between 'to' and years
+            change_from_to = bool(CHANGE_FROM_TO_RE.search(q_lower))
+            from_to_years = bool(FROM_TO_YEARS_RE.search(q_lower))
+            trend_keywords = ['trend', 'over time', 'evolution', 'progression', 'history']
+            trend_requested = any(k in q_lower for k in trend_keywords)
+            # Additional guard: if we see two distinct years and 'change' or comparison words, treat as comparison
+            detected_years = YEAR_RE.findall(q_lower)
+            two_years_with_change = (len({*detected_years}) >= 2) and (change_from_to or any(k in q_lower for k in ['change'] + comparison_keywords))
+            is_comparison = any(keyword in q_lower for keyword in comparison_keywords) or change_from_to or from_to_years or two_years_with_change
 
-                # --- Enhanced Logic for Comparative & Trend Queries ---
-                comparison_keywords = ['compare', 'vs', 'versus', 'between']
-                # Allow words between 'from' and years, and between 'to' and years
-                change_from_to = bool(CHANGE_FROM_TO_RE.search(q_lower))
-                from_to_years = bool(FROM_TO_YEARS_RE.search(q_lower))
-                trend_keywords = ['trend', 'over time', 'evolution', 'progression', 'history']
-                trend_requested = any(k in q_lower for k in trend_keywords)
-                # Additional guard: if we see two distinct years and 'change' or comparison words, treat as comparison
-                detected_years = YEAR_RE.findall(q_lower)
-                two_years_with_change = (len({*detected_years}) >= 2) and (change_from_to or any(k in q_lower for k in ['change'] + comparison_keywords))
-                is_comparison = any(keyword in q_lower for keyword in comparison_keywords) or change_from_to or from_to_years or two_years_with_change
+            norm_metric_key = re.sub(r'[^a-z0-9]', '', metric_display_name.lower())
 
-                norm_metric_key = re.sub(r'[^a-z0-9]', '', metric_display_name.lower())
-
-                if trend_requested or is_comparison:
+            if trend_requested or is_comparison:
                     # --- START: Comparative/Trend Analysis (Hardened) ---
                     try:
                         # Non-capturing to get full years
@@ -406,7 +702,12 @@ class FinancialDataEngine:
                         series = self._collect_metric_series(norm_metric_key, start_year, end_year, prefer_annual=prefer_annual_flag)
                         if series:
                             parts = []
-                            if is_comparison and len(series) >= 2:
+                            if is_comparison:
+                                if len(series) < 2:
+                                    self.last_source_refs = None
+                                    self.last_confidence = 'low'
+                                    return "Insufficient data to compare the requested periods. Please provide at least two valid reporting dates."
+
                                 old_y, old_date, old_val = series[0]
                                 new_y, new_date, new_val = series[-1]
                                 try:
@@ -417,25 +718,26 @@ class FinancialDataEngine:
                                     pct_change = (delta / abs(float(old_val))) * 100.0 if float(old_val) != 0 else 0.0
                                 except Exception:
                                     pct_change = 0.0
-                                
-                                # Enhanced analyst-style comparative narrative
+
                                 if delta > 0:
-                                    direction = "increased"
-                                    movement = "growth"
+                                    change_clause = (
+                                        f"This increase represents growth of {_format_metric_value(metric_display_name, abs(delta))} "
+                                        f"({pct_change:+.2f}% period change)."
+                                    )
                                 elif delta < 0:
-                                    direction = "decreased"
-                                    movement = "decline"
+                                    change_clause = (
+                                        f"This decrease represents a decline of {_format_metric_value(metric_display_name, abs(delta))} "
+                                        f"({pct_change:+.2f}% period change)."
+                                    )
                                 else:
-                                    direction = "remained stable"
-                                    movement = "no net change"
-                                
-                                parts.append(
-                                    f"**Comparative Analysis:** Jaiz Bank's {metric_display_name} {direction} from "
+                                    change_clause = "This remained stable with no net change."
+
+                                comparison_line = (
+                                    f"Comparing {old_y} vs {new_y}, Jaiz Bank's {metric_display_name} went from "
                                     f"{_format_metric_value(metric_display_name, old_val)} in {old_y} (year-end {old_date}) to "
-                                    f"{_format_metric_value(metric_display_name, new_val)} in {new_y} (year-end {new_date}), "
-                                    f"representing {movement} of {_format_metric_value(metric_display_name, abs(delta))} "
-                                    f"({pct_change:+.2f}% period change)."
+                                    f"{_format_metric_value(metric_display_name, new_val)} in {new_y} (year-end {new_date})."
                                 )
+                                parts.append(f"Comparative analysis: {comparison_line} {change_clause}")
                             if trend_requested:
                                 # Enhanced analyst-style trend narrative
                                 trend_intro = f"**Historical Trend ({series[0][0]}–{series[-1][0]}):** "
@@ -459,8 +761,8 @@ class FinancialDataEngine:
                     except Exception as e:
                         logging.error(f"Comparative/Trend analysis failed: {e}")
 
-                # --- Direct (non-trend) metric lookup ---
-                try:
+            # --- Direct (non-trend) metric lookup ---
+            try:
                     # Collect all candidates for the metric
                     candidates = [(val, dt) for (k, dt), val in self.metrics.items() if k == norm_metric_key]
                     if not candidates:
@@ -479,101 +781,79 @@ class FinancialDataEngine:
                         except Exception:
                             target_year = None
 
-                    if target_year:
-                        year_candidates = []
-                        for val, dt in candidates:
-                            try:
-                                if isinstance(dt, str) and dt.startswith(target_year):
-                                    year_candidates.append((val, dt))
-                            except Exception:
-                                continue
-                        if not year_candidates:
-                            continue
-                        # If quarter requested, select that month if present
-                        q_val = None
-                        if quarter_match:
-                            try:
-                                q_val = quarter_match.group(1) if hasattr(quarter_match, 'group') else None
-                            except Exception:
-                                q_val = None
-                        if q_val:
-                            quarter_months = {'1': '03', '2': '06', '3': '09', '4': '12'}
-                            tmonth = quarter_months.get(q_val)
-                            if tmonth:
-                                for val, dt in year_candidates:
-                                    try:
-                                        if f"-{tmonth}-" in (dt or ''):
-                                            # Use contextual response for quarterly data too
-                                            report_meta = (self.date_to_meta.get(dt) or [None])[0]
-                                            if report_meta:
-                                                analysis = self._interpret_financial_value(metric_display_name, val, report_meta)
-                                                self.last_source_refs = [{
-                                                    'file_name': report_meta.get('file_name'),
-                                                    'report_date': dt
-                                                }]
-                                                self.last_confidence = 'medium' if analysis.get('needs_qualification') else 'high'
-                                                return self._format_contextual_response(metric_display_name, analysis, dt)
-                                            else:
-                                                return (
-                                                    f"{metric_display_name.title()} for {target_year} was "
-                                                    f"{_format_metric_value(metric_display_name, val)} (as of {dt})."
-                                                )
-                                    except Exception:
-                                        continue
-                        # Otherwise, score within the year (prefer annual month 12, non-zero, then month rank)
-                        # EPS special-case: always prefer year-end (Dec) snapshot when a year is specified
-                        norm_eps_key = re.sub(r'[^a-z0-9]', '', self.METRIC_EARNINGS_PER_SHARE)
-                        eps_always_annual = (norm_metric_key == norm_eps_key)
-                        def _month_pref(m: int) -> int:
-                            order = {12: 4, 9: 3, 6: 2, 3: 1}
-                            return order.get(m, 0)
-                        scored = []
-                        for val, dt in year_candidates:
-                            try:
-                                m = int(dt[5:7]) if isinstance(dt, str) and len(dt) >= 7 else 0
-                            except Exception:
-                                m = 0
-                            nz = 1 if (isinstance(val, (int, float)) and float(val) != 0.0) else 0
-                            annual_boost = 1 if ((prefer_annual_flag or eps_always_annual) and m == 12) else 0
-                            score = (annual_boost, nz, _month_pref(m), dt)
-                            scored.append((score, val, dt))
-                        scored.sort(key=lambda x: x[0], reverse=True)
-                        best = scored[0]
-                        # Use contextual response system (precomputed meta)
-                        report_meta = (self.date_to_meta.get(best[2]) or [None])[0]
-                        if report_meta:
-                            analysis = self._interpret_financial_value(metric_display_name, best[1], report_meta)
-                            self.last_source_refs = [{
-                                'file_name': report_meta.get('file_name'),
-                                'report_date': best[2]
-                            }]
-                            self.last_confidence = 'medium' if analysis.get('needs_qualification') else 'high'
-                            return self._format_contextual_response(metric_display_name, analysis, best[2])
-                        else:
-                            return (
-                                f"{metric_display_name.title()} for {target_year} was "
-                                f"{_format_metric_value(metric_display_name, best[1])} (as of {best[2]})."
-                            )
+                    is_specific_period = bool(target_year or quarter_token)
+                    quarter_label = f"Q{quarter_token}" if quarter_token else None
 
-                    # No specific year: return latest with contextual analysis
-                    latest_val, latest_date = candidates[0]
-                    report_meta = (self.date_to_meta.get(latest_date) or [None])[0]
+                    best_match = self._find_best_date_match(
+                        norm_metric_key,
+                        target_year,
+                        quarter_token,
+                        prefer_annual_flag,
+                    )
+
+                    if not best_match:
+                        self.last_source_refs = None
+                        self.last_confidence = 'low'
+                        return None
+
+                    best_val, best_date = best_match
+                    report_meta = (self.date_to_meta.get(best_date) or [None])[0]
+
                     if report_meta:
-                        analysis = self._interpret_financial_value(metric_display_name, latest_val, report_meta)
+                        analysis = self._interpret_financial_value(metric_display_name, best_val, report_meta)
                         self.last_source_refs = [{
                             'file_name': report_meta.get('file_name'),
-                            'report_date': latest_date
+                            'report_date': best_date
                         }]
                         self.last_confidence = 'medium' if analysis.get('needs_qualification') else 'high'
-                        return f"The latest {self._format_contextual_response(metric_display_name, analysis, latest_date)}"
-                    else:
-                        return (
+
+                        if quarter_label and not analysis.get('needs_qualification'):
+                            if isinstance(best_date, str) and len(best_date) >= 4:
+                                year_fragment = best_date[:4]
+                                quarter_phrase = f"{quarter_label} {year_fragment}"
+                            else:
+                                quarter_phrase = quarter_label
+                            formatted_value = _format_metric_value(metric_display_name, best_val)
+                            date_fragment = best_date if best_date else 'the record date'
+                            contextual = (
+                                f"{metric_display_name.title()} for {quarter_phrase} was "
+                                f"{formatted_value} (as of {date_fragment})."
+                            )
+                        else:
+                            contextual = self._format_contextual_response(metric_display_name, analysis, best_date)
+
+                        base_line = (
                             f"The latest {metric_display_name} is "
-                            f"{_format_metric_value(metric_display_name, latest_val)} (as of {latest_date})."
+                            f"{_format_metric_value(metric_display_name, best_val)} (as of {best_date})."
                         )
-                except Exception as e:
-                    logging.error(f"Direct metric lookup failed: {e}", exc_info=True)
-                    continue
+
+                        if not is_specific_period:
+                            if analysis.get('needs_qualification'):
+                                return f"{base_line} {contextual}"
+                            return base_line
+                        return contextual
+
+                    year_fragment = best_date[:4] if isinstance(best_date, str) and len(best_date) >= 4 else 'the period'
+                    date_fragment = best_date if best_date else 'the record date'
+                    formatted_value = _format_metric_value(metric_display_name, best_val)
+
+                    if is_specific_period:
+                        if quarter_label:
+                            prefix = f"{quarter_label} {year_fragment}" if year_fragment != 'the period' else quarter_label
+                        else:
+                            prefix = year_fragment
+                        return (
+                            f"{metric_display_name.title()} for {prefix.strip()} was "
+                            f"{formatted_value} (as of {date_fragment})."
+                        )
+
+                    return (
+                        f"The latest {metric_display_name} is "
+                        f"{formatted_value} (as of {date_fragment})."
+                    )
+            except Exception as e:
+                logging.error(f"Direct metric lookup failed: {e}", exc_info=True)
+                continue
 
         return None
 
@@ -1221,6 +1501,19 @@ class IntelligentAgent:
             return True
         return False
 
+    def _get_semantic_searcher(self):
+        """Lazily instantiate the semantic searcher when available."""
+        if SemanticSearcher is None:
+            return None
+        if self._semantic_searcher is not None:
+            return self._semantic_searcher
+        try:
+            self._semantic_searcher = SemanticSearcher()  # type: ignore
+        except Exception as e:
+            logging.error(f"Semantic searcher initialization failed: {e}")
+            self._semantic_searcher = None
+        return self._semantic_searcher
+
     def _classify_intent(self, question: str) -> str:
         """Classify intent: SPECIFIC_LOOKUP vs CONCEPTUAL.
 
@@ -1517,7 +1810,34 @@ class IntelligentAgent:
             }
 
         # Chain of Command stage 2: try semantic search (local)
-        # --- FIX 3: Semantic Fallback Engine Disabled ---
+        searcher = self._get_semantic_searcher()
+        if searcher and getattr(searcher, 'available', lambda: True)():
+            try:
+                semantic_hits = searcher.search(question, k=1)
+            except Exception as e:
+                logging.error(f"Semantic search execution failed: {e}")
+                semantic_hits = []
+            if semantic_hits:
+                top_score, payload = semantic_hits[0]
+                candidate = None
+                if isinstance(payload, dict):
+                    candidate = payload.get('text') or payload.get('content') or payload.get('answer')
+                else:
+                    candidate = payload
+                answer_text = str(candidate).strip() if candidate is not None else ''
+                if answer_text:
+                    ref = None
+                    if isinstance(payload, dict):
+                        ref = {**payload}
+                        ref['semantic_score'] = top_score
+                    return {
+                        'answer_text': answer_text,
+                        'answer': answer_text,
+                        'brain_used': 'Brain 1',
+                        'provenance': 'SemanticSearchFallback',
+                        'confidence': 'medium',
+                        'source_refs': [ref] if ref else None
+                    }
 
         # Chain of Command stage 3: Vertex AI Gemini (final fallback)
         try:  # pragma: no cover - external dependency

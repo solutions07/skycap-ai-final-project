@@ -2,6 +2,36 @@
   "financial_reports": [
     {
       "report_metadata": {
+        "file_name": "Image upload - Statement of Earning Forcast for Quarter 3 2024",
+        "report_date": "2024-09-30",
+        "metrics": {
+          "gross earnings": 21227955943.03,
+          "income from financing and investment": 19445878444.91,
+          "return on equity": -5040535922.3,
+          "net revenue from funds": 14605342522.62,
+          "credit impairment charges": -1886617460.9,
+          "exceptional items": null,
+          "other income": 1582077498.11,
+          "net operating income": 14300802559.83,
+          "operating expenses": 8170525323.0,
+          "profit before tax": 6130277236.83,
+          "taxation expense": -613027723.68,
+          "profit after tax": 5517249513.15,
+          "cash from operating activities": 8442678337.61,
+          "operating cash flow before working capital charges": 8442678337.61,
+          "net cash generated from operating activities": -2854467424.41,
+          "cash flow from investing activities": -2958043581.33,
+          "cash flow from financing activities": 13448551910.35,
+          "net decrease in cash and cash equivalents": 7654040704.61,
+          "cash and bank balance at beginning of period": 181192963342.37,
+          "cash and bank balance at end of period": 188849004046.98
+        },
+        "_processed_date": "2025-10-20",
+        "_file_size_bytes": 0
+      }
+    },
+    {
+      "report_metadata": {
         "file_name": "41271_JAIZ_BANK_PLC-_QUARTER_1_-_FINANCIAL_STATEMENT_FOR_2024_FINANCIAL_STATEMENTS_MAY_2024.pdf",
         "report_date": "2024-03-31",
         "metrics": {
