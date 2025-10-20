@@ -206,7 +206,7 @@ def _compile_metric_regex(alias: str) -> Optional[re.Pattern]:
     if not tokens:
         return None
     if len(tokens) == 1:
-        pattern = rf"\\b{re.escape(tokens[0])}\\b"
+        pattern = rf"\b{re.escape(tokens[0])}\b"
     else:
         separator = r'(?:[\s\-/&]+)'
         pattern = r'\b' + separator.join(re.escape(token) for token in tokens) + r'\b'
