@@ -4,6 +4,7 @@ import re
 import logging
 import os
 from datetime import datetime
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from typing import Optional
 
 
@@ -213,24 +214,64 @@ def _compile_metric_regex(alias: str) -> Optional[re.Pattern]:
     return re.compile(pattern, re.IGNORECASE)
 
 def _format_large_number(value):
-    """Format large numbers with Nigerian Naira currency and appropriate units.
-
-    NOTE (V1.2): Source metrics are expressed in thousands; convert to full value before formatting.
-    Example: 580131058.0 (thousands) -> ₦580.131 Billion
-    """
-    if not isinstance(value, (int, float)):
-        return str(value)
+    """Format large numbers with Nigerian Naira currency and appropriate units."""
     try:
-        scaled = float(value) * 1_000.0  # convert 'in thousands' to actual ₦
-    except Exception:
-        scaled = 0.0
-    if scaled >= 1_000_000_000_000:
-        return f"₦{scaled / 1_000_000_000_000:.3f} Trillion"
-    if scaled >= 1_000_000_000:
-        return f"₦{scaled / 1_000_000_000:.3f} Billion"
-    if scaled >= 1_000_000:
-        return f"₦{scaled / 1_000_000:.3f} Million"
-    return f"₦{scaled:,.2f}"
+        number = Decimal(str(value))
+    except (InvalidOperation, TypeError, ValueError):
+        return str(value)
+    if not number.is_finite():
+        return str(value)
+
+    thousands_multiplier = Decimal('1000')
+    scaled = number * thousands_multiplier
+    abs_scaled = scaled.copy_abs()
+
+    unit = ''
+    divisor = Decimal('1')
+    trillion = Decimal('1000000000000')
+    billion = Decimal('1000000000')
+    million = Decimal('1000000')
+
+    precision_map = {
+        trillion: Decimal('0.000001'),
+        billion: Decimal('0.000001'),
+        million: Decimal('0.001'),
+    }
+
+    if abs_scaled >= trillion:
+        unit = ' Trillion'
+        divisor = trillion
+    elif abs_scaled >= billion:
+        unit = ' Billion'
+        divisor = billion
+    elif abs_scaled >= million:
+        unit = ' Million'
+        divisor = million
+
+    if divisor != Decimal('1'):
+        precision = precision_map.get(divisor, Decimal('0.01'))
+        display_value = (scaled / divisor).quantize(precision, rounding=ROUND_HALF_UP)
+    else:
+        precision = Decimal('0.01')
+        display_value = scaled.quantize(precision, rounding=ROUND_HALF_UP)
+
+    magnitude = format(display_value.copy_abs(), ',f')
+    if '.' in magnitude:
+        magnitude = magnitude.rstrip('0').rstrip('.')
+    sign = '-' if scaled < 0 else ''
+    formatted_unit = f"₦{sign}{magnitude}{unit}".strip()
+
+    raw_currency = format(scaled, ',.2f')
+    if raw_currency.endswith('00'):
+        raw_currency = raw_currency[:-3]
+    elif raw_currency.endswith('0'):
+        raw_currency = raw_currency[:-1]
+    raw_currency = f"₦{raw_currency}"
+
+    if abs_scaled >= million:
+        return f"{raw_currency} ({formatted_unit})"
+
+    return formatted_unit
 
 def _format_metric_value(metric_name: str, value):
     """Format metric values smartly based on their type.
@@ -242,14 +283,21 @@ def _format_metric_value(metric_name: str, value):
     metric_cfg = METRIC_REGISTRY.get(metric_key) if metric_key else None
     if metric_cfg and metric_cfg.get('scaling') == 'thousands':
         return _format_large_number(value)
-    # EPS and others: return as-is, formatted to sensible precision
+
     try:
-        if isinstance(value, (int, float)):
-            # show up to 4 decimals for small EPS
-            return f"{float(value):g}"
-    except Exception:
+        number = Decimal(str(value))
+    except (InvalidOperation, TypeError, ValueError):
+        return str(value)
+
+    precision = Decimal('0.0001') if metric_cfg and metric_cfg.get('value_type') == 'per_share' else Decimal('0.01')
+    try:
+        number = number.quantize(precision, rounding=ROUND_HALF_UP)
+    except InvalidOperation:
         pass
-    return str(value)
+    formatted = format(number, 'f')
+    if '.' in formatted:
+        formatted = formatted.rstrip('0').rstrip('.')
+    return formatted
 
 def _load_kb(path):
     """Load knowledge base from JSON file."""
@@ -1547,12 +1595,23 @@ class IntelligentAgent:
 
     def _ask_vertex(self, question: str):
         """Call Vertex AI with robust extraction and fallback; return answer dict or None."""
+        offline_message = (
+            "SkyCap AI's external research brain is currently unavailable. "
+            "Please try again later or refine your question to focus on data available in Brain 1."
+        )
         try:
             if self.vertex_model is None:
                 # Try one-time fallback init if not available
                 self._init_vertex_fallback()
             if self.vertex_model is None:
-                return None
+                return {
+                    'answer': offline_message,
+                    'answer_text': offline_message,
+                    'brain_used': 'Brain 2/3',
+                    'provenance': 'VertexAI-Unavailable',
+                    'confidence': 'low',
+                    'source_refs': None,
+                }
             prompt = (
                 "You are SkyCap AI's external brain. Provide a concise, factual answer to the user's question. "
                 "If you are unsure, say you don't have enough information.\n\n"
@@ -1575,8 +1634,11 @@ class IntelligentAgent:
             if answer_text:
                 return {
                     'answer': answer_text,
+                    'answer_text': answer_text,
                     'brain_used': 'Brain 2/3',
-                    'provenance': 'VertexAI'
+                    'provenance': 'VertexAI',
+                    'confidence': 'medium',
+                    'source_refs': None,
                 }
             # Retry once with fallback init
             if self._init_vertex_fallback():
@@ -1597,12 +1659,30 @@ class IntelligentAgent:
                 if ans2:
                     return {
                         'answer': ans2,
+                        'answer_text': ans2,
                         'brain_used': 'Brain 2/3',
-                        'provenance': 'VertexAI'
+                        'provenance': 'VertexAI',
+                        'confidence': 'medium',
+                        'source_refs': None,
                     }
         except Exception as e:
             logging.error(f"Vertex AI call failed: {e}")
-        return None
+            return {
+                'answer': offline_message,
+                'answer_text': offline_message,
+                'brain_used': 'Brain 2/3',
+                'provenance': 'VertexAI-Unavailable',
+                'confidence': 'low',
+                'source_refs': None,
+            }
+        return {
+            'answer': offline_message,
+            'answer_text': offline_message,
+            'brain_used': 'Brain 2/3',
+            'provenance': 'VertexAI-Unavailable',
+            'confidence': 'low',
+            'source_refs': None,
+        }
 
     def _init_vertex_fallback(self) -> bool:
         """Attempt a robust Vertex model/location fallback when a 404 or config error occurs.

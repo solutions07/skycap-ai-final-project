@@ -3,10 +3,8 @@
 
 import argparse
 import json
-import os
 import secrets
 import sys
-import time
 from pathlib import Path
 
 APP_ROOT = Path(__file__).resolve().parent
@@ -59,21 +57,20 @@ def main() -> None:
         print("[error] Token lifespan must be a positive integer.", file=sys.stderr)
         sys.exit(1)
 
-    expires_at = time.time() + (args.minutes * 60)
     token = _generate_token()
 
     tokens = _load_tokens()
     tokens[token] = {
-        "expiration_timestamp": expires_at,
+        "duration_minutes": args.minutes,
+        "first_used_timestamp": None,
         "bound_ip_address": None,
         "bound_user_agent": None,
     }
     _save_tokens(tokens)
 
-    local_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(expires_at))
     print("=== SkyCap Access Token Generated ===")
     print(f"Token: {token}")
-    print(f"Expires At (local time): {local_time}")
+    print(f"Duration: {args.minutes} minute(s) after first activation")
     print(f"Tokens file: {TOKENS_FILE}")
 
 

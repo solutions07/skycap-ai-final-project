@@ -2,7 +2,8 @@ import json
 import os
 import threading
 import time
-from flask import Flask, request, jsonify, send_from_directory, session
+from typing import Optional
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 import logging
 from intelligent_agent import IntelligentAgent
@@ -16,7 +17,10 @@ except Exception:  # pragma: no cover
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', os.urandom(32))
+env_secret = os.environ.get('FLASK_SECRET_KEY')
+if not env_secret:
+    raise RuntimeError("FLASK_SECRET_KEY environment variable must be set for session security.")
+app.config['SECRET_KEY'] = env_secret
 app.config['SESSION_COOKIE_SAMESITE'] = 'None'
 app.config['SESSION_COOKIE_SECURE'] = True
 
@@ -33,6 +37,17 @@ TOKENS_FILE_PATH = os.path.join(APP_ROOT, 'tokens.json')
 _TOKEN_STORE = {}
 _TOKEN_LOCK = threading.Lock()
 _TOKENS_MTIME = None
+
+
+def _compute_expiration(record: dict) -> Optional[float]:
+    try:
+        duration = float(record.get('duration_minutes'))
+        first_used = float(record.get('first_used_timestamp'))
+    except (TypeError, ValueError):
+        return None
+    if duration <= 0:
+        return None
+    return first_used + (duration * 60.0)
 
 
 def _refresh_token_store(force: bool = False):
@@ -56,14 +71,20 @@ def _refresh_token_store(force: bool = False):
                 if not isinstance(meta, dict):
                     continue
                 fresh_tokens.add(token)
-                record = _TOKEN_STORE.get(token, {}).copy()
-                record['expiration_timestamp'] = meta.get('expiration_timestamp')
-                record['bound_ip_address'] = record.get('bound_ip_address') or meta.get('bound_ip_address')
-                record['bound_user_agent'] = record.get('bound_user_agent') or meta.get('bound_user_agent')
-                if record.get('bound_ip_address') is None:
-                    record['bound_ip_address'] = None
-                if record.get('bound_user_agent') is None:
-                    record['bound_user_agent'] = None
+                try:
+                    duration_val = float(meta.get('duration_minutes'))
+                except (TypeError, ValueError):
+                    duration_val = None
+                try:
+                    first_used_val = float(meta.get('first_used_timestamp')) if meta.get('first_used_timestamp') is not None else None
+                except (TypeError, ValueError):
+                    first_used_val = None
+                record = {
+                    'duration_minutes': duration_val,
+                    'first_used_timestamp': first_used_val,
+                    'bound_ip_address': meta.get('bound_ip_address'),
+                    'bound_user_agent': meta.get('bound_user_agent'),
+                }
                 _TOKEN_STORE[token] = record
             stale_tokens = set(_TOKEN_STORE.keys()) - fresh_tokens
             for stale in stale_tokens:
@@ -87,7 +108,8 @@ def _persist_token(token: str):
             record = _TOKEN_STORE.get(token)
             if record:
                 data[token] = {
-                    'expiration_timestamp': record.get('expiration_timestamp'),
+                    'duration_minutes': record.get('duration_minutes'),
+                    'first_used_timestamp': record.get('first_used_timestamp'),
                     'bound_ip_address': record.get('bound_ip_address'),
                     'bound_user_agent': record.get('bound_user_agent'),
                 }
@@ -325,32 +347,47 @@ def verify_token():
     if not token_record:
         return jsonify({'status': 'error', 'message': 'Invalid or expired token.'}), 401
 
-    expiration = token_record.get('expiration_timestamp')
-    if not isinstance(expiration, (int, float)) or time.time() > float(expiration):
+    duration = token_record.get('duration_minutes')
+    if not isinstance(duration, (int, float)) or float(duration) <= 0:
         with _TOKEN_LOCK:
             _TOKEN_STORE.pop(token, None)
         _persist_token(token)
-        return jsonify({'status': 'error', 'message': 'Token expired.'}), 401
+        return jsonify({'status': 'error', 'message': 'Token invalid.'}), 401
 
     ip_address, user_agent = _get_request_fingerprint()
     bound_ip = token_record.get('bound_ip_address')
     bound_ua = token_record.get('bound_user_agent')
+    first_used = token_record.get('first_used_timestamp')
 
-    if bound_ip and bound_ip != ip_address or bound_ua and bound_ua != user_agent:
-        return jsonify({'status': 'error', 'message': 'Token already bound to another device.'}), 403
+    now = time.time()
+    expiration = _compute_expiration(token_record) if first_used is not None else None
 
-    if not bound_ip and not bound_ua:
+    if first_used is None:
         with _TOKEN_LOCK:
+            token_record['first_used_timestamp'] = now
             token_record['bound_ip_address'] = ip_address
             token_record['bound_user_agent'] = user_agent
             _TOKEN_STORE[token] = token_record
+        expiration = _compute_expiration(token_record)
         _persist_token(token)
+    else:
+        if (bound_ip and bound_ip != ip_address) or (bound_ua and bound_ua != user_agent):
+            return jsonify({'status': 'error', 'message': 'Token already bound to another device.'}), 403
+        if expiration is None or now > expiration:
+            with _TOKEN_LOCK:
+                _TOKEN_STORE.pop(token, None)
+            _persist_token(token)
+            return jsonify({'status': 'error', 'message': 'Token expired.'}), 401
 
     session['authenticated'] = True
     session['token'] = token
     session.permanent = False
 
-    return jsonify({'status': 'ok', 'message': 'Token verified.', 'expires_at': expiration}), 200
+    return jsonify({
+        'status': 'ok',
+        'message': 'Token verified.',
+        'expires_at': expiration
+    }), 200
 
 
 def _validate_session_and_token():
@@ -370,8 +407,18 @@ def _validate_session_and_token():
         session.clear()
         return False, jsonify({'error': 'Token invalid.'}), 401
 
-    expiration = token_record.get('expiration_timestamp')
-    if not isinstance(expiration, (int, float)) or time.time() > float(expiration):
+    duration = token_record.get('duration_minutes')
+    first_used = token_record.get('first_used_timestamp')
+    if not isinstance(duration, (int, float)) or float(duration) <= 0 or first_used is None:
+        with _TOKEN_LOCK:
+            _TOKEN_STORE.pop(token, None)
+        _persist_token(token)
+        session.clear()
+        return False, jsonify({'error': 'Token invalid.'}), 401
+
+    expiration = _compute_expiration(token_record)
+    now = time.time()
+    if expiration is None or now > expiration:
         with _TOKEN_LOCK:
             _TOKEN_STORE.pop(token, None)
         _persist_token(token)

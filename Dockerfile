@@ -22,6 +22,8 @@ COPY search_index.py .
 COPY build_index.py .
 # Copy all data assets (including knowledge base)
 COPY data/ ./data/
+# Copy token ledger for recharge-card access control
+COPY tokens.json ./tokens.json
 
 # Set the port the app runs on
 ENV PORT=8080
