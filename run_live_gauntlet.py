@@ -51,7 +51,7 @@ def build_expected_for_metric(fin: ia.FinancialDataEngine, metric_display: str, 
         scored.append((score, val, dt))
     scored.sort(key=lambda x: x[0], reverse=True)
     best = scored[0]
-    formatted = ia._format_metric_value(metric_display, best[1])
+    formatted = ia._format_metric_value(metric_display, best[1], best[2])
     return f"{metric_display.title()} for {year} was {formatted} (as of {best[2]})."
 
 

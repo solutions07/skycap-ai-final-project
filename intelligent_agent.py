@@ -174,6 +174,43 @@ METRIC_REGISTRY = {
     },
 }
 
+# Reports that store metrics in full Naira amounts rather than "in thousands"
+RAW_VALUE_REPORT_DATES = {
+    '2024-09-30',  # Forecast pack provides absolute values
+}
+
+# Specific metric/date combinations that should bypass the thousands scaling
+RAW_VALUE_METRIC_OVERRIDES = {
+}
+
+CONCEPTUAL_FALLBACKS = {
+    'earnings yield': (
+        "Earnings yield is the inverse of the P/E ratio. It compares a company's earnings per share to "
+        "its current share price, expressed as a percentage. Investors use it to gauge how much profit "
+        "a company generates for every naira invested in the stock; higher yields often indicate lower valuations."
+    ),
+    'discounted cash flow': (
+        "Discounted cash-flow (DCF) analysis estimates the present value of expected future cash flows. "
+        "Each cash flow is discounted back using a rate that reflects the firm's risk and capital costs, "
+        "allowing analysts to compare intrinsic value with the current market price."
+    ),
+    'capital adequacy ratio': (
+        "The capital adequacy ratio (CAR) measures a bank's capital relative to its risk-weighted assets. "
+        "Regulators require minimum CAR levels so that banks can absorb losses while honoring depositor obligations."
+    ),
+}
+
+
+def _conceptual_fallback_for_question(question: str) -> Optional[str]:
+    """Return a conceptual fallback explanation if the query references a known concept."""
+    if not question:
+        return None
+    ql = question.lower()
+    for concept, explanation in CONCEPTUAL_FALLBACKS.items():
+        if concept in ql:
+            return explanation
+    return None
+
 # Quarter interpretation maps
 QUARTER_MONTH_MAP = {
     '1': '03',
@@ -213,8 +250,8 @@ def _compile_metric_regex(alias: str) -> Optional[re.Pattern]:
         pattern = r'\b' + separator.join(re.escape(token) for token in tokens) + r'\b'
     return re.compile(pattern, re.IGNORECASE)
 
-def _format_large_number(value):
-    """Format large numbers with Nigerian Naira currency and appropriate units."""
+def _format_large_number(value, in_thousands: bool = True):
+    """Format currency values with NGN symbol, handling optional thousand scaling."""
     try:
         number = Decimal(str(value))
     except (InvalidOperation, TypeError, ValueError):
@@ -222,67 +259,71 @@ def _format_large_number(value):
     if not number.is_finite():
         return str(value)
 
-    thousands_multiplier = Decimal('1000')
-    scaled = number * thousands_multiplier
+    scale_factor = Decimal('1000') if in_thousands else Decimal('1')
+    scaled = number * scale_factor
     abs_scaled = scaled.copy_abs()
 
-    unit = ''
+    thresholds = [
+        (Decimal('1000000000000'), ' Trillion', Decimal('0.000001')),
+        (Decimal('1000000000'), ' Billion', Decimal('0.000001')),
+        (Decimal('1000000'), ' Million', Decimal('0.001')),
+    ]
+
+    unit_label = ''
     divisor = Decimal('1')
-    trillion = Decimal('1000000000000')
-    billion = Decimal('1000000000')
-    million = Decimal('1000000')
+    quantize_precision = Decimal('0.01')
 
-    precision_map = {
-        trillion: Decimal('0.000001'),
-        billion: Decimal('0.000001'),
-        million: Decimal('0.001'),
-    }
-
-    if abs_scaled >= trillion:
-        unit = ' Trillion'
-        divisor = trillion
-    elif abs_scaled >= billion:
-        unit = ' Billion'
-        divisor = billion
-    elif abs_scaled >= million:
-        unit = ' Million'
-        divisor = million
+    for threshold, label, precision in thresholds:
+        if abs_scaled >= threshold:
+            unit_label = label
+            divisor = threshold
+            quantize_precision = precision
+            break
 
     if divisor != Decimal('1'):
-        precision = precision_map.get(divisor, Decimal('0.01'))
-        display_value = (scaled / divisor).quantize(precision, rounding=ROUND_HALF_UP)
+        display_value = (scaled / divisor).quantize(quantize_precision, rounding=ROUND_HALF_UP)
     else:
-        precision = Decimal('0.01')
-        display_value = scaled.quantize(precision, rounding=ROUND_HALF_UP)
+        display_value = scaled.quantize(quantize_precision, rounding=ROUND_HALF_UP)
 
     magnitude = format(display_value.copy_abs(), ',f')
     if '.' in magnitude:
         magnitude = magnitude.rstrip('0').rstrip('.')
+
     sign = '-' if scaled < 0 else ''
-    formatted_unit = f"₦{sign}{magnitude}{unit}".strip()
+    formatted_with_unit = f"₦{sign}{magnitude}{unit_label}".strip()
 
-    raw_currency = format(scaled, ',.2f')
-    if raw_currency.endswith('00'):
-        raw_currency = raw_currency[:-3]
-    elif raw_currency.endswith('0'):
-        raw_currency = raw_currency[:-1]
-    raw_currency = f"₦{raw_currency}"
+    raw_display = scaled.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+    raw_magnitude = format(raw_display, ',f')
+    if '.' in raw_magnitude:
+        raw_magnitude = raw_magnitude.rstrip('0').rstrip('.')
+    raw_currency = f"₦{raw_magnitude}"
 
-    if abs_scaled >= million:
-        return f"{raw_currency} ({formatted_unit})"
+    if abs_scaled >= Decimal('1000000'):
+        return f"{raw_currency} ({formatted_with_unit})"
 
-    return formatted_unit
+    return formatted_with_unit
 
-def _format_metric_value(metric_name: str, value):
-    """Format metric values smartly based on their type.
+def _metric_uses_raw_values(metric_key: Optional[str], report_date: Optional[str]) -> bool:
+    """Determine if a metric/report pair stores absolute values instead of thousands."""
+    if not report_date:
+        return False
+    if report_date in RAW_VALUE_REPORT_DATES:
+        return True
+    if metric_key:
+        normalized = metric_key.strip().lower()
+        if (normalized, report_date) in RAW_VALUE_METRIC_OVERRIDES:
+            return True
+    return False
 
-    - Currency-like metrics (assets, PBT, gross earnings) are in thousands and use _format_large_number.
-    - Earnings per share (EPS) is a plain number; no currency symbol or thousands scaling.
-    """
+
+def _format_metric_value(metric_name: str, value, report_date: Optional[str] = None):
+    """Format metric values smartly based on type and report metadata."""
     metric_key = metric_name.strip().lower() if isinstance(metric_name, str) else None
     metric_cfg = METRIC_REGISTRY.get(metric_key) if metric_key else None
+
     if metric_cfg and metric_cfg.get('scaling') == 'thousands':
-        return _format_large_number(value)
+        bypass_scaling = _metric_uses_raw_values(metric_key, report_date)
+        return _format_large_number(value, in_thousands=not bypass_scaling)
 
     try:
         number = Decimal(str(value))
@@ -452,7 +493,7 @@ class FinancialDataEngine:
                        f"before making critical business decisions.")
         
         # Standard formatting for confident values
-        formatted_value = _format_metric_value(metric, raw_value)
+        formatted_value = _format_metric_value(metric, raw_value, report_date)
         return f"{metric.title()} for {report_date[:4]} was {formatted_value} (as of {report_date})."
 
     def _build_index(self):
@@ -769,12 +810,12 @@ class FinancialDataEngine:
 
                                 if delta > 0:
                                     change_clause = (
-                                        f"This increase represents growth of {_format_metric_value(metric_display_name, abs(delta))} "
+                                        f"This increase represents growth of {_format_metric_value(metric_display_name, abs(delta), new_date)} "
                                         f"({pct_change:+.2f}% period change)."
                                     )
                                 elif delta < 0:
                                     change_clause = (
-                                        f"This decrease represents a decline of {_format_metric_value(metric_display_name, abs(delta))} "
+                                        f"This decrease represents a decline of {_format_metric_value(metric_display_name, abs(delta), new_date)} "
                                         f"({pct_change:+.2f}% period change)."
                                     )
                                 else:
@@ -782,15 +823,15 @@ class FinancialDataEngine:
 
                                 comparison_line = (
                                     f"Comparing {old_y} vs {new_y}, Jaiz Bank's {metric_display_name} went from "
-                                    f"{_format_metric_value(metric_display_name, old_val)} in {old_y} (year-end {old_date}) to "
-                                    f"{_format_metric_value(metric_display_name, new_val)} in {new_y} (year-end {new_date})."
+                                    f"{_format_metric_value(metric_display_name, old_val, old_date)} in {old_y} (year-end {old_date}) to "
+                                    f"{_format_metric_value(metric_display_name, new_val, new_date)} in {new_y} (year-end {new_date})."
                                 )
                                 parts.append(f"Comparative analysis: {comparison_line} {change_clause}")
                             if trend_requested:
                                 # Enhanced analyst-style trend narrative
                                 trend_intro = f"**Historical Trend ({series[0][0]}–{series[-1][0]}):** "
                                 trend_lines = [
-                                    f"{y}: {_format_metric_value(metric_display_name, v)} (recorded {d})"
+                                    f"{y}: {_format_metric_value(metric_display_name, v, d)} (recorded {d})"
                                     for (y, d, v) in series
                                 ]
                                 parts.append(trend_intro + " | ".join(trend_lines) + ".")
@@ -861,7 +902,7 @@ class FinancialDataEngine:
                                 quarter_phrase = f"{quarter_label} {year_fragment}"
                             else:
                                 quarter_phrase = quarter_label
-                            formatted_value = _format_metric_value(metric_display_name, best_val)
+                            formatted_value = _format_metric_value(metric_display_name, best_val, best_date)
                             date_fragment = best_date if best_date else 'the record date'
                             contextual = (
                                 f"{metric_display_name.title()} for {quarter_phrase} was "
@@ -872,7 +913,7 @@ class FinancialDataEngine:
 
                         base_line = (
                             f"The latest {metric_display_name} is "
-                            f"{_format_metric_value(metric_display_name, best_val)} (as of {best_date})."
+                            f"{_format_metric_value(metric_display_name, best_val, best_date)} (as of {best_date})."
                         )
 
                         if not is_specific_period:
@@ -883,7 +924,7 @@ class FinancialDataEngine:
 
                     year_fragment = best_date[:4] if isinstance(best_date, str) and len(best_date) >= 4 else 'the period'
                     date_fragment = best_date if best_date else 'the record date'
-                    formatted_value = _format_metric_value(metric_display_name, best_val)
+                    formatted_value = _format_metric_value(metric_display_name, best_val, best_date)
 
                     if is_specific_period:
                         if quarter_label:
@@ -1599,19 +1640,32 @@ class IntelligentAgent:
             "SkyCap AI's external research brain is currently unavailable. "
             "Please try again later or refine your question to focus on data available in Brain 1."
         )
+        fallback_answer = _conceptual_fallback_for_question(question)
+
+        def _build_offline_response(provenance: str = 'VertexAI-Unavailable') -> dict:
+            if fallback_answer:
+                return {
+                    'answer': fallback_answer,
+                    'answer_text': fallback_answer,
+                    'brain_used': 'Brain 2/3',
+                    'provenance': 'ConceptualFallback',
+                    'confidence': 'medium',
+                    'source_refs': None,
+                }
+            return {
+                'answer': offline_message,
+                'answer_text': offline_message,
+                'brain_used': 'Brain 2/3',
+                'provenance': provenance,
+                'confidence': 'low',
+                'source_refs': None,
+            }
         try:
             if self.vertex_model is None:
                 # Try one-time fallback init if not available
                 self._init_vertex_fallback()
             if self.vertex_model is None:
-                return {
-                    'answer': offline_message,
-                    'answer_text': offline_message,
-                    'brain_used': 'Brain 2/3',
-                    'provenance': 'VertexAI-Unavailable',
-                    'confidence': 'low',
-                    'source_refs': None,
-                }
+                return _build_offline_response()
             prompt = (
                 "You are SkyCap AI's external brain. Provide a concise, factual answer to the user's question. "
                 "If you are unsure, say you don't have enough information.\n\n"
@@ -1667,22 +1721,8 @@ class IntelligentAgent:
                     }
         except Exception as e:
             logging.error(f"Vertex AI call failed: {e}")
-            return {
-                'answer': offline_message,
-                'answer_text': offline_message,
-                'brain_used': 'Brain 2/3',
-                'provenance': 'VertexAI-Unavailable',
-                'confidence': 'low',
-                'source_refs': None,
-            }
-        return {
-            'answer': offline_message,
-            'answer_text': offline_message,
-            'brain_used': 'Brain 2/3',
-            'provenance': 'VertexAI-Unavailable',
-            'confidence': 'low',
-            'source_refs': None,
-        }
+            return _build_offline_response()
+        return _build_offline_response()
 
     def _init_vertex_fallback(self) -> bool:
         """Attempt a robust Vertex model/location fallback when a 404 or config error occurs.
