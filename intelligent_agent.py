@@ -177,11 +177,17 @@ METRIC_REGISTRY = {
 # Reports that store metrics in full Naira amounts rather than "in thousands"
 RAW_VALUE_REPORT_DATES = {
     '2024-09-30',  # Forecast pack provides absolute values
-    '2023-12-31',  # Q5 2023 annual report contains full Naira values
 }
 
 # Specific metric/date combinations that should bypass the thousands scaling
 RAW_VALUE_METRIC_OVERRIDES = {
+    ('profit after tax', '2023-12-31'),
+}
+
+# Annual EPS zero values that warrant a cautionary flag
+SUSPICIOUS_EPS_ZERO = {
+    ('earnings per share', '2018-12-31'),
+    ('earnings per share', '2023-12-31'),
 }
 
 CONCEPTUAL_FALLBACKS = {
@@ -414,17 +420,18 @@ class FinancialDataEngine:
         if value == 0.0:
             file_name = report_metadata.get('file_name', '')
             report_date = report_metadata.get('report_date', '')
-            
+            metric_key = metric.lower()
+
             # Check if this is quarterly vs annual (quarters might legitimately be zero)
             # Be more precise: Q1-Q3 are interim, Q4/Quarter 4 and annual keywords indicate year-end
             is_interim_quarter = any(q in file_name.lower() for q in ['quarter_1', 'quarter_2', 'quarter_3', 'q1', 'q2', 'q3'])
             is_annual = any(a in file_name.lower() for a in ['annual', 'year_end', 'year-end', 'quarter_4', 'quarter_5']) or report_date.endswith('-12-31')
-            
-            if metric.lower() == 'earnings per share' and (is_annual or not is_interim_quarter):
+
+            if metric_key == 'earnings per share' and report_date and (metric_key, report_date) in SUSPICIOUS_EPS_ZERO:
                 context_flags.append("annual_eps_zero")
                 confidence_level = "medium"
-            
-            if metric.lower() == 'profit before tax' and value == 0.0:
+
+            if metric_key == 'profit before tax' and value == 0.0:
                 context_flags.append("zero_profit_flagged")
         
         return {
@@ -452,7 +459,13 @@ class FinancialDataEngine:
             # Flag suspicious patterns - improved annual detection
             is_annual_report = (any(a in file_name.lower() for a in ['annual', 'year_end', 'year-end', 'quarter_4', 'quarter_5']) 
                               or (report_date and report_date.endswith('-12-31')))
-            if metrics.get('earnings per share') == 0.0 and is_annual_report:
+            eps_value = metrics.get('earnings per share')
+            if (
+                eps_value == 0.0
+                and is_annual_report
+                and report_date
+                and ('earnings per share', report_date) in SUSPICIOUS_EPS_ZERO
+            ):
                 quality_report["suspicious_zeros"].append({
                     "metric": "earnings per share",
                     "file": file_name,
