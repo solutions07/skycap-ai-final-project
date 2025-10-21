@@ -49,8 +49,8 @@ METRIC_REGISTRY = {
     'return on equity': {
         'canonical': 'return on equity',
         'synonyms': ['roe', 'return on equity ratio', 'return on equity of investors'],
-        'scaling': 'unit',
-        'value_type': 'ratio',
+        'scaling': 'thousands',
+        'value_type': 'currency',
         'annual_preferred': False,
     },
     'net revenue from funds': {
@@ -177,6 +177,7 @@ METRIC_REGISTRY = {
 # Reports that store metrics in full Naira amounts rather than "in thousands"
 RAW_VALUE_REPORT_DATES = {
     '2024-09-30',  # Forecast pack provides absolute values
+    '2023-12-31',  # Q5 2023 annual report contains full Naira values
 }
 
 # Specific metric/date combinations that should bypass the thousands scaling

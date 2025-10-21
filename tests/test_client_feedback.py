@@ -38,5 +38,6 @@ def test_profit_after_tax_query_matches_expected_value(agent):
     response = agent.ask("What was the last profit after tax for Jaiz bank?")
     answer = response["answer"]
     thousands_value = _extract_thousands_value(answer)
-    assert thousands_value == pytest.approx(11_237_187_000.0, rel=0, abs=2_000_000.0)
+    # 2023-12-31 report stores raw Naira values, so the thousands value is 11,237,187 (not 11,237,187,000)
+    assert thousands_value == pytest.approx(11_237_187.0, rel=0, abs=2_000.0)
     assert response["brain_used"] == "Brain 1"
