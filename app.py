@@ -1,5 +1,8 @@
+import json
 import os
-from flask import Flask, request, jsonify, send_from_directory
+import threading
+import time
+from flask import Flask, request, jsonify, send_from_directory, session
 from flask_cors import CORS
 import logging
 from intelligent_agent import IntelligentAgent
@@ -13,14 +16,99 @@ except Exception:  # pragma: no cover
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', os.urandom(32))
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+app.config['SESSION_COOKIE_SECURE'] = True
+
 # Unified CORS configuration: apply to all routes for GitHub Pages frontend
-CORS(app, resources={r"/*": {"origins": "https://solutions07.github.io"}})
+CORS(app, resources={r"/*": {"origins": "https://solutions07.github.io"}}, supports_credentials=True)
 # CORS: allow GitHub Pages origin across all routes, including preflight
 ALLOWED_ORIGIN = "https://solutions07.github.io"
 
 # Define a robust path to the knowledge base file
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 KNOWLEDGE_BASE_PATH = os.path.join(APP_ROOT, 'data', 'master_knowledge_base.json')
+TOKENS_FILE_PATH = os.path.join(APP_ROOT, 'tokens.json')
+
+_TOKEN_STORE = {}
+_TOKEN_LOCK = threading.Lock()
+_TOKENS_MTIME = None
+
+
+def _refresh_token_store(force: bool = False):
+    """Refresh the in-memory token cache from disk when the file changes."""
+    global _TOKENS_MTIME
+    try:
+        mtime = os.path.getmtime(TOKENS_FILE_PATH)
+    except FileNotFoundError:
+        return
+    if not force and _TOKENS_MTIME is not None and mtime <= _TOKENS_MTIME:
+        return
+    try:
+        with open(TOKENS_FILE_PATH, 'r', encoding='utf-8') as fh:
+            data = json.load(fh)
+        if not isinstance(data, dict):
+            logging.warning("Token file malformed; expected object at root")
+            return
+        with _TOKEN_LOCK:
+            fresh_tokens = set()
+            for token, meta in data.items():
+                if not isinstance(meta, dict):
+                    continue
+                fresh_tokens.add(token)
+                record = _TOKEN_STORE.get(token, {}).copy()
+                record['expiration_timestamp'] = meta.get('expiration_timestamp')
+                record['bound_ip_address'] = record.get('bound_ip_address') or meta.get('bound_ip_address')
+                record['bound_user_agent'] = record.get('bound_user_agent') or meta.get('bound_user_agent')
+                if record.get('bound_ip_address') is None:
+                    record['bound_ip_address'] = None
+                if record.get('bound_user_agent') is None:
+                    record['bound_user_agent'] = None
+                _TOKEN_STORE[token] = record
+            stale_tokens = set(_TOKEN_STORE.keys()) - fresh_tokens
+            for stale in stale_tokens:
+                _TOKEN_STORE.pop(stale, None)
+        _TOKENS_MTIME = mtime
+    except Exception as exc:
+        logging.warning("Failed to refresh tokens: %s", exc)
+
+
+def _persist_token(token: str):
+    """Persist the current token cache state back to disk."""
+    try:
+        with _TOKEN_LOCK:
+            try:
+                with open(TOKENS_FILE_PATH, 'r', encoding='utf-8') as fh:
+                    data = json.load(fh)
+                if not isinstance(data, dict):
+                    data = {}
+            except FileNotFoundError:
+                data = {}
+            record = _TOKEN_STORE.get(token)
+            if record:
+                data[token] = {
+                    'expiration_timestamp': record.get('expiration_timestamp'),
+                    'bound_ip_address': record.get('bound_ip_address'),
+                    'bound_user_agent': record.get('bound_user_agent'),
+                }
+            else:
+                data.pop(token, None)
+            with open(TOKENS_FILE_PATH, 'w', encoding='utf-8') as fh:
+                json.dump(data, fh, indent=2, sort_keys=True)
+            global _TOKENS_MTIME
+            _TOKENS_MTIME = os.path.getmtime(TOKENS_FILE_PATH)
+    except Exception as exc:
+        logging.warning("Failed to persist token state: %s", exc)
+
+
+def _get_request_fingerprint():
+    forwarded_for = request.headers.get('X-Forwarded-For', '')
+    if forwarded_for:
+        ip_address = forwarded_for.split(',')[0].strip()
+    else:
+        ip_address = request.remote_addr or 'unknown'
+    user_agent = request.headers.get('User-Agent', 'unknown')
+    return ip_address, user_agent
 
 
 @app.before_request
@@ -36,6 +124,7 @@ def handle_cors_preflight():
             resp.headers['Vary'] = 'Origin'
             resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,OPTIONS'
             resp.headers['Access-Control-Allow-Headers'] = req_headers or 'Content-Type, Authorization'
+            resp.headers['Access-Control-Allow-Credentials'] = 'true'
             resp.headers['Access-Control-Max-Age'] = '3600'
         return resp
 
@@ -134,6 +223,7 @@ try:
             logging.warning("Semantic index repair skipped (%s)", _e)
     agent = IntelligentAgent(kb_path=KNOWLEDGE_BASE_PATH) 
     logging.info("=== SkyCap AI Server Initialization Successful ===")
+    _refresh_token_store(force=True)
 except Exception as e:
     logging.error("=== CRITICAL: SkyCap AI Server Initialization FAILED ===", exc_info=True)
 
@@ -218,6 +308,86 @@ def status():
     except Exception:
         return jsonify({"status": "error"}), 500
 
+@app.route('/verify-token', methods=['POST', 'OPTIONS'])
+def verify_token():
+    if request.method == 'OPTIONS':
+        return ('', 204)
+
+    _refresh_token_store()
+    payload = request.get_json(silent=True) or {}
+    token = str(payload.get('token', '')).strip()
+    if not token:
+        return jsonify({'status': 'error', 'message': 'Token missing.'}), 400
+
+    with _TOKEN_LOCK:
+        token_record = _TOKEN_STORE.get(token)
+
+    if not token_record:
+        return jsonify({'status': 'error', 'message': 'Invalid or expired token.'}), 401
+
+    expiration = token_record.get('expiration_timestamp')
+    if not isinstance(expiration, (int, float)) or time.time() > float(expiration):
+        with _TOKEN_LOCK:
+            _TOKEN_STORE.pop(token, None)
+        _persist_token(token)
+        return jsonify({'status': 'error', 'message': 'Token expired.'}), 401
+
+    ip_address, user_agent = _get_request_fingerprint()
+    bound_ip = token_record.get('bound_ip_address')
+    bound_ua = token_record.get('bound_user_agent')
+
+    if bound_ip and bound_ip != ip_address or bound_ua and bound_ua != user_agent:
+        return jsonify({'status': 'error', 'message': 'Token already bound to another device.'}), 403
+
+    if not bound_ip and not bound_ua:
+        with _TOKEN_LOCK:
+            token_record['bound_ip_address'] = ip_address
+            token_record['bound_user_agent'] = user_agent
+            _TOKEN_STORE[token] = token_record
+        _persist_token(token)
+
+    session['authenticated'] = True
+    session['token'] = token
+    session.permanent = False
+
+    return jsonify({'status': 'ok', 'message': 'Token verified.', 'expires_at': expiration}), 200
+
+
+def _validate_session_and_token():
+    if not session.get('authenticated'):
+        return False, jsonify({'error': 'Authentication required.'}), 401
+
+    token = session.get('token')
+    if not token:
+        session.clear()
+        return False, jsonify({'error': 'Authentication required.'}), 401
+
+    _refresh_token_store()
+    with _TOKEN_LOCK:
+        token_record = _TOKEN_STORE.get(token)
+
+    if not token_record:
+        session.clear()
+        return False, jsonify({'error': 'Token invalid.'}), 401
+
+    expiration = token_record.get('expiration_timestamp')
+    if not isinstance(expiration, (int, float)) or time.time() > float(expiration):
+        with _TOKEN_LOCK:
+            _TOKEN_STORE.pop(token, None)
+        _persist_token(token)
+        session.clear()
+        return False, jsonify({'error': 'Token expired.'}), 401
+
+    ip_address, user_agent = _get_request_fingerprint()
+    bound_ip = token_record.get('bound_ip_address')
+    bound_ua = token_record.get('bound_user_agent')
+
+    if bound_ip != ip_address or bound_ua != user_agent:
+        return False, jsonify({'error': 'Device mismatch.'}), 403
+
+    return True, token_record, None
+
+
 @app.route('/ask', methods=['POST', 'OPTIONS'])
 def ask_skycap():
     # Handle CORS preflight explicitly
@@ -225,6 +395,10 @@ def ask_skycap():
         return ('', 204)
     if agent is None:
         return jsonify({'answer': 'Service is not available due to an initialization error.'}), 503
+
+    is_valid, payload, status_code = _validate_session_and_token()
+    if not is_valid:
+        return payload, status_code
     data = request.get_json()
     if not data or 'query' not in data:
         return jsonify({'error': 'Invalid request. Missing "query" key.'}), 400
@@ -241,6 +415,7 @@ def add_cors_headers(resp):  # Fallback to guarantee CORS headers for preflight/
             resp.headers['Vary'] = 'Origin'
             resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,OPTIONS'
             resp.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+            resp.headers['Access-Control-Allow-Credentials'] = 'true'
             resp.headers['Access-Control-Max-Age'] = '3600'
     except Exception:
         pass
@@ -258,6 +433,7 @@ def cors_preflight_any(any_path):
         resp.headers['Vary'] = 'Origin'
         resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,OPTIONS'
         resp.headers['Access-Control-Allow-Headers'] = req_headers or 'Content-Type, Authorization'
+        resp.headers['Access-Control-Allow-Credentials'] = 'true'
         resp.headers['Access-Control-Max-Age'] = '3600'
     return resp
 

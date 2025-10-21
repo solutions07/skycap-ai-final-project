@@ -7,3 +7,4 @@ google-cloud-storage
 sentence-transformers==2.6.1
 torch==2.2.2+cpu ; platform_system == 'Linux' and platform_machine == 'x86_64'
 --extra-index-url https://download.pytorch.org/whl/cpu
+pytest>=7.0.0

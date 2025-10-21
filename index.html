@@ -55,6 +55,17 @@
 
         /* Layout */
         .app-shell{flex:1;display:flex;justify-content:center;padding:1.8rem clamp(.75rem,2vw,2.5rem);}
+    .lock-screen{flex:1;display:flex;align-items:center;justify-content:center;}
+    .lock-card{width:100%;max-width:480px;background:var(--surface);border-radius:26px;padding:2.1rem 2.2rem 2rem;box-shadow:var(--shadow-md);border:1px solid var(--border);text-align:center;display:flex;flex-direction:column;gap:1.1rem;}
+    .lock-card h2{font-size:1.6rem;margin-bottom:.25rem;color:var(--text);}
+    .lock-card p{margin:0;font-size:.92rem;color:var(--text-light);line-height:1.4;}
+    .lock-card input{padding:.9rem 1rem;border-radius:16px;border:1.5px solid var(--border);font-size:.95rem;letter-spacing:.05rem;background:var(--surface-alt);color:var(--text);}
+    .lock-card button{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;font-weight:600;border:none;border-radius:16px;padding:.9rem 1.1rem;font-size:.95rem;cursor:pointer;box-shadow:var(--shadow-sm);transition:.2s ease;}
+    .lock-card button:disabled{opacity:.7;cursor:not-allowed;}
+    .token-error{color:var(--danger);font-size:.8rem;min-height:1.2rem;}
+  .lock-note{font-size:.72rem;color:var(--text-light);margin:0;}
+    .lock-screen[hidden]{display:none;}
+    #app-panel[hidden]{display:none;}
   .panel{width:100%;max-width:1040px;background:var(--grad-panel);border-radius:32px;padding:1.9rem 2rem 1.3rem;box-shadow:var(--shadow-md);display:flex;flex-direction:column;gap:1.4rem;position:relative;overflow:hidden;border:1px solid var(--border);}        
         .panel:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 92% 12%,rgba(212,175,55,.18),transparent 55%);pointer-events:none;}
 
@@ -132,8 +143,20 @@
     </style>
 </head>
 <body>
-    <div class="app-shell">
-        <div class="panel" role="main" aria-labelledby="app-title">
+  <div class="app-shell">
+    <div id="lock-screen" class="lock-screen" role="dialog" aria-modal="true">
+      <div class="lock-card">
+        <div>
+          <h2>Secure Access Required</h2>
+          <p>Enter your SkyCap AI access token to unlock the session on this device.</p>
+        </div>
+        <input id="token-input" type="text" autocomplete="off" placeholder="Access token" aria-label="Access token" />
+        <button id="token-submit" type="button">Unlock</button>
+        <div id="token-error" class="token-error" role="alert" hidden>Invalid or expired token.</div>
+        <p class="lock-note">Tokens are device-locked and expire automatically after their configured window.</p>
+      </div>
+    </div>
+    <div id="app-panel" class="panel" role="main" aria-labelledby="app-title" hidden>
       <header>
                 <div class="title-row">
                     <span class="badge" aria-label="environment">Brain 1</span>
@@ -235,7 +258,17 @@
           return '';
         })();
 
+        const DEFAULT_API_ROOT = 'https://skycap-live-service-472059152731.europe-west1.run.app';
+        const API_ROOT = (API_BASE || DEFAULT_API_ROOT).replace(/\/$/, '');
+        const VERIFY_URL = `${API_ROOT}/verify-token`;
+        const ASK_URL = `${API_ROOT}/ask`;
+
 // ================= State & Elements =================
+const lockScreen = document.getElementById('lock-screen');
+const appPanel = document.getElementById('app-panel');
+const tokenInput = document.getElementById('token-input');
+const tokenButton = document.getElementById('token-submit');
+const tokenError = document.getElementById('token-error');
 const conversationEl = document.getElementById('conversation');
 const dropdownEl = document.getElementById('dropdown');
 const inputEl = document.getElementById('query-input');
@@ -249,6 +282,7 @@ const themeToggle = document.getElementById('theme-toggle');
 let dropdownOpen = false;
 let typingActive = false;
 let lastQuestion = '';
+let isUnlocked = false;
 
 // ================= Utilities =================
 function setStatus(mode){
@@ -310,6 +344,27 @@ function renderFollowups(question, answer){
 
 // renderShortcuts removed
 
+function showLockScreen(message){
+  if(message){
+    tokenError.textContent = message;
+    tokenError.hidden = false;
+  }
+  lockScreen.hidden = false;
+  appPanel.hidden = true;
+  isUnlocked = false;
+  tokenInput?.focus();
+}
+
+function unlockInterface(){
+  tokenError.hidden = true;
+  lockScreen.hidden = true;
+  appPanel.hidden = false;
+  isUnlocked = true;
+  renderDropdown();
+  setStatus('ready');
+  inputEl.focus();
+}
+
 // Typing effect word-by-word
 async function typeWriter(el, fullText, speed=25){
   typingActive = true; el.textContent='';
@@ -335,6 +390,10 @@ function renderSourceControls(container, provenance){
 async function submitQuery(){
   const question = inputEl.value.trim();
   if(!question || typingActive) return;
+  if(!isUnlocked){
+    showLockScreen('Please enter a valid access token to continue.');
+    return;
+  }
   closeDropdown();
   lastQuestion = question;
   setStatus('thinking');
@@ -349,7 +408,11 @@ async function submitQuery(){
   const meta = document.createElement('div'); meta.className='bubble-meta'; aiBubble.appendChild(meta);
   scrollToBottom();
   try {
-  const res = await fetch('https://skycap-live-service-472059152731.europe-west1.run.app/ask', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query:question}) });
+  const res = await fetch(ASK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query:question}), credentials:'include' });
+    if(res.status === 401 || res.status === 403){
+      showLockScreen('Session expired or device mismatch. Please re-enter your access token.');
+      throw new Error('Authentication required');
+    }
     if(!res.ok) throw new Error('Network error');
     const data = await res.json();
     const answer = data.answer || 'No answer available.';
@@ -364,15 +427,55 @@ async function submitQuery(){
   }
 }
 
+async function requestTokenVerification(){
+  if(!tokenInput || !tokenButton) return;
+  const tokenValue = tokenInput.value.trim();
+  if(!tokenValue){
+    tokenError.textContent = 'Please enter a token.';
+    tokenError.hidden = false;
+    return;
+  }
+  tokenError.hidden = true;
+  const originalLabel = tokenButton.textContent;
+  tokenButton.disabled = true;
+  tokenButton.textContent = 'Verifying...';
+  try{
+    const res = await fetch(VERIFY_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      credentials:'include',
+      body:JSON.stringify({token:tokenValue})
+    });
+    const payload = await res.json().catch(()=>({}));
+    if(!res.ok || payload.status !== 'ok'){
+      const message = payload?.message || 'Invalid or expired token.';
+      throw new Error(message);
+    }
+    unlockInterface();
+  }catch(err){
+    tokenError.textContent = err.message || 'Invalid or expired token.';
+    tokenError.hidden = false;
+  }finally{
+    tokenButton.disabled = false;
+    tokenButton.textContent = originalLabel;
+  }
+}
+
 // ====== Events ======
 inputEl.addEventListener('focus', ()=>{ renderDropdown(inputEl.value); openDropdown(); });
 inputEl.addEventListener('input', ()=>{ renderDropdown(inputEl.value); openDropdown(); });
 document.addEventListener('click', (e)=>{ if(!e.target.closest('#dropdown') && !e.target.closest('#query-input')) closeDropdown(); });
 askBtn.addEventListener('click', submitQuery);
 inputEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); submitQuery(); } });
+tokenButton?.addEventListener('click', requestTokenVerification);
+tokenInput?.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter'){
+    e.preventDefault();
+    requestTokenVerification();
+  }
+});
 
 function init(){ renderDropdown(); setStatus('ready'); }
-document.addEventListener('DOMContentLoaded', init);
 
 // ============ Theme Handling (Dark Mode) ============
 function applyTheme(theme){
@@ -399,7 +502,11 @@ function loadTheme(){
   }catch(_){ applyTheme('light'); }
 }
 
-document.addEventListener('DOMContentLoaded', loadTheme);
+document.addEventListener('DOMContentLoaded', ()=>{
+  loadTheme();
+  init();
+  tokenInput?.focus();
+});
 themeToggle?.addEventListener('change', (e)=>{
   const next = e.target.checked ? 'dark' : 'light';
   applyTheme(next);
